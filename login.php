@@ -50,8 +50,8 @@ if(isset($_POST['log_in']))
 	<div class="login-container">
 		<div class="logotype"></div>
 				  <form action="" method="post">
-					<label for="username">Användarnamn</label>
-						<input type="text" name="user_name"> 
+					<label for="user_name">Användarnamn</label>
+						<input type="text" id="user_name" name="user_name"> 
 					<label for="password">Lösenord</label>
 					   	<input type="password" id="password" name="password">
 					  	<button class="login-btn primary" type="submit" name="log_in"><span class="fa fa-check fa-2x"></span></button>

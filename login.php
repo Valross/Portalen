@@ -34,143 +34,31 @@ if(isset($_POST['log_in']))
 }
 
 ?>
-
-
-
-<html>
+<!doctype html>
+<html lang="sv-SE">
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-      /* Override some defaults */
-      html, body {
-        background-color: #de851b;
-      }
-      body {
-        padding-top: 40px; 
-      }
-      .container {
-        width: 300px;
-      }
-
-      /* The white background content wrapper */
-      .container > .content {
-        background-color: #f5f5f5;
-        padding: 20px;
-        margin: 0 -10px;
-      }
-
-	  .login-form {
-		margin-top: 20px;
-	  }
-	
-	  legend {
-		margin-right: -50px;
-		font-weight: bold;
-	  	color: #404040;
-	  }
-	  
-	  textarea:focus, input:focus{
-    outline: 0;
-}
-	  
-	  .btn-primary {
-		color: #ffffff;
-		background-color: #428bca;
-	  }
-	  
-	  input {
-	  background: #fff;
-	  padding: 4px;
-	  border-color: #fff;
-	  }
-
-	  .btn {
-		display: inline-block;
-		padding: 6px 12px;
-		margin-bottom: -20;
-		margin-left: 112;
-		margin-top: 10px;
-		font-size: 14px;
-		color: #fff;
-		font-weight: normal;
-		line-height: 1.428571429;
-		text-align: center;
-		white-space: nowrap;
-		vertical-align: middle;
-		cursor: pointer;
-		background: #f99929;
-		border-radius: 0;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		-o-user-select: none;
-		user-select: none;
-}
-
-box {
-background: #f99929;
-padding: 8px;
-
-}
-
-.orange {
-color: #fff;
-
-}
-
-input:-webkit-autofill {
--webkit-box-shadow: 0 0 0px 1000px #fff inset;
-}
-
-input, input[type="password"], input[type="search"], isindex {
-background-color: white;
-border-top: 2px solid #eeeeee;
-border-bottom: 2px solid #eeeeee;
-border-right: 2px solid #eeeeee;
-border-left: 0px solid;
--webkit-rtl-ordering: logical;
--webkit-user-select: text;
-cursor: auto;
-}
-
-.logo {
-		width: 290;
-		max-height: 20;
-		overflow: hidden;
-	} 
-	
-.info {
-
-	margin-top: 30px;
-	text-align: center;
-	margin-bottom: -20px;
-	font-size: 10px;
-
-}
-    </style>
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Trappans personalportal</title>
+<link rel="stylesheet" href="css/login.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body><center><a href="/" class="logo"><img src="img/border2.png"></a></center>
-  <div class="container">
-			<div class="content">
-			  <div class="row"><center>
-				<div class="login-form">
-				  <form action="" method="post">
-					<fieldset>
-					  <div class="clearfix">
-						<box><span class="glyphicon glyphicon-user  orange"></span> </box><input type="text" placeholder="Username" name="user_name" >
-					  </div></br>
-					  <div class="clearfix">
-					   <box><span class="glyphicon glyphicon-lock orange"></span> </box> <input type="password" placeholder="Password" name="password">
-					  </div>
-					  <button class="btn primary" type="submit" name="log_in">Logga in</button>
-					</fieldset>
-				  </form></center>
-				  		<div class="info"><p>För att kunna logga in måste du vara registrerad. </br>Kontakta personalansvarig vid problem.</p></div>
-				</div>
-			 </div>
+<body>
+	<div class="top-border">
+		<div class="color first"></div>
+		<div class="color third"></div>
 	</div>
-  </div> <!-- /container -->
+	<div class="login-container">
+		<div class="logotype"></div>
+				  <form action="" method="post">
+					<label for="username">Användarnamn</label>
+						<input type="text" name="user_name"> 
+					<label for="password">Lösenord</label>
+					   	<input type="password" id="password" name="password">
+					  	<button class="login-btn primary" type="submit" name="log_in"><span class="fa fa-check fa-2x"></span></button>
+				  </form>
+		<p class="info">
+			För att logga in måste du vara registrerad i systemet. Om du är personal och har problem med att logga in, kontakta webbansvarig eller din lagansvarig. 
+		</p>
+	</div> <!-- #login-container -->
 </body>
 </html>

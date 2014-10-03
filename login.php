@@ -40,7 +40,7 @@ if(isset($_POST['log_in']))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Trappans personalportal</title>
 <link rel="stylesheet" href="css/login.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="login-container">

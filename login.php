@@ -43,22 +43,23 @@ if(isset($_POST['log_in']))
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="top-border">
-		<div class="color first"></div>
-		<div class="color third"></div>
-	</div>
 	<div class="login-container">
+		<div class="top-border">
+			<div class="color first"></div>
+			<div class="color third"></div>
+		</div>
 		<div class="logotype"></div>
 				  <form action="" method="post">
 					<label for="user_name">Användarnamn</label>
 						<input type="text" id="user_name" name="user_name"> 
 					<label for="password">Lösenord</label>
 					   	<input type="password" id="password" name="password">
-					  	<button class="login-btn primary" type="submit" name="log_in"><span class="fa fa-check fa-2x"></span></button>
+					  	<button class="login-btn primary" type="submit" name="log_in"><span class="fa fa-sign-in fa-2x"></span></button>
 				  </form>
 		<p class="info">
 			För att logga in måste du vara registrerad i systemet. Om du är personal och har problem med att logga in, kontakta webbansvarig eller din lagansvarig. 
 		</p>
+		
 	</div> <!-- #login-container -->
 </body>
 </html>

@@ -77,7 +77,7 @@ a img {
 	border: 0;
 }
 body {
-	background: #d8d8d8;
+	background: #363430;
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
@@ -108,7 +108,7 @@ body {
 	position: relative;
 	top: 50%;
 	width: 320px;
-	height: 400px;
+	height: 410px;
 	margin: -210px auto 0 auto;
 	background: #f0f0f0;
 }
@@ -146,19 +146,15 @@ input[type=password] {
 	border: 0;
 	background: #fff;
 	margin: 0; 
-	padding: 0;
 	font-size: 16px;
 	padding: 20px 0 0 20px;
 }
-
 input[type=text] {
 	border-bottom: 1px solid #e8e8e8;
 }
-
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-
 button.login-btn {
 	display: block;
 	width: 100%;
@@ -167,12 +163,12 @@ button.login-btn {
 	padding: 0;
 	color: #fff;
 	border: 0;
-	background: #e8ac30;
+	background: #e0922f;
 	font-size: 14px;
 	font-size: 1.4rem;
 	font-weight: bold;
 	cursor: pointer;
 }
 button.login-btn:hover {
-	background: #e0922f;
+	background: #e8ac30;
 }

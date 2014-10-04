@@ -195,7 +195,7 @@ function loadBookedEvents()
 		$points = $workTimes[$i]['points'];
 		?>
 		
-			<a href="#" class="list-group-item"><i class="glyphicon glyphicon-chevron-down" style="float:right; margin-top: 3px;"></i><span class="badge" style="margin-right: 15px">X poäng</span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php // echo $start. '' .$end;?></span><?php echo $name ?></a>
+			<a href="#" class="list-group-item"><i class="fa fa-chevron-down" style="float:right; margin-top: 3px;"></i><span class="badge" style="margin-right: 15px">X poäng</span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php // echo $start. '' .$end;?></span><?php echo $name ?></a>
 		
 		<?php
 	}

@@ -130,11 +130,26 @@ a {
 	#sidebar ul.main-nav li a span {
 		float: left;
 		margin-right: 20px;
-		padding-top: 2px;
+		padding-top: 3px;
 	}
-	#sidebar > div.main-menu-wrapper > div.navbar-collapse.collapse > ul > li > a > span.chevron_toggleable.glyphicon {
+	#sidebar > div.main-menu-wrapper > div.navbar-collapse.collapse > ul > li > a > span.chevron_toggleable.fa {
 		float: right;
 		margin-right: 0;
+	}
+	
+	.dropdown li {
+		margin-left: -25px;
+	}
+	
+	.panel {
+		margin-bottom: 0px;
+		background-color: #363430;
+		border-radius: 0px; 
+	}
+
+	.panel-collapse {
+	background-color: #2d2d2d;
+	
 	}
 	
 	/* Responsive Bootstrap navigation */
@@ -154,17 +169,6 @@ a {
 	}
 	#sidebar .icon-bar {
  	   	background-color: #fff;
-	}
-	
-	.panel {
-		margin-bottom: 0px;
-		background-color: #363430;
-		border-radius: 0px; 
-	}
-
-	.panel-collapse {
-	background-color: #2d2d2d;
-	
 	}
 
 	

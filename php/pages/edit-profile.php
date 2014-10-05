@@ -2,53 +2,38 @@
 include_once('php/DBQuery.php');
 
 if(isset($_POST['submit'])) {
-	$user_name = $_POST['user_name'];	//gets empty string wtf
-/*	$ssn = $_POST['ssn'];
+
+	$userName = $_POST['user_name']; //TO DO: some way to access user's user_name without user input
+	$ssn = $_POST['ssn'];
 	$mail = $_POST['mail'];
 	$name = $_POST['name'];
 	$lastName = $_POST['last_name'];
-*/	
-	//control
-	if(empty($_POST['userName']))
-		echo "empty";
-	else
-		echo "userName = " + $user_name;
-	/*   "ssn = " . $ssn + \n +
-		 "mail = " . $mail + \n +
-		 "name = " . $name + \n +
-		 "lastName = " . $lastName;
-	*/
-
-
-	/*	necessary?
-	$userName = mysql_real_escape_string($userName);
-	$ssn = mysql_real_escape_string($ssn);
-	$mail = mysql_real_escape_string($mail);
-	$name = mysql_real_escape_string($name);
-	$lastName = mysql_real_escape_string($lastName);	*/
 	
 
-/*
-	//if($userName != '' && $ssn != '' && $mail != '' && $name != '' && $lastName != ''){
+
+	// if fields not empty, update values
+	if($userName != '' && $ssn != '' && $mail != '' && $name != '' && $lastName != ''){
 	DBQuery::sql("UPDATE user
-				  SET ssn='$ssn', mail='$mail', name='$name', lastName='$lastName'
+				  SET ssn='$ssn', mail='$mail', name='$name', last_name='$lastName'
 				  WHERE user_name='$userName'");
 
+		//relocate
 		?>
 		<script>
 			window.location = "?page=edit-profile";
+			alert("")
 		</script>
 		<?php
-*/
-	//}
-	/*
+	}
+	
 	else{
 		?>
 		<script>
+		//TO DO: Real validation message as user feedback
 		alert("error: empty fields","");
 		</script>
 		<?php
-	}*/
+	}
 	
 }
 ?>

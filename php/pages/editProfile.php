@@ -62,7 +62,7 @@ if(isset($_POST['submit'])) {
 		//relocate
 		?>
 		<script>
-			window.location = "?page=edit-profile";		//TO DO: hard code url
+			window.location = "?page=editProfile";		//TO DO: hard code url
 			alert("Ditt nya liv är sparat!") 	//TO DO: Proper user feedback
 		</script>
 		<?php

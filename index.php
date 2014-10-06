@@ -83,7 +83,7 @@ include_once('php/pageManager.php');
 						  <ul id="collapseOne" class="panel-collapse collapse">
 						  <li><a href="?page=profile"><span class="fa fa-user fa-fw"></span>Min profil</a></li>
 						  <li><a href="#"><span class="fa fa-envelope-o fa-fw"></span>Meddelande</a></li>
-						  <li><a href="?page=edit-profile"><span class="fa fa-cog fa-fw"></span>Redigera profil</a></li>
+						  <li><a href="?page=editProfile"><span class="fa fa-cog fa-fw"></span>Redigera profil</a></li>
 						  <li><a href="#"><span class="fa fa-trash-o fa-fw"></span>Avsluta medlemskap</a></li>
 						  </ul>
 		              </li>

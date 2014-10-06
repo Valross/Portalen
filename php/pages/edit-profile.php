@@ -2,19 +2,26 @@
 include_once('php/DBQuery.php');
 
 if(isset($_POST['submit'])) {
-
-
 	$userId = $_SESSION['user_id'];
+	$phoneNumber = $_POST['phone_number'];
 	$ssn = $_POST['ssn'];
 	$mail = $_POST['mail'];
 	$name = $_POST['name'];
 	$lastName = $_POST['last_name'];
+	$description = $_POST['description'];
 
 	//Initiate string for SET statement in SQL query
 	$queryString = "";
 
+	if($phoneNumber != '') {
+		$queryString = $queryString . "phone_number='$phoneNumber'";
+	}
+
 	if ($ssn != '') {
-		$queryString = $queryString . "ssn='$ssn'";
+		if ($queryString != '')
+			$queryString = $queryString . ", ssn='$ssn'";
+		else
+			$queryString = $queryString . "ssn='$ssn'";
 	}
 
 	if ($mail != '') {
@@ -32,10 +39,17 @@ if(isset($_POST['submit'])) {
 	}
 
 	if ($lastName != '') {
-			if ($queryString != '')
+		if ($queryString != '')
 			$queryString = $queryString . ", last_name='$lastName'";
 		else
 			$queryString = $queryString . "last_name='$lastName'";
+	}
+
+	if ($description != '') {
+		if ($queryString != '')
+			$queryString = $queryString . ", description='$description'";
+		else
+			$queryString = $queryString . "description='$description'";
 	}
 
 	//check string

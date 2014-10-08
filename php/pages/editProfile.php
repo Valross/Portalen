@@ -2,7 +2,6 @@
 include_once('php/DBQuery.php');
 
 if(isset($_POST['submit'])) {
-	$userId = $_SESSION['user_id'];
 	$phoneNumber = $_POST['phone_number'];
 	$ssn = $_POST['ssn'];
 	$mail = $_POST['mail'];
@@ -57,7 +56,7 @@ if(isset($_POST['submit'])) {
 
 	DBQuery::sql("UPDATE user
 				  SET $queryString
-				  WHERE id='$userId'");
+				  WHERE id='$_SESSION[user_id]'");
 		
 		//relocate
 		?>

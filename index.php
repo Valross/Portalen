@@ -19,6 +19,7 @@ include_once('php/pageManager.php');
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css">
 	<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
 
@@ -76,18 +77,18 @@ include_once('php/pageManager.php');
 				  
 		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
-		              <li class="active"><a href="?page=start"><span class="glyphicon glyphicon-home"></span>Hem</a></li>
+		              <li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>
 		              <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne"><span class="glyphicon glyphicon-user"></span>Mitt Konto<span class="chevron_toggleable glyphicon glyphicon-chevron-down"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar" href="#collapseOne"><span class="fa fa-user fa-fw fa-lg"></span>Mitt Konto<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 						  <ul id="collapseOne" class="panel-collapse collapse">
-						  <li><a href="?page=profile">Min profil</a></li>
-						  <li><a href="#">Meddelande</a></li>
-						  <li><a href="#">Redigera profil</a></li>
-						  <li><a href="#">Avsluta medlemskap</a></li>
+						  <li><a href="?page=profile"><span class="fa fa-user fa-fw"></span>Min profil</a></li>
+						  <li><a href="#"><span class="fa fa-envelope-o fa-fw"></span>Meddelande</a></li>
+						  <li><a href="?page=editProfile"><span class="fa fa-cog fa-fw"></span>Redigera profil</a></li>
+						  <li><a href="#"><span class="fa fa-trash-o fa-fw"></span>Avsluta medlemskap</a></li>
 						  </ul>
 		              </li>
 		               <li class="panel dropdown">
-					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="glyphicon glyphicon-wrench"></span>Adminverktyg<span class="chevron_toggleable glyphicon glyphicon-chevron-down"></span></a>
+					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="fa fa-gears fa-fw fa-lg"></span>Adminverktyg<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 						  <ul id="collapseTwo" class="panel-collapse collapse">
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
@@ -95,10 +96,10 @@ include_once('php/pageManager.php');
 						  </li>  
 						  </ul>
 		            
-		              <li><a href="?page=book" onclick="location.reload()"><span class="glyphicon glyphicon-list-alt"></span>Boka pass</a></li>
-		              <li><a href="?page=news"><span class="glyphicon glyphicon-bullhorn"></span>Nyheter</a></li>
-					  <li><a href="?page=forum"><span class="glyphicon glyphicon-comment"></span>Diskussionsforum</a></li>
-					  <li><a href="?page=groups"><span class="glyphicon glyphicon-globe"></span>Lagsidor</a></li>
+		              <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li>
+		              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+					  <li><a href="?page=forum"><span class="fa fa-comments-o fa-fw fa-lg"></span>Diskussionsforum</a></li>
+					  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 
 		            </ul>
 		          </div><!--/.nav-collapse -->
@@ -115,7 +116,7 @@ include_once('php/pageManager.php');
 		  <div id="content">
 			  <div class="row">
 				  <div class="col-sm-4 search">
-					  <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+					  <button type="submit" class="btn"><span class="fa fa-search"></span></button>
 				  		<input type="search" class="form-control" placeholder="Sök på portalen...">
 				  </div> <!-- col-sm-4 -->
 					  
@@ -123,7 +124,7 @@ include_once('php/pageManager.php');
 					  <div class="user-info">
 						  <img src="<?php echo loadAvatar(); ?>" class="avatar-32x32" width="32px" height="32px">
 						  <a href="?page=profile" class="username"><span style="font-weight: normal">Inloggad som</span> <?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></a>
-					  	<a href="login.php" class="sign-out"><span class="glyphicon glyphicon-off"></span></a>
+					  	<a href="login.php" class="sign-out"><span class="fa fa-power-off"></span></a>
 					  </div>
 				  </div>
 		 	 </div> 

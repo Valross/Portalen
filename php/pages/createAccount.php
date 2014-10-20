@@ -1,4 +1,4 @@
-<?php
+1<?php
 include_once('php/DBQuery.php');
 
 if(isset($_POST['submit']))

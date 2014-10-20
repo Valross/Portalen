@@ -39,7 +39,8 @@ if(count($result) == 1)
 else
 	$profileDescription = "";
 
-if(isset($_POST['submit'])) {
+//When first submit button is pressed
+if(isset($_POST['changeInfo'])) {
 	$phoneNumber = $_POST['phone_number'];
 	$ssn = $_POST['ssn'];
 	$mail = $_POST['mail'];
@@ -95,15 +96,23 @@ if(isset($_POST['submit'])) {
 	DBQuery::sql("UPDATE user
 				  SET $queryString
 				  WHERE id='$_SESSION[user_id]'");
-		
+
 		//relocate
 		?>
 		<script>
 			window.location = "?page=editProfile";		//TO DO: hard code url
-			alert("Ditt nya liv är sparat!") 	//TO DO: Proper user feedback
+			alert("Ditt nya liv är sparat!") 	 //TO DO: Proper user feedback
 		</script>
 		<?php
-		
+
 }
-	
+
+//When second submit button is pressed
+if(isset($_POST['changePass'])) {
+	?>
+	<script>
+		window.location = "http://www.klockren.nu";
+	</script>
+	<?php
+}
 ?>

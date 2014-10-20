@@ -29,14 +29,14 @@
 	<p>
 		Efter ett par intensiva veckor med intervjuer har nu nästa års driftgrupp utsetts! 
 </br>
-Vi vill härmed önska följande personer välkomna till Driftgruppen 14/15:
-
+Vi vill härmed önska följande personer välkomna till Driftgruppen 14/15:</br></br>
+DEN HÄR TEXTEN ÄR HÅRDKODAD. SÅ KAN VI INTE HA DET! :)
 <li>DA-lagsansvarig - Erik Thuvesen</li>
 <li>Barlagsansvariga - Niklas Simm och Simon Joelsson</li>
 <li>Kocklagsansvarig - Amanda Larsson</li>
 <li>Värdlagsansvarig - Emma Wigren</li>
 <li>Personalansvarig - Hampus Hogeby</li>
-<li style="color:red; font-size: 15px; font-weight:bold">IT- och webbansvarig - ---> Linus Sjölinder <----</li>
+<li>IT- och webbansvarig - Linus Sjölinder</li>
 <li>Eventlagsansvariga - Sandra Lindqvist och Anna Söderberg</li>
 <li>Hovmästar- och serveringsansvarig - Pia von Wachenfelt</li>
 <li>Ljud- och ljusansvariga - Christopher Forsmark och Jesper Skommargård</li>

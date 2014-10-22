@@ -18,7 +18,7 @@
 -------------------------------------------------------------- */
 
 a {
-	color: #6492de;
+	color: #2DB398;
 }
 
 .avatar-16x16 {
@@ -262,7 +262,7 @@ a {
 	
 	.badge {
 		padding: 5px 8px;
-		background: #6492de;
+		background: #2DB398;
 		font-weight: 400;
 		font-size: 11px;
 	}
@@ -302,7 +302,7 @@ text-align: center;
 white-space: nowrap;
 vertical-align: middle;
 cursor: pointer;
-background: #6492de;
+background: #2DB398;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
@@ -322,7 +322,7 @@ text-align: center;
 white-space: nowrap;
 vertical-align: middle;
 cursor: pointer;
-background: #6492de;
+background: #2DB398;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;

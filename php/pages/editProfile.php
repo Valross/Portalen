@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 
 //Current variables
-//Separate file? Combined with php/pages/profile.php?
+//Separate file? Combine with part of php/pages/profile.php?
 $result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail  IS NOT NULL");
 if(count($result) == 1)
 	$profileMail = $result[0]["mail"];
@@ -47,6 +47,14 @@ if(isset($_POST['changeInfo'])) {
 	$name = $_POST['name'];
 	$lastName = $_POST['last_name'];
 	$description = $_POST['description'];
+
+	//Prevent database attacks
+	$phoneNumber = mysql_real_escape_string($phoneNumber);
+	$ssn = mysql_real_escape_string($ssn);
+	$mail = mysql_real_escape_string($mail);
+	$name = mysql_real_escape_string($name);
+	$lastName = mysql_real_escape_string($lastName);
+	$description = mysql_real_escape_string($description);
 
 	//Initiate string for SET statement in SQL query
 	$queryString = "";

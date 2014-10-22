@@ -48,7 +48,7 @@ if(isset($_POST['changeInfo'])) {
 	$lastName = $_POST['last_name'];
 	$description = $_POST['description'];
 
-	//Prevent database attacks
+	//Partly prevent attack injections
 	$phoneNumber = mysql_real_escape_string($phoneNumber);
 	$ssn = mysql_real_escape_string($ssn);
 	$mail = mysql_real_escape_string($mail);
@@ -117,10 +117,31 @@ if(isset($_POST['changeInfo'])) {
 
 //When second submit button is pressed
 if(isset($_POST['changePass'])) {
+
+	$oldPassword = $_POST['old_password'];
+	$password = $_POST['password'];
+	$confPassword = $_POST['confirmed_password'];
+
+	//hash old password here
+	$oldPasswordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$oldPassword.'d99947dd2b0329f55babeaa6597fb7c8');
+	$oldPasswordMD5 = md5($oldPasswordMD5);
+	
+	//validate old password
+	$result = DBQuery::sql("SELECT user_name FROM user WHERE id = '$_SESSION[user_id]' AND BINARY password = '$oldPasswordMD5'");
+	if(count($result) == 1){
+		echo"hej"; //check
+
+		//validate confirmed password
+
+		//hash and apply new password
+
+	}
+	else{
 	?>
 	<script>
 		window.location = "http://www.klockren.nu";
 	</script>
 	<?php
+	}
 }
 ?>

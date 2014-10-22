@@ -19,9 +19,9 @@
 		<p><input type="submit" name="changeInfo" value="Spara" /></p>
 		<br/>
 		<h3>Byta lösenord</h3>
-		<p>Nuvarande lösenord: <input type="text" name="oldPassword" /></p>
+		<p>Nuvarande lösenord: <input type="text" name="old_assword" /></p>
 		<p>Nytt lösenord: <input type="text" name="password" /></p>
-		<p>Bekräfta lösenord: <input type="test" name="oldPassword" /></p>
+		<p>Bekräfta lösenord: <input type="test" name="confirmed_password" /></p>
 		<p><input type="submit" name="changePass" value="Ändra lösenord" /></p>
 	</form>
 </div>

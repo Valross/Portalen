@@ -126,22 +126,47 @@ if(isset($_POST['changePass'])) {
 	$oldPasswordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$oldPassword.'d99947dd2b0329f55babeaa6597fb7c8');
 	$oldPasswordMD5 = md5($oldPasswordMD5);
 	
-	//validate old password
+	//validate old (hashed) password
 	$result = DBQuery::sql("SELECT user_name FROM user WHERE id = '$_SESSION[user_id]' AND BINARY password = '$oldPasswordMD5'");
 	if(count($result) == 1){
-		echo"hej"; //check
+		//echo "old pass check!";
 
 		//validate confirmed password
+		if($password == $confPassword){
+			//echo "password and confPass check!";
 
-		//hash and apply new password
+			//hash and apply new password
+			$passwordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$password.'d99947dd2b0329f55babeaa6597fb7c8');
+			$passwordMD5 = md5($passwordMD5);
 
+			DBQuery::sql("UPDATE user
+				    	  SET password='$passwordMD5'
+				  		  WHERE id='$_SESSION[user_id]'");
+
+			//relocate
+			?>
+			<script>
+				window.location = "?page=editProfile";		//TO DO: hard code url
+				alert("Ditt lösenord är ändrat.") 	    //TO DO: Proper user feedback
+			</script>
+			<?php
+		}
+		else{
+			?>
+			<script>
+				window.location = "?page=editProfile";		//TO DO: hard code url
+				alert("Bekräftning av nytt lösenord stämmer inte, försök igen") //TO DO: Proper user feedback
+			</script>
+			<?php
+			}
 	}
 	else{
-	?>
-	<script>
-		window.location = "http://www.klockren.nu";
-	</script>
-	<?php
+		?>
+		<script>
+			window.location = "?page=editProfile";		//TO DO: hard code url
+			alert("Det angivna nuvarande lösenordet är inkorrekt, försök igen") //TO DO: Proper user feedback
+		</script>
+		<?php
 	}
 }
 ?>

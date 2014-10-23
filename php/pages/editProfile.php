@@ -41,20 +41,12 @@ else
 
 //When first submit button is pressed
 if(isset($_POST['changeInfo'])) {
-	$phoneNumber = $_POST['phone_number'];
-	$ssn = $_POST['ssn'];
-	$mail = $_POST['mail'];
-	$name = $_POST['name'];
-	$lastName = $_POST['last_name'];
-	$description = $_POST['description'];
-
-	//Partly prevent attack injections
-	$phoneNumber = mysql_real_escape_string($phoneNumber);
-	$ssn = mysql_real_escape_string($ssn);
-	$mail = mysql_real_escape_string($mail);
-	$name = mysql_real_escape_string($name);
-	$lastName = mysql_real_escape_string($lastName);
-	$description = mysql_real_escape_string($description);
+	$phoneNumber = DBQuery::safeString($_POST['phone_number']);
+	$ssn = DBQuery::safeString($_POST['ssn']);
+	$mail = DBQuery::safeString($_POST['mail']);
+	$name = DBQuery::safeString($_POST['name']);
+	$lastName = DBQuery::safeString($_POST['last_name']);
+	$description = DBQuery::safeString($_POST['description']);
 
 	//Initiate string for SET statement in SQL query
 	$queryString = "";
@@ -118,9 +110,9 @@ if(isset($_POST['changeInfo'])) {
 //When second submit button is pressed
 if(isset($_POST['changePass'])) {
 
-	$oldPassword = $_POST['old_password'];
-	$password = $_POST['password'];
-	$confPassword = $_POST['confirmed_password'];
+	$oldPassword = DBQuery::safeString($_POST['old_password']);
+	$password = DBQuery::safeString($_POST['password']);
+	$confPassword = DBQuery::safeString($_POST['confirmed_password']);
 
 	//hash old password here
 	$oldPasswordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$oldPassword.'d99947dd2b0329f55babeaa6597fb7c8');
@@ -129,11 +121,9 @@ if(isset($_POST['changePass'])) {
 	//validate old (hashed) password
 	$result = DBQuery::sql("SELECT user_name FROM user WHERE id = '$_SESSION[user_id]' AND BINARY password = '$oldPasswordMD5'");
 	if(count($result) == 1){
-		//echo "old pass check!";
 
 		//validate confirmed password
 		if($password == $confPassword){
-			//echo "password and confPass check!";
 
 			//hash and apply new password
 			$passwordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$password.'d99947dd2b0329f55babeaa6597fb7c8');
@@ -143,7 +133,6 @@ if(isset($_POST['changePass'])) {
 				    	  SET password='$passwordMD5'
 				  		  WHERE id='$_SESSION[user_id]'");
 
-			//relocate
 			?>
 			<script>
 				window.location = "?page=editProfile";		//TO DO: hard code url

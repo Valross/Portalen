@@ -23,6 +23,14 @@ class DBQuery
 			return $rows;
 		}
 	}
+	
+	public static function safeString($word)
+	{
+		DBConnect::open();
+		$safeWord = mysqli_real_escape_string(DBConnect::$mysql,$word);
+		DBConnect::close();
+		return $safeWord;
+	}
 }
 
 ?>

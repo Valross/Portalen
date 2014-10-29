@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2014 at 01:23 PM
+-- Generation Time: Oct 29, 2014 at 05:03 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -25,6 +25,38 @@ USE `portalen`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `access`
+--
+
+CREATE TABLE IF NOT EXISTS `access` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `access`
+--
+
+INSERT INTO `access` (`id`, `name`) VALUES
+(1, 'admin'),
+(7, 'bar'),
+(2, 'dagsansvarig'),
+(9, 'dj'),
+(8, 'event'),
+(3, 'hovmastare'),
+(6, 'kock'),
+(11, 'lol'),
+(13, 'marknadsforing'),
+(10, 'servering'),
+(4, 'super_admin'),
+(12, 'vard'),
+(5, 'webb');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event`
 --
 
@@ -39,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `event`
@@ -58,7 +90,8 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (29, 'nuu', '2014-03-06 18:00:00', '2014-03-06 22:00:00', 2, 1),
 (30, 'Eventet', '2014-04-21 08:00:00', '2014-04-21 17:00:00', 3, 1),
 (31, 'Puuhben', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
-(32, 'Le puub', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1);
+(32, 'Le puub', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
+(34, 'Poop', '2014-10-27 18:00:00', '2014-10-28 01:00:00', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +170,19 @@ INSERT INTO `event_type` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `group_access`
+--
+
+CREATE TABLE IF NOT EXISTS `group_access` (
+  `access_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`access_id`,`group_id`),
+  KEY `group_id` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `group_member`
 --
 
@@ -182,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `period` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `period`
@@ -192,7 +238,8 @@ INSERT INTO `period` (`id`, `name`, `start_date`, `end_date`) VALUES
 (1, 'Februari 2014', '2014-02-01', '2014-02-28'),
 (2, 'Mars 2014', '2014-03-01', '2014-03-31'),
 (3, 'April 2014', '2014-04-01', '2014-04-30'),
-(4, 'Maj/Juni 2014', '2014-05-01', '2014-06-13');
+(4, 'Maj/Juni 2014', '2014-05-01', '2014-06-13'),
+(5, 'Oktober', '2014-10-01', '2014-11-01');
 
 -- --------------------------------------------------------
 
@@ -219,18 +266,32 @@ CREATE TABLE IF NOT EXISTS `user` (
   `special_food` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`user_name`,`mail`,`ssn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', NULL, NULL, NULL, NULL, 'portalen_bild.jpg', '0000-00-00 00:00:00', NULL, NULL),
+(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', NULL, NULL, NULL, 'portalen_bild.jpg', '0000-00-00 00:00:00', NULL, NULL),
 (2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', NULL, NULL),
-(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL);
+(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL),
+(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_access`
+--
+
+CREATE TABLE IF NOT EXISTS `user_access` (
+  `access_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`access_id`,`user_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -254,8 +315,9 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (4, 1, 1),
 (5, 1, 1),
 (6, 2, 1),
-(7, 1, 0),
-(62, 1, 0);
+(7, 1, 1),
+(62, 1, 1),
+(75, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -305,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -351,7 +413,12 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 (64, 5, 31, 3, '2014-04-28 17:00:00', '2014-04-29 00:00:00'),
 (65, 5, 32, 3, '2014-04-28 17:00:00', '2014-04-29 00:00:00'),
 (66, 13, 32, 4, '2014-04-28 17:00:00', '2014-04-29 02:00:00'),
-(67, 13, 32, 4, '2014-04-28 17:00:00', '2014-04-29 02:00:00');
+(67, 13, 32, 4, '2014-04-28 17:00:00', '2014-04-29 02:00:00'),
+(71, 4, 34, 4, '2014-10-27 17:00:00', '2014-10-28 02:00:00'),
+(72, 4, 34, 4, '2014-10-27 17:00:00', '2014-10-28 02:00:00'),
+(73, 3, 34, 3, '2014-10-27 17:00:00', '2014-10-28 00:00:00'),
+(74, 3, 34, 3, '2014-10-27 17:00:00', '2014-10-28 00:00:00'),
+(75, 7, 34, 4, '2014-10-27 16:00:00', '2014-10-28 02:00:00');
 
 --
 -- Constraints for dumped tables
@@ -378,6 +445,13 @@ ALTER TABLE `event_template_group`
   ADD CONSTRAINT `event_template_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `group_access`
+--
+ALTER TABLE `group_access`
+  ADD CONSTRAINT `group_access_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `group_member`
 --
 ALTER TABLE `group_member`
@@ -389,6 +463,13 @@ ALTER TABLE `group_member`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_access`
+--
+ALTER TABLE `user_access`
+  ADD CONSTRAINT `user_access_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_work`

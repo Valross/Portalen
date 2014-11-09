@@ -17,8 +17,6 @@
 				<input type="text" name="firstName" maxlength="20" /><br>
 		 	<label for="lastName">Efternamn</label>
 				<input type="text" name="lastName" maxlength="20" /><br>
-		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" maxlength="20" /><br>
 			<label for="liuId">Liu-id</label>
 				<input type="text" name="liuId" maxlength="20" /><br>
 			<label for="mail">Mailadress</label>
@@ -35,12 +33,8 @@
 			<input type="checkbox" name="team" value="ljud">Ljud- och ljusgruppen<br>
 			<input type="checkbox" name="team" value="mf">Marknadsföringslaget<br>
 			<input type="checkbox" name="team" value="event">Eventlaget<br>
-
+			<p><input type="submit" name="submit" value="Skicka" /></p>
 		</form>
 	</div>
-
-
-
-
 	</body>
 </html>

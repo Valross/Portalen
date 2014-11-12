@@ -34,12 +34,49 @@ a {
 	float:left;
 }
 
+.row{
+	background: #C8C8AC;
+	width: 1000px; 
+}
+
+.col-sm-1,
+.col-sm-2,
+.col-sm-3
+{
+	background: #fff; 
+}
+.col-sm-5{
+background: #C8C8AC; 
+max-width: 900px; 
+
+}
+
+.col-sm-13,
+.col-sm-8,
+.col-sm-4{
+background: #fff; 
+padding: 5px;
+}
+
+
+.col-sm-7, 
+.col-sm-12
+{
+	max-width: 410px;
+	margin: 5px; 
+	background: #fff; 
+}
+
+
+
 /* =Typography
 -------------------------------------------------------------- */
 
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
+		background: #C8C8AC;
+		 
 	}
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Roboto', sans-serif;
@@ -180,7 +217,8 @@ a {
 	
 	#content .top-div { /* Divides the search form and user info from the rest of the #content div */
 		margin: 10px 0 20px 0;
-		border-bottom: 1px solid #dddddd;
+		
+	
 	}
 	
 	
@@ -342,7 +380,8 @@ input[type="text"]{
 	#footer {
 		margin-top: 30px;
 		padding-top: 10px;
-		border-top: 1px solid #dddddd;
+		/*border-top: 1px solid #dddddd;*/
+		
 	}
 	#footer p {
 		font-size: 12px;

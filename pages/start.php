@@ -1,6 +1,7 @@
 <div class="col-sm-5">
 	<div class="row">
-		<div class="col-sm-12"><h3>Dina bokade pass</h3>			
+		<div class="col-sm-12"><h3>Dina bokade pass</h3>	
+		
 			<div class="list-group" data-toggle="collapse" data-parent="#menu-bar" href="#collapseThree" >
 				 <?php loadBookedEvents(); ?>
 			<ul id="collapseThree" class="panel-collapse collapse">

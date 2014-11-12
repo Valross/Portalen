@@ -25,9 +25,14 @@ body {height: 100%; }
 		padding: 20px;
 	}	
 
-	.navbar-collapse {
+	.navbar-collapse,
+	.panel {
 		background: #21201e;
 		border-top: 0;
+	}
+	
+	.navbar-collapse {
+		font-size: 16px;
 	}
 	
 }
@@ -55,6 +60,10 @@ body {height: 100%; }
 	#sidebar a.logo img {
 		width: 160px;
 		height: 100px;
+	}
+	
+	.panel {
+		background-color: #363430;
 	}
 
 }

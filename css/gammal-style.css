@@ -10,12 +10,23 @@
 	2.	=Sidebar
 	3.  =Sidebar Navigation
 	4.  =Content
+	5.  =Media Queries
 
 	
 */
 
+
+
 /* =Global
 -------------------------------------------------------------- */
+
+
+html {min-height: 100%; position: relative;}
+body {
+	height: 100%; 
+	background: #e8e8e8;
+}
+
 
 a {
 	color: #2DB398;
@@ -34,15 +45,12 @@ a {
 	float:left;
 }
 
-
 /* =Typography
 -------------------------------------------------------------- */
 
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
-		background: #C8C8AC;
-		 
 	}
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Roboto', sans-serif;
@@ -146,6 +154,7 @@ a {
 	
 	.panel {
 		margin-bottom: 0px;
+		background-color: #363430;
 		border-radius: 0px; 
 	}
 
@@ -161,9 +170,9 @@ a {
 	  margin-top: 14px;
 	  margin-right: 20px;
 	  margin-bottom: 13px;
-	  background-color: #000;
+	  background-color: #21201e;
 	  border: 0;
-	  border-radius: 0;
+	  border-radius: 5px;
 	}
 	.navbar-toggle .icon-bar {
 	  width: 24px;
@@ -176,15 +185,6 @@ a {
 	
 /* =Content
 -------------------------------------------------------------- */
-	
-	
-	/* Box containing the search form and user info */
-	
-	#content .top-div { /* Divides the search form and user info from the rest of the #content div */
-		margin: 10px 0 20px 0;
-		
-	
-	}
 	
 	
 		/* User info */
@@ -345,10 +345,70 @@ input[type="text"]{
 	#footer {
 		margin-top: 30px;
 		padding-top: 10px;
-		/*border-top: 1px solid #dddddd;*/
-		
+		border-top: 1px solid #dddddd;
 	}
 	#footer p {
 		font-size: 12px;
 	}
 	
+	
+	
+/* =Media Queries
+-------------------------------------------------------------- */	
+	
+
+	@media (max-width: 991px) {
+		#sidebar {
+			position: static;
+			width: 100%;
+		}
+		#sidebar a.logo {
+			float: left;
+			padding: 15px;
+			height: 64px;
+			border-bottom: 15px solid #f99929;
+		} 
+		#sidebar a.logo img {
+			width: 80px;
+			height: 50px;
+		}
+		#sidebar .your-period {
+			display: none;
+		}
+	
+		#content {
+			padding: 20px;
+		}	
+
+		.navbar-collapse {
+			background: #21201e;
+			border-top: 0;
+		}
+	
+	}
+
+
+	@media (min-width: 992px) {
+	
+		#content {
+			margin-left: 240px;
+			padding: 10px 30px 10px 30px;
+			max-width: 992px;
+			float: left;
+		}
+	
+		#sidebar {
+			min-height: 100%;
+			float: left;
+			width: 240px;
+			overflow: hidden;
+		} 
+		#sidebar a.logo {
+			padding: 40px;
+		} 
+		#sidebar a.logo img {
+			width: 160px;
+			height: 100px;
+		}
+
+	}

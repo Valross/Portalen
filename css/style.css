@@ -34,40 +34,6 @@ a {
 	float:left;
 }
 
-.row{
-	background: #C8C8AC;
-	width: 1000px; 
-}
-
-.col-sm-1,
-.col-sm-2,
-.col-sm-3
-{
-	background: #fff; 
-}
-.col-sm-5{
-background: #C8C8AC; 
-max-width: 900px; 
-
-}
-
-.col-sm-13,
-.col-sm-8,
-.col-sm-4{
-background: #fff; 
-padding: 5px;
-}
-
-
-.col-sm-7, 
-.col-sm-12
-{
-	max-width: 410px;
-	margin: 5px; 
-	background: #fff; 
-}
-
-
 
 /* =Typography
 -------------------------------------------------------------- */

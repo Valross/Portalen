@@ -1,6 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
-
+//hej
 //Current variables
 //Separate file? Combine with part of php/pages/profile.php?
 $result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail  IS NOT NULL");

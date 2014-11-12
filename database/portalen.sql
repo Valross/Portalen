@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2014 at 05:03 PM
+-- Generation Time: Nov 12, 2014 at 05:22 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -53,6 +53,23 @@ INSERT INTO `access` (`id`, `name`) VALUES
 (4, 'super_admin'),
 (12, 'vard'),
 (5, 'webb');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `application`
+--
+
+CREATE TABLE IF NOT EXISTS `application` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `ssn` varchar(10) NOT NULL,
+  `mail` varchar(100) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -425,6 +442,12 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 --
 
 --
+-- Constraints for table `application`
+--
+ALTER TABLE `application`
+  ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
@@ -448,8 +471,8 @@ ALTER TABLE `event_template_group`
 -- Constraints for table `group_access`
 --
 ALTER TABLE `group_access`
-  ADD CONSTRAINT `group_access_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `group_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `group_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `group_access_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_member`
@@ -468,8 +491,8 @@ ALTER TABLE `news`
 -- Constraints for table `user_access`
 --
 ALTER TABLE `user_access`
-  ADD CONSTRAINT `user_access_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_access_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `access` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_access_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_work`

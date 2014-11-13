@@ -150,10 +150,22 @@ if(count($periodDates) == 1)
 	$periodStart = strtolower($periodStart->format('j M'));
 	$periodEnd = new DateTime($periodDates[0]['end_date']);
 	$periodEnd = strtolower($periodEnd->format('j M'));
-	$periodStart = str_replace('y', 'j', $periodStart);
-	$periodStart = str_replace('c', 'k', $periodStart);
-	$periodEnd = str_replace('y', 'j', $periodEnd);
-	$periodEnd = str_replace('c', 'k', $periodEnd);
+	if($periodStart == "oct")
+	{
+		$periodStart = "okt";
+	}
+	else if($periodStart == "may")
+	{
+		$periodStart = "maj";
+	}
+	if($periodEnd == "oct")
+	{
+		$periodEnd = "okt";
+	}
+	else if($periodEnd == "may")
+	{
+		$periodStart = "maj";
+	}
 }
 //
 //Load booked events

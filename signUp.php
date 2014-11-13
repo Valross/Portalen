@@ -1,3 +1,37 @@
+<?php
+//include_once('php/DBQuery.php');
+  	
+	//set up mySQLi connection here
+
+	//get team id's and names from database
+	//put in checkbox
+	//...
+
+
+  	if(isset($_POST['submit'])){
+	  	$firstName = DBQuery::safeString($_POST['firstName']);
+		$lastName = DBQuery::safeString($_POST['lastName']);
+		$liuId = DBQuery::safeString($_POST['liuId']);
+		$mail = DBQuery::safeString($_POST['mail']);
+		$ssn = DBQuery::safeString($_POST['ssn']);
+
+		//test accessing checkbox
+		$aTeam = $_POST['team'];
+		if(empty($aTeam)){
+			echo("Inga lag valda");
+		}
+		else{
+			$n = count($aTeam);
+			echo("$n lag valda: ");
+			
+			for($i=0; $i < $n; $i++){
+				echo htmlspecialchars($aTeam[$i]). " ";
+			}
+		}
+	}
+?>
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,7 +45,7 @@
 
 
 	<div class="col-sm-5">
-		<form action="" method="post">
+		<form action="action="" method="post"> <!--action="php/pages/reviseApplications.php" ??-->
 		 	<!--<h2></h2>-->
 		 	<label for="firstName">Förnamn</label>
 				<input type="text" name="firstName" maxlength="20" /><br>

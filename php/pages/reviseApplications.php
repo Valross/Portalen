@@ -1,7 +1,11 @@
 <?php
-include_once('php/DBQuery.php');
-include_once('php/general.php');
-include_once('php/pageManager.php');
+echo "test";
+
+//temp problem
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+include_once "$root/portalen/php/DBQuery.php";
+include_once("$root/portalen/php/general.php");
+include_once("$root/portalen/php/pageManager.php");
 
 if(isset($_POST['submit'])){
 
@@ -12,7 +16,7 @@ if(isset($_POST['submit'])){
   $ssn = DBQuery::safeString($_POST['ssn']);
 
   $aTeam = $_POST['team'];
-  if(empty($aDoor)){
+  if(empty($aTeam)){
     echo("Inga lag valda");
   }
   else{

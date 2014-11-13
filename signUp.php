@@ -2,6 +2,26 @@
 //include_once('php/DBQuery.php');
   	
 	//set up mySQLi connection here
+	
+	//open								//"poralen","portalen"
+	$mysql = mysqli_connect("localhost","root","bajs","portalen") or die("Unable to connect to MySQL");
+	mysqli_set_charset($mysql,'utf8');
+
+	$sql;
+	$result = mysqli_query($mysql,$sql);
+	$lastId = mysqli_insert_id($mysql);
+
+	//close connection here?	
+
+	$rows = array();
+		if(strtolower(substr($sql,0,6)) == 'select'){
+			while($row = mysqli_fetch_array($result)){
+				array_push($rows,$row);
+			}
+			return $rows;
+		}
+
+
 
 	//get team id's and names from database
 	//put in checkbox
@@ -9,11 +29,11 @@
 
 
   	if(isset($_POST['submit'])){
-	  	$firstName = DBQuery::safeString($_POST['firstName']);
-		$lastName = DBQuery::safeString($_POST['lastName']);
-		$liuId = DBQuery::safeString($_POST['liuId']);
-		$mail = DBQuery::safeString($_POST['mail']);
-		$ssn = DBQuery::safeString($_POST['ssn']);
+	  	$firstName = mysqli_real_escape_string($_POST['firstName']);
+		$lastName = mysqli_real_escape_string($_POST['lastName']);
+		$liuId = mysqli_real_escape_string($_POST['liuId']);
+		$mail = mysqli_real_escape_string($_POST['mail']);
+		$ssn = mysqli_real_escape_string($_POST['ssn']);
 
 		//test accessing checkbox
 		$aTeam = $_POST['team'];
@@ -29,6 +49,8 @@
 			}
 		}
 	}
+
+	mysqli_close($mysql);
 ?>
 
 

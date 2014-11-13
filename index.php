@@ -93,6 +93,7 @@ include_once('php/pageManager.php');
 					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 					  <li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
+					  <li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>
 						  </li>  
 						  </ul>
 		            

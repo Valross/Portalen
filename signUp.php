@@ -1,27 +1,10 @@
 <?php
-//include_once('php/DBQuery.php');
-  	
-	//set up mySQLi connection here
+  	session_start();
+  	include_once('php/DBConnect.php');
+  	include_once('php/DBQuery.php');
 	
-	//open								//"poralen","portalen"
-	$mysql = mysqli_connect("localhost","root","bajs","portalen") or die("Unable to connect to MySQL");
-	mysqli_set_charset($mysql,'utf8');
-
-	$sql;
-	$result = mysqli_query($mysql,$sql);
-	$lastId = mysqli_insert_id($mysql);
-
-	//close connection here?	
-
-	$rows = array();
-		if(strtolower(substr($sql,0,6)) == 'select'){
-			while($row = mysqli_fetch_array($result)){
-				array_push($rows,$row);
-			}
-			return $rows;
-		}
-
-
+	//open mysqli connection	
+	DBConnect::open();
 
 	//get team id's and names from database
 	//put in checkbox
@@ -29,11 +12,15 @@
 
 
   	if(isset($_POST['submit'])){
-	  	$firstName = mysqli_real_escape_string($_POST['firstName']);
-		$lastName = mysqli_real_escape_string($_POST['lastName']);
-		$liuId = mysqli_real_escape_string($_POST['liuId']);
-		$mail = mysqli_real_escape_string($_POST['mail']);
-		$ssn = mysqli_real_escape_string($_POST['ssn']);
+	  	$firstName = DBQuery::safeString($_POST['firstName']);
+		$lastName = DBQuery::safeString($_POST['lastName']);
+		$liuId = DBQuery::safeString($_POST['liuId']);
+		$mail = DBQuery::safeString($_POST['mail']);
+		$ssn = DBQuery::safeString($_POST['ssn']);
+
+		//close connection
+		DBConnect::close();
+
 
 		//test accessing checkbox
 		$aTeam = $_POST['team'];
@@ -48,9 +35,10 @@
 				echo htmlspecialchars($aTeam[$i]). " ";
 			}
 		}
+
 	}
 
-	mysqli_close($mysql);
+
 ?>
 
 
@@ -67,7 +55,7 @@
 
 
 	<div class="col-sm-5">
-		<form action="action="" method="post"> <!--action="php/pages/reviseApplications.php" ??-->
+		<form action="" method="post"> <!--action="php/pages/reviseApplications.php" ??-->
 		 	<!--<h2></h2>-->
 		 	<label for="firstName">Förnamn</label>
 				<input type="text" name="firstName" maxlength="20" /><br>

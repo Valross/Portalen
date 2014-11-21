@@ -3,8 +3,9 @@
   	include_once('php/DBConnect.php');
   	include_once('php/DBQuery.php');
 	
-	//open mysqli connection	
-	DBConnect::open();
+	//open mysqli connection			"portalen", "portalen"
+  	$mysql = mysqli_connect("localhost","root","bajs","portalen") or die("Unable to connect to MySQL");
+	mysqli_set_charset($mysql,'utf8');
 
 	//get team id's and names from database
 	//put in checkbox
@@ -17,10 +18,6 @@
 		$liuId = DBQuery::safeString($_POST['liuId']);
 		$mail = DBQuery::safeString($_POST['mail']);
 		$ssn = DBQuery::safeString($_POST['ssn']);
-
-		//close connection
-		DBConnect::close();
-
 
 		//test accessing checkbox
 		$aTeam = $_POST['team'];
@@ -38,6 +35,8 @@
 
 	}
 
+	//close connection
+	mysqli_close($mysql);
 
 ?>
 

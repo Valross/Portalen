@@ -23,25 +23,39 @@
 		//echo($firstName . " " . $lastName . " " . $liuId);
 
 		
-		//test accessing checkbox
-		$aTeam = $_POST['team'];
-		if(empty($aTeam)){
-			echo("test -- Inga lag valda");
-		}
-		else{
-			$n = count($aTeam);
-			echo("test -- $n lag valda: ");
-			
-			for($i=0; $i < $n; $i++){
-				echo htmlspecialchars($aTeam[$i]). " ";
+		if(isset($_POST['team'])){		//teams selected
+		
+			/*	//test accessing checkbox
+			$aTeam = $_POST['team'];
+			if(empty($aTeam)){
+				echo("test -- Inga lag valda");
 			}
-		}
-	
+			else{
+				$n = count($aTeam);
+				echo("test -- $n lag valda: ");
+				
+				for($i=0; $i < $n; $i++){
+					echo htmlspecialchars($aTeam[$i]). " ";
+				}
+			}						*/
 
-		if($firstName != '' && $lastName != '' && $mail != '' && $ssn != ''){
-			DBQuery::sql("INSERT INTO application (name, last_name,  ssn, mail, group_id)
-							VALUES ('$firstName', '$lastName', '$mail', '$ssn', 2)");
+
+			//INSERT INTO DB
+			if($firstName != '' && $lastName != '' && $mail != '' && $ssn != ''){
+				DBQuery::sql("INSERT INTO application (name, last_name,  ssn, mail, group_id)
+								VALUES ('$firstName', '$lastName', '$mail', '$ssn', 2)");
+			}
+
+			else
+				echo("-Fel: Alla fält måste fyllas i!");
+
+			
 		}
+		
+		else 	//no teams selected
+			echo("Du måste fylla i några lag");
+
+
 
 	}
 
@@ -59,7 +73,7 @@
  	</head>
  	<body>
 
-	<h1>Ansök!</h1>
+	<h1>Jobba på trappan!</h1>
 	<p>Fyll i formuläret så kontaktar vi dig när det finns plats bland arbetslagen!</p>
 
 

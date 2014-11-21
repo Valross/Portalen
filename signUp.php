@@ -19,6 +19,9 @@
 		$mail = DBQuery::safeString($_POST['mail']);
 		$ssn = DBQuery::safeString($_POST['ssn']);
 
+		//check
+		//echo($firstName . " " . $lastName . " " . $liuId);
+
 		//test accessing checkbox
 		$aTeam = $_POST['team'];
 		if(empty($aTeam)){
@@ -54,7 +57,7 @@
 
 
 	<div class="col-sm-5">
-		<form action="" method="post"> <!--action="php/pages/reviseApplications.php" ??-->
+		<form action="" method="post">
 		 	<!--<h2></h2>-->
 		 	<label for="firstName">Förnamn</label>
 				<input type="text" name="firstName" maxlength="20" /><br>
@@ -67,15 +70,15 @@
 			<label for="ssn">Personnr</label>
 				<input type="text" name="ssn" maxlength="20" /><br>
 			<h2>Vilka lag vill du söka?</h2>
-			<input type="checkbox" name="team" value="webb">Webblaget!<br>
-			<input type="checkbox" name="team" value="bar">Barlaget<br>
-			<input type="checkbox" name="team" value="kock">Kocklaget<br>
-			<input type="checkbox" name="team" value="vard">Värdlaget<br>
-			<input type="checkbox" name="team" value="servering">Serveringslaget & Hovmästarlaget<br>
-			<input type="checkbox" name="team" value="lagx">DJ-laget<br>
-			<input type="checkbox" name="team" value="ljud">Ljud- och ljusgruppen<br>
-			<input type="checkbox" name="team" value="mf">Marknadsföringslaget<br>
-			<input type="checkbox" name="team" value="event">Eventlaget<br>
+			<input type="checkbox" name="team[]" value="webb">Webblaget!<br>
+			<input type="checkbox" name="team[]" value="bar">Barlaget<br>
+			<input type="checkbox" name="team[]" value="kock">Kocklaget<br>
+			<input type="checkbox" name="team[]" value="vard">Värdlaget<br>
+			<input type="checkbox" name="team[]" value="servering">Serveringslaget & Hovmästarlaget<br>
+			<input type="checkbox" name="team[]" value="lagx">DJ-laget<br>
+			<input type="checkbox" name="team[]" value="ljud">Ljud- och ljusgruppen<br>
+			<input type="checkbox" name="team[]" value="mf">Marknadsföringslaget<br>
+			<input type="checkbox" name="team[]" value="event">Eventlaget<br>
 			<p><input type="submit" name="submit" value="Skicka" /></p>
 		</form>
 	</div>

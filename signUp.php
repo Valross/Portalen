@@ -4,7 +4,7 @@
   	include_once('php/DBQuery.php');
 	
 	//open mysqli connection			"portalen", "portalen"
-  	$mysql = mysqli_connect("localhost","root","bajs","portalen") or die("Unable to connect to MySQL");
+  	$mysql = mysqli_connect("localhost","portalen","portalen","portalen") or die("Unable to connect to MySQL");
 	mysqli_set_charset($mysql,'utf8');
 
 	//get team id's and names from database
@@ -15,25 +15,32 @@
   	if(isset($_POST['submit'])){
 	  	$firstName = DBQuery::safeString($_POST['firstName']);
 		$lastName = DBQuery::safeString($_POST['lastName']);
-		$liuId = DBQuery::safeString($_POST['liuId']);
+		//$liuId = DBQuery::safeString($_POST['liuId']);
 		$mail = DBQuery::safeString($_POST['mail']);
 		$ssn = DBQuery::safeString($_POST['ssn']);
 
 		//check
 		//echo($firstName . " " . $lastName . " " . $liuId);
 
+		
 		//test accessing checkbox
 		$aTeam = $_POST['team'];
 		if(empty($aTeam)){
-			echo("Inga lag valda");
+			echo("test -- Inga lag valda");
 		}
 		else{
 			$n = count($aTeam);
-			echo("$n lag valda: ");
+			echo("test -- $n lag valda: ");
 			
 			for($i=0; $i < $n; $i++){
 				echo htmlspecialchars($aTeam[$i]). " ";
 			}
+		}
+	
+
+		if($firstName != '' && $lastName != '' && $mail != '' && $ssn != ''){
+			DBQuery::sql("INSERT INTO application (name, last_name,  ssn, mail, group_id)
+							VALUES ('$firstName', '$lastName', '$mail', '$ssn', 2)");
 		}
 
 	}
@@ -60,15 +67,15 @@
 		<form action="" method="post">
 		 	<!--<h2></h2>-->
 		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" maxlength="20" /><br>
+				<input type="text" name="firstName" maxlength="15" /><br>
 		 	<label for="lastName">Efternamn</label>
-				<input type="text" name="lastName" maxlength="20" /><br>
-			<label for="liuId">Liu-id</label>
-				<input type="text" name="liuId" maxlength="20" /><br>
+				<input type="text" name="lastName" maxlength="15" /><br>
+			<!-- <label for="liuId">Liu-id</label>
+				<input type="text" name="liuId" maxlength="8" /><br> -->
 			<label for="mail">Mailadress</label>
-				<input type="text" name="mail" maxlength="20" /><br>
+				<input type="text" name="mail" maxlength="30" /><br>
 			<label for="ssn">Personnr</label>
-				<input type="text" name="ssn" maxlength="20" /><br>
+				<input type="text" name="ssn" maxlength="13" /><br>
 			<h2>Vilka lag vill du söka?</h2>
 			<input type="checkbox" name="team[]" value="webb">Webblaget!<br>
 			<input type="checkbox" name="team[]" value="bar">Barlaget<br>

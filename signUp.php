@@ -1,10 +1,10 @@
 <?php
   	session_start();
-  	include_once('php/DBConnect.php');
+  	//include_once('php/DBConnect.php');
   	include_once('php/DBQuery.php');
 	
 	//open mysqli connection			"portalen", "portalen"
-  	$mysql = mysqli_connect("localhost","portalen","portalen","portalen") or die("Unable to connect to MySQL");
+  	$mysql = mysqli_connect("localhost","root","bajs","portalen") or die("Unable to connect to MySQL");
 	mysqli_set_charset($mysql,'utf8');
 
 	//get team id's and names from database

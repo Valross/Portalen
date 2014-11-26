@@ -131,10 +131,11 @@ include_once('php/pageManager.php');
 		 	 </div> 
 			 <div class="top-div"></div>
    		 	 
+			 <div class="whitebox">
    		 	 <div class="row">
 				<?php content(); ?>
    		 	 </div>
-			 
+			 </div>
 		  <div class="row">
 			  <div id="footer">
 			  <div class="col-sm-13">

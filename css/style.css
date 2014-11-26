@@ -21,6 +21,12 @@ a {
 	color: #2DB398;
 }
 
+.whitebox
+{
+background: #fff; 
+padding: 8px; 
+}
+
 .avatar-16x16 {
 	
 }
@@ -41,7 +47,7 @@ a {
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
-		background: #C8C8AC;
+		background: #e0e0c7;
 		 
 	}
 	h1, h2, h3, h4, h5, h6 {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2014 at 05:22 PM
+-- Generation Time: Nov 26, 2014 at 04:53 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -69,6 +69,21 @@ CREATE TABLE IF NOT EXISTS `application` (
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicationgroup`
+--
+
+CREATE TABLE IF NOT EXISTS `applicationgroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`,`application_id`),
+  KEY `application_id` (`application_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -245,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `period` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `period`
@@ -256,7 +271,8 @@ INSERT INTO `period` (`id`, `name`, `start_date`, `end_date`) VALUES
 (2, 'Mars 2014', '2014-03-01', '2014-03-31'),
 (3, 'April 2014', '2014-04-01', '2014-04-30'),
 (4, 'Maj/Juni 2014', '2014-05-01', '2014-06-13'),
-(5, 'Oktober', '2014-10-01', '2014-11-01');
+(5, 'Oktober', '2014-10-01', '2014-11-01'),
+(6, 'November Swag', '2014-11-01', '2014-12-01');
 
 -- --------------------------------------------------------
 
@@ -446,6 +462,13 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 --
 ALTER TABLE `application`
   ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `applicationgroup`
+--
+ALTER TABLE `applicationgroup`
+  ADD CONSTRAINT `applicationgroup_ibfk_2` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `applicationgroup_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`

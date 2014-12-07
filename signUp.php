@@ -52,37 +52,35 @@
         $mail = DBQuery::safeString($_POST['mail']);
         $ssn = DBQuery::safeString($_POST['ssn']);
 
-    //validate fields
-    if($firstName != '' && $lastName != '' && $mail != '' && $ssn != ''){
+        //validate fields
+        if($firstName != '' && $lastName != '' && $mail != '' && $ssn != ''){
 
-        //validate checkbox
-        if(isset($_POST['team'])){
-            $teams = $_POST['team'];
-            $teamCounter = count($teams);
+            //validate checkbox
+            if(isset($_POST['team'])){
+                $teams = $_POST['team'];
+                $teamCounter = count($teams);
 
-            //INSERT INFO INTO DB
-            DBQuery::sql("INSERT INTO application (name, last_name, mail, ssn, group_id)
-            			  VALUES ('$firstName', '$lastName', '$mail', '$ssn', '5')"); //group id?
+                //INSERT INFO INTO DB
+                DBQuery::sql("INSERT INTO application (name, last_name, mail, ssn, group_id)
+                			  VALUES ('$firstName', '$lastName', '$mail', '$ssn', '5')"); //group id?
 
-            //INSERT TEAMS INTO DB
-            $appId = DBQuery::$lastId;
-            // echo "lag: ";
-            for($i=0; $i < $teamCounter; $i++){
-                // echo $teams[$i] . " ";
-                DBQuery::sql("INSERT INTO applicationgroup (group_id, application_id)
-                              VALUES ('$teams[$i]', '$appId')");
+                //INSERT TEAMS INTO DB
+                $appId = DBQuery::$lastId;
+                // echo "lag: ";
+                for($i=0; $i < $teamCounter; $i++){
+                    // echo $teams[$i] . " ";
+                    DBQuery::sql("INSERT INTO applicationgroup (group_id, application_id)
+                                  VALUES ('$teams[$i]', '$appId')");
+                }
+
             }
-
+            else 	//no teams selected
+                echo("Du måste fylla i några lag");
         }
-        else 	//no teams selected
-            echo("Du måste fylla i några lag");
-
+        else
+          echo("Alla fält måste fyllas i!");
     }
-    else
-      echo("Alla fält måste fyllas i!");
-    }
-
-    //close connection
+    
     mysqli_close($mysql);
 
 ?>
@@ -112,15 +110,15 @@
 			<label for="ssn">Personnr</label>
 				<input type="text" name="ssn" maxlength="13" /><br>
 			<h2>Vilka lag vill du söka?</h2>
-			<input type="checkbox" name="team[]" value="<?php echo $webbId; ?>" > Webblaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $barId; ?>"  > Barlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $kockId; ?>" > Kocklaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $vardId; ?>" > Värdlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $servId; ?>" > Serveringslaget & Hovmästarlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $djId; ?>"   > DJ-laget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $ljudId; ?>" > Ljud- och ljusgruppen <br>
-			<input type="checkbox" name="team[]" value="<?php echo $mfId; ?>"   > Marknadsföringslaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $eventId; ?>"> Eventlaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $webbId;  ?>" > Webblaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $barId;   ?>" > Barlaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $kockId;  ?>" > Kocklaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $vardId;  ?>" > Värdlaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $servId;  ?>" > Serveringslaget & Hovmästarlaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $djId;    ?>" > DJ-laget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $ljudId;  ?>" > Ljud- och ljusgruppen <br>
+			<input type="checkbox" name="team[]" value="<?php echo $mfId;    ?>" > Marknadsföringslaget <br>
+			<input type="checkbox" name="team[]" value="<?php echo $eventId; ?>" > Eventlaget <br>
 			<p><input type="submit" name="submit" value="Skicka" /></p>
 		</form>
 	</div>

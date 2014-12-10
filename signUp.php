@@ -61,15 +61,15 @@
                 $teamCounter = count($teams);
 
                 //INSERT INFO INTO DB
-                DBQuery::sql("INSERT INTO application (name, last_name, mail, ssn, group_id)
-                			  VALUES ('$firstName', '$lastName', '$mail', '$ssn', '5')"); //group id?
+                DBQuery::sql("INSERT INTO application (name, last_name, mail, ssn)
+                			  VALUES ('$firstName', '$lastName', '$mail', '$ssn')"); //group id?
 
                 //INSERT TEAMS INTO DB
                 $appId = DBQuery::$lastId;
                 // echo "lag: ";
                 for($i=0; $i < $teamCounter; $i++){
                     // echo $teams[$i] . " ";
-                    DBQuery::sql("INSERT INTO applicationgroup (group_id, application_id)
+                    DBQuery::sql("INSERT INTO application_group (group_id, application_id)
                                   VALUES ('$teams[$i]', '$appId')");
                 }
 

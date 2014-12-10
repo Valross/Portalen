@@ -86,29 +86,40 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-	<head>
+<html lang="sv-SE">
+<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Ansökning</title>
- 	</head>
- 	<body>
-
-	<h1>Jobba på trappan!</h1>
-	<p>Fyll i formuläret så kontaktar vi dig när det finns plats bland arbetslagen!</p>
-
+		<title>Kårhuset Trappan: Ansökan för jobb</title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
 
 
-	<div class="col-sm-5">
+	<div class="signup-container">
+		<div class="top-border">
+			<div class="color first"></div>
+			<div class="color third"></div>
+		</div>
+		<div class="logotype">
+			<h1>Ansökan för jobb på Trappan</h1>
+			<p style="font-size: 14px; font-size: 1.4rem;">Fyll i formuläret så kontaktar vi dig när det finns plats bland arbetslagen!</p>
+		</div>
+		
+		
+		
 		<form action="" method="post">
-		 	<!--<h2></h2>-->
+			<div class="two-column">
 		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" maxlength="15" /><br>
+				<input type="text" name="firstName" maxlength="15" />
 		 	<label for="lastName">Efternamn</label>
-				<input type="text" name="lastName" maxlength="15" /><br>
+				<input type="text" name="lastName" maxlength="15" />
 			<label for="mail">Mailadress</label>
-				<input type="text" name="mail" maxlength="30" /><br>
+				<input type="text" name="mail" maxlength="30" />
 			<label for="ssn">Personnr</label>
-				<input type="text" name="ssn" maxlength="13" /><br>
+				<input type="text" name="ssn" maxlength="13" />
+			</div>
+			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>
 			<input type="checkbox" name="team[]" value="<?php echo $webbId;  ?>" > Webblaget <br>
 			<input type="checkbox" name="team[]" value="<?php echo $barId;   ?>" > Barlaget <br>
@@ -119,8 +130,13 @@
 			<input type="checkbox" name="team[]" value="<?php echo $ljudId;  ?>" > Ljud- och ljusgruppen <br>
 			<input type="checkbox" name="team[]" value="<?php echo $mfId;    ?>" > Marknadsföringslaget <br>
 			<input type="checkbox" name="team[]" value="<?php echo $eventId; ?>" > Eventlaget <br>
-			<p><input type="submit" name="submit" value="Skicka" /></p>
+			
+			</div>
+			<input class="send-btn primary" type="submit" name="submit" value="SKICKA" />
+			
 		</form>
+		
 	</div>
-	</body>
+	
+</body>
 </html>

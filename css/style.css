@@ -21,11 +21,7 @@ a {
 	color: #2DB398;
 }
 
-.whitebox
-{
-background: #fff; 
-padding: 8px; 
-}
+
 
 .avatar-16x16 {
 	
@@ -47,7 +43,7 @@ padding: 8px;
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
-		background: #e0e0c7;
+		background: #fff;
 		 
 	}
 	h1, h2, h3, h4, h5, h6 {
@@ -67,7 +63,9 @@ padding: 8px;
 
 /* =Sidebar
 -------------------------------------------------------------- */
-
+	.bajs {
+	background: fff;
+	}
 
 
 	#sidebar {

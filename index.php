@@ -113,7 +113,6 @@ include_once('php/pageManager.php');
 				  
 		  </div> 
 		  <!-- end sidebar -->
-
 		  <div id="content">
 			  <div class="row">
 				  <div class="col-sm-4 search">
@@ -131,6 +130,7 @@ include_once('php/pageManager.php');
 		 	 </div> 
 			 <div class="top-div"></div>
    		 	 
+    <div class="bajs">
    		 	 <div class="row">
 				<?php content(); ?>
    		 	 </div>
@@ -142,7 +142,7 @@ include_once('php/pageManager.php');
 			  </div>
 		 	  </div> <!-- #footer -->
 		  </div>
-			 
+	</div>	 
    	 	</div> <!-- end #content -->
 	</div> <!-- #page-container -->
 	

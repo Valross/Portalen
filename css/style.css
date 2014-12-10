@@ -21,6 +21,8 @@ a {
 	color: #2DB398;
 }
 
+
+
 .avatar-16x16 {
 	
 }
@@ -41,7 +43,7 @@ a {
 	body {
 		font-family: 'Roboto', sans-serif;
 		font-weight: 400;
-		background: #C8C8AC;
+		background: #fff;
 		 
 	}
 	h1, h2, h3, h4, h5, h6 {

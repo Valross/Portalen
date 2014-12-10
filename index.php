@@ -131,6 +131,7 @@ include_once('php/pageManager.php');
 		 	 </div> 
 			 <div class="top-div"></div>
    		 	 
+
    		 	 <div class="row">
 				<?php content(); ?>
    		 	 </div>

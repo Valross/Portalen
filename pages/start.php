@@ -1,5 +1,6 @@
 <div class="col-sm-5">
 	<div class="row">
+		
 		<div class="col-sm-12"><h3>Dina bokade pass</h3>	
 		
 			<div class="list-group" data-toggle="collapse" data-parent="#menu-bar" href="#collapseThree" >
@@ -48,6 +49,7 @@ MF-ansvariga och DJ-ansvarig presenteras vid ett senare tillfälle.
 <h3><a href="?page=news">Random länk till tidigare nyhet 2001</a></h3>
 <h3><a href="?page=news">Länk till tidigare nyhet 2/01</a></h3>
 <h3><a href="?page=news">Typisk länk till tidigare nyhet</a></h3>
+
 
 </div>
 

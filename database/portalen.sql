@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2014 at 04:53 PM
+-- Generation Time: Dec 10, 2014 at 04:48 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -66,18 +66,16 @@ CREATE TABLE IF NOT EXISTS `application` (
   `last_name` varchar(50) NOT NULL,
   `ssn` varchar(10) NOT NULL,
   `mail` varchar(100) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `group_id` (`group_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `applicationgroup`
+-- Table structure for table `application_group`
 --
 
-CREATE TABLE IF NOT EXISTS `applicationgroup` (
+CREATE TABLE IF NOT EXISTS `application_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
   `application_id` int(11) NOT NULL,
@@ -458,17 +456,11 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 --
 
 --
--- Constraints for table `application`
+-- Constraints for table `application_group`
 --
-ALTER TABLE `application`
-  ADD CONSTRAINT `application_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `applicationgroup`
---
-ALTER TABLE `applicationgroup`
-  ADD CONSTRAINT `applicationgroup_ibfk_2` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `applicationgroup_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `application_group`
+  ADD CONSTRAINT `application_group_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `application_group_ibfk_2` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`

@@ -111,25 +111,53 @@
 		<form action="" method="post">
 			<div class="two-column">
 		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" maxlength="15" />
+				<input type="text" name="firstName" id="firstName" maxlength="15" />
 		 	<label for="lastName">Efternamn</label>
-				<input type="text" name="lastName" maxlength="15" />
+				<input type="text" name="lastName" id="lastName" maxlength="15" />
 			<label for="mail">Mailadress</label>
-				<input type="text" name="mail" maxlength="30" />
-			<label for="ssn">Personnr</label>
-				<input type="text" name="ssn" maxlength="13" />
+				<input type="text" name="mail" id="mail" maxlength="30" />
+			<label for="ssn">Personnummer</label>
+				<input type="text" name="ssn" id="ssn" placeholder="ååååmmdd-xxxx" maxlength="13" />
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>
-			<input type="checkbox" name="team[]" value="<?php echo $webbId;  ?>" > Webblaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $barId;   ?>" > Barlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $kockId;  ?>" > Kocklaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $vardId;  ?>" > Värdlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $servId;  ?>" > Serveringslaget & Hovmästarlaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $djId;    ?>" > DJ-laget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $ljudId;  ?>" > Ljud- och ljusgruppen <br>
-			<input type="checkbox" name="team[]" value="<?php echo $mfId;    ?>" > Marknadsföringslaget <br>
-			<input type="checkbox" name="team[]" value="<?php echo $eventId; ?>" > Eventlaget <br>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="webb" value="<?php echo $webbId;  ?>" >
+			<label for="webb">Webb</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="bar" value="<?php echo $barId;   ?>" > 			
+			<label for="bar">Bar</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="kock" value="<?php echo $kockId;  ?>" > 			
+			<label for="kock">Kock</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="vard" value="<?php echo $vardId;  ?>" > 
+			<label for="vard">Värd</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="dj" value="<?php echo $djId;    ?>" >
+			<label for="dj">DJ</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="ljud" value="<?php echo $ljudId;  ?>" >
+			<label for="ljud">Ljud och ljus</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="marknadsforing" value="<?php echo $mfId;    ?>" >
+			<label for="marknadsforing">Marknadsföring</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="servering" value="<?php echo $servId;  ?>" > 
+			<label for="servering">Servering & hovmästare</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="event" value="<?php echo $eventId; ?>" >
+			<label for="event">Event</label>
+			</div>
+		
 			
 			</div>
 			<input class="send-btn primary" type="submit" name="submit" value="SKICKA" />

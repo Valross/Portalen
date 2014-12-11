@@ -121,41 +121,43 @@
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="webb" value="<?php echo $webbId;  ?>" >
-			<label for="webb">Webb</label>
-			</div>
+			
+			
 			<div class="fifty-percent-width">
 			<input type="checkbox" name="team[]" id="bar" value="<?php echo $barId;   ?>" > 			
 			<label for="bar">Bar</label>
-			</div>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="kock" value="<?php echo $kockId;  ?>" > 			
-			<label for="kock">Kock</label>
-			</div>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="vard" value="<?php echo $vardId;  ?>" > 
-			<label for="vard">Värd</label>
-			</div>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="dj" value="<?php echo $djId;    ?>" >
-			<label for="dj">DJ</label>
-			</div>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="ljud" value="<?php echo $ljudId;  ?>" >
-			<label for="ljud">Ljud och ljus</label>
 			</div>
 			<div class="fifty-percent-width">
 			<input type="checkbox" name="team[]" id="marknadsforing" value="<?php echo $mfId;    ?>" >
 			<label for="marknadsforing">Marknadsföring</label>
 			</div>
 			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="servering" value="<?php echo $servId;  ?>" > 
-			<label for="servering">Servering & hovmästare</label>
-			</div>
-			<div class="fifty-percent-width">
 			<input type="checkbox" name="team[]" id="event" value="<?php echo $eventId; ?>" >
 			<label for="event">Event</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="servering" value="<?php echo $servId;  ?>" > 
+			<label for="servering">Servering</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="dj" value="<?php echo $djId;    ?>" >
+			<label for="dj">DJ</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="vard" value="<?php echo $vardId;  ?>" > 
+			<label for="vard">Värd</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="kock" value="<?php echo $kockId;  ?>" > 			
+			<label for="kock">Kock</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="webb" value="<?php echo $webbId;  ?>" >
+			<label for="webb">Webb</label>
+			</div>
+			<div class="fifty-percent-width">
+			<input type="checkbox" name="team[]" id="ljud" value="<?php echo $ljudId;  ?>" >
+			<label for="ljud">Ljud och ljus</label>
 			</div>
 		
 			

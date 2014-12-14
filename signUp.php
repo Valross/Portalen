@@ -73,14 +73,30 @@
                                   VALUES ('$teams[$i]', '$appId')");
                 }
 
+                //feedback
+                ?><script>
+                    window.location = "?page=signUp";
+                    alert("Din ansökan har skickats.")
+                </script><?php
+
+
+
             }
-            else 	//no teams selected
-                echo("Du måste fylla i några lag");
+            else{   //feedback
+                ?><script>
+                window.location = "?page=signUp";
+                alert("FEL: Du måste fylla i några lag!")
+                </script><?php
+            }
         }
-        else
-          echo("Alla fält måste fyllas i!");
+        else{   //feedback
+          ?><script>
+          window.location = "?page=signUp";
+          alert("FEL: Du måste fylla i alla fält!")
+          </script><?php
+      }
     }
-    
+
     mysqli_close($mysql);
 
 ?>
@@ -105,9 +121,9 @@
 			<h1>Ansökan för jobb på Trappan</h1>
 			<p style="font-size: 14px; font-size: 1.4rem;">Fyll i formuläret så kontaktar vi dig när det finns plats bland arbetslagen!</p>
 		</div>
-		
-		
-		
+
+
+
 		<form action="" method="post">
 			<div class="two-column">
 		 	<label for="firstName">Förnamn</label>
@@ -121,10 +137,10 @@
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>
-			
-			
+
+
 			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="bar" value="<?php echo $barId;   ?>" > 			
+			<input type="checkbox" name="team[]" id="bar" value="<?php echo $barId;   ?>" >
 			<label for="bar">Bar</label>
 			</div>
 			<div class="fifty-percent-width">
@@ -136,7 +152,7 @@
 			<label for="event">Event</label>
 			</div>
 			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="servering" value="<?php echo $servId;  ?>" > 
+			<input type="checkbox" name="team[]" id="servering" value="<?php echo $servId;  ?>" >
 			<label for="servering">Servering</label>
 			</div>
 			<div class="fifty-percent-width">
@@ -144,11 +160,11 @@
 			<label for="dj">DJ</label>
 			</div>
 			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="vard" value="<?php echo $vardId;  ?>" > 
+			<input type="checkbox" name="team[]" id="vard" value="<?php echo $vardId;  ?>" >
 			<label for="vard">Värd</label>
 			</div>
 			<div class="fifty-percent-width">
-			<input type="checkbox" name="team[]" id="kock" value="<?php echo $kockId;  ?>" > 			
+			<input type="checkbox" name="team[]" id="kock" value="<?php echo $kockId;  ?>" >
 			<label for="kock">Kock</label>
 			</div>
 			<div class="fifty-percent-width">
@@ -159,14 +175,14 @@
 			<input type="checkbox" name="team[]" id="ljud" value="<?php echo $ljudId;  ?>" >
 			<label for="ljud">Ljud och ljus</label>
 			</div>
-		
-			
+
+
 			</div>
 			<input class="send-btn primary" type="submit" name="submit" value="SKICKA" />
-			
+
 		</form>
-		
+
 	</div>
-	
+
 </body>
 </html>

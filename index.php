@@ -90,16 +90,24 @@ include_once('php/pageManager.php');
 		               <li class="panel dropdown">
 					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="fa fa-gears fa-fw fa-lg"></span>Adminverktyg<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 						  <ul id="collapseTwo" class="panel-collapse collapse">
-					  <li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
-					  <li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
-					  <li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
-					  <li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>
+							<li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
+							<li><a href="?page= #"></span>Hantera eventmallar</a></li>
+							<li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
+							<li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
+							<li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>
+							<li><a href="?page= #"></span>Statistik</a></li>
+							<li><a href="?page= #"></span>Personallistor</a></li>
+							<li><a href="?page= #"></span></a></li>
+							<li><a href="?page= #"></span><---DA Verktyg ---></a></li>
+							<li><a href="?page= #"></span>Checka av pass</a></li>
+							<li><a href="?page=createEvent"></span>DA-lappar</a></li>
+
+
 						  </li>  
 						  </ul>
 		            
 		              <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li>
 		              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
-					  <li><a href="?page=forum"><span class="fa fa-comments-o fa-fw fa-lg"></span>Diskussionsforum</a></li>
 					  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 
 		            </ul>

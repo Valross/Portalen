@@ -5,6 +5,7 @@
 		<th>Personnummer</th>
 		<th>Mail</th>
 		<th>Lag</th>
+		<th>Verktyg</th>
 	</tr>
 
 <?php
@@ -52,6 +53,7 @@ for($i=0; $i<$howMany; $i++) {
 									echo $thisTeam;
 				    	  	}
 				    ?></td>
+				<td> <button type="button">Godkänn</button>  <button type="button">Neka</button> </td>
 			</tr>
 	<?php
 

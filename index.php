@@ -33,7 +33,7 @@ include_once('php/pageManager.php');
   </head>
   <body>
 	  <div id="page-container">
-		  <div id="sidebar">
+		  <div id="sidebar" style="overflow:auto;" >
 			  <!-- begin logo -->
 			  <a href="/" class="logo"><img src="img/logo.png"></a>
 			  <!-- end Logo -->

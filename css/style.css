@@ -339,7 +339,29 @@ input[type="text"]{
 	
 }
 	
+
+	/* reviseApplications */
+	table#application-table{
+		text-align: left;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+
+	table#application-table th, td {
+    	padding: 15px;
+	} 
 	
+	table#application-table th {
+    	color: white;
+    	background-color: #363430;
+    	font-size: 20px;
+	}
+
+	table#application-table td {
+    	font-size: 17px;
+	}
+
+		
 /* =Footer
 -------------------------------------------------------------- */	
 	

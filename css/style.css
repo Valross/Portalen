@@ -1,73 +1,135 @@
 /*
 * Trappans Personalportal
-* Utvecklad av Trappans webblag 2014:
-* Hampus Axelsson, Linus Sjölinder, Connie Åberg, Andreas Antonsson
+*
+* 	Jag föreslår att vi försöker följa den här strukturen i CSS-filen:
+* 	http://smacss.com/book/categorizing
+* 	/Andreas
+*
 */
 
 /*
-	Table of content:
-	1.  =Typography
-	2.	=Sidebar
-	3.  =Sidebar Navigation
-	4.  =Content
 
+	Table of content:
+	1.  =Base
+	2.	=Layout
+	3.  =Module
+	4.  =State
 	
 */
 
-/* =Global
+
+
+/* =Debug (temp)
 -------------------------------------------------------------- */
 
-a {
+
+
+/* =Base
+-------------------------------------------------------------- */
+
+html {
+	min-height: 100%; 
+	position: relative;
+}
+body {
+	height: 100%; 
+	background: #f0f0f0; 
+}
+
+/* Typography */
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3 {
+	font-weight: lighter;
+}
+h4, h5, h6 {
+	font-weight: bold;
+}
+
+
+/* Links */
+
+a:link,
+a:visited {
 	color: #2DB398;
 }
+a:hover,
+a:focus {
+	color: #000;
+}
 
 
+/* Forms */
 
-.avatar-16x16 {
+input[type="submit"] {
+display: inline-block;
+padding: 6px 12px;
+font-size: 12px;
+color: #fff;
+font-weight: normal;
+line-height: 1.428571429;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+background: #2DB398;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+border: 1px solid transparent;
+}
+
+input[type="button"] {
+display: inline-block;
+padding: 6px 12px;
+font-size: 12px;
+color: #fff;
+font-weight: normal;
+line-height: 1.428571429;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+background: #2DB398;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+border: 1px solid transparent;
+}
+
+input[type="text"] {
 	
 }
-.avatar-32x32 {
-	border-radius: 22px;
-}
-.avatar-96x96 {
-	border-radius: 48px;
-	width: 96px;
-	height: 96px;
-	float:left;
-}
 
 
-/* =Typography
+/* =Layout
 -------------------------------------------------------------- */
 
-	body {
-		font-family: 'Roboto', sans-serif;
-		font-weight: 400;
-		background: #fff;
-		 
-	}
-	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Roboto', sans-serif;
-	}
-	h1, h2, h3 {
-		font-weight: lighter;
-	}
-	h4, h5, h6 {
-		font-weight: bold;
-	}
-	.page-header {
-	  margin: 0 0 6px;
-	  border-bottom: 0;
-	}
-
-
-/* =Sidebar
--------------------------------------------------------------- */
-
-
+/* Sidebar */
 	#sidebar {
 		background: #363430;
 	} 
+	
+/* Footer */	
+	
+	#footer {
+		margin-top: 30px;
+		padding-top: 10px;
+	}
+
+
+/* =Modules
+-------------------------------------------------------------- */
 	
 	/* Logotype */
 	#sidebar a.logo {
@@ -106,9 +168,7 @@ a {
 	}
 
 	
-	
-/* =Sidebar navigation
--------------------------------------------------------------- */
+/* Sidebar navigation */
 		
 	#sidebar ul.main-nav {
 		margin: 0;
@@ -173,11 +233,6 @@ a {
 	#sidebar .icon-bar {
  	   	background-color: #fff;
 	}
-
-	
-/* =Content
--------------------------------------------------------------- */
-	
 	
 	/* Box containing the search form and user info */
 	
@@ -264,6 +319,19 @@ a {
 	
 	/* Måste kategoriseras ordentligt, men jag är för dålig */
 	
+	.avatar-16x16 {
+	
+	}
+	.avatar-32x32 {
+		border-radius: 22px;
+	}
+	.avatar-96x96 {
+		border-radius: 48px;
+		width: 96px;
+		height: 96px;
+		float:left;
+	}
+	
 	.badge {
 		padding: 5px 8px;
 		background: #2DB398;
@@ -292,54 +360,7 @@ a {
 	  border-bottom-right-radius: 0px;
 	  border-bottom-left-radius: 0px;
 	}
-
-
-input[type="submit"]{
-display: inline-block;
-padding: 6px 12px;
-
-font-size: 12px;
-color: #fff;
-font-weight: normal;
-line-height: 1.428571429;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-cursor: pointer;
-background: #2DB398;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
--o-user-select: none;
-user-select: none;
-border: 1px solid transparent;
-}
-
-input[type="button"]{
-display: inline-block;
-padding: 6px 12px;
-font-size: 12px;
-color: #fff;
-font-weight: normal;
-line-height: 1.428571429;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-cursor: pointer;
-background: #2DB398;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
--o-user-select: none;
-user-select: none;
-border: 1px solid transparent;
-}
-
-input[type="text"]{
 	
-}
-	
-
 	/* reviseApplications */
 	table#application-table{
 		text-align: left;
@@ -360,18 +381,79 @@ input[type="text"]{
 	table#application-table td {
     	font-size: 17px;
 	}
-
-		
-/* =Footer
--------------------------------------------------------------- */	
 	
-	#footer {
-		margin-top: 30px;
-		padding-top: 10px;
-		/*border-top: 1px solid #dddddd;*/
-		
-	}
+	
 	#footer p {
 		font-size: 12px;
-	}
+	}	
 	
+	
+	
+/* =State
+-------------------------------------------------------------- */
+	
+	@media (max-width: 991px) {
+		#sidebar {
+			position: static;
+			width: 100%;
+		}
+		#sidebar a.logo {
+			float: left;
+			padding: 15px;
+			height: 64px;
+			border-bottom: 15px solid #f99929;
+		} 
+		#sidebar a.logo img {
+			width: 80px;
+			height: 50px;
+		}
+		#sidebar .your-period {
+			display: none;
+		}
+	
+		#content {
+			padding: 20px;
+		}	
+
+		.navbar-collapse,
+		.panel {
+			background: #21201e;
+			border-top: 0;
+		}
+	
+		.navbar-collapse {
+			font-size: 16px;
+		}
+	
+	}
+
+
+	@media (min-width: 992px) {
+	
+		#content {
+			margin-left: 240px;
+			padding: 10px 30px 10px 30px;
+			max-width: 992px;
+		}
+	
+		#sidebar {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 240px;
+			overflow: hidden;
+		} 
+		#sidebar a.logo {
+			padding: 40px;
+		} 
+		#sidebar a.logo img {
+			width: 160px;
+			height: 100px;
+		}
+	
+		.panel {
+			background-color: #363430;
+		}
+
+	}

@@ -18,7 +18,6 @@ include_once('php/pageManager.php');
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css">
 	<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
@@ -33,7 +32,7 @@ include_once('php/pageManager.php');
   </head>
   <body>
 	  <div id="page-container">
-		  <div id="sidebar" style="overflow:auto;" >
+		  <div id="sidebar">
 			  <!-- begin logo -->
 			  <a href="/" class="logo"><img src="img/logo.png"></a>
 			  <!-- end Logo -->

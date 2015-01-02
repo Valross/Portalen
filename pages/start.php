@@ -26,30 +26,7 @@
 	</div>
 </div>
 <div class="col-sm-7">
-	<h1>Introducing nya driftgruppen</h1>
-	<img src="profile.jpg" class="avatar-16x16" width="16px" height="16px"><small>Skrivet av <a href="#">Astrid Adelsköld</a> den 24 februari 2014 kl. 14:45</small>
-	<p>
-		Efter ett par intensiva veckor med intervjuer har nu nästa års driftgrupp utsetts! 
-</br>
-Vi vill härmed önska följande personer välkomna till Driftgruppen 14/15:</br></br>
-DEN HÄR TEXTEN ÄR HÅRDKODAD. SÅ KAN VI INTE HA DET! :)
-<li>DA-lagsansvarig - Erik Thuvesen</li>
-<li>Barlagsansvariga - Niklas Simm och Simon Joelsson</li>
-<li>Kocklagsansvarig - Amanda Larsson</li>
-<li>Värdlagsansvarig - Emma Wigren</li>
-<li>Personalansvarig - Hampus Hogeby</li>
-<li>IT- och webbansvarig - Linus Sjölinder</li>
-<li>Eventlagsansvariga - Sandra Lindqvist och Anna Söderberg</li>
-<li>Hovmästar- och serveringsansvarig - Pia von Wachenfelt</li>
-<li>Ljud- och ljusansvariga - Christopher Forsmark och Jesper Skommargård</li>
-</br>
-MF-ansvariga och DJ-ansvarig presenteras vid ett senare tillfälle.
-	</p>
-
-<h3><a href="?page=news">Random länk till tidigare nyhet 2001</a></h3>
-<h3><a href="?page=news">Länk till tidigare nyhet 2/01</a></h3>
-<h3><a href="?page=news">Typisk länk till tidigare nyhet</a></h3>
-
+	<h1>En kalender här kanske eller något, "kommande evenemang"</h1>
 
 </div>
 

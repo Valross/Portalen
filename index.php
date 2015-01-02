@@ -143,14 +143,12 @@ include_once('php/pageManager.php');
 
 
 		  <div id="content">	     		 	 
-
-	   		 	 <div class="row">
-					<?php content(); ?>
-	   		 	 </div>
+			  <div class="container-fluid">
+					<?php content(); ?>  
+			  </div>
+			<div class="push"></div>
 			 
-			 <div class="push"></div>
-			 
-		</div> <!-- end #content -->
+		  </div> <!-- end #content -->
 		
 				  <div id="footer">
 				  <div class="col-sm-13">

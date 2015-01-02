@@ -256,6 +256,7 @@ input[type="button"] {
 	.white-box {
 		background: #fff;
 		border: 1px solid #e3e9eb;
+		margin-bottom: 20px;
 	}
 	.white-box p, 
 	.white-box h1, 
@@ -379,7 +380,32 @@ input[type="button"] {
 		margin-left: 5px;
 	}
 	
+	/* Page headers */
 	
+	.page-header {
+	    padding-bottom: 0;
+	    border-bottom: 0;
+		overflow: hidden;
+	}
+	.page-header-img {
+		float: left;
+	}
+	.page-header h1.img-float {
+		float: left;
+		margin: 0;
+		padding-left: 30px;
+		line-height: 100px;
+	}
+	
+	/* Basic tables */
+	
+	.basic-table {
+		margin-bottom: 20px;
+	}
+	
+	.basic-table td {
+		padding: 5px 20px;
+	}
 	
 	/* Upcoming events (startpage) */
 

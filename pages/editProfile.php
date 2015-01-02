@@ -1,8 +1,8 @@
-<div class="container-fluid">	
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="page-header">
 			<h1>Inställningar</h1>
+			<button type="button" class="btn btn-default">Avsluta medlemskap (ska fixa denna)</button>
 			</div>
 		</div>
 	</div> <!-- .row -->
@@ -18,7 +18,7 @@
 		<label for="last_name">Efternamn</label>
 		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name">
 	  	<label for="ssn">Personnummer</label>
-	  	<input type="text" value="<?php echo $profileSsn; ?>" name="ssn" id="ssn" maxlength="10">
+	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååååmmdd-xxxx" name="ssn" id="ssn" maxlength="10">
 	  	<label for="phone_number">Mobilnummer</label>
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="15">
 		<label for="mail">Mailadress</label>
@@ -33,6 +33,14 @@
 </div>
 <div class="col-sm-6">
 	<div class="white-box">
+		<h3>Ändra visningsbild</h3>
+	<form action="" method="post">
+		<label for="old_password">Nuvarande lösenord</label>
+		<input type="password" name="old_password" id="old_password">
+		<input type="submit" name="changePass" value="Ladda upp">
+	</form>
+	</div> <!-- .white-box -->
+	<div class="white-box">
 		<h3>Ändra lösenord</h3>
 	<form action="" method="post">
 		<label for="old_password">Nuvarande lösenord</label>
@@ -46,5 +54,3 @@
 	</div> <!-- .white-box -->
 </div>
 </div> <!-- .row -->
-
-</div> <!-- .container-fluid -->

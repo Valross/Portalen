@@ -1,0 +1,6 @@
+Komponenter som ändrats i vår Bootstrapfil (v3.3.1):
+
+ - Glyphicons är inte inkluderat.
+ - @font-family-sans-serif -> "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+ - @grid-float-breakpoint -> @screen-md-min
+ 

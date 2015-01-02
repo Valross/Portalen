@@ -83,6 +83,7 @@ include_once('php/pageManager.php');
 	  						  <ul id="collapseTwo" class="panel-collapse collapse">
 	  							<li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
 	  							<li><a href="?page= #"></span>Hantera eventmallar</a></li>
+	  							<li><a href="?page=period"></span>Hantera perioder</a></li>
 	  							<li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 	  							<li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
 	  							<li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>

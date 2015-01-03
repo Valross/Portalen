@@ -1,9 +1,11 @@
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-8">
 			<div class="page-header">
 			<h1>Inställningar</h1>
-			<button type="button" class="btn btn-default">Avsluta medlemskap (ska fixa denna)</button>
 			</div>
+		</div>
+		<div class="col-sm-4 text-right">
+			<button type="button" class="btn btn-page-header"><i class="fa fa-trash fa-lg"></i> Avsluta medlemskap</button>
 		</div>
 	</div> <!-- .row -->
 

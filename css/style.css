@@ -283,8 +283,11 @@ input[type="button"] {
 	  padding: 5px 16px;
 	  color: #444;
 	}
-	.dropdown-menu span.fa {
+	.dropdown-menu .fa {
 		margin-right: 10px;
+	}
+	.btn .fa {
+		margin-right: 5px;
 	}
 	
 	/* Badges: modified Bootstrap style */
@@ -390,11 +393,19 @@ input[type="button"] {
 	.page-header-img {
 		float: left;
 	}
-	.page-header h1.img-float {
+	.page-header h1.header-img {
 		float: left;
 		margin: 0;
 		padding-left: 30px;
 		line-height: 100px;
+	}
+	.btn-page-header {
+		margin: 60px 0 20px 0;
+		background: transparent;
+		border-color: #cccccc;
+	}
+	.btn-page-header.header-img {
+		margin: 74px 0 54px 0;
 	}
 	
 	/* Basic tables */

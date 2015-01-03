@@ -9,7 +9,7 @@ if(isset($_POST['submit']))
 	
 		{
 		DBQuery::sql("INSERT INTO period (name, start_date, end_date)
-							VALUES ($PeriodName', '$PeriodStart', '$PeriodEnd')");
+							VALUES ('$PeriodName', '$PeriodStart', '$PeriodEnd')");
 		?>
 		<?php
 	}

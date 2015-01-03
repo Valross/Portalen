@@ -266,6 +266,21 @@ input[type="button"] {
 		margin: 20px;
 	}
 	
+	/* Buttons */
+	
+	.btn .fa {
+		margin-right: 5px;
+	}
+	
+	.btn-page-header {
+		margin: 60px 0 20px 0;
+		background: transparent;
+		border-color: #cccccc;
+	}
+	.btn-page-header.header-img {
+		margin: 74px 0 54px 0;
+	}
+	
 	/* Dropdowns: modified Bootstrap style */
 	
 	.dropdown-menu {
@@ -285,9 +300,6 @@ input[type="button"] {
 	}
 	.dropdown-menu .fa {
 		margin-right: 10px;
-	}
-	.btn .fa {
-		margin-right: 5px;
 	}
 	
 	/* Badges: modified Bootstrap style */
@@ -398,14 +410,6 @@ input[type="button"] {
 		margin: 0;
 		padding-left: 30px;
 		line-height: 100px;
-	}
-	.btn-page-header {
-		margin: 60px 0 20px 0;
-		background: transparent;
-		border-color: #cccccc;
-	}
-	.btn-page-header.header-img {
-		margin: 74px 0 54px 0;
 	}
 	
 	/* Basic tables */

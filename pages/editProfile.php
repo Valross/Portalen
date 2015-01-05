@@ -20,7 +20,7 @@
 		<label for="last_name">Efternamn</label>
 		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name">
 	  	<label for="ssn">Personnummer</label>
-	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååååmmdd-xxxx" name="ssn" id="ssn" maxlength="10">
+	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååmmddxxxx" name="ssn" id="ssn" maxlength="10">
 	  	<label for="phone_number">Mobilnummer</label>
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="15">
 		<label for="mail">Mailadress</label>

@@ -133,7 +133,7 @@
 			<label for="mail">Mailadress</label>
 				<input type="text" name="mail" id="mail" maxlength="30" />
 			<label for="ssn">Personnummer</label>
-				<input type="text" name="ssn" id="ssn" placeholder="ååååmmdd-xxxx" maxlength="13" />
+				<input type="text" name="ssn" id="ssn" placeholder="ååmmddxxxx" maxlength="10" />
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>

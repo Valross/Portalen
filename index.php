@@ -151,11 +151,15 @@ include_once('php/pageManager.php');
 			 
 		  </div> <!-- end #content -->
 		
-				  <div id="footer">
-				  <div class="col-sm-13">
+		  <div id="footer">
+			  <div class="container-fluid">
+			  <div class="row">
+				  <div class="col-sm-8">
 					  <p>Trappans Personalportal 2014. <a href="?page=about">Om portalen</a>. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor.
 				  </div>
-			 	  </div> <!-- #footer -->
+			</div> <!-- .row -->
+			</div>
+		  </div> <!-- #footer -->
 			 
 		
 	

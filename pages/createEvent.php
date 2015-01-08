@@ -95,6 +95,7 @@ function removeSlot(id)
 
 </script>
 
+<div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
 			<h1>Skapa nytt evenemang</h1>
@@ -102,35 +103,56 @@ function removeSlot(id)
 	</div>
 </div> <!-- .row -->
 
-<div class="row">
 
-<div class="col-sm-10">
+
+<div class="row">
+<div class="col-sm-6">
+	<div class="white-box">
+		<h3>Evenemangsinformation</h3>
+
+
 	<form action="" method="post">
-	<h4> Evenemangsmallar </h4>
-			<select name="template" onchange="getTemplate(this.value)">
+		
+			<label for="template">Mall</label>
+			<select name="template" id="template" onchange="getTemplate(this.value)">
 				<option value="no">Ingen mall</option>
 				<?php loadTemplates(); ?>
 			</select>
-		</p>
-		<p>Evenemangets namn: <input type="text" placeholder="Namn" name="name"/></p>
-		<p>Evenemanget startar:<input id="start" class="datepicker" type="text" placeholder="Starttid" name="start" value="<?php echo $dateNoTime; ?>"/></p>
-		<p>Evenemanget slutar: <input id="end" class="datepicker" type="text" placeholder="Sluttid" name="end" value="<?php echo $dateNoTime; ?>"/></p>
-		<p>Typ av Evenemang: 
-		<select name="type">
+			
+			<label for="type">Evenemangstyp</label>
+			<select name="type" id="type">
 				<option id="typeno" value="no">Välj typ</option>
 				<?php loadTypes(); ?>
-			</select></p>
-		<p>
+			</select>
+		
+		<label for="name">Evenemangets namn</label>
+		<input type="text" name="name" id="name">
+		<label for="start">Starttid</label>
+		<input id="start" class="datepicker" type="text" name="start" value="<?php echo $dateNoTime; ?>">
+		<label for="end">Sluttid</label>
+		<input id="end" class="datepicker bottom-border" type="text" name="end" value="<?php echo $dateNoTime; ?>">
+	
+		<input type="submit" name="submit" value="Skapa evenemang">
+</div> <!-- .white-box -->
+</div> <!-- .col-sm-6 -->			
+<div class="col-sm-6">
+	<div class="white-box">
+		<h3>Lägg till pass</h3>	
+			<p class="bg-warning">OBS! Skapa alla pass innan du trycker på knappen "Skapa evenemang".</p>
+		
+		
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
 			<input id="group_amount" type="number" value="1" style="width:40px;"/>
+			
+			
 			<select id="group" name="group">
 				<?php loadGroups(); ?>
 			</select>
 			<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $dateNoTime; ?>"/>
 			<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $dateNoTime; ?>"/>
 			<input id="slot_points" type="number" value="0" style="width:40px;"/>
-		<p>
 		<div id="added_groups"></div>
-		<input type="submit" name="submit" value="Skapa event"/></p>
 	</form>
-</div>
+</div> <!-- .white-box -->
+</div> <!-- .col-sm-6 -->
+</div> <!-- .row -->

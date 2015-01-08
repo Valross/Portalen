@@ -81,6 +81,7 @@ label {
 
 input[type=text],
 input[type=password],
+select,
 textarea {
 	width: 100%;
 	border: 0;
@@ -90,9 +91,10 @@ textarea {
 	border-top: 1px solid #e3e9eb;
 }
 input[type=text],
-input[type=password] {
+input[type=password],
+select {
 	height: 70px;
-	padding: 20px 0 0 20px;
+	padding: 20px 0 0 20px !important; 
 }
 textarea {
 	resize: vertical;
@@ -268,6 +270,10 @@ fieldset[disabled] {
 	.white-box h3,
 	.white-box h4 {
 		margin: 20px;
+	}
+	
+	.white-box p {
+		padding: 15px;
 	}
 	
 	/* Buttons */

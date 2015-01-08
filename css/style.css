@@ -105,7 +105,6 @@ textarea.bottom-border {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-
 input[type="submit"], 
 input[type="button"] {
 	display: inline-block;
@@ -124,6 +123,14 @@ input[type="button"] {
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+}
+input[disabled],
+input[readonly],
+fieldset[disabled] {
+  cursor: not-allowed;
+  background-color: #f6f6f6;
+  opacity: 1;
+  color: #777;
 }
 
 

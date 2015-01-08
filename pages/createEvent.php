@@ -124,21 +124,31 @@ function removeSlot(id)
 				<option id="typeno" value="no">Välj typ</option>
 				<?php loadTypes(); ?>
 			</select>
-		
-		<label for="name">Evenemangets namn</label>
-		<input type="text" name="name" id="name">
+
+		<div class="input-group date datetimepicker">
 		<label for="start">Starttid</label>
-		<input id="start" class="datepicker" type="text" name="start" value="<?php echo $dateNoTime; ?>">
-		<label for="end">Sluttid</label>
-		<input id="end" class="datepicker bottom-border" type="text" name="end" value="<?php echo $dateNoTime; ?>">
-	
+		<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
+        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+		</div>
+			
+		<div class="input-group date datetimepicker">
+			<label for="end">Sluttid</label>
+			<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>">
+			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+		</div>
+		
+		<label for="name">Namn</label>
+		<input type="text" name="name" id="name">
+		<label for="info">Beskrivning</label>
+		<textarea rows="6" name="info" id="info" class="bottom-border"></textarea>
+		
 		<input type="submit" name="submit" value="Skapa evenemang">
 </div> <!-- .white-box -->
 </div> <!-- .col-sm-6 -->			
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Lägg till pass</h3>	
-			<p class="bg-warning">OBS! Skapa alla pass innan du trycker på knappen "Skapa evenemang".</p>
+			<p class="bg-warning">Observera! Du måste skapa och färdigställa alla pass innan du trycker på knappen "Skapa evenemang".</p>
 		
 		
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>

@@ -69,7 +69,6 @@ a:focus {
 
 /* Forms */
 
-
 label {
 	display: block;
 	position: absolute;
@@ -78,7 +77,6 @@ label {
 	font-weight: 400;
 	color: #999;
 }
-
 input[type=text],
 input[type=password],
 select,
@@ -91,10 +89,14 @@ textarea {
 	border-top: 1px solid #e3e9eb;
 }
 input[type=text],
-input[type=password],
+input[type=password] {
+	height: 70px;
+	padding: 20px 0 0 20px; 
+}
 select {
 	height: 70px;
-	padding: 20px 0 0 20px !important; 
+	/* Some browsers ignores the padding for <select> (I believe it is webkit-browsers), therefore the text looks misplaced. 
+	I'm not sure how to fix this without overriding everything with "appearance:none;" /Andreas */
 }
 textarea {
 	resize: vertical;
@@ -133,6 +135,18 @@ fieldset[disabled] {
   background-color: #f6f6f6;
   opacity: 1;
   color: #777;
+}
+
+.input-group-addon {
+  padding: 6px 24px;
+  color: #2DB398;
+  background-color: #f8f8f8;
+  border-top: 1px solid #e3e9eb;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+  cursor: pointer;
 }
 
 
@@ -433,6 +447,18 @@ fieldset[disabled] {
 	
 	.basic-table td {
 		padding: 5px 20px;
+	}
+	
+	/* Bootstrap datetimepicker color modification */
+	
+	.bootstrap-datetimepicker-widget td span.active {
+	  background-color: #2DB398 !important;
+  }
+	  .bootstrap-datetimepicker-widget td.today:before {
+	    border-bottom: 7px solid #2DB398 !important;
+	}
+	.bootstrap-datetimepicker-widget td.active.today:before {
+	  border-bottom-color: #fff !important;
 	}
 	
 	/* Upcoming events (startpage) */

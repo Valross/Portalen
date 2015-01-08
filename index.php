@@ -19,8 +19,7 @@ include_once('php/pageManager.php');
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/jquery-ui-1.10.4.custom.css">
-	<link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,7 +27,6 @@ include_once('php/pageManager.php');
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-	<script src="https://code.jquery.com/jquery.js"></script>
   </head>
   <body>
 	  
@@ -39,29 +37,19 @@ include_once('php/pageManager.php');
  					 <p>
  					  <small>Din period: <strong><?php echo $periodStart.' - '.$periodEnd; ?></strong></small>
  					  </p>
-					  
 					  <div class="progress">
-						  
-					    <div class="progress-bar worked" rel='tooltip' title="Arbetat: <?php echo $workedPoints; ?> poäng" style="width: <?php echo $workedPointsPercent; ?>%">
+					    <div class="progress-bar worked" data-toggle="tooltip" data-placement="top" title="Arbetat: <?php echo $workedPoints; ?> poäng" style="width: <?php echo $workedPointsPercent; ?>%">
+					    </div>	
+					    <div class="progress-bar booked" data-toggle="tooltip" data-placement="top"  title="Bokat: <?php echo $bookedPoints; ?> poäng" style="width:<?php echo $bookedPointsPercent; ?>%">
 					    </div>
-						
-					    <div class="progress-bar booked" rel='tooltip'  title="Bokat: <?php echo $bookedPoints; ?> poäng" style="width:<?php echo $bookedPointsPercent; ?>%">
-					    </div>
-						
-						
- 						<div class="progress-bar remaining" rel='tooltip' title="Ej bokat: <?php echo $emptyPoints; ?> poäng" style="width: <?php echo $emptyPointsPercent; ?>%">
+ 						<div class="progress-bar remaining" data-toggle="tooltip" data-placement="top" title="Ej bokat: <?php echo $emptyPoints; ?> poäng" style="width: <?php echo $emptyPointsPercent; ?>%">
  					   	</div>
-						
 					  </div> <!-- .progress -->
-					  
 			  </div> <!-- .your-period -->
-			  
-			  
+
 			  <!-- begin menu -->
-			  
-		      <!-- Fixed navbar -->
+			   <!-- Fixed navbar -->
 		      <div class="main-menu-wrapper" role="navigation">
-		        
 		          <div class="navbar-header">
 		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		              <span class="sr-only">Toggle navigation</span>
@@ -70,8 +58,7 @@ include_once('php/pageManager.php');
 		              <span class="icon-bar"></span>
 		            </button>
 		          </div>
-				  
-				  
+
 		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
 			              <li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>   
@@ -97,7 +84,6 @@ include_once('php/pageManager.php');
 	  						  </ul>
 		            </ul>
 		          </div><!--/.nav-collapse -->
-		        
 		      </div> <!-- end menu -->  
 		  </div> <!-- end sidebar -->
 		  
@@ -109,7 +95,6 @@ include_once('php/pageManager.php');
 						<input type="search" placeholder="Sök på portalen...">
 					</div>
 					<div class="col-sm-6 text-right">
-						
 					<div class="dropdown">
 						<button class="user-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
 							<img src="<?php echo loadAvatar(); ?>" class="img-circle" width="32px" height="32px">
@@ -142,13 +127,11 @@ include_once('php/pageManager.php');
 				</div>
 			</div> <!-- #topbar -->
 
-
-		  <div id="content">	     		 	 
+		  <div id="content">	     		 
 			  <div class="container-fluid">
 					<?php content(); ?>  
 			  </div>
 			<div class="push"></div>
-			 
 		  </div> <!-- end #content -->
 		
 		  <div id="footer">
@@ -160,23 +143,29 @@ include_once('php/pageManager.php');
 			</div> <!-- .row -->
 			</div>
 		  </div> <!-- #footer -->
-			 
-		
-	
+		  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/ui-datepicker.js"></script>
-	<script src="js/ui_timepicker-addon.js"></script>
-
-		<!-- Datepicker -->
-		<script>
-			$(function() {
-			$( ".datepicker" ).datetimepicker();
-			});
-		</script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/locale/sv.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 	
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+						language: 'sv',
+						icons: {
+		                    time: "fa fa-clock-o",
+		                    date: "fa fa-calendar",
+		                    up: "fa fa-arrow-up",
+		                    down: "fa fa-arrow-down"
+						}
+					});
+        });
+    </script>
+
 	<!-- Collapsing Bars -->
 		<script type="text/javascript">
 				(function($) {
@@ -196,23 +185,9 @@ include_once('php/pageManager.php');
 
 <!-- Tooltip -->
 		  <script>
-  $(function() {
-    $( document ).tooltip({
-      position: {
-        my: "center bottom-15",
-        at: "center top",
-        using: function( position, feedback ) {
-          $( this ).css( position );
-          $( "<div>" )
-            .addClass( "arrow" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-
-        }
-      }
-    });
-  });
-  </script>
+				$(function () {
+				  $('[data-toggle="tooltip"]').tooltip()
+				})
+ 		</script>
   </body>
 </html>

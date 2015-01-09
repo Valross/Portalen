@@ -1,3 +1,4 @@
+<div class="row">	
 	<div class="col-sm-12">
 		<div class="page-header">
 			<h1>Hantera Perioder</h1>
@@ -7,11 +8,20 @@
 
 <div class="row">
 	
-<div class="col-sm-5">
+<div class="col-sm-6">
+	<div class="white-box">
+		<h3>Skapa ny period</h3>
 	<form action="" method="post">
-		<p><input type="text" placeholder="Period" name="name"/></p>
-		<p><input type="text" placeholder="Startdatum" name="start_date" /></p>
-		<p><input type="text" placeholder="Slutdatum" name="end_date" /></p>
-		<p><input type="submit" name="submit" value="Skapa period"/></p>
+		
+		<label for="name">Period</label>
+		<input type="text" id="name" name="name">
+		<label for="start_date">Startdatum</label>
+		<input type="text" id="start_date" name="start_date">
+		<label for="end_date">Slutdatum</label>
+		<input type="text" id="end_date" name="end_date" class="bottom-border">
+		
+		<input type="submit" name="submit" value="Skapa period">
 	</form>
+	</div>
+</div>
 </div>

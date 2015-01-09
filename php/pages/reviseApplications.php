@@ -1,4 +1,52 @@
-<!-- table head -->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="page-header">
+			<h1>Granska ansökningar</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="white-box">
+			<table class="table table-hover">
+			      <thead>
+			        <tr>
+			          <th>#</th>
+			          <th>Namn</th>
+			          <th>Personnummer</th>
+			          <th>Mail</th>
+					  <th>Lag</th>
+					  <th>Verktyg</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			        <tr>
+			          <th scope="row">1</th>
+			          <td>Någon Persson</td>
+			          <td>9405092199</td>
+			          <td>hallå@eller.se</td>
+					  <td>Webb, Marknadsföring, Event</td>
+					  <td>Verktyg</td>
+			        </tr>
+			        <tr>
+			          <th scope="row">2</th>
+			          <td>Inge Glid</td>
+			          <td>4501019999</td>
+			          <td>ingespam@tack.nu</td>
+					  <td>Bar</td>
+					  <td>Verktyg</td>
+			        </tr>
+			      </tbody>
+			    </table>
+		</div>
+	</div>
+</div>
+
+(Sorry Jonathan för att jag dissade din tabell! Lämnade kvar den så länge)
+
+
+
+
 <table style="width:100%" id="application-table">
 	<tr>
 		<th>Namn</th>

@@ -154,13 +154,23 @@ function removeSlot(id)
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
 			<input id="group_amount" type="number" value="1" style="width:40px;"/>
 			
-			
+			<label for="group">Typ av pass</label>
 			<select id="group" name="group">
 				<?php loadGroups(); ?>
 			</select>
-			<input id="slot_start" class="datepicker" type="text" placeholder="Starttid" value="<?php echo $dateNoTime; ?>"/>
-			<input id="slot_end" class="datepicker" type="text" placeholder="Sluttid" value="<?php echo $dateNoTime; ?>"/>
-			<input id="slot_points" type="number" value="0" style="width:40px;"/>
+			
+			<div class="input-group date datetimepicker">
+			<label for="slot_start">Passets starttid</label>
+			<input id="slot_start"type="text" value="<?php echo $dateNoTime; ?>">
+			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+			<div class="input-group date datetimepicker">
+			<label for="slot_end">Passets sluttid</label>
+			<input id="slot_end" type="text" value="<?php echo $dateNoTime; ?>">
+			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+			<label for="slot_points">Poäng</label>
+			<input id="slot_points" type="number" value="0">
 		<div id="added_groups"></div>
 	</form>
 </div> <!-- .white-box -->

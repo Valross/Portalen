@@ -79,6 +79,7 @@ label {
 }
 input[type=text],
 input[type=password],
+input[type=number],
 select,
 textarea {
 	width: 100%;
@@ -89,7 +90,8 @@ textarea {
 	border-top: 1px solid #e3e9eb;
 }
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=number] {
 	height: 70px;
 	padding: 20px 0 0 20px; 
 }
@@ -282,11 +284,12 @@ fieldset[disabled] {
 	.white-box h1, 
 	.white-box h2,
 	.white-box h3,
-	.white-box h4 {
+	.white-box h4,
+	.white-box table {
 		margin: 20px;
 	}
 	
-	.white-box p {
+	.white-box p.bg-warning {
 		padding: 15px;
 	}
 	
@@ -447,6 +450,12 @@ fieldset[disabled] {
 	
 	.basic-table td {
 		padding: 5px 20px;
+	}
+	
+	/* Bootstrap table class modification */
+	
+	.col-sm-12 .white-box .table {
+	  width: 96.5%;
 	}
 	
 	/* Bootstrap datetimepicker color modification */

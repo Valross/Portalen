@@ -14,7 +14,7 @@
 <div class="col-sm-8">
 	
 	
-	
+	<div class="page-header">
 	<div class="pull-right form-inline">
 				<div class="btn-group">
 					<button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
@@ -31,6 +31,7 @@
 
 			<h3></h3>
 			<small>To see example with events navigate to march 2013</small>
+			</div>
 			
 			
 			

@@ -160,7 +160,7 @@ include_once('php/pageManager.php');
 	<script type="text/javascript">
 	        var calendar = $("#calendar").calendar(
 	            {
-	                tmpl_path: "/tmpls/",
+	                tmpl_path: "tmpls/",
 	                events_source: function () { return []; }
 	            });         
 	    </script>

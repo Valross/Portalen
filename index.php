@@ -14,12 +14,13 @@ include_once('php/pageManager.php');
     <title>Trappans personalportal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="css/calendar.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -151,6 +152,18 @@ include_once('php/pageManager.php');
 	<script src="js/moment.js"></script>
 	<script src="js/locale/sv.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="js/underscore-min.js"></script>
+		<script type="text/javascript" src="js/jstz.min.js"></script>
+		<script type="text/javascript" src="js/calendar.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+	
+	<script type="text/javascript">
+	        var calendar = $("#calendar").calendar(
+	            {
+	                tmpl_path: "/tmpls/",
+	                events_source: function () { return []; }
+	            });         
+	    </script>
 	
     <script type="text/javascript">
         $(function () {

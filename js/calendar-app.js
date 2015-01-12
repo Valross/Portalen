@@ -7,8 +7,11 @@
 		view: 'week',
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
+<<<<<<< HEAD:js/calendar-app.js
 		language: 'sv-SE',
 		day: '2013-03-12',
+=======
+>>>>>>> FETCH_HEAD:js/app.js
 		onAfterEventsLoad: function(events) {
 			if(!events) {
 				return;

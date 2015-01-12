@@ -149,35 +149,32 @@ include_once('php/pageManager.php');
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	
+	<!-- datetimepicker -->
 	<script src="js/moment.js"></script>
 	<script src="js/locale/sv.js"></script>
 	<script src="js/bootstrap-datetimepicker.min.js"></script>
-		<script type="text/javascript" src="js/underscore-min.js"></script>
-		<script type="text/javascript" src="js/jstz.min.js"></script>
-		<script type="text/javascript" src="js/calendar.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
-	
-	<script type="text/javascript">
-	        var calendar = $("#calendar").calendar(
-	            {
-	                tmpl_path: "tmpls/",
-	                events_source: function () { return []; }
-	            });         
-	    </script>
 	
     <script type="text/javascript">
         $(function () {
             $('.datetimepicker').datetimepicker({
-						language: 'sv',
-						icons: {
-		                    time: "fa fa-clock-o",
-		                    date: "fa fa-calendar",
-		                    up: "fa fa-arrow-up",
-		                    down: "fa fa-arrow-down"
-						}
-					});
+				language: 'sv',
+				icons: {
+		        	time: "fa fa-clock-o",
+		            date: "fa fa-calendar",
+		            up: "fa fa-arrow-up",
+		           	down: "fa fa-arrow-down"
+				}
+			});
         });
     </script>
+	
+	<!-- Bootstrap calendar -->
+	<script src="js/language/sv-SE.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/jstz.min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="js/calendar-app.js"></script>
 
 	<!-- Collapsing Bars -->
 		<script type="text/javascript">

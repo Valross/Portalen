@@ -286,7 +286,9 @@ fieldset[disabled] {
 	.white-box h3,
 	.white-box h4,
 	.white-box table {
-		margin: 20px;
+		margin: 20px; 
+		/* Detta är ju egentligen ingen bra lösning. Det kanske man skulle fixa när man pallar. 
+		Typ fixa en div som sköter marginen ist för att tilldela den till massa återkommande taggar. /Andreas */
 	}
 	
 	.white-box p.bg-warning {
@@ -295,8 +297,12 @@ fieldset[disabled] {
 	
 	/* Buttons */
 	
-	.btn .fa {
+	.btn .fa-margin-right {
 		margin-right: 5px;
+	}
+	
+	.btn .fa-margin-left {
+		margin-left: 5px;
 	}
 	
 	.btn-page-header {
@@ -441,7 +447,7 @@ fieldset[disabled] {
 		padding-left: 30px;
 		line-height: 100px;
 	}
-	
+
 	/* Basic tables */
 	
 	.basic-table {
@@ -457,6 +463,10 @@ fieldset[disabled] {
 	.col-sm-12 .white-box .table {
 	  width: 96.5%;
 	}
+	
+	/* Bootstrap calendar modification */
+	
+    
 	
 	/* Bootstrap datetimepicker color modification */
 	
@@ -547,6 +557,10 @@ fieldset[disabled] {
 	
 	.dropdown-menu.is-floated-parent {
 		top: 58px;
+	}
+	
+	.calendar-top h3 {
+		display: inline-block;
 	}
 	
 	@media (max-width: 991px) {

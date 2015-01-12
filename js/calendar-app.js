@@ -4,9 +4,10 @@
 
 	var options = {
 		events_source: 'events.json.php',
-		view: 'month',
+		view: 'week',
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
+		language: 'sv-SE',
 		day: '2013-03-12',
 		onAfterEventsLoad: function(events) {
 			if(!events) {
@@ -22,7 +23,7 @@
 			});
 		},
 		onAfterViewLoad: function(view) {
-			$('.page-header h3').text(this.getTitle());
+			$('.calendar-box h3').text(this.getTitle());
 			$('.btn-group button').removeClass('active');
 			$('button[data-calendar-view="' + view + '"]').addClass('active');
 		},

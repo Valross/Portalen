@@ -6,7 +6,7 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<button type="button" class="btn btn-page-header header-img"><i class="fa fa-envelope-o"></i> Skicka meddelande</button>
+		<button type="button" class="btn btn-page-header header-img"><i class="fa fa-envelope-o fa-margin-right"></i> Skicka meddelande</button>
 	</div>
 </div> <!-- .row -->
 

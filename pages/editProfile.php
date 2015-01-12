@@ -5,7 +5,7 @@
 			</div>
 		</div>
 		<div class="col-sm-4 page-header-right text-right">
-			<button type="button" class="btn btn-page-header"><i class="fa fa-trash fa-lg"></i> Avsluta medlemskap</button>
+			<button type="button" class="btn btn-page-header"><i class="fa fa-trash fa-lg fa-margin-right"></i> Avsluta medlemskap</button>
 		</div>
 	</div> <!-- .row -->
 

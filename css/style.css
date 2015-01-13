@@ -602,6 +602,7 @@ fieldset[disabled] {
 			top: 0;
 			bottom: 0;
 			width: 240px;
+			overflow: scroll;
 			z-index: 10;
 		} 
 		#topbar .container-fluid {

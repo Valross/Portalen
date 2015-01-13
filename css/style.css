@@ -294,6 +294,7 @@ fieldset[disabled] {
 	.white-box p.bg-warning {
 		padding: 15px;
 	}
+
 	
 	/* Buttons */
 	
@@ -559,9 +560,20 @@ fieldset[disabled] {
 		top: 58px;
 	}
 	
+	/* Bootstrap calendar state */
+	
+	.white-box .calendar-top {
+		overflow: hidden;
+	}
+	.white-box .calendar-top .btn-group {
+		margin: 20px;
+	}
+	
 	.calendar-top h3 {
 		display: inline-block;
 	}
+	
+	/* Media queries */
 	
 	@media (max-width: 991px) {
 		#sidebar {

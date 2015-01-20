@@ -26,11 +26,11 @@ $result = DBQuery::sql("SELECT * FROM application");
 $howMany = count($result);
 
 for($i=0; $i<$howMany; $i++) {
-	$name = DBQuery::safeString($result[$i]["name"]);
-	$lastName = DBQuery::safeString($result[$i]["last_name"]);
-	$ssn = DBQuery::safeString($result[$i]["ssn"]);
-	$mail = DBQuery::safeString($result[$i]["mail"]);
-	$appId = DBQuery::safeString($result[$i]["id"]);
+	$name = $result[$i]["name"];
+	$lastName = $result[$i]["last_name"];
+	$ssn = $result[$i]["ssn"];
+	$mail = $result[$i]["mail"];
+	$appId = $result[$i]["id"];
 
 	$teamIds = DBQuery::sql("SELECT group_id FROM application_group WHERE application_id = '$appId'");
 	$nTeams = count($teamIds);

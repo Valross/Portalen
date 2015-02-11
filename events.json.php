@@ -1,56 +1,28 @@
 <?php
 
-/*
-$out = array();
+
+/*$out = array();
+$startTime = round(microtime(true) * 1000;
+$endTime = strtotime("2015-02-12 20:00:00") * 1000;
 
 $out[] = array(
-    'id' => "123",
-    'title' => "testpuben",
-    'url' => "http://example.com",
-    'class' => "event-warning",
-    'start' => time(), //"1422465963000",
-    'end' => strtotime("2015-01-28 20:00:00") //"1422471600000"
+    'id' => 123,
+    'title' => 'testpuben',
+    'url' => 'http://example.com',
+    'class' => 'event-warning',
+    'start' => 1423767600000, //"1422465963000",
+    'end' => 1423774800000	//"1422471600000"
 );
 
 
 //encoda till json
 echo json_encode(array('success' => 1, 'result' => $out));
-// exit;
-
+exit;
 */
+
 ?>
 
 {
-	"success": 1,
-	"result": [
-		{
-			<?php
-
-			$result = DBQuery::sql("SELECT id FROM work_slot WHERE id = '51'");
-		    $id = $result[0]["id"];
-
-		    $result = DBQuery::sql("SELECT name FROM event where id = '35'");
-		    $title = $result[0]["name"];
-
-		    $url = "http://www.example.com/";
-		    $class = "event-warning";
-
-		    $start = time();
-		    $end = strtotime("2015-01-28 20:00:00");
-
-		    echo " \"id\": \"" .    $id 	. "\","
-		    .	 " \"title\": \"" . $title  . "\","
-		    . 	 " \"url\": \"" . 	$url 	. "\","
-		    . 	 " \"class\": \"" . $class  . "\","
-		    . 	 " \"start\": \"" . $start  . "\","
-		    . 	 " \"end\": \"" . 	$end 	. "\","
-		     
-			?>
-		}
-	]
-}
-
-<!-- {
 	"success": 1,
 	"result": [
 		{
@@ -66,8 +38,8 @@ echo json_encode(array('success' => 1, 'result' => $out));
 			"title": "Event that ends on timeline",
 			"url": "http://www.example.com/",
 			"class": "event-warning",
-			"start": "1363155300000",
-			"end":   "1363227600000"
+			"start": "1423767600000",
+			"end":   "1423774800000"
 		},
 		{
 			"id": "276",
@@ -127,4 +99,3 @@ echo json_encode(array('success' => 1, 'result' => $out));
 		}
 	]
 }
- -->

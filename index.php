@@ -80,7 +80,7 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page= #"></span></a></li>
 	  							<li><a href="?page= #"></span><---DA Verktyg ---></a></li>
 	  							<li><a href="?page= #"></span>Checka av pass</a></li>
-	  							<li><a href="?page=createEvent"></span>DA-lappar</a></li>
+	  							<li><a href="?page=createDAnote"></span>DA-lappar</a></li>
 	  						  </li>  
 	  						  </ul>
 		            </ul>

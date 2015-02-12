@@ -75,12 +75,14 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 	  							<li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
 	  							<li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>
-	  							<li><a href="?page= #"></span>Statistik</a></li>
+	  							<li><a href="?page=stats"></span>Statistik</a></li>
 	  							<li><a href="?page= #"></span>Personallistor</a></li>
-	  							<li><a href="?page= #"></span></a></li>
-	  							<li><a href="?page= #"></span><---DA Verktyg ---></a></li>
+	  							<li><a></span></a></li>
+	  							
 	  							<li><a href="?page= #"></span>Checka av pass</a></li>
-	  							<li><a href="?page=createEvent"></span>DA-lappar</a></li>
+	  							<li><a href="?page=createDANote"></span>Skriv lapp</a></li>
+	  							<li><a href="?page=browseDANote"></span>DA-lappar</a></li>
+	  							<li><a href="?page=browseHeadWaiterNote"></span>Hovis-lappar</a></li>
 	  						  </li>  
 	  						  </ul>
 		            </ul>

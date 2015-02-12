@@ -21,9 +21,9 @@ if(isset($_POST['submit']))
 $result = DBQuery::sql("SELECT description FROM user WHERE id = '$_SESSION[user_id]' AND description IS NOT NULL");
 
 if(count($result) == 1)
-	$profileDescription = $result[0]["description"];
+	$groupDescription = $result[0]["description"];
 else
-	$profileDescription = "Hej ".$_SESSION['name']." har inte skrivit något om sig själv ännu.";
+	$groupDescription = "Hej ".$_SESSION['name']." har inte skrivit något om sig själv ännu.";
 
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
 
@@ -47,56 +47,16 @@ if(count($result) == 1)
 else
 	$profileMail = "";
 
-function loadUnjoinedGroups()
+function loadMembersOfGroup()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
-							WHERE id NOT IN 
-							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
-							ORDER BY name");
+	$groups = DBQuery::sql("SELECT user_id FROM group_member 
+							WHERE group_id = 2");
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+			<option value="<?php echo $groups[$i]['user_id']; ?>"><?php echo $groups[$i]['user_id']; ?></option>
 		<?php
 	}
-}
-
-function addToGroup()
-{
-	//if(admin_rights)
-	?>
-	<div class="col-sm-6">
-		<div class="white-box">
-			<form action="" method="post">
-				<label for="addGroup">Lägg till i lag</label>
-					<select name="addGroup" id="addGroup">
-						<option id="typeno" value="no">Välj lag</option>
-						<?php loadUnjoinedGroups(); ?>
-					</select>
-				<input type="submit" name="submit" value="Lägg till">		
-			</form>
-		</div>
-	</div>
-	<?php
-}
-
-function removeFromGroup()
-{
-	//if(admin_rights)
-	?>
-	<div class="col-sm-6">
-		<div class="white-box">
-			<form action="" method="post">
-				<label for="removeGroup">Ta bort från lag</label>
-					<select name="removeGroup" id="removeGroup">
-						<option id="typeno" value="no">Välj lag</option>
-						<?php loadMyGroupsOption(); ?>
-					</select>
-				<input type="submit" name="submit" value="Ta bort">		
-			</form>
-		</div>
-	</div>
-	<?php
 }
 
 ?>

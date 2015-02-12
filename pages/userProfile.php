@@ -1,12 +1,9 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-		<img src="<?php echo loadAvatar(); ?>" width="100" height="100" class="page-header-img">
-			<h1 class="header-img"><?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></h1>
+		<img src="<?php echo loadUserAvatar(); ?>" width="100" height="100" class="page-header-img">
+			<h1 class="header-img"><?php loadUserName(); ?></h1>
 		</div>
-	</div>
-	<div class="col-sm-4 page-header-right text-right">
-		<button type="button" class="btn btn-page-header header-img"><i class="fa fa-envelope-o fa-margin-right"></i> Skicka meddelande</button>
 	</div>
 </div> <!-- .row -->
 
@@ -58,7 +55,7 @@
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Är med i följande lag</h3>
-			<?php loadMyGroups(); ?>
+			<?php loadGroups(); ?>
 		</div>
 	</div>
 	<?php addToGroup(); ?>

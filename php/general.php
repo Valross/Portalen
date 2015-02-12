@@ -317,4 +317,54 @@ function loadAvatar()
 	}
 	return 'img/avatars/'.$results[0]['avatar'];
 }
+
+function loadMyGroups()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+							WHERE id IN 
+							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
+							ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<p><?php echo $groups[$i]['name']; ?></p>
+		<?php
+	}
+}
+
+function loadMyGroupsOption()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+							WHERE id IN 
+							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
+							ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+		<?php
+	}
+}
+
+function loadAllGroups()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<p><?php echo $groups[$i]['name']; ?></p>
+		<?php
+	}
+}
+
+function loadAllGroupsOption()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+		<?php
+	}
+}
 ?>

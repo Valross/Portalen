@@ -58,7 +58,9 @@
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Är med i följande lag</h3>
-		Cool lista
+			<?php loadMyGroups(); ?>
 		</div>
 	</div>
+	<?php addToGroup(); ?>
+	<?php removeFromGroup(); ?>
 </div> <!-- .row -->

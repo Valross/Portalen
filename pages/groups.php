@@ -6,10 +6,8 @@
 	</div>
 	<div class="col-sm-4 text-right page-header-right">
 		<select class="form-control">
-			<option>Hoppa till lag</option>
-		    <option>Webb</option>
-		    <option>DG</option>
-		    <option>Bastu</option>
+			<option id="typeno" value="no">Hoppa till lag</option>
+		    <?php loadAllGroupsOption(); ?>
 		</select>
 	</div>
 </div> <!-- .row -->
@@ -18,13 +16,13 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Dina lag</h3>
-	cool lista
+		<?php loadMyGroups(); ?>
 	</div> <!-- .white-box -->
 </div> <!-- col-sm-6 -->
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Alla lag</h3>
-			cool lista
+			<?php loadAllGroups(); ?>
 		</div>
 	</div>
 </div> <!-- .row -->

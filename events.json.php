@@ -1,27 +1,3 @@
-<?php
-
-
-/*$out = array();
-$startTime = round(microtime(true) * 1000;
-$endTime = strtotime("2015-02-12 20:00:00") * 1000;
-
-$out[] = array(
-    'id' => 123,
-    'title' => 'testpuben',
-    'url' => 'http://example.com',
-    'class' => 'event-warning',
-    'start' => 1423767600000, //"1422465963000",
-    'end' => 1423774800000	//"1422471600000"
-);
-
-
-//encoda till json
-echo json_encode(array('success' => 1, 'result' => $out));
-exit;
-*/
-
-?>
-
 {
 	"success": 1,
 	"result": [

@@ -352,7 +352,7 @@ function loadAllGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><?php echo $groups[$i]['name']; ?></option></p>
+			<p><?php echo $groups[$i]['name']; ?></p>
 		<?php
 	}
 }

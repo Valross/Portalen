@@ -12,9 +12,9 @@
 	<form action="" method="post">
 		<label for="event">Evenemangstyp</label>
 			<select name="event" id="event">
-				<option id="typeno" value="no">Välj event</option>
+				<option id="typeno" value="typeno">Välj event</option>
 				<?php loadMyDAEvents(); ?>
-		</select>
+			</select>
 
 		<label for="salesEntry">Försäljning entré</label>
 		<input type="text" placeholder="9001" name="salesEntry" id="salesEntry">

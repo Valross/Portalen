@@ -11,30 +11,28 @@ function loadEventName()
 
 function loadDAStats()
 {
+	$event_id = $_GET['id'];
+
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.sales_entry, da_note.sales_bar, da_note.cash, 
 									da_note.n_of_people, da_note.sales_spenta, da_note.message, event.name FROM da_note 
-							INNER JOIN event ON da_note.event_id = event.id 
-							ORDER BY event.start_time");
-
-	for($i = 0; $i < count($DANotes); ++$i)
-	{
-		?>
-		<tr>
-			<td><?php echo $DANotes[$i]['sales_entry']; ?></td>
-			<td><?php echo $DANotes[$i]['sales_bar']; ?></td>
-			<td><?php echo $DANotes[$i]['cash']; ?></td>
-			<td><?php echo $DANotes[$i]['n_of_people']; ?></td>
-			<td><?php echo $DANotes[$i]['sales_spenta']; ?></td>
-		</tr>
-		<?php
-	}
+							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
+	?>
+	<tr>
+		<td><?php echo $DANotes[0]['sales_entry']; ?></td>
+		<td><?php echo $DANotes[0]['sales_bar']; ?></td>
+		<td><?php echo $DANotes[0]['cash']; ?></td>
+		<td><?php echo $DANotes[0]['n_of_people']; ?></td>
+		<td><?php echo $DANotes[0]['sales_spenta']; ?></td>
+	</tr>
+	<?php
 }
 
 function loadDAMessage()
 {
+	$event_id = $_GET['id'];
+
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.message FROM da_note 
-							INNER JOIN event ON da_note.event_id = event.id 
-							ORDER BY event.start_time");
+							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
 
 	echo $DANotes[0]['message'];
 }

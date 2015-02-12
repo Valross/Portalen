@@ -2,7 +2,7 @@
 	<div class="col-sm-8">
 		<div class="page-header">
 		<img src="<?php echo loadAvatar(); ?>" width="100" height="100" class="page-header-img">
-			<h1 class="header-img"><?php echo 'Webblaget'; //lösa automatisk text för rätt lag?></h1> 
+			<h1 class="header-img"><?php loadGroupName(); ?></h1> 
 		</div>
 	</div>
 </div> <!-- .row -->

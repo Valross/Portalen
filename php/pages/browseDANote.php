@@ -7,20 +7,23 @@ function loadAllDANotes()
 							INNER JOIN event ON da_note.event_id = event.id 
 							ORDER BY event.start_time");
 
-	for($i = 0; $i < count($DANotes); ++$i)
+	if(count($DANotes) > 0)
 	{
-		?>
-		<tr>
-			<td><?php echo $i+1;?></td>
-			<td><a href=<?php echo '"?page=DANote&id='.$DANotes[$i]['event_id'].'"'; ?>>
-			<?php echo $DANotes[$i]['name']; ?></a></td>
-			<td><?php echo $DANotes[$i]['sales_entry']; ?></td>
-			<td><?php echo $DANotes[$i]['sales_bar']; ?></td>
-			<td><?php echo $DANotes[$i]['cash']; ?></td>
-			<td><?php echo $DANotes[$i]['n_of_people']; ?></td>
-			<td><?php echo $DANotes[$i]['sales_spenta']; ?></td>
-		</tr>
-		<?php
+		for($i = 0; $i < count($DANotes); ++$i)
+		{
+			?>
+			<tr>
+				<td><?php echo $i+1;?></td>
+				<td><a href=<?php echo '"?page=DANote&id='.$DANotes[$i]['event_id'].'"'; ?>>
+				<?php echo $DANotes[$i]['name']; ?></a></td>
+				<td><?php echo $DANotes[$i]['sales_entry']; ?></td>
+				<td><?php echo $DANotes[$i]['sales_bar']; ?></td>
+				<td><?php echo $DANotes[$i]['cash']; ?></td>
+				<td><?php echo $DANotes[$i]['n_of_people']; ?></td>
+				<td><?php echo $DANotes[$i]['sales_spenta']; ?></td>
+			</tr>
+			<?php
+		}
 	}
 }
 

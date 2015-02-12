@@ -12,7 +12,6 @@ if(isset($_POST['submit']))
 	if(isset($_POST['removeGroup']))
 	{
 		$removeGroup = $_POST['removeGroup'];
-		echo($removeGroup);
 		DBQuery::sql("DELETE FROM group_member
 							WHERE $removeGroup = group_id AND $_SESSION[user_id] = user_id"); //ändra $_SESSION[user_id] till dens profil det är
 	}

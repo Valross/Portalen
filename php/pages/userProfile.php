@@ -24,7 +24,7 @@ $result = DBQuery::sql("SELECT description FROM user WHERE id = '$user_id' AND d
 if(count($result) == 1)
 	$profileDescription = $result[0]["description"];
 else
-	$profileDescription = "Hej ".$_SESSION['name']." har inte skrivit något om sig själv ännu.";
+	$profileDescription = "Hej, den här personen har inte skrivit något om sig själv ännu.";
 
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$user_id' AND phone_number IS NOT NULL");
 
@@ -50,6 +50,8 @@ else
 
 function loadUnjoinedGroups()
 {
+	$user_id = $_GET['id'];
+
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
 							WHERE id NOT IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$user_id')
@@ -73,13 +75,16 @@ function loadGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><?php echo $groups[$i]['name']; ?></p>
+			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
+				<?php echo $groups[$i]['name']; ?></a></p>
 		<?php
 	}
 }
 
 function loadGroupsOption()
 {
+	$user_id = $_GET['id'];
+
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$user_id')

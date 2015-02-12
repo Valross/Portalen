@@ -327,7 +327,8 @@ function loadMyGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><?php echo $groups[$i]['name']; ?></p>
+			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
+				<?php echo $groups[$i]['name']; ?></a></p>
 		<?php
 	}
 }
@@ -352,7 +353,8 @@ function loadAllGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><?php echo $groups[$i]['name']; ?></p>
+			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
+				<?php echo $groups[$i]['name']; ?></a></p>
 		<?php
 	}
 }
@@ -365,6 +367,8 @@ function loadAllGroupsOption()
 		?>
 			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
 		<?php
+
+
 	}
 }
 ?>

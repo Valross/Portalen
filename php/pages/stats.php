@@ -47,15 +47,13 @@ function loadWorkedPoints($j)
 									AND id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '1')
 									");
+	$workedPointsTotal = 0;
 	if(count($workedPointsResult) > 0)
 	{
-		$workedPointsTotal = 0;
-
 		for($i = 0; $i < count($workedPointsResult); ++$i)
 			$workedPointsTotal = $workedPointsTotal + $workedPointsResult[$i]['points'];
-
-		echo $workedPointsTotal;
 	}
+	echo $workedPointsTotal;
 }
 
 function loadAmountOfPasses()

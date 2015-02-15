@@ -127,11 +127,11 @@
 		<form action="" method="post">
 			<div class="two-column">
 		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" id="firstName" maxlength="15" />
+				<input type="text" name="firstName" id="firstName" placeholder="James" maxlength="15" />
 		 	<label for="lastName">Efternamn</label>
-				<input type="text" name="lastName" id="lastName" maxlength="15" />
-			<label for="mail">Mailadress</label>
-				<input type="text" name="mail" id="mail" maxlength="30" />
+				<input type="text" name="lastName" id="lastName" placeholder="Bond" maxlength="15" />
+			<label for="mail">Mailadress (LIU-mail)</label>
+				<input type="text" name="mail" id="mail" placeholder="Jambo007@student.liu.se" maxlength="30" />
 			<label for="ssn">Personnummer</label>
 				<input type="text" name="ssn" id="ssn" placeholder="ååmmddxxxx" maxlength="10" />
 			</div>

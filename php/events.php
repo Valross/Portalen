@@ -33,7 +33,7 @@ for ($i=0; $i < $howMany; $i++) {
 	$out[] = array(
         'id' => $result[$i]["id"],
         'title' => $result[$i]["name"],
-        'url' => "http://www.example.com" ,	//url till varje event, event > id ska användas?
+        'url' => "?page=event&id=".$result[$i]["id"] ,	//url till varje event, event > id ska användas?
         'start' => strtotime($result[$i]["start_time"]) . '000',
         'end' => strtotime($result[$i]["end_time"]) . '000'
     );

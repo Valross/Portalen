@@ -34,23 +34,5 @@
 	    <p>Pluggar GDK yao. fett bra människa. Vacker. Rolig. Jättespontan. Världsvan. Ödmjuk. Växt upp med HTML, foppoll, Ford Fiesta och en fobi mot frukt och grönsaker (men diggar grönt).</p>
 	  </div>
 	</div>
-	<div class="media">
-	  <a class="pull-left" href="#">
-	    <img class="media-object avatar-96x96" src="https://scontent-a.xx.fbcdn.net/hphotos-ash3/t1/1948036_10203333887416234_1102924100_n.jpg" width="96px" height="96px" alt="namn">
-	  </a>
-	  <div class="media-body">
-	    <h3 class="media-heading"><a href="">Connie Åberg</a></h3>
-	    <p>Bor på ett fett najs studentboende. Gör resten av webblaget avundsjuka. Kommer från Gotland, där finns det får. Rätt stor Ö ändå. Oklart varför jag skrev ö med versalt ö. Jättelång text tänkte jag att detta skulle va, men jag kommer inte på mer roliga saker att skriva. Connie har samma efternamn som Alfons, Alfons Åberg!</p>
-	  </div>
-	</div>
-	<div class="media">
-	  <a class="pull-left" href="#">
-	    <img class="media-object avatar-96x96" src="https://scontent-a.xx.fbcdn.net/hphotos-ash3/t1/77153_10203151144085215_1474897962_n.jpg" width="96px" height="96px" alt="namn">
-	  </a>
-	  <div class="media-body">
-	    <h3 class="media-heading"><a href="">Linus Sjölinder</a></h3>
-	    <p>Ankor och fulvin. Väcker Pontus på våning 4 med hård döttstechno. Jag behöver egentligen inte skriva så mycket om Linus, för han placerades längst ner så för exempel-layoutens skull är det inte nödvändigt med stort textblock här. Men nu när jag förklarat allt detta så blev texten lång i alla fall. I äm fabulous.</p>
-	  </div>
-	</div>
 	
 </div>

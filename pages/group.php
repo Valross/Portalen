@@ -15,7 +15,7 @@
 	<table class="basic-table">
 		<tr>
 			<td><strong>Antal medlemmar</strong></td>
-			<td>x</td>
+			<td><?php echo $nMembers; ?></td>
 		</tr>
 	</table>
 

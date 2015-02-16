@@ -3,6 +3,12 @@ include_once("php/DBQuery.php");
 
 $group_id = $_GET['id'];
 
+$members = DBQuery::sql("SELECT name, last_name, id FROM user 
+							WHERE id IN 
+							(SELECT user_id FROM group_member WHERE group_id = '$group_id')");
+
+$nMembers = count($members);
+
 if(isset($_POST['submit']))
 {
 	if(isset($_POST['addGroup'])) 

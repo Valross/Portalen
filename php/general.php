@@ -327,8 +327,10 @@ function loadMyGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
-				<?php echo $groups[$i]['name']; ?></a></p>
+			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
+				<?php echo $groups[$i]['name']; ?>
+				<span>Medlem sedan datum</span>
+			</a>
 		<?php
 	}
 }
@@ -353,8 +355,10 @@ function loadAllGroups()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
-				<?php echo $groups[$i]['name']; ?></a></p>
+			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
+				<?php echo $groups[$i]['name']; ?>
+				<span class="badge">14</span>
+			</a>
 		<?php
 	}
 }

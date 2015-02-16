@@ -456,7 +456,7 @@ fieldset[disabled] {
 	}
 	
 	.basic-table td {
-		padding: 5px 20px;
+		padding: 5px 45px 5px 0;
 	}
 	
 	/* Bootstrap table class modification */
@@ -481,76 +481,35 @@ fieldset[disabled] {
 	  border-bottom-color: #fff !important;
 	}
 	
-	/* Upcoming events (startpage) */
-
-	#collapseThree
-	{
-		background: #fff;
-		border: 1px solid #ddd;
-	}
 	
-	#content .upcoming-event {
-		padding: 15px;
-		background: #f99929;
-		color: #fff;
-	}
-	#content .upcoming-event-info {
-		background: #fff;
-		border-bottom: 1px solid #ddd;
-		border-right: 1px solid #ddd;
-		border-left: 1px solid #ddd;
-		padding: 15px 15px 5px 15px;
-	}
-
+	/* List groups */	
 	
-	.list-group-item-date-floated-left {
-		float: left; 
-		width: 44px;
+	.white-box .list-group-item {
+  	  border-right: 0;
+  	  border-left: 0;
+	  border-color: #e3e9eb;
 	}
-	
-	.list-group-item-time-floated-left {
-		float: left; 
-		width: 98px;
+	.white-box a.list-group-item {
+		color: #444;
 	}
-	
-	
-	.list-group-item:first-child {
+	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;
 	  border-top-left-radius: 0px;
 	}
-
-	.list-group-item:last-child {
-	  margin-bottom: 0;
+	.white-box .list-group-item:last-child {
+	  margin-bottom: -20px;
+	  border-bottom: 0;
 	  border-bottom-right-radius: 0px;
 	  border-bottom-left-radius: 0px;
 	}
 	
-	/* reviseApplications */
-	table#application-table{
-		text-align: left;
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-
-	table#application-table th, td {
-    	padding: 15px;
-	} 
 	
-	table#application-table th {
-    	color: white;
-    	background-color: #363430;
-    	font-size: 20px;
-	}
-
-	table#application-table td {
-    	font-size: 17px;
-	}
+	
 	
 	
 	#footer p {
 		font-size: 12px;
 	}	
-	
 	
 	
 /* =State

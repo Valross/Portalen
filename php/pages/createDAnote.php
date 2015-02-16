@@ -10,6 +10,12 @@ if(isset($_POST['submit']))
 	$nOfPeople = $_POST['nOfPeople'];
 	$salesSpenta = $_POST['salesSpenta'];
 	$message = $_POST['message'];
+
+	if(isset($_POST['partyries']))
+	{
+        $partyries = $_POST['partyries'];
+        $partyriesCounter = count($partyries);
+    }
 	
 	if($event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{
@@ -37,4 +43,19 @@ function loadMyDAEvents()
 		<?php
 	}
 }
+
+function loadPartyries()
+{
+	$partyries = DBQuery::sql("SELECT id, name FROM partyries");
+	for($i = 0; $i < count($partyries); ++$i)
+	{
+		?>
+			<div class="fifty-percent-width">
+				<input type="checkbox" name="partyries[]" id="<?php echo $partyries[$i]['id']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+				<label for="<?php echo $partyries[$i]['id']; ?>"><?php echo $partyries[$i]['name']; ?></label>
+			</div>
+		<?php
+	}
+}
+
 ?>

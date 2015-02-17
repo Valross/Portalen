@@ -494,7 +494,7 @@ fieldset[disabled] {
 	  border-color: #e3e9eb;
 	}
 	.white-box a.list-group-item {
-		color: #444;
+		/* color: #444; */
 	}
 	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;

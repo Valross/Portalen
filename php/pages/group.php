@@ -78,8 +78,9 @@ function loadMembersOfGroup()
 	for($i = 0; $i < count($members); ++$i)
 	{
 		?>
-		<p><a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?>>
-				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?></a></p>
+		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item">
+				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?>
+		</a>
 		<?php
 	}
 }

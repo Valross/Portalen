@@ -486,6 +486,12 @@ fieldset[disabled] {
 	}
 	
 	
+	/* Tooltip modification */
+	
+	.tooltip {
+	  line-height: 2;
+	}
+	
 	/* List groups */	
 	
 	.white-box .list-group-item {

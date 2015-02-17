@@ -20,7 +20,10 @@
 
 <div class="col-sm-4">
 	<div class="white-box">
-	<p>Oklart just nu vad som ska ligga här. Kanske "Dina pass", "kommande pass du kan boka dig på i dina lag" eller liknande. vi får se.</p>
+	<h3>Dina bokningsbara pass</h3>
+	En lista
+	<h3>Bokade pass</h3>
+	En lista
 	</div>
 </div>
 <div class="col-sm-8">

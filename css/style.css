@@ -49,7 +49,10 @@ html, body {
 h1, h2, h3 {
 	font-weight: lighter;
 }
-h4, h5, h6 {
+h4 {
+	font-weight: normal;
+}
+h5, h6 {
 	font-weight: bold;
 }
 
@@ -105,7 +108,8 @@ textarea {
 	padding: 34px 0 0 20px;
 }
 input.bottom-border,
-textarea.bottom-border {
+textarea.bottom-border,
+select.bottom-border {
 	border-bottom: 1px solid #e3e9eb;
 }
 input:-webkit-autofill {

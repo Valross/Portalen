@@ -11,20 +11,16 @@
 	<form action="" method="post">
 		<div class="white-box">
 			<label for="event">Evenemang</label>
-			<select name="event" id="event">
+			<select name="event" id="event" class="bottom-border">
 				<option id="typeno" value="typeno">Välj event</option>
 				<?php loadMyDAEvents(); ?>
 			</select>
-			<h2>Arrangerande festeri</h2>
+			<h4>Arrangerande festeri</h4>
 					<?php loadPartyries(); ?>
-		</div>
 
-		<div class="white-box">
-			<h2>Arbetande festeri</h2>
+			<h4>Arbetande festeri</h4>
 					<?php loadPartyries(); ?>
-		</div> <!-- .white-box -->
 
-		<div class="white-box">
 			<label for="salesEntry">Försäljning entré</label>
 			<input type="text" placeholder="9001" name="salesEntry" id="salesEntry">
 			<label for="salesBar">Försäljning bar</label>
@@ -36,7 +32,7 @@
 			<label for="salesSpenta">Antal sålda Spenta</label>
 			<input type="text" placeholder="420" name="salesSpenta" id="salesSpenta">
 			<label for="message">Händelser</label>
-			<input type="text" placeholder="Festeristerna jobbade på bra" name="message" id="message" class="border-bottom">
+			<textarea rows="6" cols="50" placeholder="Festeristerna jobbade på bra" name="message" id="message" class="bottom-border"></textarea>
 
 			<input type="submit" name="submit" value="Skapa DA-lapp">
 		</div> <!-- .white-box -->

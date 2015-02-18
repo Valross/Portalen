@@ -1,8 +1,6 @@
 <script>
-
 //Global variables
 var countSlots = 0;
-
 Date.prototype.yyyymmdd = function() {         
                                 
         var yyyy = this.getFullYear().toString();                                    
@@ -11,8 +9,6 @@ Date.prototype.yyyymmdd = function() {
                             
         return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
    };  
-
-
 function getTemplate(id)
 {
 	if(window.XMLHttpRequest)
@@ -68,7 +64,6 @@ function getTemplate(id)
 	xmlhttp.open("GET","php/askTemplate.php?template_id="+id, true);
 	xmlhttp.send();
 }
-
 function addGroup()
 {
 	var group = $("#group option:selected").text();
@@ -87,12 +82,10 @@ function addGroup()
 		++countSlots;
 	}
 }
-
 function removeSlot(id)
 {
 	$("#slot" + id).remove();
 }
-
 </script>
 
 <div class="row">
@@ -104,26 +97,23 @@ function removeSlot(id)
 </div> <!-- .row -->
 
 
-
+<form action="" method="post">
 <div class="row">
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Evenemangsinformation</h3>
 
-
-	<form action="" method="post">
+		<label for="template">Mall</label>
+		<select name="template" id="template" onchange="getTemplate(this.value)">
+			<option value="no">Ingen mall</option>
+			<?php loadTemplates(); ?>
+		</select>
 		
-			<label for="template">Mall</label>
-			<select name="template" id="template" onchange="getTemplate(this.value)">
-				<option value="no">Ingen mall</option>
-				<?php loadTemplates(); ?>
-			</select>
-			
-			<label for="type">Evenemangstyp</label>
-			<select name="type" id="type">
-				<option id="typeno" value="no">Välj typ</option>
-				<?php loadTypes(); ?>
-			</select>
+		<label for="type">Evenemangstyp</label>
+		<select name="type" id="type">
+			<option id="typeno" value="no">Välj typ</option>
+			<?php loadTypes(); ?>
+		</select>
 
 		<div class="input-group date datetimepicker">
 		<label for="start">Starttid</label>
@@ -150,7 +140,6 @@ function removeSlot(id)
 		<h3>Lägg till pass</h3>	
 			<p class="bg-warning">Observera! Du måste skapa och färdigställa alla pass innan du trycker på knappen "Skapa evenemang".</p>
 		
-		
 			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
 			<input id="group_amount" type="number" value="1" style="width:40px;"/>
 			
@@ -172,7 +161,8 @@ function removeSlot(id)
 			<label for="slot_points">Poäng</label>
 			<input id="slot_points" type="number" value="0">
 		<div id="added_groups"></div>
-	</form>
+	
 </div> <!-- .white-box -->
 </div> <!-- .col-sm-6 -->
 </div> <!-- .row -->
+</form>

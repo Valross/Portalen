@@ -108,7 +108,6 @@ include_once('php/pageManager.php');
 						<ul class="dropdown-menu is-floated-parent dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
 						    <li role="presentation"><a role="menuitem" href="?page=profile"><span class="fa fa-user fa-fw"></span> Min profil</a></li>
 							<li role="presentation"><a role="menuitem" href="#"><span class="fa fa-history fa-fw"></span> Arbetade pass</a></li>
-						    <li role="presentation"><a role="menuitem" href="#"><span class="fa fa-envelope-o fa-fw"></span> Meddelande</a></li>
 						    <li role="presentation"><a role="menuitem" href="?page=editProfile"><span class="fa fa-cog fa-fw"></span> Inställningar</a></li>
 							<li role="presentation" class="divider"></li>
 						    <li role="presentation"><a role="menuitem" href="#"><span class="fa fa-power-off fa-fw"></span> Logga ut</a></li>
@@ -116,13 +115,9 @@ include_once('php/pageManager.php');
 					</div> <!-- .dropdown -->
 					
 					<div class="notifications">
-						<a href="#" data-toggle="tooltip" data-placement="bottom" title="1 oläst nyhet"> 
+						<a href="#" data-toggle="tooltip" data-placement="bottom" title="1 oläst händelse"> 
 							<i class="fa fa-newspaper-o"></i>
 						    <span class="badge on-top-of-element">1</span>
-						</a>
-						<a href="#" data-toggle="tooltip" data-placement="bottom" title="3 olästa meddelanden"> 
-							<i class="fa fa-envelope-o"></i>
-						    <span class="badge on-top-of-element">3</span>
 						</a>
 					</div>
 					

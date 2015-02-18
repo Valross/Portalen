@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
 		{
 			DBQuery::sql("INSERT INTO event (id, name, event_type_id, start_time, end_time, period_id)
 							VALUES ('', '$name', '$type', '$start', '$end', '$periodId')");
-			$eventId = DBQuery::$lastId; //Ger denna fel eventID?
+			$eventId = DBQuery::$lastId; 
 			if(isset($_POST['slotGroups']))
 			{
 				$slotGroups = $_POST['slotGroups'];

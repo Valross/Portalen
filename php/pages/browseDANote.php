@@ -6,17 +6,12 @@ function loadDAAvatar($DA_id)
 							INNER JOIN event ON da_note.event_id = event.id 
 							ORDER BY event.start_time DESC");
 
-	//$DA_id = $DANotes[0]['user_id'];
-
-	// if(isset($DANotes))
-	// {
-		$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$DA_id' AND avatar IS NOT NULL");
-		if(count($results) == 0)
-		{
-			return 'img/avatars/no_face_small.png';
-		}
-		return 'img/avatars/'.$results[0]['avatar'];
-	// }
+	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$DA_id' AND avatar IS NOT NULL");
+	if(count($results) == 0)
+	{
+		return 'img/avatars/no_face_small.png';
+	}
+	return 'img/avatars/'.$results[0]['avatar'];
 }
 
 function loadAllDANotes()

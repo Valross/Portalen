@@ -4,9 +4,9 @@ function loadEventName()
 {
 	$event_id = $_GET['id'];
 	
-	$eventName = DBQuery::sql("SELECT name FROM event
+	$eventName = DBQuery::sql("SELECT name, start_time FROM event
 							WHERE id = '$event_id'");
-	echo $eventName[0]['name'];
+	echo $eventName[0]['name'].' '.$eventName[0]['start_time'];
 }
 
 function loadDAStats()

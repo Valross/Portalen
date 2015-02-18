@@ -363,10 +363,16 @@ function loadAllGroups()
 	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
+		$group_id = $groups[$i]['id'];
+
+		$members = DBQuery::sql("SELECT name, last_name, id FROM user 
+							WHERE id IN 
+							(SELECT user_id FROM group_member WHERE group_id = '$group_id')");
+
 		?>
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
 				<?php echo $groups[$i]['name']; ?>
-				<span class="badge">14</span>
+				<span class="badge"><?php echo count($members); ?></span>
 			</a>
 		<?php
 	}

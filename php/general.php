@@ -207,7 +207,8 @@ function loadBookedEvents()
 		$points = $workTimes[$i]['points'];
 		?>
 		
-			<a href="#" class="list-group-item"><i class="fa fa-chevron-down" style="float:right; margin-top: 3px;"></i><span class="badge" style="margin-right: 15px">X poäng</span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php // echo $start. '' .$end;?></span><?php echo $name ?></a>
+			<a href=<?php echo '"?page=event&id='.$availableSlots[$i]['id'].'"'; ?> class="list-group-item"><i class="fa fa-chevron-down" style="float:right; margin-top: 3px;"></i><span class="badge" style="margin-right: 15px">X poäng</span>
+			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php // echo $start. '' .$end;?></span><?php echo $name ?></a>
 		
 		<?php
 	}
@@ -258,7 +259,7 @@ function loadTodaysEvents()
 			$end = $end->format(' H:i');
 			$type = $upcomingEvents[$i]['type_name'];
 			?>
-				<a href="#" class="list-group-item"><strong class="list-group-item-time-floated-left"><?php echo $start. '' .$end;?></strong><?php echo $name ?></a>
+				<a href=<?php echo '"?page=event&id='.$upcomingEvents[$i]['id'].'"'; ?> class="list-group-item"><strong class="list-group-item-time-floated-left"><?php echo $start. '' .$end.' ';?></strong><?php echo $name ?></a>
 			<?php
 		}
 	}
@@ -302,7 +303,8 @@ function loadAvailableEvents()
 		$type = $availableEvents[$i]['type_name'];
 
 		?>
-			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+			<a href=<?php echo '"?page=event&id='.$availableEvents[$i]['id'].'"'; ?> class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span>
+			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong><?php echo $name ?></a>
 		<?php
 	}
 
@@ -333,12 +335,16 @@ function loadMyGroups()
 							WHERE id IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
 							ORDER BY name");
+
 	for($i = 0; $i < count($groups); ++$i)
 	{
+		$group_id = $groups[$i]['id'];
+		$group_members = DBQuery::sql("SELECT user_id, group_id, member_since FROM group_member 
+							WHERE user_id = '$_SESSION[user_id]' AND group_id = '$group_id'");
 		?>
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
 				<?php echo $groups[$i]['name']; ?>
-				<span>Medlem sedan datum</span>
+				<span><?php echo '(Sedan '.$group_members[0]['member_since'].')'; ?></span>
 			</a>
 		<?php
 	}

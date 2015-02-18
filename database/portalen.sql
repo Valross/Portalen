@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Dec 10, 2014 at 04:48 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.12
+-- Host: 127.0.0.1
+-- Generation Time: Feb 18, 2015 at 07:17 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `portalen`
 --
-CREATE DATABASE IF NOT EXISTS `portalen` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `portalen`;
 
 -- --------------------------------------------------------
 
@@ -67,7 +65,14 @@ CREATE TABLE IF NOT EXISTS `application` (
   `ssn` varchar(10) NOT NULL,
   `mail` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `application`
+--
+
+INSERT INTO `application` (`id`, `name`, `last_name`, `ssn`, `mail`) VALUES
+(1, 'Simon', '.', '120395y082', 'rw');
 
 -- --------------------------------------------------------
 
@@ -82,7 +87,47 @@ CREATE TABLE IF NOT EXISTS `application_group` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`application_id`),
   KEY `application_id` (`application_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `application_group`
+--
+
+INSERT INTO `application_group` (`id`, `group_id`, `application_id`) VALUES
+(2, 2, 1),
+(1, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_note`
+--
+
+CREATE TABLE IF NOT EXISTS `da_note` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `sales_entry` int(11) NOT NULL,
+  `sales_bar` int(11) NOT NULL,
+  `cash` int(11) NOT NULL,
+  `n_of_people` int(11) NOT NULL,
+  `sales_spenta` int(11) NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`event_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `da_note`
+--
+
+INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`) VALUES
+(1, 1, 35, 9001, 80085, 1337, 69, 420, 'fest'),
+(2, 2, 32, 142, 2, 2, 2, 2, '2'),
+(3, 2, 31, 2, 2, 2, 2, 2, '2'),
+(4, 2, 30, 2, 2, 2, 2, 2, '2'),
+(5, 2, 4, 40333, 1, 1, 1, 1, '1');
 
 -- --------------------------------------------------------
 
@@ -101,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `event`
@@ -121,7 +166,9 @@ INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event
 (30, 'Eventet', '2014-04-21 08:00:00', '2014-04-21 17:00:00', 3, 1),
 (31, 'Puuhben', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
 (32, 'Le puub', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
-(34, 'Poop', '2014-10-27 18:00:00', '2014-10-28 01:00:00', 5, 1);
+(34, 'Poop', '2014-10-27 18:00:00', '2014-10-28 01:00:00', 5, 1),
+(35, 'Bleep', '2015-02-14 00:00:00', '2015-02-15 00:00:00', 2, 1),
+(36, 'TORSDAG, FUCK YEAH', '2015-02-19 00:00:00', '2015-02-20 00:00:00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -219,6 +266,7 @@ CREATE TABLE IF NOT EXISTS `group_access` (
 CREATE TABLE IF NOT EXISTS `group_member` (
   `group_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `group_leader` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -227,8 +275,50 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 -- Dumping data for table `group_member`
 --
 
-INSERT INTO `group_member` (`group_id`, `user_id`) VALUES
-(2, 1);
+INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`) VALUES
+(2, 1, 0),
+(2, 2, 0),
+(4, 1, 0),
+(7, 1, 0),
+(7, 2, 0),
+(9, 2, 0),
+(11, 1, 0),
+(13, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `headwaiter_note`
+--
+
+CREATE TABLE IF NOT EXISTS `headwaiter_note` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `n_of_sitting` int(11) NOT NULL,
+  `food` text NOT NULL,
+  `invoice_drinks` text NOT NULL,
+  `n_of_waiting_stair` int(11) NOT NULL,
+  `n_of_waiting_organizers` int(11) NOT NULL,
+  `toast` text NOT NULL,
+  `organizers` text NOT NULL,
+  `stair_staff` text NOT NULL,
+  `organizers_staff` text NOT NULL,
+  `swine` text NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`event_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `headwaiter_note`
+--
+
+INSERT INTO `headwaiter_note` (`id`, `user_id`, `event_id`, `n_of_sitting`, `food`, `invoice_drinks`, `n_of_waiting_stair`, `n_of_waiting_organizers`, `toast`, `organizers`, `stair_staff`, `organizers_staff`, `swine`, `message`) VALUES
+(5, 2, 2, 1, '1', '1', 0, 1, '1', '1', '1', '1', '1', '1'),
+(6, 2, 7, 112, 'Björn knows his shit!!!!', '13 läsk\r\n37 Spenta\r\n69 briska', 0, 6, 'Oförsiktiga med utrustningen men nämnde nödutgångarna!', 'De glömde nämna att man inte får ha mat med sig..', 'Baren svinnade som FAN, men servering var KUNG', 'Det viktiga är att man försöker', '2cl Sourz Raspberry - dålig bartender', 'Det var en lugn sittning, ingen GaSSKAT'),
+(7, 2, 30, 12, 'B', '13 spenta', 2, 6, 'of', 'e', 'wq', 'we', 'we', 'wewqewrqwraowaojfajo');
 
 -- --------------------------------------------------------
 
@@ -244,7 +334,43 @@ CREATE TABLE IF NOT EXISTS `news` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `message`, `date`, `user_id`) VALUES
+(1, 'Hej', 'Då', '2015-02-12 14:53:09', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partyries`
+--
+
+CREATE TABLE IF NOT EXISTS `partyries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `partyries`
+--
+
+INSERT INTO `partyries` (`id`, `name`) VALUES
+(1, '3Cant'),
+(2, 'Tryckbar'),
+(3, 'Escort'),
+(4, 'Helgrymt'),
+(5, 'LATex'),
+(6, 'Skandal'),
+(7, 'SSKadat'),
+(8, 'Fest-N'),
+(9, 'Max'),
+(10, 'Skumpa'),
+(11, 'SoCeR');
 
 -- --------------------------------------------------------
 
@@ -258,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `period` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `period`
@@ -464,6 +590,13 @@ ALTER TABLE `application_group`
   ADD CONSTRAINT `application_group_ibfk_2` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `da_note`
+--
+ALTER TABLE `da_note`
+  ADD CONSTRAINT `da_note_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `da_note_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
@@ -496,6 +629,13 @@ ALTER TABLE `group_access`
 ALTER TABLE `group_member`
   ADD CONSTRAINT `group_member_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `headwaiter_note`
+--
+ALTER TABLE `headwaiter_note`
+  ADD CONSTRAINT `headwaiter_note_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `headwaiter_note_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news`

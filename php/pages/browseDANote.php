@@ -2,10 +2,6 @@
 
 function loadDAAvatar($DA_id)
 {
-	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.user_id FROM da_note 
-							INNER JOIN event ON da_note.event_id = event.id 
-							ORDER BY event.start_time DESC");
-
 	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$DA_id' AND avatar IS NOT NULL");
 	if(count($results) == 0)
 	{

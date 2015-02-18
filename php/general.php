@@ -205,11 +205,12 @@ function loadBookedEvents()
 		$end = new DateTime($workTimes[$i]['end_time']);
 		$end = $end->format(' H:i');
 		$points = $workTimes[$i]['points'];
+		
 		?>
-		
-			<a href=<?php echo '"?page=event&id='.$availableSlots[$i]['id'].'"'; ?> class="list-group-item"><i class="fa fa-chevron-down" style="float:right; margin-top: 3px;"></i><span class="badge" style="margin-right: 15px">X poäng</span>
-			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong><span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"><?php // echo $start. '' .$end;?></span><?php echo $name ?></a>
-		
+			<a href=<?php echo '"?page=event&id='.$bookedEvents[$i]['id'].'"'; ?> class="list-group-item"><i class="fa fa-chevron-down" style="float:right; margin-top: 3px;"></i>
+			<span class="badge" style="margin-right: 15px"><?php echo $points ?> poäng</span>
+			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong>
+			<span class="title" style="font-size: 0.8em; margin: 0 5px 0 -10px"></span><?php echo ' '.$name ?></a>
 		<?php
 	}
 	

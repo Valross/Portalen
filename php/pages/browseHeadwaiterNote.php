@@ -2,10 +2,6 @@
 
 function loadHeadwaiterAvatar($headwaiter_id)
 {
-	$Headwaiter = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.user_id FROM headwaiter_note 
-							INNER JOIN event ON headwaiter_note.event_id = event.id 
-							ORDER BY event.start_time DESC");
-
 	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$headwaiter_id' AND avatar IS NOT NULL");
 	if(count($results) == 0)
 	{

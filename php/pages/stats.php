@@ -10,24 +10,25 @@ function loadStats()
 		?>
 		<tr>
 			<td><?php echo $j+1;?></td>
-			<td><?php echo $users[$j]['name'].' '.$users[$j]['last_name']; ?></td>
-			<td><?php loadBookedPoints(); ?></td>
-			<td><?php loadWorkedPoints($j); ?></td>
-			<td><?php loadAmountOfPasses(); ?></td>
-			<td><?php loadAmountOfMeetings(); ?></td>
+			<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
+			<td><?php loadBookedPoints($users[$j]['id']); ?></td>
+			<td><?php loadWorkedPoints($users[$j]['id']); ?></td>
+			<td><?php loadAmountOfPasses($users[$j]['id']); ?></td>
+			<td><?php loadAmountOfMeetings($users[$j]['id']); ?></td>
 		</tr>
 		<?php
 	}
 }
 
-function loadBookedPoints()
+function loadBookedPoints($user_id)
 {
-	$bookedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
+	$bookedPointsResult = DBQuery::sql("SELECT points FROM work_slot 
+									WHERE event_id IN
 										(SELECT id FROM event WHERE period_id IN 
 											(SELECT id FROM period)
 										) 
 									AND id IN
-										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id')
 									");
 	$bookedPointsTotal = 0;
 	if(count($bookedPointsResult) > 0)
@@ -38,14 +39,15 @@ function loadBookedPoints()
 	echo $bookedPointsTotal;
 }
 
-function loadWorkedPoints($j)
+function loadWorkedPoints($user_id)
 {
-	$workedPointsResult = DBQuery::sql	("SELECT points FROM work_slot WHERE event_id IN
+	$workedPointsResult = DBQuery::sql("SELECT points FROM work_slot 
+									WHERE event_id IN
 										(SELECT id FROM event WHERE period_id IN 
 											(SELECT id FROM period)
 										) 
 									AND id IN
-										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '1')
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
 									");
 	$workedPointsTotal = 0;
 	if(count($workedPointsResult) > 0)
@@ -56,26 +58,26 @@ function loadWorkedPoints($j)
 	echo $workedPointsTotal;
 }
 
-function loadAmountOfPasses()
+function loadAmountOfPasses($user_id)
 {
-	$amountOfPasses = DBQuery::sql 		("SELECT points FROM work_slot WHERE event_id IN
-										(SELECT id FROM event WHERE period_id IN 
-											(SELECT id FROM period)
-										) 
-									AND id IN
-										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND points > 0)
+	$amountOfPasses = DBQuery::sql("SELECT event_type_id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id')) AND event_type_id != 5
 									");
 	echo count($amountOfPasses);
 }
 
-function loadAmountOfMeetings()
+function loadAmountOfMeetings($user_id)
 {
-	$amountOfMeetings = DBQuery::sql 		("SELECT points FROM work_slot WHERE event_id IN
-										(SELECT id FROM event WHERE period_id IN 
-											(SELECT id FROM period)
-										) 
-									AND id IN
-										(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND points = 0)
+	$amountOfMeetings = DBQuery::sql("SELECT event_type_id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id')) AND event_type_id = 5
 									");
 	echo count($amountOfMeetings);
 }

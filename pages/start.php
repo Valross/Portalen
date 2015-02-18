@@ -26,7 +26,7 @@
 	</div>
 </div>
 <div class="col-sm-7">
-	<h1>En kalender här kanske eller något, "kommande evenemang"</h1>
+	<h1>Nyhet</h1>
 	<?php loadTitle(); ?>
 	<?php loadMessage(); //fixa frontend?>
 	<?php loadUser(); ?>

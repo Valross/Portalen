@@ -48,13 +48,17 @@ function loadWorkSlots()
 	$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE work_slot_id IN
 						(SELECT id FROM work_slot 
-						WHERE event_id = '$event_id')
-						ORDER BY work_slot_id");
+						WHERE event_id = '$event_id')");
 
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
 							ORDER BY name");
+
+	$availableSlots = DBQuery::sql("SELECT id FROM work_slot 
+									WHERE id NOT IN
+										(SELECT work_slot_id FROM user_work)
+									ORDER BY id");
 
 	for($i = 0; $i < count($groups); ++$i)
 	{
@@ -70,7 +74,7 @@ function loadWorkSlots()
 					echo " USER_ID: ".$bookedSlots[$j]['user_id'];
 					echo loadAvatarFromUser(($bookedSlots[$j]['user_id'])).'</p>';
 				}
-				if(checkIfMemberOfGroup($_SESSION['user_id'], $groups[$i]['id']))
+				if(checkIfMemberOfGroup($_SESSION['user_id'], $groups[$i]['id']) && $availableSlots[$j]['id'] != $slots[$j]['id']) //fungerar inte
 				{
 					echo '<button type="button">Boka</button>';
 				}

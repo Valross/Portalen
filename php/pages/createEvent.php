@@ -4,6 +4,7 @@ include_once('php/DBQuery.php');
 if(isset($_POST['submit']))
 {
 	$name = $_POST['name'];
+	$info = $_POST['info'];
 	$type = $_POST['type'];
 	$start = $_POST['start'];
 	$end = $_POST['end'];
@@ -17,10 +18,10 @@ if(isset($_POST['submit']))
 		$periodId = $periodId[0]["id"];
 		// echo "periodId = " . $periodId;
 
-		if($name != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
+		if($name != '' && $info != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 		{
-			DBQuery::sql("INSERT INTO event (id, name, event_type_id, start_time, end_time, period_id)
-							VALUES ('', '$name', '$type', '$start', '$end', '$periodId')");
+			DBQuery::sql("INSERT INTO event (id, name, info, event_type_id, start_time, end_time, period_id)
+							VALUES ('', '$name', '$info', '$type', '$start', '$end', '$periodId')");
 			$eventId = DBQuery::$lastId; 
 			if(isset($_POST['slotGroups']))
 			{

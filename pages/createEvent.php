@@ -96,7 +96,6 @@ function removeSlot(id)
 	</div>
 </div> <!-- .row -->
 
-
 <form action="" method="post">
 <div class="row">
 <div class="col-sm-6">
@@ -116,9 +115,9 @@ function removeSlot(id)
 		</select>
 
 		<div class="input-group date datetimepicker">
-		<label for="start">Starttid</label>
-		<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
-        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			<label for="start">Starttid</label>
+			<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
+	        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 		</div>
 			
 		<div class="input-group date datetimepicker">
@@ -149,20 +148,19 @@ function removeSlot(id)
 			</select>
 			
 			<div class="input-group date datetimepicker">
-			<label for="slot_start">Passets starttid</label>
-			<input id="slot_start"type="text" value="<?php echo $dateNoTime; ?>">
-			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+				<label for="slot_start">Passets starttid</label>
+				<input id="slot_start"type="text" value="<?php echo $dateNoTime; ?>">
+				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 			</div>
 			<div class="input-group date datetimepicker">
-			<label for="slot_end">Passets sluttid</label>
-			<input id="slot_end" type="text" value="<?php echo $dateNoTime; ?>">
-			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+				<label for="slot_end">Passets sluttid</label>
+				<input id="slot_end" type="text" value="<?php echo $dateNoTime; ?>">
+				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 			</div>
 			<label for="slot_points">Poäng</label>
 			<input id="slot_points" type="number" value="0">
 		<div id="added_groups"></div>
-	
-</div> <!-- .white-box -->
+	</div> <!-- .white-box -->
 </div> <!-- .col-sm-6 -->
 </div> <!-- .row -->
 </form>

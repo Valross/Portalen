@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 18, 2015 at 07:17 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Feb 18, 2015 at 10:23 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -138,6 +138,7 @@ INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_entry`, `sales_bar`, 
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `info` text NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `period_id` int(11) NOT NULL,
@@ -146,29 +147,34 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `name`, `start_time`, `end_time`, `period_id`, `event_type_id`) VALUES
-(1, 'Pizzaonsdag', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1, 1),
-(2, 'Vårkravallen', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
-(4, 'Sittning', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
-(5, 'Personalfest', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
-(7, 'MT <3 GDK', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
-(10, 'Fotbollstisdag', '2014-02-25 20:00:00', '2014-02-25 22:00:00', 1, 1),
-(11, 'Onsdagspub', '2014-02-26 18:00:00', '2014-02-26 22:00:00', 1, 1),
-(26, 'Rockfesten', '2014-03-01 22:00:00', '2014-03-02 03:00:00', 2, 2),
-(27, 'Kravallpub', '2014-02-27 18:00:00', '2014-02-28 01:00:00', 1, 1),
-(29, 'nuu', '2014-03-06 18:00:00', '2014-03-06 22:00:00', 2, 1),
-(30, 'Eventet', '2014-04-21 08:00:00', '2014-04-21 17:00:00', 3, 1),
-(31, 'Puuhben', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
-(32, 'Le puub', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
-(34, 'Poop', '2014-10-27 18:00:00', '2014-10-28 01:00:00', 5, 1),
-(35, 'Bleep', '2015-02-14 00:00:00', '2015-02-15 00:00:00', 2, 1),
-(36, 'TORSDAG, FUCK YEAH', '2015-02-19 00:00:00', '2015-02-20 00:00:00', 2, 1);
+INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`, `event_type_id`) VALUES
+(1, 'Pizzaonsdag', '', '2014-02-19 18:00:00', '2014-02-19 22:00:00', 1, 1),
+(2, 'Vårkravallen', '', '2014-03-08 22:00:00', '2014-03-09 03:00:00', 2, 2),
+(4, 'Sittning', '', '2014-02-14 17:00:00', '2014-02-14 23:00:00', 1, 3),
+(5, 'Personalfest', '', '2014-03-09 18:30:00', '2014-03-10 03:00:00', 2, 4),
+(7, 'MT <3 GDK', '', '2014-02-22 18:00:00', '2014-02-22 22:00:00', 1, 3),
+(10, 'Fotbollstisdag', '', '2014-02-25 20:00:00', '2014-02-25 22:00:00', 1, 1),
+(11, 'Onsdagspub', '', '2014-02-26 18:00:00', '2014-02-26 22:00:00', 1, 1),
+(26, 'Rockfesten', '', '2014-03-01 22:00:00', '2014-03-02 03:00:00', 2, 2),
+(27, 'Kravallpub', '', '2014-02-27 18:00:00', '2014-02-28 01:00:00', 1, 1),
+(29, 'nuu', '', '2014-03-06 18:00:00', '2014-03-06 22:00:00', 2, 1),
+(30, 'Eventet', '', '2014-04-21 08:00:00', '2014-04-21 17:00:00', 3, 1),
+(31, 'Puuhben', '', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
+(32, 'Le puub', '', '2014-04-28 18:00:00', '2014-04-28 22:00:00', 3, 1),
+(34, 'Poop', '', '2014-10-27 18:00:00', '2014-10-28 01:00:00', 5, 1),
+(35, 'Bleep', '', '2015-02-14 00:00:00', '2015-02-15 00:00:00', 2, 1),
+(36, 'TORSDAG, FUCK YEAH', '', '2015-02-19 00:00:00', '2015-02-20 00:00:00', 2, 1),
+(37, 'Beepity Bapeti', '', '2015-02-22 00:00:00', '2015-02-23 00:00:00', 2, 2),
+(38, 'GAMMALT SKIT', '', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
+(48, 'GAMMALT SKIT 13', 'Fan rätt fräscht asså', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
+(49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
+(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -185,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `event_template` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `event_template`
@@ -194,7 +200,8 @@ CREATE TABLE IF NOT EXISTS `event_template` (
 INSERT INTO `event_template` (`id`, `name`, `start_time`, `end_time`, `event_type_id`) VALUES
 (5, 'Onsdagspub', '18:00:00', '22:00:00', 1),
 (6, 'Vanlig nattklubb', '22:00:00', '03:00:00', 2),
-(7, 'Vanlig pub', '18:00:00', '01:00:00', 1);
+(7, 'Vanlig pub', '18:00:00', '01:00:00', 1),
+(9, 'Webbmöte', '17:15:00', '19:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -212,14 +219,15 @@ CREATE TABLE IF NOT EXISTS `event_template_group` (
   PRIMARY KEY (`id`),
   KEY `event_template_id` (`event_template_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `event_template_group`
 --
 
 INSERT INTO `event_template_group` (`id`, `start_time`, `end_time`, `points`, `event_template_id`, `group_id`) VALUES
-(1, '2014-03-06 17:00:00', '2014-03-07 00:00:00', 3, 5, 5);
+(1, '2014-03-06 17:00:00', '2014-03-07 00:00:00', 3, 5, 5),
+(2, '2015-02-25 17:15:00', '2015-02-25 19:00:00', 0, 9, 2);
 
 -- --------------------------------------------------------
 
@@ -232,13 +240,14 @@ CREATE TABLE IF NOT EXISTS `event_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `event_type`
 --
 
 INSERT INTO `event_type` (`id`, `name`) VALUES
+(5, 'Möte'),
 (2, 'Nattklubb'),
 (4, 'Personalaktivitet'),
 (1, 'Pub'),
@@ -267,6 +276,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
   `group_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `group_leader` int(11) NOT NULL DEFAULT '0',
+  `member_since` date NOT NULL,
   PRIMARY KEY (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -275,15 +285,15 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 -- Dumping data for table `group_member`
 --
 
-INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`) VALUES
-(2, 1, 0),
-(2, 2, 0),
-(4, 1, 0),
-(7, 1, 0),
-(7, 2, 0),
-(9, 2, 0),
-(11, 1, 0),
-(13, 1, 0);
+INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
+(2, 1, 0, '0000-00-00'),
+(2, 2, 0, '2015-02-05'),
+(4, 1, 0, '0000-00-00'),
+(7, 1, 0, '0000-00-00'),
+(7, 2, 0, '2014-00-00'),
+(9, 2, 0, '2013-00-00'),
+(11, 1, 0, '0000-00-00'),
+(13, 1, 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -475,7 +485,9 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (6, 2, 1),
 (7, 1, 1),
 (62, 1, 1),
-(75, 1, 0);
+(75, 1, 0),
+(90, 1, 0),
+(93, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -525,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -576,7 +588,18 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `start_time`, `
 (72, 4, 34, 4, '2014-10-27 17:00:00', '2014-10-28 02:00:00'),
 (73, 3, 34, 3, '2014-10-27 17:00:00', '2014-10-28 00:00:00'),
 (74, 3, 34, 3, '2014-10-27 17:00:00', '2014-10-28 00:00:00'),
-(75, 7, 34, 4, '2014-10-27 16:00:00', '2014-10-28 02:00:00');
+(75, 7, 34, 4, '2014-10-27 16:00:00', '2014-10-28 02:00:00'),
+(76, 5, 38, 3, '2015-02-18 17:00:00', '2015-02-19 00:00:00'),
+(77, 13, 38, 15, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(86, 5, 48, 3, '2015-02-18 17:00:00', '2015-02-19 00:00:00'),
+(87, 13, 48, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(88, 2, 49, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
+(89, 2, 50, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
+(90, 13, 50, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(91, 6, 50, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(92, 10, 50, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(93, 7, 50, 13, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(94, 7, 50, 13, '2015-02-18 00:00:00', '2015-02-18 00:00:00');
 
 --
 -- Constraints for dumped tables

@@ -1,19 +1,23 @@
 <?php
 include_once("php/DBQuery.php");
 
+$dates = new DateTime;
+$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+$dateNoTime = $dates->format('Y-m-d');
+
 if(isset($_POST['submit']))
 {
 	if(isset($_POST['addGroup'])) 
 	{
 		$addGroup = $_POST['addGroup'];
-		DBQuery::sql("INSERT INTO group_member (group_id, user_id)
-							VALUES ('$addGroup', '$_SESSION[user_id]')"); //ändra $_SESSION[user_id] till dens profil det är
+		DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+							VALUES ('$addGroup', '$_SESSION[user_id]', '$dateNoTime')"); 
 	}
 	if(isset($_POST['removeGroup']))
 	{
 		$removeGroup = $_POST['removeGroup'];
 		DBQuery::sql("DELETE FROM group_member
-							WHERE $removeGroup = group_id AND $_SESSION[user_id] = user_id"); //ändra $_SESSION[user_id] till dens profil det är
+							WHERE $removeGroup = group_id AND $_SESSION[user_id] = user_id");
 	}
 }
 
@@ -45,6 +49,13 @@ if(count($result) == 1)
 	$profileMail = $result[0]["mail"];
 else
 	$profileMail = "";
+
+$result = DBQuery::sql("SELECT address FROM user WHERE id = '$_SESSION[user_id]' AND address IS NOT NULL");
+
+if(count($result) == 1)
+	$profileAddress = $result[0]["address"];
+else
+	$profileAddress = "";
 
 function loadUnjoinedGroups()
 {

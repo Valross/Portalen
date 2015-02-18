@@ -25,6 +25,12 @@
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="15">
 		<label for="mail">Mailadress</label>
 		<input type="text" value="<?php echo $profileMail; ?>" name="mail" id="mail">
+		<label for="mail">Adress</label>
+		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address">
+		<label for="mail">Hemsida</label>
+		<input type="text" value="<?php echo $profileHomepage; ?>" name="homepage" id="homepage">
+		<label for="mail">Utbildning</label>
+		<input type="text" value="<?php echo $profileMajor; ?>" name="major" id="major">
 		
 		<label for="description">Presentation</label>
 		<textarea rows="5" cols="50" value="<?php echo $profileDescription; ?>" name="description" id="description" maxlength="150" class="bottom-border"></textarea>

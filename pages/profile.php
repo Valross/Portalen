@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td><strong>Adress</strong></td>
-				<td></td>
+				<td><?php echo $profileAddress; ?></td>
 			</tr>
 			<tr>
 				<td><strong>Hemsida</strong></td>

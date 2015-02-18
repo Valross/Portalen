@@ -3,11 +3,29 @@ include_once('php/DBQuery.php');
 
 //Current variables
 //Separate file? Combine with part of php/pages/profile.php?
-$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail  IS NOT NULL");
+$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
 if(count($result) == 1)
 	$profileMail = $result[0]["mail"];
 else
 	$profileMail = "";
+
+$result = DBQuery::sql("SELECT address FROM user WHERE id = '$_SESSION[user_id]' AND address IS NOT NULL");
+if(count($result) == 1)
+	$profileAddress = $result[0]["address"];
+else
+	$profileAddress = "";
+
+$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
+if(count($result) == 1)
+	$profileHomepage = $result[0]["mail"];
+else
+	$profileHomepage = "";
+
+$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
+if(count($result) == 1)
+	$profileMajor = $result[0]["mail"];
+else
+	$profileMajor = "";
 
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
 if(count($result) == 1)
@@ -44,6 +62,9 @@ if(isset($_POST['changeInfo'])) {
 	$phoneNumber = DBQuery::safeString($_POST['phone_number']);
 	$ssn = DBQuery::safeString($_POST['ssn']);
 	$mail = DBQuery::safeString($_POST['mail']);
+	$address = DBQuery::safeString($_POST['address']);
+	$homepage = DBQuery::safeString($_POST['homepage']);
+	$major = DBQuery::safeString($_POST['major']);
 	$name = DBQuery::safeString($_POST['name']);
 	$lastName = DBQuery::safeString($_POST['last_name']);
 	$description = DBQuery::safeString($_POST['description']);
@@ -67,6 +88,27 @@ if(isset($_POST['changeInfo'])) {
 			$queryString = $queryString . ", mail='$mail'";
 		else
 			$queryString = $queryString . "mail='$mail'";
+	}
+
+	if ($address != '') {
+		if ($queryString != '')
+			$queryString = $queryString . ", address='$address'";
+		else
+			$queryString = $queryString . "address='$address'";
+	}
+
+	if ($homepage != '') {
+		// if ($queryString != '')
+		// 	$queryString = $queryString . ", mail='$mail'";
+		// else
+		// 	$queryString = $queryString . "mail='$mail'";
+	}
+
+	if ($major != '') {
+		// if ($queryString != '')
+		// 	$queryString = $queryString . ", mail='$mail'";
+		// else
+		// 	$queryString = $queryString . "mail='$mail'";
 	}
 
 	if ($name != '') {

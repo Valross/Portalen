@@ -305,6 +305,15 @@ function loadAvailableEvents()
 			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
 		<?php
 	}
+
+	if(count($availableEvents) == 0)
+	{
+		?>
+		
+		<p><i>Det finns inte några lediga pass just nu.</i></p>
+		
+		<?php
+	}
 }
 //
 //Load avatar

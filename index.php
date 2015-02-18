@@ -80,9 +80,10 @@ include_once('php/pageManager.php');
 	  							<li><a></span></a></li>
 	  							
 	  							<li><a href="?page= #"></span>Checka av pass</a></li>
-	  							<li><a href="?page=createDANote"></span>Skriv lapp</a></li>
-	  							<li><a href="?page=browseDANote"></span>DA-lappar</a></li>
-	  							<li><a href="?page=browseHeadWaiterNote"></span>Hovis-lappar</a></li>
+	  							<li><a href="?page=createDANote"></span>Skriv DA-lapp</a></li>
+	  							<li><a href="?page=createHeadWaiterNote"></span>Skriv Hovis-lapp</a></li>
+	  							<li><a href="?page=browseDANote"></span>Läs DA-lappar</a></li>
+	  							<li><a href="?page=browseHeadWaiterNote"></span>Läs Hovis-lappar</a></li>
 	  						  </li>  
 	  						  </ul>
 		            </ul>

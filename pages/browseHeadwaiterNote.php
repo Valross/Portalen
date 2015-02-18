@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>DA-lappar - <a href="?page=browseHeadwaiterNote">Hovis-lappar</a></h1>
+			<h1>Hovis-lappar - <a href="?page=browseDANote">DA-lappar</a></h1>
 		</div>
 	</div>
 </div>
@@ -13,18 +13,14 @@
 		      	<thead>
 			        <tr>
 			          	<th>#</th>
-			          	<th>Event</th>
-			          	<th>Entré (kr)</th>
-			          	<th>Bar (kr)</th>
-					  	<th>Cash (kr)</th>
-					  	<th>Inklick</th>
-					  	<th># Spenta</th>
-					  	<th>DA</th>
+			          	<th>Sittning</th>
+			          	<th>Antal sittande</th>
+			          	<th>Hovis</th>
 			        </tr>
 			    </thead>
 				<tbody>
 
-				  	<?php loadAllDANotes(); ?>
+				  	<?php loadAllHeadwaiterNotes(); ?>
 
 			  	</tbody>
 				</table>

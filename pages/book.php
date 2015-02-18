@@ -21,9 +21,9 @@
 <div class="col-sm-4">
 	<div class="white-box">
 	<h3>Dina bokningsbara pass</h3>
-	En lista
+	<?php echo loadAvailableEvents() ?>
 	<h3>Bokade pass</h3>
-	En lista
+	<?php echo loadBookedEvents() ?>
 	</div>
 </div>
 <div class="col-sm-8">

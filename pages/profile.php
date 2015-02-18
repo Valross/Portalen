@@ -5,9 +5,6 @@
 			<h1 class="header-img"><?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></h1>
 		</div>
 	</div>
-	<div class="col-sm-4 page-header-right text-right">
-		<button type="button" class="btn btn-page-header header-img"><i class="fa fa-envelope-o fa-margin-right"></i> Skicka meddelande</button>
-	</div>
 </div> <!-- .row -->
 
 <div class="row">

@@ -1,6 +1,10 @@
 <?php
 include_once('php/DBQuery.php');
 
+$dates = new DateTime;
+$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+$date = $dates->format('Y-m-d H:i:s');
+
 if(isset($_POST['submit']))
 {
 	$event = $_POST['event'];
@@ -19,8 +23,8 @@ if(isset($_POST['submit']))
 	
 	if($event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{
-		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message)
-						VALUES ('$_SESSION[user_id]', '$event', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message')");
+		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message, date_written)
+						VALUES ('$_SESSION[user_id]', '$event', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message', '$date')");
 		?>
 		<script>
 			window.location = "?page=browseDANote";

@@ -46,6 +46,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="white-box">
+			<h1>Meddelande</h1>
 			<p>
 
 			<?php loadDAMessage(); ?>
@@ -54,3 +55,18 @@
 		</div>
 	</div>
 </div>
+
+<?php loadComments(); ?>
+
+<form action="" method="post">
+<div class="row">
+	<div class="col-sm-12">
+		<div class="white-box">
+			<label for="comment">Skriv kommentar</label>
+			<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
+
+			<input type="submit" name="submit" value="Skicka kommentar">
+		</div> <!-- .white-box -->
+	</div>
+</div>
+</form>

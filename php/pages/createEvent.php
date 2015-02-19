@@ -16,7 +16,6 @@ if(isset($_POST['submit']))
 
     else{							//date valid
 		$periodId = $periodId[0]["id"];
-		// echo "periodId = " . $periodId;
 
 		if($name != '' && $info != '' && $type != 'no' && $start != '' && $end != '' && $start < $end)
 		{

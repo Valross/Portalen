@@ -41,42 +41,54 @@ function checkIfMemberOfGroup($user_id, $group_id)
 function loadWorkSlots()
 {
 	$event_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
 	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
 						WHERE event_id = '$event_id'
-						ORDER BY id");
+						");
 
 	$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE work_slot_id IN
-						(SELECT id FROM work_slot 
-						WHERE event_id = '$event_id')");
+							(SELECT id FROM work_slot 
+							WHERE event_id = '$event_id')
+						AND user_id = '$user_id'");
 
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
-							ORDER BY name");
-
-	$availableSlots = DBQuery::sql("SELECT id FROM work_slot 
-									WHERE id NOT IN
-										(SELECT work_slot_id FROM user_work)
-									ORDER BY id");
+							");
 
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		echo '<p>'.$groups[$i]['name'].'</p>';
 		for($j = 0; $j < count($slots); ++$j)
 		{
+			$work_slot_id = $slots[$j]['id'];
+			$availableSlot = DBQuery::sql("SELECT id FROM work_slot 
+										WHERE id NOT IN
+											(SELECT work_slot_id FROM user_work)
+										AND id = '$work_slot_id'");
 			if($slots[$j]['group_id'] == $groups[$i]['id'])
 			{
-				echo '<p>'.$slots[$j]['id']." | GROUP_ID: ".$slots[$j]['group_id'];
-				echo " BOOKED: ".count($bookedSlots);
-				if(count($bookedSlots) > $j)
+				$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+						WHERE work_slot_id IN
+							(SELECT id FROM work_slot 
+							WHERE event_id = '$event_id')
+						AND work_slot_id = '$work_slot_id'");
+				echo '<a class="list-group-item">'.$slots[$j]['id']." | GROUP_ID: ".$slots[$j]['group_id'].' ';
+				if(count($bookedSlot) > 0)
 				{
-					echo " USER_ID: ".$bookedSlots[$j]['user_id'];
-					echo loadAvatarFromUser(($bookedSlots[$j]['user_id'])).'</p>';
+					echo " USER_ID: ".$bookedSlot[0]['user_id'];
+					echo loadAvatarFromUser(($bookedSlot[0]['user_id'])).'</a>';
 				}
-				if(checkIfMemberOfGroup($_SESSION['user_id'], $groups[$i]['id']) && $availableSlots[$j]['id'] != $slots[$j]['id']) //fungerar inte
+				if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0) //fungerar inte
 				{
-					echo '<button type="button">Boka</button>';
+					echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+					'>Boka</a>';
+				}
+				else
+				{
+					echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+					'>Boka av</a>';
 				}
 			}
 		}

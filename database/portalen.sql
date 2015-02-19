@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 19, 2015 at 05:09 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Feb 19, 2015 at 10:40 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `da_note`
@@ -125,11 +125,7 @@ CREATE TABLE IF NOT EXISTS `da_note` (
 
 INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
 (1, 1, 35, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
-(2, 2, 32, 142, 2, 2, 2, 2, '2', '0000-00-00'),
-(3, 2, 31, 2, 2, 2, 2, 2, '2', '0000-00-00'),
-(4, 2, 30, 2, 2, 2, 2, 2, '2', '0000-00-00'),
-(5, 2, 4, 40333, 1, 1, 1, 1, '1', '0000-00-00'),
-(6, 2, 36, 5, 5, 55, 5, 5, '5', '2015-02-19');
+(27, 2, 36, 1, 2, 23, 2342, 242, '42', '2015-02-19');
 
 -- --------------------------------------------------------
 
@@ -146,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `da_note_comments` (
   PRIMARY KEY (`id`),
   KEY `event_id` (`da_note_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `da_note_comments`
@@ -155,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `da_note_comments` (
 INSERT INTO `da_note_comments` (`id`, `da_note_id`, `comment`, `date_written`, `user_id`) VALUES
 (1, 1, 'bleep', '2015-02-19', 2),
 (2, 1, 'wrr', '2015-02-19', 2),
-(3, 6, 'lol', '2015-02-19', 2);
+(4, 27, 'top lel\r\n', '2015-02-19', 2);
 
 -- --------------------------------------------------------
 
@@ -202,7 +198,7 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (38, 'GAMMALT SKIT', '', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (48, 'GAMMALT SKIT 13', 'Fan rätt fräscht asså', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
-(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5);
+(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 5);
 
 -- --------------------------------------------------------
 
@@ -294,6 +290,13 @@ CREATE TABLE IF NOT EXISTS `group_access` (
   KEY `group_id` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `group_access`
+--
+
+INSERT INTO `group_access` (`access_id`, `group_id`) VALUES
+(1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -320,8 +323,7 @@ INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since
 (7, 1, 0, '0000-00-00'),
 (7, 2, 0, '2014-00-00'),
 (9, 2, 0, '2013-00-00'),
-(11, 1, 0, '0000-00-00'),
-(13, 1, 0, '0000-00-00');
+(11, 1, 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -413,6 +415,49 @@ INSERT INTO `partyries` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `partyries_arrange`
+--
+
+CREATE TABLE IF NOT EXISTS `partyries_arrange` (
+  `event_id` int(11) NOT NULL,
+  `partyries_id` int(11) NOT NULL,
+  PRIMARY KEY (`partyries_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `partyries_arrange`
+--
+
+INSERT INTO `partyries_arrange` (`event_id`, `partyries_id`) VALUES
+(36, 1),
+(36, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partyries_work`
+--
+
+CREATE TABLE IF NOT EXISTS `partyries_work` (
+  `event_id` int(11) NOT NULL,
+  `partyries_id` int(11) NOT NULL,
+  PRIMARY KEY (`partyries_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `partyries_work`
+--
+
+INSERT INTO `partyries_work` (`event_id`, `partyries_id`) VALUES
+(36, 1),
+(36, 9),
+(36, 10);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `period`
 --
 
@@ -470,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', NULL, NULL, NULL, 'portalen_bild.jpg', '0000-00-00 00:00:00', NULL, NULL),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, NULL, NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, 'beawea', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL),
@@ -508,14 +553,7 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 --
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
-(4, 1, 1),
-(5, 1, 1),
-(6, 2, 1),
-(7, 1, 1),
-(62, 1, 1),
-(75, 1, 0),
-(90, 1, 0),
-(93, 2, 1);
+(93, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -701,6 +739,20 @@ ALTER TABLE `headwaiter_note`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `partyries_arrange`
+--
+ALTER TABLE `partyries_arrange`
+  ADD CONSTRAINT `partyries_arrange_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `partyries_arrange_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `partyries_work`
+--
+ALTER TABLE `partyries_work`
+  ADD CONSTRAINT `partyries_work_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `partyries_work_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_access`

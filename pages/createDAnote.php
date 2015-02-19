@@ -16,10 +16,10 @@
 				<?php loadMyDAEvents(); ?>
 			</select>
 			<h4>Arrangerande festeri</h4>
-					<?php loadPartyries(); ?>
+					<?php loadArrangingPartyries(); ?>
 
 			<h4>Arbetande festeri</h4>
-					<?php loadPartyries(); ?>
+					<?php loadWorkingPartyries(); ?>
 
 			<label for="salesEntry">Försäljning entré</label>
 			<input type="text" placeholder="9001" name="salesEntry" id="salesEntry">

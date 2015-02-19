@@ -138,6 +138,69 @@ function loadCommentAvatar($comment_id)
 	}
 }
 
+function loadArrangingPartyries()
+{
+	$event_id = $_GET['id'];
+	
+	$arrangingPartyries = DBQuery::sql("SELECT id, name FROM partyries
+							WHERE id IN
+							(SELECT partyries_id FROM partyries_arrange
+							WHERE event_id = '$event_id')");
+
+	if(count($arrangingPartyries) > 0)
+	{
+		echo '<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">';
+		if(count($arrangingPartyries) > 1)
+			echo '<h2>Arrangerande Festerier</h1>';
+		else
+			echo '<h2>Arrangerande Festeri</h1>';
+
+		for($i = 0; $i < count($arrangingPartyries); ++$i)
+		{
+			echo '<div>';
+			echo '<p>'.$arrangingPartyries[$i]['name'].'</p>';
+			echo '</div>';
+		}
+		echo '			</div>
+					</div>
+				</div>';
+	}
+}
+
+function loadWorkingPartyries()
+{
+	$event_id = $_GET['id'];
+	
+	$workingPartyries = DBQuery::sql("SELECT id, name FROM partyries
+							WHERE id IN
+							(SELECT partyries_id FROM partyries_work
+							WHERE event_id = '$event_id')");
+
+	if(count($workingPartyries) > 0)
+	{
+		echo '<div class="row">
+					<div class="col-sm-12">
+						<div class="white-box">';
+		if(count($workingPartyries) > 1)
+			echo '<h2>Arbetande Festerier</h1>';
+		else
+			echo '<h2>Arbetande Festeri</h1>';
+
+		for($i = 0; $i < count($workingPartyries); ++$i)
+		{
+			echo '<div>';
+			echo '<p>'.$workingPartyries[$i]['name'].'</p>';
+			echo '</div>';
+		}
+		echo '			</div>
+					</div>
+				</div>';
+	}
+}
+
+
 function loadComments()
 {
 	$da_note_event_id = $_GET['id'];
@@ -166,8 +229,8 @@ function loadComments()
 			echo '</div>';
 		}
 		echo '			</div>
-						</div>
-					</div>';
+					</div>
+				</div>';
 	}
 }
 

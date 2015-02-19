@@ -43,6 +43,9 @@
 	</div>
 </div>
 
+<?php loadArrangingPartyries(); ?>
+<?php loadWorkingPartyries(); ?>
+
 <div class="row">
 	<div class="col-sm-12">
 		<div class="white-box">

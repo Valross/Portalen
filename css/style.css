@@ -499,8 +499,8 @@ fieldset[disabled] {
   	  border-left: 0;
 	  border-color: #e3e9eb;
 	}
-	.white-box a.list-group-item {
-		/* color: #444; */
+	.white-box a.list-group-item .list-group-item-text {
+		color: #444; 
 	}
 	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;
@@ -512,10 +512,42 @@ fieldset[disabled] {
 	  border-bottom-right-radius: 0px;
 	  border-bottom-left-radius: 0px;
 	}
+	.white-box .list-group-item.with-thumbnail {
+		padding-top: 12px;
+	}
+	.white-box .list-group-item.with-thumbnail > * {
+		margin-top: 5px;
+	}
+	.white-box .list-group-item .list-group-thumbnail {
+		margin: -2px 10px 0 0;
+	}
+	
+	
+	/* Group badges */
+	
+	.group-badge {
+		display: block;
+		border-radius: 50%;
+	}
+	.page-header .group-badge {
+		float: left;
+		width: 100px;
+		line-height: 100px;
+		font-size: 50px;
+	}
+	.list-group-item .group-badge {
+		width: 32px;
+		line-height: 32px;
+		font-size: 16px;
+	}
+	.group-badge.webb {
+		background: #b8b5f7;
+		color: #6267CB;
+	}
 	
 	
 	
-	
+	/* kategorisera detta bättre */
 	
 	#footer p {
 		font-size: 12px;

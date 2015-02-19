@@ -101,7 +101,7 @@ include_once('php/pageManager.php');
 					<div class="col-sm-6 text-right">
 					<div class="dropdown">
 						<button class="user-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
-							<img src="<?php echo loadAvatar(); ?>" class="img-circle" width="32px" height="32px">
+							<img src="<?php echo loadAvatar(); ?>" class="img-circle" width="32" height="32">
 							<?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?> <span class="caret"></span>
 						</button>
 						

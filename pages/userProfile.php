@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-		<img src="<?php echo loadUserAvatar(); ?>" width="100" height="100" class="page-header-img">
+		<img src="<?php echo loadUserAvatar(); ?>" width="100" height="100" class="page-header-img img-circle">
 			<h1 class="header-img"><?php loadUserName(); ?></h1>
 		</div>
 	</div>

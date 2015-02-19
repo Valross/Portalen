@@ -78,8 +78,9 @@ function loadMembersOfGroup()
 	for($i = 0; $i < count($members); ++$i)
 	{
 		?>
-		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item">
-				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?>
+		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item ">
+			<img src="<?php echo loadAvatar(); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
+				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?> <span class="list-group-item-text">["medlem sedan" (ska fixas högerställt)]</span>
 		</a>
 		<?php
 	}

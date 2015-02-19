@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-		<img src="<?php echo loadAvatar(); ?>" width="100" height="100" class="page-header-img img-circle">
+			<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
 			<h1 class="header-img"><?php loadGroupName(); ?></h1> 
 		</div>
 	</div>

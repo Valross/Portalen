@@ -74,9 +74,14 @@ function loadGroups()
 							ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
+		$group_id = $groups[$i]['id'];
+		$group_members = DBQuery::sql("SELECT user_id, group_id, member_since FROM group_member 
+							WHERE user_id = '$user_id' AND group_id = '$group_id'");
 		?>
-			<p><a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?>>
-				<?php echo $groups[$i]['name']; ?></a></p>
+			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
+				<?php echo $groups[$i]['name']; ?>
+				<span><?php echo '(Sedan '.$group_members[0]['member_since'].')'; ?></span>
+			</a>
 		<?php
 	}
 }

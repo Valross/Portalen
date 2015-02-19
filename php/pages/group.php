@@ -63,6 +63,16 @@ function loadGroupName()
 	echo $groupName[0]['name'];
 }
 
+function loadMemberAvatar($user_id)
+{
+	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
+	if(count($results) == 0)
+	{
+		return 'img/avatars/no_face_small.png';
+	}
+	return 'img/avatars/'.$results[0]['avatar'];
+}
+
 function loadMembersOfGroup()
 {
 	$group_id = $_GET['id'];
@@ -71,16 +81,16 @@ function loadMembersOfGroup()
 							WHERE id IN 
 							(SELECT user_id FROM group_member WHERE group_id = '$group_id')");
 
-	// $members = DBQuery::sql("SELECT user.name, user.last_name FROM user 
-	// 						INNER JOIN group_member ON user.id = group_member.user_id
-	// 						ORDER BY user.last_name");
-
 	for($i = 0; $i < count($members); ++$i)
 	{
+		$member_id = $members[$i]['id'];
+		$group_members = DBQuery::sql("SELECT user_id, group_id, member_since FROM group_member 
+							WHERE user_id = '$member_id' AND group_id = '$group_id'");
 		?>
 		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item ">
-			<img src="<?php echo loadAvatar(); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
-				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?> <span class="list-group-item-text">["medlem sedan" (ska fixas högerställt)]</span>
+			<img src="<?php echo loadMemberAvatar($member_id); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
+				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?> 
+				<span class="list-group-item-text">[<?php echo $group_members[0]['member_since']; ?>]</span>
 		</a>
 		<?php
 	}

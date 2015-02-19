@@ -33,7 +33,11 @@ function loadEventName()
 	
 	$eventName = DBQuery::sql("SELECT name, start_time FROM event
 							WHERE id = '$event_id'");
-	echo $eventName[0]['name'].' '.$eventName[0]['start_time'];
+
+	?>
+	<a href=<?php echo '?page=event&id='.$event_id; ?>>
+	<?php
+	echo $eventName[0]['name'].'</a> '.$eventName[0]['start_time'];
 }
 
 function loadDAStats()

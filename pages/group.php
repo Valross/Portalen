@@ -2,14 +2,8 @@
 	<div class="col-sm-8">
 		<div class="page-header">
 			<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
-			<h1 class="header-img"><?php loadGroupName(); ?></h1> 
+			<h1 class="header-img"><?php loadGroupName(); ?> - <a href="?page=groups">Alla lag</a></h1> 
 		</div>
-	</div>
-	<div class="col-sm-4 text-right page-header-right">
-		<select class="form-control">
-			<option id="typeno" value="no">Hoppa till lag</option>
-		    <?php loadAllGroupsOption(); ?>
-		</select>
 	</div>
 </div> <!-- .row -->
 

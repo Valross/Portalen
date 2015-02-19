@@ -26,7 +26,7 @@ $result = DBQuery::sql("SELECT description FROM user WHERE id = '$_SESSION[user_
 if(count($result) == 1)
 	$profileDescription = $result[0]["description"];
 else
-	$profileDescription = "Hej ".$_SESSION['name']." har inte skrivit något om sig själv ännu.";
+	$profileDescription = $_SESSION['name']." har inte skrivit något om sig själv.";
 
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
 

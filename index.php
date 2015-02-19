@@ -137,7 +137,7 @@ include_once('php/pageManager.php');
 			  <div class="container-fluid">
 			  <div class="row">
 				  <div class="col-sm-8">
-					  <p>Trappans Personalportal 2014. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor.
+					  <p>Trappans Personalportal. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor.
 				  </div>
 			</div> <!-- .row -->
 			</div>

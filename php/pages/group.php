@@ -30,7 +30,7 @@ $result = DBQuery::sql("SELECT description FROM user WHERE id = '$_SESSION[user_
 if(count($result) == 1)
 	$groupDescription = $result[0]["description"];
 else
-	$groupDescription = "Hej, gruppen har ingen beskrivning ännu.";
+	$groupDescription = "Gruppen har ingen beskrivning.";
 
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
 

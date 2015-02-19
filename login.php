@@ -57,9 +57,8 @@ if(isset($_POST['log_in']))
 					  	<button class="login-btn primary" type="submit" name="log_in"><span class="fa fa-sign-in fa-2x"></span></button>
 				  </form>
 		<p class="info">
-			För att logga in måste du vara registrerad i systemet. Ny användare? 
-			<a href="signUp.php">Klicka här!</a> 
-			Om du är personal och har problem med att logga in, kontakta webbansvarig eller din lagansvarig. 
+			För att logga in måste du vara registrerad i systemet. <a href="signUp.php">Ansök om att jobba på Trappan.</a> 
+			Om du är personal och har problem med att logga in, kontakta din lagansvarig. 
 		</p>
 		
 	</div> <!-- #login-container -->

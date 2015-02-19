@@ -203,4 +203,20 @@ function loadUserAvatar()
 	}
 }
 
+function loadLastWorked()
+{
+	$user_id = $_GET['id'];
+	$lastWorked = DBQuery::sql("SELECT id, name, start_time FROM event
+								WHERE id IN
+									(SELECT event_id FROM work_slot
+									WHERE id IN
+										(SELECT work_slot_id FROM user_work
+										WHERE user_id = '$user_id' AND checked = 1))
+								ORDER BY start_time DESC");
+	if(count($lastWorked) > 0)
+		echo '<a href=?page=event&id='.$lastWorked[0]['id'].'>'.$lastWorked[0]['name'].' ('.$lastWorked[0]['start_time'].')'.'</a>';
+	else
+		echo 'Har ej jobbat';
+}
+
 ?>

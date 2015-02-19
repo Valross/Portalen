@@ -25,10 +25,6 @@
 			<td><strong>Personal sedan</strong></td>
 			<td><?php echo $profileCreation; ?></td>
 		</tr>
-		<tr>
-			<td><strong>Senast inloggad</strong></td>
-			<td>ganska nyligen</td>
-		</tr>
 	</table>
 
 		<h3>Kontaktinformation</h3>

@@ -29,6 +29,10 @@
 			<td><strong>Senast inloggad</strong></td>
 			<td>ganska nyligen</td>
 		</tr>
+		<tr>
+			<td><strong>Jobbade senast</strong></td>
+			<td><?php loadLastWorked() ?></td>
+		</tr>
 	</table>
 
 		<h3>Kontaktinformation</h3>

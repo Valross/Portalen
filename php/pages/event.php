@@ -67,6 +67,10 @@ function loadWorkSlots()
 										WHERE id NOT IN
 											(SELECT work_slot_id FROM user_work)
 										AND id = '$work_slot_id'");
+			$slotStart = new DateTime($slots[$j]['start_time']);
+			$slotEnd = new DateTime($slots[$j]['end_time']);
+			$start = $slotStart->format('H:i -');
+			$end = $slotEnd->format(' H:i');
 			if($slots[$j]['group_id'] == $groups[$i]['id'])
 			{
 				$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
@@ -74,11 +78,14 @@ function loadWorkSlots()
 							(SELECT id FROM work_slot 
 							WHERE event_id = '$event_id')
 						AND work_slot_id = '$work_slot_id'");
-				echo '<a class="list-group-item">'.$slots[$j]['id']." | GROUP_ID: ".$slots[$j]['group_id'].' ';
+				echo '<a class="list-group-item">'.$start.$end;
+				if(count($bookedSlot) > 0)
+					echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+				echo " (".$slots[$j]['points'].' poäng)';
 				if(count($bookedSlot) > 0)
 				{
-					echo " USER_ID: ".$bookedSlot[0]['user_id'];
-					echo loadAvatarFromUser(($bookedSlot[0]['user_id'])).'</a>';
+					// echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'>';
+					echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 				}
 				if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0) //fungerar inte
 				{
@@ -103,7 +110,16 @@ function loadAvatarFromUser($user_id)
 		return '<img src="img/avatars/no_face_small.png" width="20" height="20" class="img-circle">';
 	}
 	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="20" height="20" class="img-circle">';
+}
 
+function loadNameFromUser($user_id)
+{
+	$results = DBQuery::sql("SELECT name, last_name FROM user WHERE id = '$user_id'");
+	if(count($results) == 0)
+	{
+		return '';
+	}
+	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
 ?>

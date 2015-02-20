@@ -87,7 +87,7 @@ function loadWorkSlots()
 				}
 				else
 				{
-					echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+					echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 					'>Boka av</a>';
 				}
 			}

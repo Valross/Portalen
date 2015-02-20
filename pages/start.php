@@ -14,6 +14,10 @@
 			<div class="list-group">
 				<?php loadAvailableEvents(); ?>
 			</div>
+			<h3>Möten</h3>
+			<div class="list-group">
+				<?php loadAvailableMeetings(); ?>
+			</div>
 		</div>
 	</div>
 </div>

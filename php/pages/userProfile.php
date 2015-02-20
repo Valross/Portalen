@@ -78,9 +78,10 @@ function loadGroups()
 		$group_members = DBQuery::sql("SELECT user_id, group_id, member_since FROM group_member 
 							WHERE user_id = '$user_id' AND group_id = '$group_id'");
 		?>
-			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item">
+			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
+				<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
 				<?php echo $groups[$i]['name']; ?>
-				<span><?php echo '(Sedan '.$group_members[0]['member_since'].')'; ?></span>
+				<span class="list-group-item-text pull-right"><?php echo 'sedan '.$group_members[0]['member_since']; ?></span>
 			</a>
 		<?php
 	}

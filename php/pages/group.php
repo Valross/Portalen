@@ -87,10 +87,10 @@ function loadMembersOfGroup()
 		$group_members = DBQuery::sql("SELECT user_id, group_id, member_since FROM group_member 
 							WHERE user_id = '$member_id' AND group_id = '$group_id'");
 		?>
-		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item ">
+		<a href=<?php echo '"?page=userProfile&id='.$members[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
 			<img src="<?php echo loadMemberAvatar($member_id); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
-				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?> 
-				<span class="list-group-item-text">[<?php echo $group_members[0]['member_since']; ?>]</span>
+				<?php echo $members[$i]['name'].' '.$members[$i]['last_name']; ?>
+				<span class="list-group-item-text pull-right">sedan <?php echo $group_members[0]['member_since']; ?></span>
 		</a>
 		<?php
 	}

@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 19, 2015 at 10:40 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Host: 127.0.0.1
+-- Generation Time: Feb 23, 2015 at 11:07 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -553,6 +553,8 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 --
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
+(90, 2, 0),
+(91, 2, 0),
 (93, 2, 0);
 
 -- --------------------------------------------------------
@@ -564,6 +566,7 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 CREATE TABLE IF NOT EXISTS `work_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `facebook_group` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
@@ -573,19 +576,39 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 -- Dumping data for table `work_group`
 --
 
-INSERT INTO `work_group` (`id`, `name`) VALUES
-(13, 'Alla'),
-(4, 'Bar'),
-(7, 'Dagsansvarig'),
-(5, 'DJ'),
-(8, 'Event'),
-(12, 'Hovmästare'),
-(3, 'Kock'),
-(10, 'Ljud & Ljus'),
-(9, 'Marknadsföring'),
-(11, 'Servering'),
-(6, 'Värd'),
-(2, 'Webb');
+INSERT INTO `work_group` (`id`, `name`, `facebook_group`) VALUES
+(2, 'Webb', ''),
+(3, 'Kock', ''),
+(4, 'Bar', ''),
+(5, 'DJ', ''),
+(6, 'Värd', ''),
+(7, 'Dagsansvarig', ''),
+(8, 'Event', ''),
+(9, 'Marknadsföring', ''),
+(10, 'Ljud & Ljus', ''),
+(11, 'Servering', ''),
+(12, 'Hovmästare', ''),
+(13, 'Alla', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work_group_leaders`
+--
+
+CREATE TABLE IF NOT EXISTS `work_group_leaders` (
+  `work_group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`work_group_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `work_group_leaders`
+--
+
+INSERT INTO `work_group_leaders` (`work_group_id`, `user_id`) VALUES
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -690,8 +713,8 @@ ALTER TABLE `da_note`
 -- Constraints for table `da_note_comments`
 --
 ALTER TABLE `da_note_comments`
-  ADD CONSTRAINT `da_note_comments_ibfk_3` FOREIGN KEY (`da_note_id`) REFERENCES `da_note` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `da_note_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `da_note_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `da_note_comments_ibfk_3` FOREIGN KEY (`da_note_id`) REFERENCES `da_note` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`
@@ -744,15 +767,15 @@ ALTER TABLE `news`
 -- Constraints for table `partyries_arrange`
 --
 ALTER TABLE `partyries_arrange`
-  ADD CONSTRAINT `partyries_arrange_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `partyries_arrange_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `partyries_arrange_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `partyries_arrange_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `partyries_work`
 --
 ALTER TABLE `partyries_work`
-  ADD CONSTRAINT `partyries_work_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `partyries_work_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `partyries_work_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `da_note` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `partyries_work_ibfk_2` FOREIGN KEY (`partyries_id`) REFERENCES `partyries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_access`
@@ -767,6 +790,13 @@ ALTER TABLE `user_access`
 ALTER TABLE `user_work`
   ADD CONSTRAINT `user_work_ibfk_1` FOREIGN KEY (`work_slot_id`) REFERENCES `work_slot` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_work_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `work_group_leaders`
+--
+ALTER TABLE `work_group_leaders`
+  ADD CONSTRAINT `work_group_leaders_ibfk_1` FOREIGN KEY (`work_group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `work_group_leaders_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `work_slot`

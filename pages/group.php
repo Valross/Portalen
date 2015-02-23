@@ -17,7 +17,7 @@
 		<table class="basic-table">
 			<tr>
 				<td><strong>Lagchef(er)</strong></td>
-				<td>eller ska lagchefer skrivas ut på ngt tydligare vis?</td>
+				<td><?php loadGroupLeader(); ?></td>
 			</tr>
 			<tr>
 				<td><strong>Facebookgrupp</strong></td>

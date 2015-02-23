@@ -96,4 +96,26 @@ function loadMembersOfGroup()
 	}
 }
 
+function loadGroupLeader()
+{
+	$group_id = $_GET['id'];
+
+	$groupLeader = DBQuery::sql("SELECT name, last_name, id FROM user 
+							WHERE id IN 
+							(SELECT user_id FROM work_group_leaders WHERE work_group_id = '$group_id')");
+
+	for($i = 0; $i < count($groupLeader); ++$i)
+	{
+		$groupLeader_id = $groupLeader[$i]['id'];
+		?>
+		<a href=<?php echo '"?page=userProfile&id='.$groupLeader[$i]['id'].'"'; ?> class="">
+			<img src="<?php echo loadMemberAvatar($groupLeader_id); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
+				<?php echo $groupLeader[$i]['name'].' '.$groupLeader[$i]['last_name']; ?>
+		</a>
+		<?php
+	}
+	if(count($groupLeader) == 0)
+		echo 'Det finns ingen gruppledare!';
+}
+
 ?>

@@ -17,11 +17,11 @@
 		<table class="basic-table">
 			<tr>
 				<td><strong>Lagchef(er)</strong></td>
-				<td><?php loadGroupLeader(); ?></td>
+				<?php loadGroupLeader(); ?>
 			</tr>
 			<tr>
 				<td><strong>Facebookgrupp</strong></td>
-				<td>många lag har ju faktiskt grupper där man sköter kommunikationen</td>
+				<td><?php loadFacebookGroupURL(); ?></td>
 			</tr>
 		</table>
 	</div> <!-- .white-box -->

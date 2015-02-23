@@ -108,14 +108,33 @@ function loadGroupLeader()
 	{
 		$groupLeader_id = $groupLeader[$i]['id'];
 		?>
-		<a href=<?php echo '"?page=userProfile&id='.$groupLeader[$i]['id'].'"'; ?> class="">
+		<td><a href=<?php echo '"?page=userProfile&id='.$groupLeader[$i]['id'].'"'; ?> class="">
 			<img src="<?php echo loadMemberAvatar($groupLeader_id); ?>" class="img-circle list-group-thumbnail" width="32" height="32">
 				<?php echo $groupLeader[$i]['name'].' '.$groupLeader[$i]['last_name']; ?>
-		</a>
+		</a></td>
 		<?php
 	}
 	if(count($groupLeader) == 0)
 		echo 'Det finns ingen gruppledare!';
+}
+
+function loadFacebookGroupURL()
+{
+	$group_id = $_GET['id'];
+
+	$facebookGroupURL = DBQuery::sql("SELECT facebook_group FROM work_group 
+							WHERE id = '$group_id'");
+
+	for($i = 0; $i < count($facebookGroupURL); ++$i)
+	{
+		?>
+		<a href=<?php echo '"'.$facebookGroupURL[$i]['facebook_group'].'"'; ?> class="">
+				<?php echo $facebookGroupURL[$i]['facebook_group']; ?>
+		</a>
+		<?php
+	}
+	if(count($facebookGroupURL) == 0)
+		echo 'Det finns ingen facebookgrupp!';
 }
 
 ?>

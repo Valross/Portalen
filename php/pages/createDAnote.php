@@ -56,9 +56,18 @@ if(isset($_POST['submit']))
 
 function loadMyDAEvents()
 {
+	// $groups = DBQuery::sql("SELECT id, name, start_time, event_type_id FROM event 
+	// 						WHERE event_type_id != 5
+	// 						ORDER BY start_time DESC"); //fixa så att endast jobbpass där man varit DA kommer upp
+	$user_id = $_SESSION['user_id'];
+
 	$groups = DBQuery::sql("SELECT id, name, start_time, event_type_id FROM event 
-							WHERE event_type_id != 5
-							ORDER BY start_time DESC"); //fixa så att endast jobbpass där man varit DA kommer upp
+							WHERE event_type_id != 5 AND id IN
+								(SELECT event_id FROM work_slot
+								WHERE group_id = 7 AND id IN
+									(SELECT work_slot_id FROM user_work
+									WHERE user_id = '$user_id'))
+							ORDER BY start_time DESC"); 
 
 	for($i = 0; $i < count($groups); ++$i)
 	{
@@ -66,6 +75,8 @@ function loadMyDAEvents()
 			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo($groups[$i]['name'].' '.$groups[$i]['start_time']); ?></option>
 		<?php
 	}
+	if(count($groups) == 0)
+		echo 'fuck';
 }
 
 function loadArrangingPartyries()

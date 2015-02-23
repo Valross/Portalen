@@ -79,7 +79,7 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=staffList"></span>Personallistor</a></li>
 	  							<li><a></span></a></li>
 	  							
-	  							<li><a href="?page= #"></span>Checka av pass</a></li>
+	  							<li><a href="?page=checkPasses"></span>Checka av pass</a></li>
 	  							<li><a href="?page=createDANote"></span>Skriv DA-lapp</a></li>
 	  							<li><a href="?page=createHeadWaiterNote"></span>Skriv Hovis-lapp</a></li>
 	  							<li><a href="?page=browseDANote"></span>Läs DA-lappar</a></li>

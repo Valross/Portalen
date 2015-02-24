@@ -32,7 +32,8 @@ function loadApplications()
 										echo $thisTeam;
 					    	  	}
 					    ?></td>
-					<td> <button type="button">Godkänn</button>  <button type="button">Neka</button> </td>
+					<td> <?php echo '<a href=?page=reviseApplicationsAccept&name='.$name.'&lastName='.$lastName.'&ssn='.$ssn.'&mail='.$mail.'>Boka</a>'; ?>
+						  <button type="button">Neka</button> </td>
 				</tr>
 		<?php
 

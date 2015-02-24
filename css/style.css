@@ -92,6 +92,15 @@ textarea {
 	font-size: 16px;
 	border-top: 1px solid #e3e9eb;
 }
+input[type=text].input-book {
+	width: 8%;
+	height: 25px;
+	padding: 0 0 0 0;
+	border: 0;
+	background: #fff;
+	margin: 0; 
+	font-size: 12px;
+}
 input[type=text],
 input[type=password],
 input[type=number] {

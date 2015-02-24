@@ -43,16 +43,21 @@ function loadWorkSlots()
 	$event_id = $_GET['id'];
 	$user_id = $_SESSION['user_id'];
 
-	$userBookedThisEvent = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+	$localUserBookedThisEvent = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE user_id = '$user_id' AND work_slot_id IN
 							(SELECT id FROM work_slot
 							WHERE event_id IN
 								(SELECT id FROM event
 								WHERE id = '$event_id'))");
 
-	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
-						WHERE event_id = '$event_id'
-						");
+	$adminAccess = DBQuery::sql("SELECT access_id, group_id FROM group_access
+						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4) AND
+						group_id IN
+							(SELECT group_id FROM group_member
+							WHERE user_id = '$user_id' AND (group_id = 1 OR group_id = 7))");
+
+	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
+						WHERE event_id = '$event_id'");
 
 	$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE work_slot_id IN
@@ -62,8 +67,7 @@ function loadWorkSlots()
 
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
 							WHERE id IN 
-							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
-							");
+							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')");
 
 	for($i = 0; $i < count($groups); ++$i)
 	{
@@ -92,41 +96,67 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND work_slot_id = '$work_slot_id'");
 
-				if(count($bookedSlot) > 0)
+				if(count($adminAccess) > 0)
 				{
-					// echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="list-group-item">'.$number.'. '.$start.$end;
-					echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
-					echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-					echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
-				}
-				else
-				{
-					echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
-				}
-				echo " (".$slots[$j]['points'].' poäng)';
-				if(count($userBookedThisEvent) == 0)
-				{
-					if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
+					if(count($bookedSlot) > 0)
 					{
-						echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-						' class="list-group-item-text-book">Boka</a></p>';
+						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
+					}
+					else
+						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+
+					if(count($adminAccess) > 0 || count($localUserBookedThisEvent) > 0)
+						echo " (".$slots[$j]['wage'].' kr/h)'; 
+
+					echo " (".$slots[$j]['points'].' poäng)';
+
+					if(count($bookedSlot) == 0)
+					{
+						echo '<a href=?page=eventBookWorkSlotFor&event_id='.$event_id.'&work_slot_id='.$slots[$j]['id'].
+							' class="list-group-item-text-book">Boka person</a></p>';
 					}
 					else
 					{
 						echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-						' class="list-group-item-text-book">Boka av</a></p>';
+							' class="list-group-item-text-book">Boka av</a></p>';
 					}
 				}
 				else
 				{
-					if(count($availableSlot) == 0)
+					$localUserBookedThisSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+						WHERE user_id = '$user_id' AND work_slot_id = '$work_slot_id'");
+
+					if(count($bookedSlot) > 0)
 					{
-						echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-						' class="list-group-item-text-book">Boka av</a></p>';
+						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
+					}
+					else
+						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+
+					if(count($adminAccess) > 0 || count($localUserBookedThisEvent) > 0)
+						echo " (".$slots[$j]['wage'].' kr/h)'; 
+
+					echo " (".$slots[$j]['points'].' poäng)';
+
+					if(count($localUserBookedThisEvent) == 0)
+					{
+						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
+							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+							' class="list-group-item-text-book">Boka</a></p>';
+						else
+							echo '</p>';
 					}
 					else
 					{
-						echo '</a></p>';
+						if(count($localUserBookedThisSlot) > 0)
+							echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+							' class="list-group-item-text-book">Boka av</a></p>';
+						else
+							echo '</a></p>';
 					}
 				}
 			}

@@ -37,7 +37,9 @@ function loadEventName()
 	?>
 	<a href=<?php echo '?page=event&id='.$event_id; ?>>
 	<?php
-	echo $eventName[0]['name'].'</a> '.$eventName[0]['start_time'];
+	$eventStart = new DateTime($eventName[0]['start_time']);
+	$start = $eventStart->format('Y-m-d');
+	echo $eventName[0]['name'].'</a> - '.$start;
 }
 
 function loadDAStats()

@@ -110,7 +110,7 @@ include_once('php/pageManager.php');
 							<li role="presentation"><a role="menuitem" href="?page=workedEvents"><span class="fa fa-history fa-fw"></span> Arbetade pass</a></li>
 						    <li role="presentation"><a role="menuitem" href="?page=editProfile"><span class="fa fa-cog fa-fw"></span> Inställningar</a></li>
 							<li role="presentation" class="divider"></li>
-						    <li role="presentation"><a role="menuitem" href="#"><span class="fa fa-power-off fa-fw"></span> Logga ut</a></li>
+						    <li role="presentation"><a role="menuitem" href="logout.php"><span class="fa fa-power-off fa-fw"></span> Logga ut</a></li>
 						  </ul>
 					</div> <!-- .dropdown -->
 					

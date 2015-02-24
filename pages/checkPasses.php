@@ -15,10 +15,4 @@
 </div>
 </div>
 
-<div class="row">
-<div class="col-sm-6">
-	<div class="white-box">
-		<?php loadWorkSlots(); ?>
-	</div> <!-- .white-box -->
-</div>
-</div>
+<?php loadWorkSlots(); ?>

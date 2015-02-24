@@ -42,6 +42,13 @@ function loadWorkSlots()
 {
 	$event_id = $_GET['id'];
 	$user_id = $_SESSION['user_id'];
+
+	$userBooked = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+						WHERE user_id = '$user_id' AND work_slot_id IN
+							(SELECT id FROM work_slot
+							WHERE start_time )
+						");
+
 	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
 						WHERE event_id = '$event_id'
 						");

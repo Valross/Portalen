@@ -32,11 +32,16 @@ function loadMyDAEvents()
 									WHERE user_id = '$user_id'))
 							ORDER BY start_time DESC"); 
 
-	for($i = 0; $i < count($events); ++$i)
+	if(count($events) == 0)
+		echo '<p>Du har fan inte jobbat DA</p>';
+	else 
 	{
-		?>
-			<a class="list-group-item" href=<?php echo '"?page=checkPasses&id='.$events[$i]['id'].'"'; ?>><?php echo $events[$i]['name']; ?></a>
-		<?php
+		for($i = 0; $i < count($events); ++$i)
+		{
+			?>
+				<a class="list-group-item" href=<?php echo '"?page=checkPasses&id='.$events[$i]['id'].'"'; ?>><?php echo $events[$i]['name']; ?></a>
+			<?php
+		}
 	}
 }
 
@@ -73,71 +78,74 @@ function loadNameFromUser($user_id)
 
 function loadWorkSlots()
 {
-	$event_id = $_GET['id'];
-	$user_id = $_SESSION['user_id'];
-	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
-						WHERE event_id = '$event_id'
-						");
-
-	$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
-						WHERE work_slot_id IN
-							(SELECT id FROM work_slot 
-							WHERE event_id = '$event_id')
-						AND user_id = '$user_id'");
-
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
-							WHERE id IN 
-							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
+	if(isset($_GET['id']))
+	{
+		echo '<div class="row">
+				<div class="col-sm-6">
+					<div class="white-box">';
+		$event_id = $_GET['id'];
+		$user_id = $_SESSION['user_id'];
+		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
+							WHERE event_id = '$event_id'
 							");
 
+		$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+							WHERE work_slot_id IN
+								(SELECT id FROM work_slot 
+								WHERE event_id = '$event_id')
+							AND user_id = '$user_id'");
 
-	if(count($groups) > 0)
-	{
-		echo '<h3>Checka pass för '.loadEventName($event_id).'</h3>';
-		echo '<form action="" method="post">';
-	}
+		$groups = DBQuery::sql("SELECT id, name FROM work_group 
+								WHERE id IN 
+								(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
+								");
 
-	for($i = 0; $i < count($groups); ++$i)
-	{
-		echo '<p>'.$groups[$i]['name'].'</p>';
-		for($j = 0; $j < count($slots); ++$j)
+
+		if(count($groups) > 0)
 		{
-			$work_slot_id = $slots[$j]['id'];
-			$availableSlot = DBQuery::sql("SELECT id FROM work_slot 
-										WHERE id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										AND id = '$work_slot_id'");
-			$slotStart = new DateTime($slots[$j]['start_time']);
-			$slotEnd = new DateTime($slots[$j]['end_time']);
-			$start = $slotStart->format('H:i -');
-			$end = $slotEnd->format(' H:i');
-			if($slots[$j]['group_id'] == $groups[$i]['id'])
-			{
-				$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
-						WHERE work_slot_id IN
-							(SELECT id FROM work_slot 
-							WHERE event_id = '$event_id')
-						AND work_slot_id = '$work_slot_id'");
-				// echo '<label for="'.$slots[$j]['id'].'">';
-				echo '<a class="list-group-item">';
-				echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
-				echo $start.$end;
-				if(count($bookedSlot) > 0)
-					echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-				echo " (".$slots[$j]['points'].' poäng)';
-				if(count($bookedSlot) > 0)
-				{
-					echo loadAvatarFromUser($bookedSlot[0]['user_id']);
-				}
-				echo '</a>';
-			}
-		}
-	}
+			echo '<h3>Checka pass för '.loadEventName($event_id).'</h3>';
+			echo '<form action="" method="post">';
 
-	if(count($groups) > 0)
-	{
-		echo '<input type="submit" name="submit" value="Check">';
-		echo '</form>';
+			for($i = 0; $i < count($groups); ++$i)
+			{
+				echo '<p>'.$groups[$i]['name'].'</p>';
+				for($j = 0; $j < count($slots); ++$j)
+				{
+					$work_slot_id = $slots[$j]['id'];
+					$availableSlot = DBQuery::sql("SELECT id FROM work_slot 
+												WHERE id NOT IN
+													(SELECT work_slot_id FROM user_work)
+												AND id = '$work_slot_id'");
+					$slotStart = new DateTime($slots[$j]['start_time']);
+					$slotEnd = new DateTime($slots[$j]['end_time']);
+					$start = $slotStart->format('H:i -');
+					$end = $slotEnd->format(' H:i');
+					if($slots[$j]['group_id'] == $groups[$i]['id'])
+					{
+						$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+								WHERE work_slot_id IN
+									(SELECT id FROM work_slot 
+									WHERE event_id = '$event_id')
+								AND work_slot_id = '$work_slot_id'");
+						if(count($bookedSlot) > 0)
+						{
+							echo '<a class="list-group-item">';
+							echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
+							echo $start.$end;
+							echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+							echo " (".$slots[$j]['points'].' poäng)';
+							echo loadAvatarFromUser($bookedSlot[0]['user_id']);
+							echo '</a>';
+						}
+					}
+				}
+			}
+			echo '<input type="submit" name="submit" value="Check">';
+			echo '</form>';
+		}
+		echo '</div> <!-- .white-box -->
+			</div>
+		</div>';
 	}
 }
 

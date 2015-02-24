@@ -16,6 +16,9 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 	DBQuery::sql("INSERT INTO user (user_name, mail, ssn, password, name, last_name)
 						VALUES ('$mail', '$mail', '$ssn', '$tempPassword', '$name', '$lastName')");
 
+	//send confirmation email
+	//...
+
 	//remove applicant from applications
 	DBQuery::sql("DELETE FROM application WHERE id='$appId'");
 	DBQuery::sql("DELETE FROM application_group WHERE application_id='$appId'");

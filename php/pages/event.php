@@ -48,13 +48,24 @@ function loadEventName()
 function loadEventDescription()
 {
 	$event_id = $_GET['id'];
-	$event_info = DBQuery::sql("SELECT info, start_time, end_time FROM event 
+	$event_info = DBQuery::sql("SELECT info, start_time, end_time, event_type_id FROM event 
 						WHERE id = '$event_id'");
 
-	if(count($event_info) > 0)
+	$eventStart = new DateTime($event_info[0]['start_time']);
+	$eventEnd = new DateTime($event_info[0]['end_time']);
+	$start = $eventStart->format('Y-m-d H:i');
+	$end = $eventEnd->format('Y-m-d H:i');
+
+	if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
 	{
-		echo "<p>Start: ".$event_info[0]['start_time']."</p>";
-		echo "<p>Slut: ".$event_info[0]['end_time']."</p>";
+		echo "<p>Börjar: ".$start."</p>";
+		echo "<p>Slutar: ".$end."</p>";
+		echo "<p>".$event_info[0]['info']."</p>";
+	}
+	else
+	{
+		echo "<p>Öppnar: ".$start."</p>";
+		echo "<p>Stänger: ".$end."</p>";
 		echo "<p>".$event_info[0]['info']."</p>";
 	}
 
@@ -116,13 +127,13 @@ function loadWorkSlots()
 										WHERE id NOT IN
 											(SELECT work_slot_id FROM user_work)
 										AND id = '$work_slot_id'");
-
-			$slotStart = new DateTime($slots[$j]['start_time']);
-			$slotEnd = new DateTime($slots[$j]['end_time']);
-			$start = $slotStart->format('H:i');
-			$end = $slotEnd->format('H:i');
+			
 			if($slots[$j]['group_id'] == $groups[$i]['id'])
 			{
+				$slotStart = new DateTime($slots[$j]['start_time']);
+				$slotEnd = new DateTime($slots[$j]['end_time']);
+				$start = $slotStart->format('H:i');
+				$end = $slotEnd->format('H:i');
 				$number++;
 
 				$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
@@ -165,6 +176,11 @@ function loadWorkSlots()
 				}
 				else
 				{
+					$slotStart = new DateTime($slots[$j]['start_time']);
+					$slotEnd = new DateTime($slots[$j]['end_time']);
+					$start = $slotStart->format('H:i -');
+					$end = $slotEnd->format(' H:i');
+
 					$localUserBookedThisSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE user_id = '$user_id' AND work_slot_id = '$work_slot_id'");
 

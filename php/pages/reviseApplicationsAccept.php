@@ -9,7 +9,7 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 	$ssn= $_GET['ssn'];
 	$mail= $_GET['mail'];
 
-	echo "DEBUG name = " . $name . ", lastName = " . $lastName . ", ssn = " . $ssn . ", mail = " . $mail;
+	// echo "DEBUG name = " . $name . ", lastName = " . $lastName . ", ssn = " . $ssn . ", mail = " . $mail;
 
 	$tempPassword = "trappan";
 	DBQuery::sql("INSERT INTO user (user_name, mail, ssn, password, name, last_name)
@@ -17,7 +17,7 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 
 	?>
 		<script>
-			// window.location = "?page=reviseApplications";
+			window.location = "?page=reviseApplications";
 			alert("Inlagd!")
 		</script>
 	<?php

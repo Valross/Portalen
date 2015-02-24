@@ -32,18 +32,12 @@ function loadApplications()
 										echo $thisTeam;
 					    	  	}
 					    ?></td>
-					<td> <?php echo '<a href=?page=reviseApplicationsAccept&name='.$name.'&lastName='.$lastName.'&ssn='.$ssn.'&mail='.$mail.'>Boka</a>'; ?>
-						  <button type="button">Neka</button> </td>
+					<td> <?php echo '<a href=?page=reviseApplicationsAccept&name='.$name.'&lastName='.$lastName.'&ssn='.$ssn.'&mail='.$mail.'>Godkänn</a>'; ?>
+						 <?php echo ', ' . '<a href=http://www.example.com>Neka</a>'; ?> </td>
 				</tr>
 		<?php
 
 	}
 }
 
-function addMemberToDatabase()
-{
-	$tempPassword = "trappan";
-	DBQuery::sql("INSERT INTO user (user_name, mail, ssn, password, name, last_name)
-						VALUES ('$mail', '$mail', '$ssn', '$tempPassword', '$name', '$last_name')");
-}
 ?>

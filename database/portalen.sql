@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 23, 2015 at 11:07 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Feb 24, 2015 at 09:55 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -198,7 +198,7 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (38, 'GAMMALT SKIT', '', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (48, 'GAMMALT SKIT 13', 'Fan rätt fräscht asså', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
-(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 5);
+(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -295,6 +295,7 @@ CREATE TABLE IF NOT EXISTS `group_access` (
 --
 
 INSERT INTO `group_access` (`access_id`, `group_id`) VALUES
+(1, 1),
 (1, 2);
 
 -- --------------------------------------------------------
@@ -317,6 +318,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 --
 
 INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
+(1, 2, 0, '0000-00-00'),
 (2, 1, 0, '0000-00-00'),
 (2, 2, 0, '2015-02-05'),
 (4, 1, 0, '0000-00-00'),
@@ -553,9 +555,11 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 --
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
+(89, 1, 0),
 (90, 2, 0),
-(91, 2, 0),
-(93, 2, 0);
+(91, 5, 0),
+(93, 3, 0),
+(94, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -577,6 +581,7 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 --
 
 INSERT INTO `work_group` (`id`, `name`, `facebook_group`) VALUES
+(1, 'Driftgruppen', ''),
 (2, 'Webb', ''),
 (3, 'Kock', ''),
 (4, 'Bar', ''),
@@ -685,10 +690,10 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (87, 13, 48, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (88, 2, 49, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
 (89, 2, 50, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
-(90, 13, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(90, 13, 50, 6, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (91, 6, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (92, 10, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(93, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(93, 7, 50, 13, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00');
 
 --

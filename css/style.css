@@ -502,6 +502,9 @@ fieldset[disabled] {
 	.white-box a.list-group-item .list-group-item-text {
 		color: #444; 
 	}
+	.white-box a.list-group-item-text-book {
+		float: right;
+	}
 	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;
 	  border-top-left-radius: 0px;

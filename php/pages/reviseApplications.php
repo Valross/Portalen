@@ -32,7 +32,7 @@ function loadApplications()
 										echo $thisTeam;
 					    	  	}
 					    ?></td>
-					<td> <?php echo '<a href=?page=reviseApplicationsAccept&name='.$name.'&lastName='.$lastName.'&ssn='.$ssn.'&mail='.$mail.'>Godkänn</a>'; ?>
+					<td> <?php echo '<a href=?page=reviseApplicationsAccept&name='.$name.'&lastName='.$lastName.'&ssn='.$ssn.'&mail='.$mail.'&id='.$appId.'>Godkänn</a>'; ?>
 						 <?php echo ', ' . '<a href=http://www.example.com>Neka</a>'; ?> </td>
 				</tr>
 		<?php

@@ -467,8 +467,6 @@ function loadAllGroupsOption()
 		?>
 			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
 		<?php
-
-
 	}
 }
 ?>

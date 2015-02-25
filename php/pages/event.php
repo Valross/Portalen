@@ -165,7 +165,7 @@ function loadWorkSlots()
 						echo '<p class="list-group-item-text">'.$number.'. ';
 						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
 						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
-						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
@@ -203,7 +203,7 @@ function loadWorkSlots()
 					if(count($bookedSlot) > 0)
 					{
 						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
-						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else

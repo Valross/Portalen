@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 24, 2015 at 09:55 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Host: 127.0.0.1
+-- Generation Time: Feb 25, 2015 at 05:22 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `event`
@@ -198,7 +198,9 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (38, 'GAMMALT SKIT', '', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (48, 'GAMMALT SKIT 13', 'Fan rätt fräscht asså', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
-(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3);
+(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3),
+(51, 'Test wage', 'Yep', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
+(52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,6 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 --
 
 INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
-(1, 2, 0, '0000-00-00'),
 (2, 1, 0, '0000-00-00'),
 (2, 2, 0, '2015-02-05'),
 (4, 1, 0, '0000-00-00'),
@@ -559,7 +560,9 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (90, 2, 0),
 (91, 5, 0),
 (93, 3, 0),
-(94, 2, 0);
+(94, 2, 0),
+(95, 2, 1),
+(96, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -570,6 +573,7 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 CREATE TABLE IF NOT EXISTS `work_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
   `facebook_group` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
@@ -580,20 +584,20 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 -- Dumping data for table `work_group`
 --
 
-INSERT INTO `work_group` (`id`, `name`, `facebook_group`) VALUES
-(1, 'Driftgruppen', ''),
-(2, 'Webb', ''),
-(3, 'Kock', ''),
-(4, 'Bar', ''),
-(5, 'DJ', ''),
-(6, 'Värd', ''),
-(7, 'Dagsansvarig', ''),
-(8, 'Event', ''),
-(9, 'Marknadsföring', ''),
-(10, 'Ljud & Ljus', ''),
-(11, 'Servering', ''),
-(12, 'Hovmästare', ''),
-(13, 'Alla', '');
+INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`) VALUES
+(1, 'Driftgruppen', '', ''),
+(2, 'Webb', '', ''),
+(3, 'Kock', '', ''),
+(4, 'Bartastic', 'YEAH BAR', 'www.facebook.com'),
+(5, 'DJ', '', ''),
+(6, 'Värd', '', ''),
+(7, 'Dagsansvarig', '', ''),
+(8, 'Event', '', ''),
+(9, 'Marknadsföring', '', ''),
+(10, 'Ljud & Ljus', '', ''),
+(11, 'Servering', '', ''),
+(12, 'Hovmästare', '', ''),
+(13, 'Alla', '', '');
 
 -- --------------------------------------------------------
 
@@ -632,7 +636,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -690,11 +694,13 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (87, 13, 48, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (88, 2, 49, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
 (89, 2, 50, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
-(90, 13, 50, 6, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(90, 13, 50, 68, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (91, 6, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (92, 10, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (93, 7, 50, 13, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00');
+(94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(95, 7, 51, 4, 40, '2015-02-18 16:00:00', '2015-02-19 04:00:00'),
+(96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00');
 
 --
 -- Constraints for dumped tables

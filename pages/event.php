@@ -10,14 +10,12 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Evenemangsinformation</h3>
-
+		<table class="basic-table">
 		<?php loadEventDescription() ?>
+		</table>
 		
 		</div> <!-- .white-box -->
 	</div> <!-- .col-sm-6 -->
-</div> <!-- .row -->
-
-<div class="row">
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Pass</h3>

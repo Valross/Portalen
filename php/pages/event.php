@@ -74,15 +74,15 @@ function loadEventDescription()
 
 	if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
 	{
-		echo "<p>Börjar: ".$start."</p>";
-		echo "<p>Slutar: ".$end."</p>";
-		echo "<p>".$event_info[0]['info']."</p>";
+		echo "<tr><td><strong>Börjar</strong></td><td>".$start."</td></tr>";
+		echo "<tr><td><strong>Slutar</strong></td><td>".$end."</td></tr>";
+		echo "<tr><td><strong>Information</td><td>".$event_info[0]['info']."</td></tr>";
 	}
 	else
 	{
-		echo "<p>Öppnar: ".$start."</p>";
-		echo "<p>Stänger: ".$end."</p>";
-		echo "<p>".$event_info[0]['info']."</p>";
+		echo "<tr><td><strong>Öppnar</strong></td><td>".$start."</td></tr>";
+		echo "<tr><td><strong>Stänger</strong></td><td>".$end."</td></tr>";
+		echo "<tr><td><strong>Information</strong></td><td>".$event_info[0]['info']."</td></tr>";
 	}
 
 }
@@ -165,7 +165,7 @@ function loadWorkSlots()
 						echo '<p class="list-group-item-text">'.$number.'. ';
 						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
 						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
-						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
@@ -203,7 +203,7 @@ function loadWorkSlots()
 					if(count($bookedSlot) > 0)
 					{
 						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
-						echo '<a href="?page=userProfile&id='.$user_id.'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else

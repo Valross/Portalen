@@ -84,6 +84,7 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=createHeadWaiterNote"></span>Skriv Hovis-lapp</a></li>
 	  							<li><a href="?page=browseDANote"></span>Läs DA-lappar</a></li>
 	  							<li><a href="?page=browseHeadWaiterNote"></span>Läs Hovis-lappar</a></li>
+	  							<li><a href="?page=DC"></span>DC-Verktyg</a></li>
 	  						  </li>  
 	  						  </ul>
 		            </ul>

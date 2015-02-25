@@ -74,15 +74,15 @@ function loadEventDescription()
 
 	if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
 	{
-		echo "<p>Börjar: ".$start."</p>";
-		echo "<p>Slutar: ".$end."</p>";
-		echo "<p>".$event_info[0]['info']."</p>";
+		echo "<tr><td><strong>Börjar</strong></td><td>".$start."</td></tr>";
+		echo "<tr><td><strong>Slutar</strong></td><td>".$end."</td></tr>";
+		echo "<tr><td><strong>Information</td><td>".$event_info[0]['info']."</td></tr>";
 	}
 	else
 	{
-		echo "<p>Öppnar: ".$start."</p>";
-		echo "<p>Stänger: ".$end."</p>";
-		echo "<p>".$event_info[0]['info']."</p>";
+		echo "<tr><td><strong>Öppnar</strong></td><td>".$start."</td></tr>";
+		echo "<tr><td><strong>Stänger</strong></td><td>".$end."</td></tr>";
+		echo "<tr><td><strong>Information</strong></td><td>".$event_info[0]['info']."</td></tr>";
 	}
 
 }

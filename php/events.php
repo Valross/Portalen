@@ -33,7 +33,6 @@ $out = array();
 for ($i=0; $i < $howMany; ++$i) { 
 
 	//färger
-	//switch-sats ineffektiv? http://stackoverflow.com/questions/1309728/best-way-to-do-a-php-switch-with-multiple-values-per-case
 	$eventType = $result[$i]["event_type_id"];
 	$class = "";
 
@@ -43,10 +42,10 @@ for ($i=0; $i < $howMany; ++$i) {
 				$class = "event-success"; //grön
 				break;
 			case 2:		//nattklubb
-				$class = "event-special"; //grön
+				$class = "event-special"; //lila
 				break;
 			case 3:		//sittning
-				$class = "event-warning"; //lila
+				$class = "event-warning"; //gul
 				break;
 			case 4:		//personalaktivitet
 				$class = "event-important";	  //???

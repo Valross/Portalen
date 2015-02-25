@@ -26,33 +26,39 @@ include_once('DBQuery.php');
 // }
 
 //nu gör vi så här tills vidare
-$result = DBQuery::sql("SELECT * FROM event where start_time BETWEEN '2015-01-01 00:00:01' AND '2015-12-31 23:59:59'");
+$result = DBQuery::sql("SELECT * FROM event WHERE start_time BETWEEN '2015-01-01 00:00:01' AND '2015-12-31 23:59:59'");
 $howMany = count($result);
 
 $out = array();
-for ($i=0; $i < $howMany; $i++) { 
+for ($i=0; $i < $howMany; ++$i) { 
 
 	//färger
 	//switch-sats ineffektiv? http://stackoverflow.com/questions/1309728/best-way-to-do-a-php-switch-with-multiple-values-per-case
 	$eventType = $result[$i]["event_type_id"];
 	$class = "";
-	$templateId = DBQuery::sql("SELECT id FROM event_template WHERE event_type_id='$eventType'");
 
-	switch($templateId[0]["id"]){
-		case 5:
-		case 7:		//pubar
-			$class = "event-success"; //grön
-			break;
-		case 6:		//klubbar
-			$class = "event-special"; //lila
-			break;
-		case 9:		//möten
-			$class = "event-info";	  //blå
-			break;
-		default:
-			$class = "event-inverse"; //grå
-	}
 
+		switch($eventType){
+			case 1:		//pub
+				$class = "event-success"; //grön
+				break;
+			case 2:		//nattklubb
+				$class = "event-special"; //grön
+				break;
+			case 3:		//sittning
+				$class = "event-warning"; //lila
+				break;
+			case 4:		//personalaktivitet
+				$class = "event-important";	  //???
+				break;
+			case 5:		//möte
+				$class = "event-info"; //blå
+				break;
+			default:
+				$class = "event-inverse"; //grå
+				// break;
+		}
+	
 	//varje event
 	$out[] = array(
         'id' => $result[$i]["id"],

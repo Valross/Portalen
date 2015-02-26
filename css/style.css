@@ -324,6 +324,9 @@ fieldset[disabled] {
 		background: transparent;
 		border-color: #cccccc;
 	}
+	.btn-page-header:hover {
+		border-color: #aaa;
+	}
 	.btn-page-header.header-img {
 		margin: 14px 0 54px 0;
 	}

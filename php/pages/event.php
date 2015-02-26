@@ -134,7 +134,7 @@ function loadWorkSlots()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		$number = 0;
-		echo '<a href="?page=group&id='.$groups[$i]['id'].'" class="list-group-item">'.$groups[$i]['name'].'</a>';
+		echo '<li class="list-group-item"><a href="?page=group&id='.$groups[$i]['id'].'"><strong>'.$groups[$i]['name'].'</strong></a></li>';
 		for($j = 0; $j < count($slots); ++$j)
 		{
 			$work_slot_id = $slots[$j]['id'];
@@ -162,7 +162,7 @@ function loadWorkSlots()
 				{
 					if(count($bookedSlot) > 0)
 					{
-						echo '<p class="list-group-item-text">'.$number.'. ';
+						echo '<li class="list-group-item">'.$number.'. ';
 						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
 						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
@@ -170,7 +170,7 @@ function loadWorkSlots()
 					}
 					else
 					{
-						echo '<p class="list-group-item-text">'.$number.'. ';
+						echo '<li class="list-group-item">'.$number.'. ';
 						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
 						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
 					}
@@ -182,12 +182,12 @@ function loadWorkSlots()
 					if(count($bookedSlot) == 0)
 					{
 						echo '<a href=?page=eventBookWorkSlotFor&event_id='.$event_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka person</a></p>';
+							' class="list-group-item-text-book">Boka person</a></li>';
 					}
 					else
 					{
 						echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka av</a></p>';
+							' class="list-group-item-text-book">Boka av</a></li>';
 					}
 				}
 				else
@@ -202,12 +202,12 @@ function loadWorkSlots()
 
 					if(count($bookedSlot) > 0)
 					{
-						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<li class="list-group-item-text">'.$number.'. '.$start.$end;
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
-						echo '<p class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<li class="list-group-item-text">'.$number.'. '.$start.$end;
 
 					if(count($adminAccess) > 0 || count($localUserBookedThisEvent) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
@@ -218,17 +218,17 @@ function loadWorkSlots()
 					{
 						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka</a></p>';
+							' class="list-group-item-text-book">Boka</a></li>';
 						else
-							echo '</p>';
+							echo '</li>';
 					}
 					else
 					{
 						if(count($localUserBookedThisSlot) > 0)
 							echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka av</a></p>';
+							' class="list-group-item-text-book">Boka av</a></li>';
 						else
-							echo '</a></p>';
+							echo '</a></li>';
 					}
 				}
 			}

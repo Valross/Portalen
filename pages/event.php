@@ -20,7 +20,9 @@
 	<div class="white-box">
 		<h3>Pass</h3>
 
+		<div class="list-group">
 		<?php loadWorkSlots() ?>
+		</div>
 		
 		</div> <!-- .white-box -->
 	</div> <!-- .col-sm-6 -->

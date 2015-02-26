@@ -1,3 +1,7 @@
+<?php
+	if(checkAdminAccess())
+	{
+?>
 <script>
 //Global variables
 var countSlots = 0;
@@ -164,3 +168,15 @@ function removeSlot(id)
 </div> <!-- .col-sm-6 -->
 </div> <!-- .row -->
 </form>
+<?php
+	}
+	else
+	{
+		?>
+			<script>
+				window.location = "?page=start";
+				alert("Sluta försöka hacka sidan!")
+			</script>
+		<?php
+	}
+?>

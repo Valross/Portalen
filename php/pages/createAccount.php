@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) && checkAdminAccess())
 {
 	$userName = $_POST['user_name'];
 	$password = $_POST['password'];

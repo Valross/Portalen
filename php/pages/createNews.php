@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) && checkAdminAccess())
 {
 	$title = $_POST['title'];
 	$message = $_POST['message'];

@@ -16,7 +16,7 @@ function loadAllHeadwaiterNotes()
 							INNER JOIN event ON headwaiter_note.event_id = event.id 
 							ORDER BY event.start_time DESC");
 
-	if(count($HeadwaiterNotes) > 0)
+	if(count($HeadwaiterNotes) > 0 && checkAdminAccess())
 	{
 		for($i = 0; $i < count($HeadwaiterNotes); ++$i)
 		{

@@ -17,7 +17,7 @@ function loadAllDANotes()
 							INNER JOIN event ON da_note.event_id = event.id 
 							ORDER BY event.start_time DESC");
 
-	if(count($DANotes) > 0)
+	if(count($DANotes) > 0 && checkAdminAccess())
 	{
 		for($i = 0; $i < count($DANotes); ++$i)
 		{

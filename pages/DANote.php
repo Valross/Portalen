@@ -1,3 +1,7 @@
+<?php
+	if(checkAdminAccess())
+	{
+?>
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
@@ -73,3 +77,15 @@
 	</div>
 </div>
 </form>
+<?php
+	}
+	else
+	{
+		?>
+			<script>
+				window.location = "?page=start";
+				alert("Sluta försöka hacka sidan!")
+			</script>
+		<?php
+	}
+?>

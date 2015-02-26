@@ -5,7 +5,7 @@ $dates = new DateTime;
 $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
 $date = $dates->format('Y-m-d H:i:s');
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) && checkAdminAccess())
 {
 	$event = $_POST['event'];
 	$salesEntry = $_POST['salesEntry'];

@@ -2,20 +2,32 @@
 
 function loadStats()
 {
-	$users = DBQuery::sql("SELECT name, last_name, id FROM user 
+	if(checkAdminAccess())
+	{
+		$users = DBQuery::sql("SELECT name, last_name, id FROM user 
 							ORDER BY id");
-	$howMany = count($users);
-	for($j = 0; $j < $howMany; ++$j)
+		$howMany = count($users);
+		for($j = 0; $j < $howMany; ++$j)
+		{
+			?>
+			<tr>
+				<td><?php echo $j+1;?></td>
+				<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
+				<td><?php loadBookedPoints($users[$j]['id']); ?></td>
+				<td><?php loadWorkedPoints($users[$j]['id']); ?></td>
+				<td><?php loadAmountOfPasses($users[$j]['id']); ?></td>
+				<td><?php loadAmountOfMeetings($users[$j]['id']); ?></td>
+			</tr>
+			<?php
+		}
+	}
+	else
 	{
 		?>
-		<tr>
-			<td><?php echo $j+1;?></td>
-			<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
-			<td><?php loadBookedPoints($users[$j]['id']); ?></td>
-			<td><?php loadWorkedPoints($users[$j]['id']); ?></td>
-			<td><?php loadAmountOfPasses($users[$j]['id']); ?></td>
-			<td><?php loadAmountOfMeetings($users[$j]['id']); ?></td>
-		</tr>
+		<script>
+			window.location = "?page=start";
+			alert("Sluta försöka hacka sidan!")
+		</script>
 		<?php
 	}
 }

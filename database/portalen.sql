@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2015 at 04:46 PM
+-- Generation Time: Feb 26, 2015 at 06:16 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -186,6 +186,32 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3),
 (51, 'Test wage', 'Yep', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
 (52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `event_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(500) NOT NULL,
+  `date_written` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `event_comments`
+--
+
+INSERT INTO `event_comments` (`id`, `comment`, `date_written`, `user_id`, `event_id`) VALUES
+(1, '*måste fixa lite', '2015-02-26', 2, 50),
+(2, '*lol', '2015-02-26', 2, 37),
+(3, '*typ css på dessa', '2015-02-26', 2, 50);
 
 -- --------------------------------------------------------
 
@@ -560,13 +586,13 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 CREATE TABLE IF NOT EXISTS `work_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  `facebook_group` text NOT NULL,
+  `description` text,
+  `facebook_group` text,
   `icon` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `work_group`
@@ -585,7 +611,8 @@ INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`)
 (10, 'Ljud & Ljus', '', '', ''),
 (11, 'Servering', '', '', ''),
 (12, 'Hovmästare', '', '', ''),
-(13, 'Alla', '', '', '');
+(13, 'Alla', '', '', ''),
+(14, 'Vimmel', 'vimmel yeah!', 'www.facebook.com', '');
 
 -- --------------------------------------------------------
 

@@ -32,6 +32,25 @@ if(isset($_POST['submit'])) {
     }
 }
 
+
+if(isset($_POST['submitComment']))
+{
+	$comment = $_POST['comment'];
+	$event_id = $_GET['id'];
+	
+	if($comment != '')
+	{
+		DBQuery::sql("INSERT INTO event_comments (user_id, event_id, comment, date_written)
+						VALUES ('$_SESSION[user_id]', '$event_id', '$comment', '$date')");
+		?>
+		<script>
+			window.location = <?php echo '?page=event&id='.$event_id; ?>;
+		</script>
+		<?php
+	}
+	
+}
+
 function loadEventName()
 {
 	$event_id = $_GET['id'];
@@ -226,6 +245,63 @@ function loadWorkSlots()
 	{
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';
+	}
+}
+
+function checkWhatGroup()
+{
+	return true;
+}
+
+function loadCommentAvatar($comment_id)
+{
+	$event_id = $_GET['id'];
+
+	$user = DBQuery::sql("SELECT user_id FROM event_comments 
+						WHERE event_id = '$event_id'
+						AND id = '$comment_id'"); 
+	if(count($user) > 0)
+		$user_id = $user[0]['user_id'];
+
+	if(isset($user_id))
+	{
+		$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
+		if(count($results) == 0)
+		{
+			return 'img/avatars/no_face_small.png';
+		}
+		return 'img/avatars/'.$results[0]['avatar'];
+	}
+}
+
+function loadComments()
+{
+	if(checkWhatGroup())
+	{
+		$event_id = $_GET['id'];
+
+		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written FROM event_comments 
+								WHERE event_id = '$event_id'");
+
+		if(count($event_comments) > 0)
+		{
+			echo '<div class="row">
+						<div class="col-sm-12">
+							<div class="white-box">';
+			echo '<h1>Kommentarer</h1>';
+
+			for($i = 0; $i < count($event_comments); ++$i)
+			{
+				echo '<div>';
+				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="100" height="100" class="page-header-img">';
+				echo '<p>'.$event_comments[$i]['date_written'].'</p>';
+				echo '<p>'.$event_comments[$i]['comment'].'</p>';
+				echo '</div>';
+			}
+			echo '			</div>
+						</div>
+					</div>';
+		}
 	}
 }
 

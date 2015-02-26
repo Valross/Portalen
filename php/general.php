@@ -402,6 +402,16 @@ function loadAvatar()
 	return 'img/avatars/'.$results[0]['avatar'];
 }
 
+function loadAvatarFromUser($user_id, $size)
+{
+	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
+	if(count($results) == 0)
+	{
+		return '<img src="img/avatars/no_face_small.png" width="'.$size.'" height="'.$size.'" class="img-circle">';
+	}
+	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="'.$size.'" height="'.$size.'" class="img-circle">';
+}
+
 function loadMyGroups()
 {
 	$groups = DBQuery::sql("SELECT id, name FROM work_group 
@@ -470,6 +480,15 @@ function loadAllGroupsOption()
 	}
 }
 
+function checkIfMemberOfGroup($user_id, $group_id)
+{
+	if($user_id < 0)
+	{
+		return false;
+	}
+	return true;
+}
+
 function checkAdminAccess()
 {
 	$user_id = $_SESSION['user_id'];
@@ -488,4 +507,16 @@ function checkAdminAccess()
 	else
 		return false;
 }
+
+function loadNameFromUser($user_id)
+{
+	$results = DBQuery::sql("SELECT name, last_name FROM user WHERE id = '$user_id'");
+	if(count($results) == 0)
+	{
+		return '';
+	}
+	
+	return $results[0]['name'].' '.$results[0]['last_name'];
+}
+
 ?>

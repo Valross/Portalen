@@ -15,11 +15,11 @@
 	<table class="basic-table">
 		<tr>
 			<td><strong>Ålder</strong></td>
-			<td>gammal</td>
+			<td><?php loadAge() ?></td>
 		</tr>
 		<tr>
 			<td><strong>Utbildning</strong></td>
-			<td>Grafisk design och kommunikation lol</td>
+			<td><?php echo $major; ?></td>
 		</tr>
 		<tr>
 			<td><strong>Personal sedan</strong></td>
@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td><strong>Senast inloggad</strong></td>
-			<td>ganska nyligen</td>
+			<td><?php echo $latest_session; ?></td>
 		</tr>
 		<tr>
 			<td><strong>Jobbade senast</strong></td>
@@ -47,11 +47,7 @@
 			</tr>
 			<tr>
 				<td><strong>Adress</strong></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><strong>Hemsida</strong></td>
-				<td></td>
+				<td><?php echo $address; ?></td>
 			</tr>
 		</table>
 	</div> <!-- .white-box -->

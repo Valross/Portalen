@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 24, 2015 at 09:55 PM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Host: 127.0.0.1
+-- Generation Time: Feb 26, 2015 at 04:46 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -65,14 +65,7 @@ CREATE TABLE IF NOT EXISTS `application` (
   `ssn` varchar(10) NOT NULL,
   `mail` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `application`
---
-
-INSERT INTO `application` (`id`, `name`, `last_name`, `ssn`, `mail`) VALUES
-(1, 'Simon', '.', '120395y082', 'rw');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -87,15 +80,7 @@ CREATE TABLE IF NOT EXISTS `application_group` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`application_id`),
   KEY `application_id` (`application_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `application_group`
---
-
-INSERT INTO `application_group` (`id`, `group_id`, `application_id`) VALUES
-(2, 2, 1),
-(1, 4, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -171,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `event`
@@ -198,7 +183,9 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (38, 'GAMMALT SKIT', '', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (48, 'GAMMALT SKIT 13', 'Fan rätt fräscht asså', '2015-02-18 18:00:00', '2015-02-18 22:00:00', 2, 1),
 (49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
-(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3);
+(50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3),
+(51, 'Test wage', 'Yep', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
+(52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -318,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 --
 
 INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
-(1, 2, 0, '0000-00-00'),
+(1, 2, 0, '2015-02-26'),
 (2, 1, 0, '0000-00-00'),
 (2, 2, 0, '2015-02-05'),
 (4, 1, 0, '0000-00-00'),
@@ -500,11 +487,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` varchar(50) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
+  `major` varchar(60) NOT NULL,
   `address` varchar(100) DEFAULT NULL,
   `zip` varchar(5) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `avatar` varchar(200) DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `latest_session` date NOT NULL,
   `bank_account` varchar(50) DEFAULT NULL,
   `special_food` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -515,13 +504,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `address`, `zip`, `city`, `avatar`, `date_created`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '1111111234', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', NULL, NULL, NULL, 'portalen_bild.jpg', '0000-00-00 00:00:00', NULL, NULL),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, 'beawea', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', NULL, NULL),
-(3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-(5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', NULL, NULL),
-(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', NULL, NULL),
-(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', NULL, NULL);
+INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `bank_account`, `special_food`) VALUES
+(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', '1337-000000000', 'Ja'),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, '', 'beawea', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', NULL, NULL),
+(3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', NULL, NULL),
+(5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', NULL, NULL),
+(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', NULL, NULL),
+(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -557,9 +546,10 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (89, 1, 0),
 (90, 2, 0),
-(91, 5, 0),
+(91, 2, 0),
 (93, 3, 0),
-(94, 2, 0);
+(95, 2, 1),
+(96, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -570,7 +560,9 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 CREATE TABLE IF NOT EXISTS `work_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
   `facebook_group` text NOT NULL,
+  `icon` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
@@ -580,20 +572,20 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 -- Dumping data for table `work_group`
 --
 
-INSERT INTO `work_group` (`id`, `name`, `facebook_group`) VALUES
-(1, 'Driftgruppen', ''),
-(2, 'Webb', ''),
-(3, 'Kock', ''),
-(4, 'Bar', ''),
-(5, 'DJ', ''),
-(6, 'Värd', ''),
-(7, 'Dagsansvarig', ''),
-(8, 'Event', ''),
-(9, 'Marknadsföring', ''),
-(10, 'Ljud & Ljus', ''),
-(11, 'Servering', ''),
-(12, 'Hovmästare', ''),
-(13, 'Alla', '');
+INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`) VALUES
+(1, 'Driftgruppen', '', '', ''),
+(2, 'Webb', '', '', ''),
+(3, 'Kock', '', '', ''),
+(4, 'Bartastic', 'YEAH BAR', 'www.facebook.com', ''),
+(5, 'DJ', '', '', ''),
+(6, 'Värd', '', '', ''),
+(7, 'Dagsansvarig', '', '', ''),
+(8, 'Event', '', '', ''),
+(9, 'Marknadsföring', '', '', ''),
+(10, 'Ljud & Ljus', '', '', ''),
+(11, 'Servering', '', '', ''),
+(12, 'Hovmästare', '', '', ''),
+(13, 'Alla', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -632,7 +624,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -690,11 +682,12 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (87, 13, 48, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (88, 2, 49, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
 (89, 2, 50, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
-(90, 13, 50, 6, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(91, 6, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(92, 10, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(90, 13, 50, 68, 0, '2015-02-19 16:00:00', '2015-02-20 05:00:00'),
+(91, 6, 50, 0, 0, '2015-02-18 19:00:00', '2015-02-19 05:00:00'),
 (93, 7, 50, 13, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00');
+(94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(95, 7, 51, 4, 40, '2015-02-18 16:00:00', '2015-02-19 04:00:00'),
+(96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00');
 
 --
 -- Constraints for dumped tables

@@ -87,15 +87,6 @@ function loadEventDescription()
 
 }
 
-function checkIfMemberOfGroup($user_id, $group_id)
-{
-	if($user_id < 0)
-	{
-		return false;
-	}
-	return true;
-}
-
 function loadWorkSlots()
 {
 	$event_id = $_GET['id'];
@@ -165,7 +156,7 @@ function loadWorkSlots()
 					if(count($bookedSlot) > 0)
 					{
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
+						echo loadAvatarFromUser($bookedSlot[0]['user_id'], 25).'</a>';
 					}
 					else
 					{
@@ -201,7 +192,7 @@ function loadWorkSlots()
 					{
 						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
+						echo loadAvatarFromUser($bookedSlot[0]['user_id'], 25).'</a>';
 					}
 					else
 						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
@@ -236,27 +227,6 @@ function loadWorkSlots()
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';
 	}
-}
-
-function loadAvatarFromUser($user_id)
-{
-	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
-	if(count($results) == 0)
-	{
-		return '<img src="img/avatars/no_face_small.png" width="25" height="25" class="img-circle">';
-	}
-	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="25" height="25" class="img-circle">';
-}
-
-function loadNameFromUser($user_id)
-{
-	$results = DBQuery::sql("SELECT name, last_name FROM user WHERE id = '$user_id'");
-	if(count($results) == 0)
-	{
-		return '';
-	}
-	
-	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
 ?>

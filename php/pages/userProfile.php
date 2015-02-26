@@ -48,6 +48,27 @@ if(count($result) == 1)
 else
 	$profileMail = "";
 
+$result = DBQuery::sql("SELECT latest_session FROM user WHERE id = '$user_id' AND latest_session IS NOT NULL");
+
+if(count($result) == 1)
+	$latest_session = $result[0]["latest_session"];
+else
+	$latest_session = "";
+
+$result = DBQuery::sql("SELECT major FROM user WHERE id = '$user_id' AND major IS NOT NULL");
+
+if(count($result) == 1)
+	$major = $result[0]["major"];
+else
+	$major = "";
+
+$result = DBQuery::sql("SELECT address FROM user WHERE id = '$user_id' AND address IS NOT NULL");
+
+if(count($result) == 1)
+	$address = $result[0]["address"];
+else
+	$address = "";
+
 function loadUnjoinedGroups()
 {
 	$user_id = $_GET['id'];
@@ -191,6 +212,19 @@ function loadLastWorked()
 		echo '<a href=?page=event&id='.$lastWorked[0]['id'].'>'.$lastWorked[0]['name'].' ('.$lastWorked[0]['start_time'].')'.'</a>';
 	else
 		echo 'Har ej jobbat';
+}
+
+function loadAge()
+{
+	$user_id = $_GET['id'];
+
+	$user_name = DBQuery::sql("SELECT ssn FROM user  
+							WHERE id = '$user_id'");
+
+	// $slotStart = new DateTime($slots[$j]['start_time']);
+	// $start_h = $slotStart->format('H:i');
+
+	echo 'to be calculated';
 }
 
 ?>

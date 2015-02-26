@@ -93,13 +93,30 @@ textarea {
 	border-top: 1px solid #e3e9eb;
 }
 input[type=text].input-book {
-	width: 8%;
+	width: 6.5%;
 	height: 25px;
 	padding: 0 0 0 0;
 	border: 0;
 	background: #fff;
 	margin: 0; 
 	font-size: 12px;
+	border-bottom: 1px solid #e3e9eb;
+	border-right: 1px solid #e3e9eb;
+	border-top: 1px solid #e3e9eb;
+	border-left: 1px solid #e3e9eb;
+}
+input[type=text].input-book-long {
+	width: 14.5%;
+	height: 25px;
+	padding: 0 0 0 0;
+	border: 0;
+	background: #fff;
+	margin: 0; 
+	font-size: 12px;
+	border-bottom: 1px solid #e3e9eb;
+	border-right: 1px solid #e3e9eb;
+	border-top: 1px solid #e3e9eb;
+	border-left: 1px solid #e3e9eb;
 }
 input[type=text],
 input[type=password],
@@ -516,6 +533,9 @@ fieldset[disabled] {
 	}
 	.white-box a.list-group-item-text-book {
 		float: right;
+	}
+	.white-box a.list-group-item-text-book-remove {
+		float: clear;
 	}
 	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;

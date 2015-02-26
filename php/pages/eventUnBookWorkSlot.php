@@ -7,8 +7,20 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 	$user_id = $_GET['user_id'];
 	$work_slot_id = $_GET['work_slot_id'];
 
-	DBQuery::sql("DELETE FROM user_work
+	if($user_id == $_SESSION['user_id'] || $checkAdminAccess())
+	{
+		DBQuery::sql("DELETE FROM user_work
         					WHERE '$work_slot_id' = work_slot_id");
+	}
+	else
+	{
+		?>
+		<script>
+			window.location = "?page=event&id=<?php echo $event_id; ?>";
+			alert("Sluta försöka hacka sidan!")
+		</script>
+	<?php
+	}
 
 	?>
 		<script>

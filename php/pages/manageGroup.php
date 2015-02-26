@@ -1,7 +1,17 @@
 <?php
 include_once('php/DBQuery.php');
 
-loadAll();
+if(checkAdminAccess())
+	loadAll();
+else
+	{
+		?>
+		<script>
+			window.location = "?page=start";
+			alert("Sluta försöka hacka sidan!")
+		</script>
+	<?php
+}
 
 if(isset($_POST['submit']))
 {

@@ -2,32 +2,32 @@
 include_once('php/DBQuery.php');
 
 if(isset($_POST['submit'])) {
-	$p_start_time = $_POST['start'];
-	$p_end_time = $_POST['end'];
+	$p_start_time = $_POST['start_h'];
+	$p_end_time = $_POST['end_h'];
+	$p_start_date = $_POST['start_d'];
+	$p_end_date = $_POST['end_d'];
 	$p_points = $_POST['points'];
 	$p_wage = $_POST['wage'];
 	$p_work_slot_id = $_POST['work_slot_id'];
 
 	$slotCounter = count($p_work_slot_id);
 
-	// $dates = new DateTime;
-	// $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
-	// $date = $dates->format('Y-m-d H:i:s');
-
     for($i=0; $i < $slotCounter; $i++)
     {
     	$start_time = $p_start_time[$i];
     	$end_time = $p_end_time[$i];
+    	$start_date = $p_start_date[$i];
+    	$end_date = $p_end_date[$i];
     	$points = $p_points[$i];
     	$wage = $p_wage[$i];
     	$work_slot_id = $p_work_slot_id[$i];
 
-     //    DBQuery::sql("UPDATE work_slot
-			  // SET start_time = '$start_time', end_time = '$end_time'
-			  // 		points = '$points', wage = '$wage'
-			  // WHERE id='$work_slot_id'");
+    	$start = $start_date.' '.$start_time.':00';
+    	$end = $end_date.' '.$end_time.':00';
+
         DBQuery::sql("UPDATE work_slot
-			  SET points = '$points', wage = '$wage'
+			  SET start_time = '$start', end_time = '$end',
+			  		points = '$points', wage = '$wage'
 			  WHERE id='$work_slot_id'");
     }
 }
@@ -108,12 +108,6 @@ function loadWorkSlots()
 								(SELECT id FROM event
 								WHERE id = '$event_id'))");
 
-	$adminAccess = DBQuery::sql("SELECT access_id, group_id FROM group_access
-						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4) AND
-						group_id IN
-							(SELECT group_id FROM group_member
-							WHERE user_id = '$user_id' AND (group_id = 1 OR group_id = 7))");
-
 	$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
 						WHERE event_id = '$event_id'");
 
@@ -127,7 +121,7 @@ function loadWorkSlots()
 							WHERE id IN 
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')");
 
-	if(count($adminAccess) > 0)
+	if(checkAdminAccess())
 	{
 		echo '<form action="" method="post">';
 	}
@@ -148,8 +142,10 @@ function loadWorkSlots()
 			{
 				$slotStart = new DateTime($slots[$j]['start_time']);
 				$slotEnd = new DateTime($slots[$j]['end_time']);
-				$start = $slotStart->format('H:i');
-				$end = $slotEnd->format('H:i');
+				$start_h = $slotStart->format('H:i');
+				$end_h = $slotEnd->format('H:i');
+				$start_d = $slotStart->format('Y-m-d');
+				$end_d = $slotEnd->format('Y-m-d');
 				$number++;
 
 				$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
@@ -158,25 +154,26 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND work_slot_id = '$work_slot_id'");
 
-				if(count($adminAccess) > 0)
+				if(checkAdminAccess())
 				{
+					echo '<li class="list-group-item">'.$number.'. ';
+					echo '<input type="text" class="input-book-long" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
+					echo '<input type="text" class="input-book" name="start_h[]" id="start_h[]" value="'.$start_h.'"> ';
+					echo '<input type="text" class="input-book-long" name="end_d[]" id="end_d[]" value="'.$end_d.'">';
+					echo '<input type="text" class="input-book" name="end_h[]" id="end_h[]" value="'.$end_h.'"> ';
+					echo '<input type="text" class="input-book" name="wage[]" id="wage[]" value="'.$slots[$j]['wage'].'"> kr/h ';
 					if(count($bookedSlot) > 0)
 					{
-						echo '<li class="list-group-item">'.$number.'. ';
-						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
-						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
 					{
-						echo '<li class="list-group-item">'.$number.'. ';
-						echo '<input type="text" class="input-book" name="start[]" id="start[]" value="'.$start.'"> - ';
-						echo '<input type="text" class="input-book" name="end[]" id="end[]" value="'.$end.'">';
+						echo '<a href=?page=eventRemoveWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+							' class="list-group-item-text-book-remove">Ta bort passet</a>';
 					}
 
-					echo '<input type="text" class="input-book" name="wage[]" id="wage[]" value="'.$slots[$j]['wage'].'"> kr/h ';
-					echo '<input type="text" class="input-book" name="points[]" id="points[]" value="'.$slots[$j]['points'].'"> poäng';
+					echo '<input type="text" class="input-book" name="points[]" id="points[]" value="'.$slots[$j]['points'].'">p';
 					echo '<input type="hidden" name="work_slot_id[]" id="work_slot_id[]" value="'.$slots[$j]['id'].'">';
 
 					if(count($bookedSlot) == 0)
@@ -194,25 +191,25 @@ function loadWorkSlots()
 				{
 					$slotStart = new DateTime($slots[$j]['start_time']);
 					$slotEnd = new DateTime($slots[$j]['end_time']);
-					$start = $slotStart->format('H:i -');
-					$end = $slotEnd->format(' H:i');
+					$start_h = $slotStart->format('H:i -');
+					$end_h = $slotEnd->format(' H:i');
 
 					$localUserBookedThisSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE user_id = '$user_id' AND work_slot_id = '$work_slot_id'");
 
 					if(count($bookedSlot) > 0)
 					{
-						echo '<li class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
-						echo '<li class="list-group-item-text">'.$number.'. '.$start.$end;
+						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
 
-					if(count($adminAccess) > 0 || count($localUserBookedThisEvent) > 0)
+					if(checkAdminAccess() || count($localUserBookedThisEvent) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
 
-					echo " (".$slots[$j]['points'].' poäng)';
+					echo " (".$slots[$j]['points'].'p)';
 
 					if(count($localUserBookedThisEvent) == 0)
 					{
@@ -234,7 +231,7 @@ function loadWorkSlots()
 			}
 		}
 	}
-	if(count($adminAccess) > 0)
+	if(checkAdminAccess())
 	{
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';

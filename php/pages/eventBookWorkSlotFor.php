@@ -3,7 +3,7 @@ include_once('php/DBQuery.php');
 
 function loadPeople()
 {
-	if(isset($_GET['event_id']) && isset($_GET['work_slot_id']))
+	if(isset($_GET['event_id']) && isset($_GET['work_slot_id']) && checkAdminAccess())
 	{
 		$event_id = $_GET['event_id'];
 		$work_slot_id = $_GET['work_slot_id'];
@@ -23,6 +23,15 @@ function loadPeople()
 			</tr>
 			<?php
 		}
+	}
+	else
+	{
+		?>
+			<script>
+				window.location = "?page=book";
+				alert("Något gick fel!")
+			</script>
+		<?php
 	}
 }
 

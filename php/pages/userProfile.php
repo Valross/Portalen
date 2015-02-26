@@ -106,24 +106,8 @@ function loadGroupsOption()
 function addToGroup()
 {
 	$user_id = $_SESSION['user_id'];
-	$admin_rights_group_bool = false;
 
-	$admin_rights_user = DBQuery::sql("SELECT access_id, user_id FROM user_access 
-							WHERE user_id = '$user_id' AND access_id = 1");
-	$admin_rights_group = DBQuery::sql("SELECT access_id, group_id FROM group_access");
-	$users_groups = DBQuery::sql("SELECT user_id, group_id FROM group_member
-							WHERE user_id = '$user_id'");
-
-	for($i = 0; $i < count($admin_rights_group); ++$i)
-	{
-		for($j = 0; $j < count($users_groups); ++$j)
-		{
-			if($admin_rights_group[$i]['group_id'] == $users_groups[$j]['group_id'])
-				$admin_rights_group_bool = true;
-		}
-	}
-
-	if($admin_rights_group_bool || isset($admin_rights_user[0]))
+	if(checkAdminAccess())
 	{
 		?>
 		<div class="col-sm-6">
@@ -145,24 +129,8 @@ function addToGroup()
 function removeFromGroup()
 {
 	$user_id = $_SESSION['user_id'];
-	$admin_rights_group_bool = false;
 
-	$admin_rights_user = DBQuery::sql("SELECT access_id, user_id FROM user_access 
-							WHERE user_id = '$user_id' AND access_id = 1");
-	$admin_rights_group = DBQuery::sql("SELECT access_id, group_id FROM group_access");
-	$users_groups = DBQuery::sql("SELECT user_id, group_id FROM group_member
-							WHERE user_id = '$user_id'");
-
-	for($i = 0; $i < count($admin_rights_group); ++$i)
-	{
-		for($j = 0; $j < count($users_groups); ++$j)
-		{
-			if($admin_rights_group[$i]['group_id'] == $users_groups[$j]['group_id'])
-				$admin_rights_group_bool = true;
-		}
-	}
-
-	if($admin_rights_group_bool || isset($admin_rights_user[0]))
+	if(checkAdminAccess())
 	{
 		?>
 		<div class="col-sm-6">

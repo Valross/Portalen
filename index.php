@@ -66,6 +66,11 @@ include_once('php/pageManager.php');
 			              <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li>
 						  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 			              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+	  		               
+		            <?php 
+			            if(checkAdminAccess())
+			            {
+		            ?>
 	  		               <li class="panel dropdown">
 	  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="fa fa-gears fa-fw fa-lg"></span>Adminverktyg<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 	  						  <ul id="collapseTwo" class="panel-collapse collapse">
@@ -87,6 +92,9 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=DC"></span>DC-Verktyg</a></li>
 	  						  </li>  
 	  						  </ul>
+					<?php 
+	  					}
+					?>
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		      </div> <!-- end menu -->  

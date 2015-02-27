@@ -173,7 +173,7 @@ function loadWorkSlots()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		$number = 0;
-		echo '<li class="list-group-item"><a href="?page=group&id='.$groups[$i]['id'].'"><strong>'.$groups[$i]['name'].'</strong></a></li>';
+		echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'"><strong>'.$groups[$i]['name'].'</strong></a></li>';
 		for($j = 0; $j < count($slots); ++$j)
 		{
 			$work_slot_id = $slots[$j]['id'];

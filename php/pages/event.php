@@ -32,7 +32,6 @@ if(isset($_POST['submit'])) {
     }
 }
 
-
 if(isset($_POST['submitComment']))
 {
 	$comment = $_POST['comment'];
@@ -48,7 +47,33 @@ if(isset($_POST['submitComment']))
 		</script>
 		<?php
 	}
+}
+
+if(isset($_POST['addSlot']))
+{
+	$group_id = $_POST['group'];
+	$amount = $_POST['amount'];
+	$event_id = $_GET['id'];
+
+	$event = DBQuery::sql("SELECT id, start_time, end_time FROM event
+							WHERE id = '$event_id'");
 	
+	$start_time = $event[0]['start_time'];
+	$end_time = $event[0]['end_time'];
+
+	if($group_id != '')
+	{
+		for($i = 0; $i < $amount; ++$i)
+		{
+			DBQuery::sql("INSERT INTO work_slot (group_id, event_id, points, wage, start_time, end_time)
+							VALUES ('$group_id', '$event_id', '0', '0', '$start_time', '$end_time')");
+		}
+		?>
+		<script>
+			window.location = <?php echo '?page=event&id='.$event_id; ?>;
+		</script>
+		<?php
+	}
 }
 
 function loadEventName()
@@ -103,7 +128,17 @@ function loadEventDescription()
 		echo "<tr><td><strong>Stänger</strong></td><td>".$end."</td></tr>";
 		echo "<tr><td><strong>Information</strong></td><td>".$event_info[0]['info']."</td></tr>";
 	}
+}
 
+function loadGroups()
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		?>
+			<option value="<?php echo $groups[$i]['id']; ?>" name="group[]"><?php echo $groups[$i]['name']; ?></option>
+		<?php
+	}
 }
 
 function loadWorkSlots()
@@ -241,7 +276,7 @@ function loadWorkSlots()
 			}
 		}
 	}
-	if(checkAdminAccess())
+	if(checkAdminAccess() && count($groups) > 0)
 	{
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';

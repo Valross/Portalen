@@ -11,7 +11,7 @@
 	<div class="white-box">
 		<h3>Evenemangsinformation</h3>
 		<table class="basic-table">
-		<?php loadEventDescription() ?>
+			<?php loadEventDescription() ?>
 		</table>
 		
 		</div> <!-- .white-box -->
@@ -19,9 +19,17 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Pass</h3>
+		<form action="" method="post">
+			<label for="group">Typ av pass</label>
+			<select id="group" name="group">
+				<?php loadGroups(); ?>
+			</select>
+			<input type="number" id="amount" name="amount" value="1" class="input-book"/>
+			<input type="submit" name="addSlot" value="Lägg till pass">
+		</form>
 
 		<div class="list-group">
-		<?php loadWorkSlots() ?>
+			<?php loadWorkSlots() ?>
 		</div>
 		
 		</div> <!-- .white-box -->

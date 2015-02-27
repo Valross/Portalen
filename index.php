@@ -66,6 +66,8 @@ include_once('php/pageManager.php');
 			              <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li>
 						  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 			              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+			              <li><a href="?page=stats"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik</a></li>
+			              <li><a href="?page=achievements"><span class="fa fa-trophy fa-fw fa-lg"></span>Achievements</a></li>
 	  		               
 		            <?php 
 			            if(checkAdminAccess())
@@ -74,22 +76,21 @@ include_once('php/pageManager.php');
 	  		               <li class="panel dropdown">
 	  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="fa fa-gears fa-fw fa-lg"></span>Adminverktyg<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 	  						  <ul id="collapseTwo" class="panel-collapse collapse">
-	  							<li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
-	  							<li><a href="?page=manageEventTemplate"></span>Hantera eventmallar</a></li>
-	  							<li><a href="?page=period"></span>Hantera perioder</a></li>
-	  							<li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
-	  							<li><a href="?page=createNews"></span>Skapa en nyhet</a></li>
-	  							<li><a href="?page=reviseApplications"></span>Granska ansökningar</a></li>
-	  							<li><a href="?page=stats"></span>Statistik</a></li>
-	  							<li><a href="?page=staffList"></span>Personallistor</a></li>
+	  							<li><a href="?page=createEvent"><span class="fa fa-calendar fa-fw fa-lg"></span>Skapa evenemang</a></li>
+	  							<li><a href="?page=createNews"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Skapa en nyhet</a></li>
+	  							<li><a href="?page=manageEventTemplate"><span class="fa fa-table fa-fw fa-lg"></span>Eventmallar</a></li>
+	  							<li><a href="?page=period"><span class="fa fa-calendar-o fa-fw fa-lg"></span>Perioder</a></li>
+	  							<li><a href="?page=createAccount"><span class="fa fa-user-plus fa-fw fa-lg"></span>Skapa nytt konto</a></li>
+	  							<li><a href="?page=reviseApplications"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ansökningar</a></li>
+	  							<li><a href="?page=staffList"><span class="fa fa-list fa-fw fa-lg"></span>Personallistor</a></li>
 	  							<li><a></span></a></li>
 	  							
-	  							<li><a href="?page=checkPasses"></span>Checka av pass</a></li>
-	  							<li><a href="?page=createDANote"></span>Skriv DA-lapp</a></li>
-	  							<li><a href="?page=createHeadWaiterNote"></span>Skriv Hovis-lapp</a></li>
-	  							<li><a href="?page=browseDANote"></span>Läs DA-lappar</a></li>
-	  							<li><a href="?page=browseHeadWaiterNote"></span>Läs Hovis-lappar</a></li>
-	  							<li><a href="?page=DC"></span>DC-Verktyg</a></li>
+	  							<li><a href="?page=checkPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka av pass</a></li>
+	  							<li><a href="?page=createDANote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv DA-lapp</a></li>
+	  							<li><a href="?page=createHeadWaiterNote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv Hovis-lapp</a></li>
+	  							<li><a href="?page=browseDANote"><span class="fa fa-user-secret fa-fw fa-lg"></span>Läs DA-lappar</a></li>
+	  							<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-user-secret fa-fw fa-lg"></span>Läs Hovis-lappar</a></li>
+	  							<li><a href="?page=DC"><span class="fa fa-gavel fa-fw fa-lg"></span>DC-Verktyg</a></li>
 	  						  </li>  
 	  						  </ul>
 					<?php 

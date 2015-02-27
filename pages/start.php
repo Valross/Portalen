@@ -1,7 +1,14 @@
-<div class="col-sm-5">
-	<div class="row">
-		
-		<div class="col-sm-12"><h3>Dina bokade pass</h3>	
+<div class="row">
+	<div class="col-sm-12">
+		<div class="page-header">
+			<h1><span class="fa fa-home fa-fw fa-lg"></span> Hem</h1>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+<div class="col-sm-6">
+		<h3>Dina bokade pass</h3>	
 		
 			<div class="list-group">
 				 <?php loadBookedEvents(); ?>
@@ -18,8 +25,6 @@
 			<div class="list-group">
 				<?php loadAvailableMeetings(); ?>
 			</div>
-		</div>
-	</div>
 </div>
 		
 <div class="col-sm-6">
@@ -39,5 +44,6 @@
 	</div>
 	
 	</div>
+</div>
 </div>
 

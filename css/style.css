@@ -68,6 +68,9 @@ a:focus {
 	color: #000;
 	text-decoration: none;
 }
+a.black-link {
+	color: #444;
+}
 
 
 /* Forms */

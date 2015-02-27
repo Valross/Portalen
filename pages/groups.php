@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1>Lagsidor</h1>
+			<h1><span class="fa fa-users fa-fw fa-lg"></span> Lagsidor</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

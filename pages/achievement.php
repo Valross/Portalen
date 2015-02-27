@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1><a href="?page=achievements">Achievements <span class="fa fa-trophy fa-fw fa-lg"></span></a></h1>
+			<h1><a href="?page=achievements">Achievements <span class="fa fa-trophy fa-fw"></span></a></h1>
 		</div>
 	</div>
 </div> <!-- .row -->

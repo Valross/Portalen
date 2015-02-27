@@ -4,12 +4,12 @@ include_once('php/DBQuery.php');
 if(checkAdminAccess())
 	loadAll();
 else
-	{
-		?>
-		<script>
-			window.location = "?page=start";
-			alert("Sluta försöka hacka sidan!")
-		</script>
+{
+	?>
+	<script>
+		window.location = "?page=start";
+		alert("Sluta försöka hacka sidan!")
+	</script>
 	<?php
 }
 

@@ -5,27 +5,11 @@
 		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="white-box">
-			<table class="table table-hover">
-		      	<thead>
-			        <tr>
-			          	<th>#</th>
-			          	<th>Namn</th>
-			          	<th>Bokade poäng</th>
-			          	<th>Arbetade poäng</th>
-					  	<th>Antal pass</th>
-					  	<th>Antal möten</th>
-			        </tr>
-			    </thead>
-				<tbody>
-
-				  	<?php loadStats(); ?>
-
-			  	</tbody>
-				</table>
-			</div>
+			<?php loadAllTools() ?>
 		</div>
 	</div>
 </div>

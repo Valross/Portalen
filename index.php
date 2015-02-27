@@ -75,7 +75,7 @@ include_once('php/pageManager.php');
 	  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseTwo"><span class="fa fa-gears fa-fw fa-lg"></span>Adminverktyg<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 	  						  <ul id="collapseTwo" class="panel-collapse collapse">
 	  							<li><a href="?page=createEvent"></span>Skapa evenemang</a></li>
-	  							<li><a href="?page= #"></span>Hantera eventmallar</a></li>
+	  							<li><a href="?page=manageEventTemplate"></span>Hantera eventmallar</a></li>
 	  							<li><a href="?page=period"></span>Hantera perioder</a></li>
 	  							<li><a href="?page=createAccount"></span>Skapa nytt konto</a></li>
 	  							<li><a href="?page=createNews"></span>Skapa en nyhet</a></li>

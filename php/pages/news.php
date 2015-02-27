@@ -1,20 +1,36 @@
 <?php
 include_once('php/DBQuery.php');
 
-
-
-function loadTitle()
+function loadAll()
 {
-	$groups = DBQuery::sql("SELECT title, date FROM news ORDER BY date");
-	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['title'];
+	$news = DBQuery::sql("SELECT id, date FROM news ORDER BY date DESC");
+
+	for($i = 0; $i < count($news); ++$i)
+	{
+		echo '<div class="col-sm-7">
+				<div class="white-box">';
+					echo '<h1>'.loadTitle($news[$i]['id']).'</h1>';
+					echo '<div>'.loadUserAvatar($news[$i]['id']);
+					echo loadUserName($news[$i]['id']);
+					echo '<p>'.loadDate($news[$i]['id']).'</p></div>';
+					echo '<div>'.loadMessage($news[$i]['id']).'</div>';
+		echo    '</div>
+			 </div>';
+	}
 }
 
-function loadMessage()
+function loadTitle($news_id)
 {
-	$groups = DBQuery::sql("SELECT message, date FROM news ORDER BY date");
-	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['message'];
+	$news = DBQuery::sql("SELECT title FROM news
+							WHERE id = '$news_id'");
+	return $news[0]['title'];
+}
+
+function loadMessage($news_id)
+{
+	$news = DBQuery::sql("SELECT message FROM news
+							WHERE id = '$news_id'");
+	return $news[0]['message'];
 }
 
 function loadNewsAvatar($user_id)
@@ -27,20 +43,37 @@ function loadNewsAvatar($user_id)
 	return 'img/avatars/'.$results[0]['avatar'];
 }
 
-function loadUser()
+function loadUserAvatar($news_id)
 {
-	$groups = DBQuery::sql("SELECT user_id, date FROM news ORDER BY date");
-	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['user_id'];
-	echo '<a href=?page=userProfile&id='.$groups[count($groups)-1]['user_id'].'>'.
-	'<img src="'.loadNewsAvatar($groups[count($groups)-1]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+	$news = DBQuery::sql("SELECT user_id FROM news
+						WHERE id = '$news_id'");
+
+	if(count($news) > 0)
+	{
+		echo '<a href=?page=userProfile&id='.$news[0]['user_id'].'>'.
+		'<img src="'.loadNewsAvatar($news[0]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+	}
 }
 
-function loadDate()
+function loadUserName($news_id)
 {
-	$groups = DBQuery::sql("SELECT date FROM news ORDER BY date");
-	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['date'];
+	$news = DBQuery::sql("SELECT user_id FROM news
+						WHERE id = '$news_id'");
+	$user_id = $news[0]['user_id'];
+
+	$user = DBQuery::sql("SELECT name, last_name FROM user 
+						WHERE id = '$user_id'");
+	if(count($news) > 0)
+	{
+		echo '<a href=?page=userProfile&id='.$news[0]['user_id'].'>'.$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+	}
+}
+
+function loadDate($news_id)
+{
+	$news = DBQuery::sql("SELECT date FROM news
+							WHERE id = '$news_id'");
+	return $news[0]['date'];
 }
 
 ?>

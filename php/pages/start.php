@@ -27,13 +27,28 @@ function loadNewsAvatar($user_id)
 	return 'img/avatars/'.$results[0]['avatar'];
 }
 
-function loadUser()
+function loadUserAvatar()
 {
 	$groups = DBQuery::sql("SELECT user_id, date FROM news ORDER BY date");
+
 	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['user_id'];
-	echo '<a href=?page=userProfile&id='.$groups[count($groups)-1]['user_id'].'>'.
-	'<img src="'.loadNewsAvatar($groups[count($groups)-1]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+	{
+		echo '<a href=?page=userProfile&id='.$groups[count($groups)-1]['user_id'].'>'.
+		'<img src="'.loadNewsAvatar($groups[count($groups)-1]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+	}
+}
+
+function loadUserName()
+{
+	$groups = DBQuery::sql("SELECT user_id, date FROM news ORDER BY date");
+	$user_id = $groups[0]['user_id'];
+
+	$user = DBQuery::sql("SELECT name, last_name FROM user 
+						WHERE id = '$user_id'");
+	if(count($groups) > 0)
+	{
+		echo '<a href=?page=userProfile&id='.$groups[count($groups)-1]['user_id'].'>'.$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+	}
 }
 
 function loadDate()

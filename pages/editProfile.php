@@ -27,13 +27,11 @@
 		<input type="text" value="<?php echo $profileMail; ?>" name="mail" id="mail">
 		<label for="mail">Adress</label>
 		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address">
-		<label for="mail">Hemsida</label>
-		<input type="text" value="<?php echo $profileHomepage; ?>" name="homepage" id="homepage">
 		<label for="mail">Utbildning</label>
 		<input type="text" value="<?php echo $profileMajor; ?>" name="major" id="major">
 		
 		<label for="description">Presentation</label>
-		<textarea rows="5" cols="50" value="<?php echo $profileDescription; ?>" name="description" id="description" maxlength="150" class="bottom-border"></textarea>
+		<textarea rows="5" cols="50" value="" name="description" id="description" maxlength="150" class="bottom-border"><?php echo $profileDescription; ?></textarea>
 			
 		<input type="submit" name="changeInfo" value="Uppdatera profil">
 	</form>

@@ -21,11 +21,23 @@
 		</div>
 	</div>
 </div>
-<div class="col-sm-7">
-	<h1>Nyhet</h1>
-	<?php loadTitle(); ?>
-	<?php loadMessage(); //fixa frontend?>
-	<?php loadUser(); ?>
-	<?php loadDate(); ?>
+		
+<div class="col-sm-6">
+	<div class="white-box">
+	<h1><?php loadTitle(); ?></h1>
+	<div>
+		<?php loadUserAvatar(); ?>
+	</div>
+	<div>
+		<?php loadUserName(); ?>
+	</div>
+	<div>
+		<?php loadDate(); ?>
+	</div>
+	<div class="list-group">
+		<?php loadMessage(); ?>
+	</div>
+	
+	</div>
 </div>
 

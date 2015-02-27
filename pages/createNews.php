@@ -17,7 +17,7 @@
 		<label for="title">Titel</label>
 		<input type="text" placeholder="Nyhetsbrev Maj" name="title" id="title">
 		<label for="message">Meddelande</label>
-		<input type="text" name="message" id="message" class="border-bottom">
+		<textarea rows="7" cols="50" value="" name="message" id="message" maxlength="1500" class="bottom-border"></textarea>
 		<input type="submit" name="submit" value="Skicka nyhet">
 	</form>
 	</div> <!-- .white-box -->

@@ -15,15 +15,9 @@ if(count($result) == 1)
 else
 	$profileAddress = "";
 
-$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
+$result = DBQuery::sql("SELECT major FROM user WHERE id = '$_SESSION[user_id]' AND major IS NOT NULL");
 if(count($result) == 1)
-	$profileHomepage = $result[0]["mail"];
-else
-	$profileHomepage = "";
-
-$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
-if(count($result) == 1)
-	$profileMajor = $result[0]["mail"];
+	$profileMajor = $result[0]["major"];
 else
 	$profileMajor = "";
 
@@ -63,7 +57,6 @@ if(isset($_POST['changeInfo'])) {
 	$ssn = DBQuery::safeString($_POST['ssn']);
 	$mail = DBQuery::safeString($_POST['mail']);
 	$address = DBQuery::safeString($_POST['address']);
-	$homepage = DBQuery::safeString($_POST['homepage']);
 	$major = DBQuery::safeString($_POST['major']);
 	$name = DBQuery::safeString($_POST['name']);
 	$lastName = DBQuery::safeString($_POST['last_name']);
@@ -97,18 +90,11 @@ if(isset($_POST['changeInfo'])) {
 			$queryString = $queryString . "address='$address'";
 	}
 
-	if ($homepage != '') {
-		// if ($queryString != '')
-		// 	$queryString = $queryString . ", mail='$mail'";
-		// else
-		// 	$queryString = $queryString . "mail='$mail'";
-	}
-
 	if ($major != '') {
-		// if ($queryString != '')
-		// 	$queryString = $queryString . ", mail='$mail'";
-		// else
-		// 	$queryString = $queryString . "mail='$mail'";
+		if ($queryString != '')
+			$queryString = $queryString . ", major='$major'";
+		else
+			$queryString = $queryString . "major='$major'";
 	}
 
 	if ($name != '') {

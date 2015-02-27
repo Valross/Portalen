@@ -19,6 +19,10 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Pass</h3>
+		<?php
+			if(checkAdminAccess())
+			{
+		?>
 		<form action="" method="post">
 			<label for="group">Typ av pass</label>
 			<select id="group" name="group">
@@ -28,10 +32,14 @@
 			<input type="submit" name="addSlot" value="Lägg till pass">
 		</form>
 
+		<?php
+			}
+		?>
+
 		<div class="list-group">
 			<?php loadWorkSlots() ?>
 		</div>
-		
+
 		</div> <!-- .white-box -->
 	</div> <!-- .col-sm-6 -->
 </div> <!-- .row -->

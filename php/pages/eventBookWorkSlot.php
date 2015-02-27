@@ -11,10 +11,15 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 	{
 		DBQuery::sql("INSERT INTO user_work (work_slot_id, user_id, checked)
                                   VALUES ('$work_slot_id', '$user_id', '0')");
+		?>
+		<script>
+			window.location = "?page=event&id=<?php echo $event_id; ?>";
+		</script>
+	<?php
 	}
 	else
 	{
-		?>
+	?>
 		<script>
 			window.location = "?page=event&id=<?php echo $event_id; ?>";
 			alert("Sluta försöka hacka sidan!")

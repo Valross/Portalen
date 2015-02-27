@@ -49,7 +49,7 @@ if(isset($_POST['submitComment']))
 	}
 }
 
-if(isset($_POST['addSlot']))
+if(isset($_POST['addSlot']) && checkAdminAccess())
 {
 	$group_id = $_POST['group'];
 	$amount = $_POST['amount'];
@@ -215,7 +215,7 @@ function loadWorkSlots()
 					else
 					{
 						echo '<a href=?page=eventRemoveWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book-remove">Ta bort passet</a>';
+							' class="list-group-item-text-book-remove"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 					}
 
 					echo '<input type="text" class="input-book" name="points[]" id="points[]" value="'.$slots[$j]['points'].'">p';
@@ -224,12 +224,12 @@ function loadWorkSlots()
 					if(count($bookedSlot) == 0)
 					{
 						echo '<a href=?page=eventBookWorkSlotFor&event_id='.$event_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka person</a></li>';
+							' class="list-group-item-text-book"><span class="fa fa-user-plus fa-fw fa-lg"></span></a></li>';
 					}
 					else
 					{
 						echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka av</a></li>';
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
 					}
 				}
 				else
@@ -260,7 +260,7 @@ function loadWorkSlots()
 					{
 						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka</a></li>';
+							' class="list-group-item-text-book"><span class="fa fa-plus fa-fw fa-lg"></span></a></li>';
 						else
 							echo '</li>';
 					}
@@ -268,7 +268,7 @@ function loadWorkSlots()
 					{
 						if(count($localUserBookedThisSlot) > 0)
 							echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book">Boka av</a></li>';
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
 						else
 							echo '</a></li>';
 					}

@@ -173,7 +173,7 @@ function loadWorkSlots()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		$number = 0;
-		echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'"><strong>'.$groups[$i]['name'].'</strong></a></li>';
+		echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'" class="black-link"><strong>'.$groups[$i]['name'].'</strong></a></li>';
 		for($j = 0; $j < count($slots); ++$j)
 		{
 			$work_slot_id = $slots[$j]['id'];
@@ -244,17 +244,17 @@ function loadWorkSlots()
 
 					if(count($bookedSlot) > 0)
 					{
-						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
+						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
 						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 						echo loadAvatarFromUser($bookedSlot[0]['user_id'], 25).'</a>';
 					}
 					else
-						echo '<li class="list-group-item-text">'.$number.'. '.$start_h.$end_h;
+						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
 
 					if(checkAdminAccess() || count($localUserBookedThisEvent) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
 
-					echo " (".$slots[$j]['points'].'p)';
+					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
 
 					if(count($localUserBookedThisEvent) == 0)
 					{

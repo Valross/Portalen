@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1>Achievements</h1>
+			<h1>Achievements <span class="fa fa-trophy fa-fw fa-lg"></span></h1>
 		</div>
 	</div>
 </div> <!-- .row -->
@@ -32,6 +32,16 @@
 			  	</tbody>
 				</table>
 			</div>
+		</div>
+	<div class="col-sm-6">
+		<div class="white-box">
+			<table class="table table-hover">
+				<tbody>
+
+				  	<?php loadAchievements() ?>
+
+			  	</tbody>
+				</table>
 		</div>
 	</div>
 </div>

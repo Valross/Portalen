@@ -209,8 +209,7 @@ function loadWorkSlots()
 					echo '<input type="text" class="input-book" name="wage[]" id="wage[]" value="'.$slots[$j]['wage'].'"> kr/h ';
 					if(count($bookedSlot) > 0)
 					{
-						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-						echo loadAvatarFromUser($bookedSlot[0]['user_id'], 25).'</a>';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'">'.loadAvatarFromUser($bookedSlot[0]['user_id'], 20). loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
 					{
@@ -245,8 +244,7 @@ function loadWorkSlots()
 					if(count($bookedSlot) > 0)
 					{
 						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
-						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'"> '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
-						echo loadAvatarFromUser($bookedSlot[0]['user_id'], 25).'</a>';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> '.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
 						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
@@ -260,7 +258,7 @@ function loadWorkSlots()
 					{
 						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book"><span class="fa fa-plus fa-fw fa-lg"></span></a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
 						else
 							echo '</li>';
 					}

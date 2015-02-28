@@ -544,15 +544,6 @@ fieldset[disabled] {
   	  border-left: 0;
 	  border-color: #e3e9eb;
 	}
-	.white-box a.list-group-item .list-group-item-text {
-		color: #444; 
-	}
-	.white-box a.list-group-item-text-book {
-		float: right;
-	}
-	.white-box a.list-group-item-text-book-remove {
-		float: clear;
-	}
 	.white-box .list-group-item:first-child {
 	  border-top-right-radius: 0px;
 	  border-top-left-radius: 0px;
@@ -572,7 +563,23 @@ fieldset[disabled] {
 	.white-box .list-group-item .list-group-thumbnail {
 		margin: -2px 10px 0 0;
 	}
-	
+	.white-box a.list-group-item .list-group-item-text {
+		color: #444; 
+	}
+	.white-box .list-group-item-text-book {
+		float: right;
+	}
+	.white-box .list-group-item-text-book-remove {
+		float: clear;
+	}
+	.white-box .list-group-item .work-slot-user {
+		display: inline-block;
+		margin-left: 20px;
+	}
+	.white-box .list-group-item .work-slot-user img,
+	.white-box .list-group-item .work-slot-user span.fa {
+		margin: -2px 6px 0 0;
+	}
 	
 	/* Group badges */
 	

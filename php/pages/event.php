@@ -327,7 +327,7 @@ function loadComments()
 			{
 				echo '<div class="comment">';
 				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
-				echo '<p><strong>Namnet Namnsson</strong> ';
+				echo '<p><a href="">Namnet Namnsson</a> ';
 				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
 				echo $event_comments[$i]['comment'].'</p>';
 				echo '</div>';

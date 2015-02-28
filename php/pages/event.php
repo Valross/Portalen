@@ -84,12 +84,6 @@ function loadEventName()
 	$event_name = DBQuery::sql("SELECT name FROM event
 							WHERE id = '$event_id'");
 
-	$adminAccess = DBQuery::sql("SELECT access_id, group_id FROM group_access
-						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4) AND
-						group_id IN
-							(SELECT group_id FROM group_member
-							WHERE user_id = '$user_id' AND (group_id = 1 OR group_id = 7))");
-
 	if(count($event_name) > 0)
 		echo $event_name[0]['name'];
 	else
@@ -98,7 +92,7 @@ function loadEventName()
 	$da_note = DBQuery::sql("SELECT event_id FROM da_note
 							WHERE event_id = '$event_id'");
 
-	if(count($da_note) > 0 && count($adminAccess) > 0)
+	if(count($da_note) > 0 && checkAdminAccess())
 	{
 		echo ' - <a href="?page=DANote&id='.$da_note[0]['event_id'].'">DA-lapp</a>';
 	}

@@ -318,22 +318,22 @@ function loadComments()
 
 		if(count($event_comments) > 0)
 		{
-			echo '<div class="row">
-						<div class="col-sm-12">
+			echo '
+						<div class="col-sm-7">
 							<div class="white-box">';
-			echo '<h1>Kommentarer</h1>';
+			echo '<h3>Kommentarer (x) <-- antal</h3>';
 
 			for($i = 0; $i < count($event_comments); ++$i)
 			{
-				echo '<div>';
-				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="100" height="100" class="page-header-img">';
-				echo '<p>'.$event_comments[$i]['date_written'].'</p>';
-				echo '<p>'.$event_comments[$i]['comment'].'</p>';
+				echo '<div class="comment">';
+				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
+				echo '<p><strong>Namnet Namnsson</strong> ';
+				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
+				echo $event_comments[$i]['comment'].'</p>';
 				echo '</div>';
 			}
 			echo '			</div>
-						</div>
-					</div>';
+						</div>';
 		}
 	}
 }

@@ -331,7 +331,8 @@ fieldset[disabled] {
 	.white-box h2,
 	.white-box h3,
 	.white-box h4,
-	.white-box table {
+	.white-box table,
+	.white-box .comment {
 		margin: 20px; 
 		/* Detta är ju egentligen ingen bra lösning. Det kanske man skulle fixa när man pallar. 
 		Typ fixa en div som sköter marginen ist för att tilldela den till massa återkommande taggar. /Andreas */
@@ -603,7 +604,25 @@ fieldset[disabled] {
 		color: #6267CB;
 	}
 	
+	/* Comments */
 	
+	.white-box .comment {
+		border-top: 1px dashed #e3e9eb;
+		overflow: hidden;
+		padding: 20px 0;
+		margin: 0 20px;
+	}
+	.white-box .comment img.img-circle {
+		float: left;
+		margin: 0 20px 0 0;
+	}
+	.white-box .comment p {
+		float: left;
+		margin: 0;
+	}
+	.white-box .comment span.time {
+		color: #aaa;
+	}
 	
 	/* kategorisera detta bättre */
 	

@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>DA-lappar - <a href="?page=browseHeadwaiterNote">Hovis-lappar</a></h1>
+			<h1><span class="fa fa-user-secret fa-fw fa-lg"></span> DA-lappar - <a href="?page=browseHeadwaiterNote">Hovis-lappar</a></h1>
 		</div>
 	</div>
 </div>

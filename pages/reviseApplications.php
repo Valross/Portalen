@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Granska ansökningar</h1>
+			<h1><span class="fa fa-user-plus fa-fw fa-lg"></span> Granska ansökningar</h1>
 		</div>
 	</div>
 </div>

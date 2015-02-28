@@ -5,7 +5,7 @@
 <div class="row">	
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Hantera Perioder</h1>
+			<h1><span class="fa fa-calendar-o fa-fw fa-lg"></span> Hantera perioder</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

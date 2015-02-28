@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Personallista</h1>
+			<h1><span class="fa fa-list fa-fw fa-lg"></span> Personallista</h1>
 		</div>
 	</div>
 </div>

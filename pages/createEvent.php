@@ -95,7 +95,7 @@ function removeSlot(id)
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Skapa nytt evenemang</h1>
+			<h1><span class="fa fa-calendar fa-fw fa-lg"></span> Skapa evenemang</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

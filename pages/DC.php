@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1>DC-Verktyg</h1>
+			<h1><span class="fa fa-gavel fa-fw fa-lg"></span> DC-Verktyg</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

@@ -1,7 +1,7 @@
 	<div class="row">
 		<div class="col-sm-8">
 			<div class="page-header">
-			<h1>Inställningar</h1>
+			<h1><span class="fa fa-cog fa-fw fa-lg"></span> Inställningar</h1>
 			</div>
 		</div>
 		<div class="col-sm-4 page-header-right text-right">

@@ -1,7 +1,14 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1><span class="fa fa-trophy fa-fw fa-lg"></span> Achievements</h1>
+			<h1><span class="fa fa-trophy fa-fw fa-lg"></span> Achievements
+			<?php
+				if(checkAdminAccess())
+				{
+					echo ' - <a href="?page=createAchievement">Hantera</a>';
+				}
+			?>
+			</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

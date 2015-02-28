@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2015 at 04:21 PM
+-- Generation Time: Feb 28, 2015 at 05:24 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `achievement` (
   `icon` varchar(35) DEFAULT NULL,
   `points` int(11) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `achievement`
@@ -73,7 +73,8 @@ CREATE TABLE IF NOT EXISTS `achievement` (
 
 INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
 (1, 'Logga in', 'Logga in för första gången!', 'fa fa-diamond fa-fw fa-lg', 5),
-(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', '', 5);
+(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', '', 5),
+(3, 'Första passet', 'Jobba ditt första pass!', '', 15);
 
 -- --------------------------------------------------------
 
@@ -84,6 +85,7 @@ INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
 CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
   `user_id` int(11) NOT NULL,
   `achievement_id` int(11) NOT NULL,
+  `date_unlocked` date NOT NULL,
   KEY `user_id` (`user_id`,`achievement_id`),
   KEY `achievement_id` (`achievement_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -92,9 +94,11 @@ CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
 -- Dumping data for table `achievement_unlocked`
 --
 
-INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`) VALUES
-(2, 1),
-(2, 1);
+INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`, `date_unlocked`) VALUES
+(2, 1, '0000-00-00'),
+(2, 1, '0000-00-00'),
+(1, 1, '0000-00-00'),
+(6, 2, '2015-02-21');
 
 -- --------------------------------------------------------
 
@@ -582,11 +586,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 0, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', 2, 0, NULL, NULL),
+(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 5, '1337-000000000', 'Ja'),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', 3, 10, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, 0, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
-(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
+(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 5, NULL, NULL),
 (7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------

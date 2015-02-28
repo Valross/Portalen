@@ -52,7 +52,7 @@ function loadAll()
 	echo '<div class="row">
 			<div class="col-sm-12">
 				<div class="page-header">
-					<h1>Skapa Achievement<span class="fa fa-trophy fa-fw fa-lg"></span></h1>
+					<h1><span class="fa fa-trophy fa-fw fa-lg"></span>Hantera <a href="?page=achievements">Achievements</a></h1>
 				</div>
 			</div>
 		</div> <!-- .row -->';

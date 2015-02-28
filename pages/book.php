@@ -21,11 +21,15 @@
 <div class="col-sm-4">
 	<div class="white-box">
 	<h3>Dina bokningsbara pass</h3>
+	<div class="list-group">
 	<?php echo loadAvailableEvents() ?>
+	</div>
 	<h3>Bokade pass</h3>
+	<div class="list-group">
 	<?php echo loadBookedEvents() ?>
 	</div>
-</div>
+	</div> <!-- .white-box -->
+</div> <!-- .col-sm-4 -->
 <div class="col-sm-8">
 	<div class="white-box calendar-box">
 		<div class="calendar-top">

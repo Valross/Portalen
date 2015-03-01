@@ -8,24 +8,29 @@
 
 <div class="row">
 <div class="col-sm-5">
-		<h3>Dina bokade pass</h3>	
+	<div class="white-box">
 		
+			<h3>Bokade pass</h3>	
 			<div class="list-group">
 				 <?php loadBookedEvents(); ?>
 			</div>
+			
 			<h3>Idag på Trappan</h3>
 			<div class="list-group">	
 				<?php loadTodaysEvents(); ?>
 			</div>
-			<h3>Lediga pass</h3>
+			
+			<h3>Bokningsbara pass</h3>
 			<div class="list-group">
 				<?php loadAvailableEvents(); ?>
 			</div>
+			
 			<h3>Möten</h3>
 			<div class="list-group">
 				<?php loadAvailableMeetings(); ?>
 			</div>
-</div>
+	</div> <!-- .white-box -->
+</div> <!-- col-sm-5 -->
 		
 <div class="col-sm-7">
 	<div class="white-box">

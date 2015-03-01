@@ -624,6 +624,21 @@ fieldset[disabled] {
 		color: #aaa;
 	}
 	
+	/* News */
+	
+	.news-info {
+		display: block;
+		margin: -12px 20px 0 20px;
+		font-size: 12px;
+		line-height: 20px;
+	}
+	.news-info img {
+		margin: -1px 5px 0 0;
+	}
+	.news-info span.time {
+		color: #aaa;
+	}
+	
 	/* kategorisera detta bättre */
 	
 	#footer p {

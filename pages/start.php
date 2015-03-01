@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-5">
 		<h3>Dina bokade pass</h3>	
 		
 			<div class="list-group">
@@ -27,21 +27,16 @@
 			</div>
 </div>
 		
-<div class="col-sm-6">
+<div class="col-sm-7">
 	<div class="white-box">
-	<h1><?php loadTitle(); ?></h1>
-	<div>
-		<?php loadUserAvatar(); ?>
-	</div>
-	<div>
-		<?php loadUserName(); ?>
-	</div>
-	<div>
-		<?php loadDate(); ?>
-	</div>
-	<div class="list-group">
-		<?php loadMessage(); ?>
-	</div>
+	<h2><?php loadTitle(); ?></h2>
+		
+		<div class="news-info">
+		<span><?php loadUserAvatar(); ?>
+		<?php loadUserName(); ?></span> <span class="time">- <?php loadDate(); ?></span>
+		</div>
+		
+		<p><?php loadMessage(); ?></p>
 	
 	</div>
 </div>

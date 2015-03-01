@@ -34,7 +34,7 @@ function loadUserAvatar()
 	if(count($groups) > 0)
 	{
 		echo '<a href=?page=userProfile&id='.$groups[count($groups)-1]['user_id'].'>'.
-		'<img src="'.loadNewsAvatar($groups[count($groups)-1]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+		'<img src="'.loadNewsAvatar($groups[count($groups)-1]['user_id']).'" width="20" height="20" class="img-circle"></a>';
 	}
 }
 

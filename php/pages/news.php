@@ -9,11 +9,12 @@ function loadAll()
 	{
 		echo '<div class="col-sm-7">
 				<div class="white-box">';
-					echo '<h1>'.loadTitle($news[$i]['id']).'</h1>';
-					echo '<div>'.loadUserAvatar($news[$i]['id']);
+					echo '<h2>'.loadTitle($news[$i]['id']).'</h2>';
+					echo '<div class="news-info"><span>';
+					echo loadUserAvatar($news[$i]['id']);
 					echo loadUserName($news[$i]['id']);
-					echo '<p>'.loadDate($news[$i]['id']).'</p></div>';
-					echo '<div>'.loadMessage($news[$i]['id']).'</div>';
+					echo '</span> <span class="time">- '.loadDate($news[$i]['id']).'</span></div>';
+					echo '<p>'.loadMessage($news[$i]['id']).'</p>';
 		echo    '</div>
 			 </div>';
 	}
@@ -51,7 +52,7 @@ function loadUserAvatar($news_id)
 	if(count($news) > 0)
 	{
 		echo '<a href=?page=userProfile&id='.$news[0]['user_id'].'>'.
-		'<img src="'.loadNewsAvatar($news[0]['user_id']).'" width="25" height="25" class="img-circle"></a>';
+		'<img src="'.loadNewsAvatar($news[0]['user_id']).'" width="20" height="20" class="img-circle"></a>';
 	}
 }
 

@@ -198,51 +198,49 @@ if(isset($_POST['UploadAvatar'])) {
 
 	// Check if file is an image
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
     if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
+        // echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
+    }
+
+    else {
+        echo "Filen är inte en bild.";
         $uploadOk = 0;
     }
 
-    // Allow certain file formats
+    // Check if image file type is valid
 	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 	&& $imageFileType != "gif" ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 	    $uploadOk = 0;
 	}
 
-	// Check file size
+	// Check so file size isn't batshit crazy
 	if ($_FILES["fileToUpload"]["size"] > 25000000) {
 	    echo "Sorry, your file is too large.";
 	    $uploadOk = 0;
 	}
 
-	// Get information from the form
-	$img = ($_FILES['fileToUpload']['name']); 
-
-	//update database
-	DBQuery::sql("UPDATE user
-				  SET avatar = '$img'
-				  WHERE id='$_SESSION[user_id]'");   
-
-	// Check if $uploadOk is set to 0 by an error
-	if ($uploadOk == 0) {
+	// If image doesn't pass, print feedback 
+	if ($uploadOk == 0)
 	    echo "Din fil kunde inte laddas upp.";
-	} 
 
-	// if everything is ok, try to upload file
+	// Else if everything is ok, attempt uploading file
 	else {
+		$img = ($_FILES['fileToUpload']['name']); 
 
-		// $testTarget = "../../img/avatars"
+		// Update database
+		DBQuery::sql("UPDATE user
+					  SET avatar = '$img'
+					  WHERE id='$_SESSION[user_id]'");   
+
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+	        // echo "Din bild" . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
 	    } 
 
-	    else {
-	        echo "Sorry, there was an error uploading your file.";
-	    }
+	    else
+	        echo "Din bild kunde inte laddas upp.";
 	}
 
 }

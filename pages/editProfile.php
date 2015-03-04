@@ -41,11 +41,15 @@
 	<div class="white-box">
 		<h3>Ändra visningsbild</h3>
 	<form action="" method="post">
-		<label for="old_password">Nuvarande lösenord</label>
+<!-- 		<label for="old_password">Nuvarande lösenord</label>
 		<input type="password" name="old_password" id="old_password">
-		<input type="submit" name="changePass" value="Ladda upp">
+		<input type="submit" name="changePass" value="Ladda upp"> -->
+		<p>Välj bild:</p>
+    	<input type="file" name="fileToUpload" id="fileToUpload">
+    	<input type="submit" value="Ladda upp" name="UploadImage">
 	</form>
 	</div> <!-- .white-box -->
+
 	<div class="white-box">
 		<h3>Ändra lösenord</h3>
 	<form action="" method="post">

@@ -186,4 +186,13 @@ if(isset($_POST['changePass'])) {
 		<?php
 	}
 }
+
+if(isset($_POST['UploadImage'])) {
+	$image = $_POST['fileToUpload'];  //string?
+
+	// echo $image;
+
+	//sql UPDATE
+
+}
 ?>

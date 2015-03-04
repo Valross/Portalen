@@ -213,6 +213,12 @@ if(isset($_POST['UploadAvatar'])) {
 	    $uploadOk = 0;
 	}
 
+	// Check file size
+	if ($_FILES["fileToUpload"]["size"] > 25000000) {
+	    echo "Sorry, your file is too large.";
+	    $uploadOk = 0;
+	}
+
 	// Get information from the form
 	$img = ($_FILES['fileToUpload']['name']); 
 

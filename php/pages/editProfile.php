@@ -236,8 +236,16 @@ if(isset($_POST['UploadAvatar'])) {
 					  WHERE id='$_SESSION[user_id]'");   
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	        // echo "Din bild" . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
-	    } 
+	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
+	        
+	        //relocate
+			?>
+			<script>
+				window.location = "?page=editProfile";		//TO DO: hard code url
+				alert("Din bild \"" + "<?php echo $img; ?>" + "\" har laddats upp!");
+			</script>
+			<?php
+		}
 
 	    else
 	        echo "Din bild kunde inte laddas upp.";

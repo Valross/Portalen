@@ -56,7 +56,7 @@ function loadEventName($event_id)
 		echo "Något gick fel!";
 }
 
-function loadAvatarFromUser($user_id)
+function loadUserAvatar($user_id)
 {
 	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
 	if(count($results) == 0)
@@ -64,16 +64,6 @@ function loadAvatarFromUser($user_id)
 		return '<img src="img/avatars/no_face_small.png" width="20" height="20" class="img-circle">';
 	}
 	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="20" height="20" class="img-circle">';
-}
-
-function loadNameFromUser($user_id)
-{
-	$results = DBQuery::sql("SELECT name, last_name FROM user WHERE id = '$user_id'");
-	if(count($results) == 0)
-	{
-		return '';
-	}
-	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
 function loadWorkSlots()
@@ -134,7 +124,7 @@ function loadWorkSlots()
 							echo $start.$end;
 							echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 							echo " (".$slots[$j]['points'].' poäng)';
-							echo loadAvatarFromUser($bookedSlot[0]['user_id']);
+							echo loadUserAvatar($bookedSlot[0]['user_id']);
 							echo '</a>';
 						}
 					}

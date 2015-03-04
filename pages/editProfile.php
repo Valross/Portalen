@@ -40,13 +40,11 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Ändra visningsbild</h3>
-	<form action="" method="post">
-<!-- 		<label for="old_password">Nuvarande lösenord</label>
-		<input type="password" name="old_password" id="old_password">
-		<input type="submit" name="changePass" value="Ladda upp"> -->
+	
+	<form action="" method="post" enctype="multipart/form-data">
 		<p>Välj bild:</p>
     	<input type="file" name="fileToUpload" id="fileToUpload">
-    	<input type="submit" value="Ladda upp" name="UploadImage">
+    	<input type="submit" value="Ladda upp" name="UploadAvatar">
 	</form>
 	</div> <!-- .white-box -->
 

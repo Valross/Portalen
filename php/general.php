@@ -135,7 +135,8 @@ function loadUpcomingEvents()
 			break;
 		}*/
 		?>
-			<a href="#" class="list-group-item"><span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span><strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month; ?></strong><?php echo $name ?></a>
+			<a href="#" class="list-group-item"><strong><?php echo $day.'/'.$month; ?></strong><?php echo $name ?>
+			<span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span></a>
 		<?php
 	}
 }
@@ -208,8 +209,8 @@ function loadBookedEvents()
 		
 		?>
 			<a href=<?php echo '"?page=event&id='.$bookedEvents[$i]['id'].'"'; ?> class="list-group-item">
-			<span class="badge" style="margin-right: 15px"><?php echo $points ?> poäng</span>
-			<strong class="list-group-item-time-floated-left"><?php echo $day.'/'.$month.' '; ?></strong>
+			<span class="badge"><?php echo $points ?>p</span>
+			<strong><?php echo $day.'/'.$month.' '; ?></strong>
 			<?php echo ' '.$name ?></a>
 		<?php
 	}

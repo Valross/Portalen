@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2015 at 11:14 AM
+-- Generation Time: Feb 28, 2015 at 05:24 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -51,6 +51,54 @@ INSERT INTO `access` (`id`, `name`) VALUES
 (4, 'super_admin'),
 (12, 'vard'),
 (5, 'webb');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `achievement`
+--
+
+CREATE TABLE IF NOT EXISTS `achievement` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `icon` varchar(35) DEFAULT NULL,
+  `points` int(11) NOT NULL DEFAULT '5',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `achievement`
+--
+
+INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
+(1, 'Logga in', 'Logga in för första gången!', 'fa fa-diamond fa-fw fa-lg', 5),
+(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', '', 5),
+(3, 'Första passet', 'Jobba ditt första pass!', '', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `achievement_unlocked`
+--
+
+CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
+  `user_id` int(11) NOT NULL,
+  `achievement_id` int(11) NOT NULL,
+  `date_unlocked` date NOT NULL,
+  KEY `user_id` (`user_id`,`achievement_id`),
+  KEY `achievement_id` (`achievement_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `achievement_unlocked`
+--
+
+INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`, `date_unlocked`) VALUES
+(2, 1, '0000-00-00'),
+(2, 1, '0000-00-00'),
+(1, 1, '0000-00-00'),
+(6, 2, '2015-02-21');
 
 -- --------------------------------------------------------
 
@@ -228,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `event_template` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `event_type_id` (`event_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `event_template`
@@ -333,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 --
 
 INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
-(1, 2, 0, '2015-02-26'),
+(1, 2, 0, '2015-02-27'),
 (2, 1, 0, '0000-00-00'),
 (2, 2, 0, '2015-02-05'),
 (4, 1, 0, '0000-00-00'),
@@ -390,15 +438,18 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  KEY `user_id` (`user_id`),
+  FULLTEXT KEY `message` (`message`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `title`, `message`, `date`, `user_id`) VALUES
-(1, 'Hej', 'Då', '2015-02-12 14:53:09', 2);
+(1, 'Hej', 'Då', '2015-02-12 14:53:09', 2),
+(2, 'Nya pass och personalfest!', 'Hej!  Nu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan!  Glöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen.  Ha det bra!', '2015-02-27 11:20:14', 2),
+(3, 'Nyhetsbrev', 'Hej! \r\nNu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan! \r\n\r\nGlöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen. \r\n\r\nHa det bra!', '2015-02-27 11:40:17', 2);
 
 -- --------------------------------------------------------
 
@@ -523,6 +574,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `latest_session` date NOT NULL,
   `number_of_sessions` int(11) NOT NULL DEFAULT '0',
+  `achievement_points` int(11) NOT NULL DEFAULT '0',
   `bank_account` varchar(50) DEFAULT NULL,
   `special_food` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -533,13 +585,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', NULL, '', 'beawea', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', 2, NULL, NULL),
-(3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, NULL, NULL),
-(5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, NULL, NULL),
-(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, NULL, NULL),
-(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', 0, NULL, NULL);
+INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
+(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 5, '1337-000000000', 'Ja'),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', 3, 10, NULL, NULL),
+(3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, 0, NULL, NULL),
+(5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
+(6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 5, NULL, NULL),
+(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -575,7 +627,6 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (89, 1, 0),
 (90, 2, 0),
-(91, 2, 0),
 (93, 3, 0),
 (95, 2, 1),
 (96, 2, 1);
@@ -654,7 +705,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -717,11 +768,31 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (93, 7, 50, 13, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (95, 7, 51, 4, 40, '2015-02-18 16:00:00', '2015-02-19 04:00:00'),
-(96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00');
+(96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00'),
+(99, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(100, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(101, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(102, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(103, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(104, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(105, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(106, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(107, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(108, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(109, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(110, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(111, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00');
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `achievement_unlocked`
+--
+ALTER TABLE `achievement_unlocked`
+  ADD CONSTRAINT `achievement_unlocked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `achievement_unlocked_ibfk_2` FOREIGN KEY (`achievement_id`) REFERENCES `achievement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `application_group`
@@ -755,8 +826,8 @@ ALTER TABLE `event`
 -- Constraints for table `event_comments`
 --
 ALTER TABLE `event_comments`
-  ADD CONSTRAINT `event_comments_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `event_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `event_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_comments_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event_template`

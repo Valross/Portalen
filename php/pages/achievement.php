@@ -7,9 +7,7 @@ function loadAchievement()
 								WHERE id = '$achievement_id'");
 	?>
 		<h1>
-			<a href="" data-toggle="tooltip" data-placement="bottom" title="<?php echo $achievements[0]['description'];?>"> 
-				<i class="<?php echo $achievements[0]['icon'];?>"></i>
-			</a>
+			<i class="<?php echo $achievements[0]['icon'];?>"></i>
 			<?php echo $achievements[0]['name'];?> - <span class="fa fa-diamond fa-fw fa-lg"></span><?php echo $achievements[0]['points'];?>
 		</h1>
 		<p>

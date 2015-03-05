@@ -7,7 +7,7 @@
 </div> <!-- .row -->
 
 <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-5">
 	<div class="white-box">
 		<h3>Evenemangsinformation</h3>
 		<table class="basic-table">
@@ -16,7 +16,7 @@
 		
 		</div> <!-- .white-box -->
 	</div> <!-- .col-sm-6 -->
-<div class="col-sm-6">
+<div class="col-sm-7">
 	<div class="white-box">
 		<h3>Pass</h3>
 

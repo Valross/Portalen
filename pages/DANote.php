@@ -29,6 +29,7 @@
 			<table class="table table-hover">
 		      	<thead>
 			        <tr>
+			        	<th>Totalt (kr)</th>
 			          	<th>Entré (kr)</th>
 			          	<th>Bar (kr)</th>
 					  	<th>Cash (kr)</th>

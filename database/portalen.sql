@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2015 at 05:17 PM
+-- Generation Time: Mar 05, 2015 at 05:07 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -65,15 +65,20 @@ CREATE TABLE IF NOT EXISTS `achievement` (
   `icon` varchar(35) DEFAULT NULL,
   `points` int(11) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `achievement`
 --
 
 INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
-(1, 'Logga in', 'Logga in för första gången!', 'fa fa-diamond fa-fw fa-lg', 5),
-(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', '', 5);
+(1, 'Logga in', 'Logga in för första gången!', 'fa fa-cloud fa-fw fa-lg', 5),
+(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', 'fa fa-cloud fa-fw fa-lg', 5),
+(3, 'För att du är Värd det', 'Jobba som värd 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(4, 'Bartastic', 'Jobba som bartender 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(5, 'Kocktastic', 'Jobba som kock 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(6, 'DA-tastic', 'Jobba som DA 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(7, 'Jack of all trades', 'Jobba minst ett pass som: bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 10);
 
 -- --------------------------------------------------------
 
@@ -94,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
 
 INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`) VALUES
 (2, 1),
-(2, 1);
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -136,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
+  `sales_total` int(11) NOT NULL,
   `sales_entry` int(11) NOT NULL,
   `sales_bar` int(11) NOT NULL,
   `cash` int(11) NOT NULL,
@@ -152,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `da_note` (
 -- Dumping data for table `da_note`
 --
 
-INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
-(1, 1, 35, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
-(27, 2, 36, 1, 2, 23, 2342, 242, '42', '2015-02-19');
+INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
+(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
+(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-19');
 
 -- --------------------------------------------------------
 
@@ -377,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 --
 
 INSERT INTO `group_member` (`group_id`, `user_id`, `group_leader`, `member_since`) VALUES
-(1, 2, 0, '2015-02-27'),
+(1, 2, 0, '2015-03-04'),
 (2, 1, 0, '0000-00-00'),
 (2, 2, 0, '2015-02-05'),
 (4, 1, 0, '0000-00-00'),
@@ -582,7 +588,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 0, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'rikge099.gif', '0000-00-00 00:00:00', '0000-00-00', 2, 10, NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '0000-00-00', 2, 10, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, 0, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
@@ -621,8 +627,9 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (89, 1, 0),
-(90, 2, 0),
+(91, 2, 1),
 (93, 3, 0),
+(94, 2, 0),
 (95, 2, 1),
 (96, 2, 1);
 
@@ -651,7 +658,7 @@ INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`)
 (1, 'Driftgruppen', '', '', ''),
 (2, 'Webb', '', '', ''),
 (3, 'Kock', '', '', ''),
-(4, 'Bartastic', 'YEAH BAR', 'www.facebook.com', ''),
+(4, 'Bar', 'YEAH BAR', 'www.facebook.com', ''),
 (5, 'DJ', '', '', ''),
 (6, 'Värd', '', '', ''),
 (7, 'Dagsansvarig', '', '', ''),

@@ -520,4 +520,102 @@ function loadNameFromUser($user_id)
 	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
+function unlockAchievementForUser($user_id, $achievement_id)
+{
+	$achievement = DBQuery::sql("SELECT id, points FROM achievement WHERE id = '$achievement_id'");
+
+	$achievement_unlocked = DBQuery::sql("SELECT achievement_id FROM achievement_unlocked 
+								WHERE user_id = '$user_id' AND achievement_id = $achievement_id");
+
+	$points = DBQuery::sql("SELECT achievement_points FROM user WHERE id = '$user_id'");
+
+	$total_points = $points[0]['achievement_points'] + $achievement[0]['points'];
+	
+	if(count($achievement_unlocked) == 0)
+	{
+		DBQuery::sql("INSERT INTO achievement_unlocked (user_id, achievement_id)
+							VALUES ('$user_id', '$achievement_id')");
+
+		DBQuery::sql("UPDATE user
+				  SET achievement_points = '$total_points', 
+				  WHERE id='$user_id'");
+	}
+}
+
+function checkIfAchievement($user_id)
+{
+	$achievements_unlocked = DBQuery::sql("SELECT achievement_id FROM achievement_unlocked 
+								WHERE user_id = '$user_id'");
+
+	$workedGuard = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 6)) 
+										AND event_type_id != 5");
+
+	$workedChef = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 3)) 
+										AND event_type_id != 5");
+
+	$workedBar = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 4)) 
+										AND event_type_id != 5");
+
+	$workedAll = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 13)) 
+										AND event_type_id != 5");
+
+	$workedServe = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 11)) 
+										AND event_type_id != 5");
+
+	$workedDA = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 7)) 
+										AND event_type_id != 5");
+
+	if(count($workedGuard) >= 5) //Jobba värd 5 gånger
+	{
+		unlockAchievementForUser($user_id, 3);
+	}
+	if(count($workedChef) >= 5) //Jobba kock 5 gånger
+	{
+		unlockAchievementForUser($user_id, 5);
+	}
+	if(count($workedBar) >= 5) //Jobba bar 5 gånger
+	{
+		unlockAchievementForUser($user_id, 4);
+	}
+	if(count($workedDA) >= 5) //Jobba bar 5 gånger
+	{
+		unlockAchievementForUser($user_id, 6);
+	}
+	if(count($workedBar) >= 1 && count($workedChef) >= 1 && count($workedGuard) >= 1 
+			&& count($workedServe) >= 1 && count($workedAll) >= 1) //Jobba alla pass (Jack of all trades)
+	{
+		unlockAchievementForUser($user_id, 7);
+	}
+}
+
 ?>

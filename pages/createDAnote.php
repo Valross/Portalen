@@ -24,7 +24,8 @@
 
 			<h4>Arbetande festeri</h4>
 					<?php loadWorkingPartyries(); ?>
-
+			<label for="salesTotal">Försäljning totalt</label>
+			<input type="text" placeholder="89086" name="salesTotal" id="salesTotal">
 			<label for="salesEntry">Försäljning entré</label>
 			<input type="text" placeholder="9001" name="salesEntry" id="salesEntry">
 			<label for="salesBar">Försäljning bar</label>

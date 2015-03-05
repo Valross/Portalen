@@ -17,6 +17,9 @@ if(isset($_POST['submit']) && checkAdminAccess())
 	        DBQuery::sql("UPDATE user_work
 				  SET checked=1
 				  WHERE work_slot_id='$slot'");	    
+	        $user_id = DBQuery::sql("SELECT user_id FROM user_work
+							WHERE work_slot_id = '$slot'");
+	        checkIfAchievement($user_id[0]['user_id']);
 	    }
 	}
 }

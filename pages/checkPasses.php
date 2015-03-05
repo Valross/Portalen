@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>Checka pass</h1>
+			<h1><span class="fa fa-check-square-o fa-fw fa-lg"></span> Checka av pass</h1>
 		</div>
 	</div>
 </div> <!-- .row -->
@@ -13,13 +13,14 @@
 <div class="row">
 <div class="col-sm-6">
 	<div class="white-box">
-		<p>Välj evenemang</p>
+		<h3>Välj evenemang</h3>
 			<?php loadMyDAEvents(); ?>
 	</div> <!-- .white-box -->
 </div>
-</div>
 
 <?php loadWorkSlots(); ?>
+
+</div>
 <?php
 	}
 	else

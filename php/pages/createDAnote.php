@@ -84,28 +84,25 @@ function loadArrangingPartyries()
 {
 	$partyries = DBQuery::sql("SELECT id, name FROM partyries");
 	?>
-		<div class="two-column">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = 0; $i < count($partyries)-5; ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="A<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+
+			<label for="A<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			<?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
 		</div>
-		<div class="two-column-padding">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = count($partyries)-5; $i < count($partyries); ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="A<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			<label for="A<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			 <?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
@@ -117,28 +114,24 @@ function loadWorkingPartyries()
 {
 	$partyries = DBQuery::sql("SELECT id, name FROM partyries");
 	?>
-		<div class="two-column">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = 0; $i < count($partyries)-5; ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			<label for="<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			<?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
 		</div>
-		<div class="two-column-padding">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = count($partyries)-5; $i < count($partyries); ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			
+			<label for="<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>"> <?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>

@@ -1,7 +1,7 @@
-<form  method="post" action="search.php?go"  id="searchform"> 
-	<input  type="text" name="name"> 
-	<input  type="submit" name="submitSearch" value="Search"> 
-</form>
+<!-- <form  method="post" action="search.php?go"  id="searchform"> 
+	<input type="text" name="name"> 
+	<input type="submit" name="submitSearch" value="Search"> 
+</form> -->
 
 <?php
 include_once('DBQuery.php');
@@ -9,7 +9,7 @@ include_once('DBQuery.php');
 if(isset($_POST['submitSearch'])){ 
 	if(isset($_GET['go'])){
 		if(preg_match("/[A-Za-z]+/", $_POST['name'])){ 
-		   $name=$_POST['name']; 
+		   $name=DBQuery::safeString($_POST['name']); 
 
 		   $result = DBQuery::sql("SELECT id, name, last_name, mail FROM user WHERE name LIKE '%" . $name . "%' OR last_name LIKE '%" . $name  ."%'"); 
 
@@ -28,7 +28,9 @@ if(isset($_POST['submitSearch'])){
 		}   
 	}
 }
-		else{ 
-			echo  "<p>Please enter a search query</p>"; 
-		} 
+
+else{ 
+	echo  "<p>Please enter a search query</p>"; 
+} 
+
 ?>

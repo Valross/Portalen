@@ -105,8 +105,10 @@ include_once('php/pageManager.php');
 				<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-6" id="search">
-						<button type="submit"><span class="fa fa-search"></span></button>
-						<input type="search" placeholder="Sök på portalen...">
+						<form  method="post" action="php/search.php?go"  id="searchform"> 
+							<button type="submit" name="submitSearch" ><span class="fa fa-search"></span></button>
+							<input type="search" name="name" placeholder="Sök på portalen...">
+						</form>
 					</div>
 					<div class="col-sm-6 text-right">
 					<div class="dropdown">

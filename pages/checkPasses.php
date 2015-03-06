@@ -14,7 +14,9 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Välj evenemang</h3>
+		<div class="list-group">
 			<?php loadMyDAEvents(); ?>
+		</div>
 	</div> <!-- .white-box -->
 </div>
 

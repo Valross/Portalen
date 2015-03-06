@@ -224,8 +224,6 @@ fieldset[disabled] {
 /* =Layout
 -------------------------------------------------------------- */
 
-/* Sidebar */
-
 
 	#sidebar {
 		background: #363430;
@@ -753,10 +751,12 @@ fieldset[disabled] {
 		clear: both;
 		}
 		#footer {
-			margin-left: 240px;
+			margin: 10px 0 0 240px;
 		}
-		
-		
+		#footer .row div {
+			border-top: 1px solid #e3e9eb;
+			padding: 10px;
+		}
 		
 		#sidebar a.logo {
 			padding: 40px;

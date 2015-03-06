@@ -7,7 +7,7 @@
 		<div class="page-header">
 			<h1><?php loadEventName(); ?></h1>
 			<h4>
-			<img src="<?php echo loadDAAvatar(); ?>" width="32" height="32" class="page-header-img img-circle"> <?php loadDAName(); ?></h4>
+			<img src="<?php echo loadDAAvatar(); ?>" width="32" height="32" class="img-circle"> <?php loadDAName(); ?></h4>
 		</div>
 	</div>
 </div>

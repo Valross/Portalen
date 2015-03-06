@@ -3,22 +3,11 @@
 	{
 ?>
 <div class="row">
-	<div class="col-sm-8">
-		<div class="page-header">
-		<img src="<?php echo loadDAAvatar(); ?>" width="100" height="100" class="page-header-img">
-			<h1 class="header-img"><?php loadDAName(); ?></h1>
-		</div>
-	</div>
-</div> <!-- .row -->
-
-<div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>
-
-				<?php loadEventName(); ?>
-
-			</h1>
+			<h1><?php loadEventName(); ?></h1>
+			<h4>
+			<img src="<?php echo loadDAAvatar(); ?>" width="32" height="32" class="page-header-img img-circle"> <?php loadDAName(); ?></h4>
 		</div>
 	</div>
 </div>
@@ -43,41 +32,51 @@
 
 			  	</tbody>
 				</table>
-			</div>
-		</div>
-	</div>
-</div>
-
+			</div> <!-- .white-box -->
+		</div> <!-- col-sm-12 -->
+	</div> <!-- .row -->
+<div class="row">
 <?php loadArrangingPartyries(); ?>
 <?php loadWorkingPartyries(); ?>
 
-<div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="white-box">
-			<h1>Meddelande</h1>
+			<h3>Meddelande</h3>
 			<p>
-
 			<?php loadDAMessage(); ?>
-			
 			</p>
 		</div>
 	</div>
-</div>
+</div> <!-- .row -->
 
-<?php loadComments(); ?>
-
-<form action="" method="post">
 <div class="row">
 	<div class="col-sm-12">
+		<div class="page-header">
+			<h1><span class="fa fa-comments fa-fw fa-lg"></span> Kommentarer</h1>
+		</div>
+	</div>
+</div> <!-- .row -->
+
+
+<div class="row">
+<?php loadComments(); ?>
+
+
+<form action="" method="post">
+	<div class="col-sm-5">
 		<div class="white-box">
-			<label for="comment">Skriv kommentar</label>
+			<h3>Skriv kommentar</h3>
+			<label for="comment">Kommentar</label>
 			<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
 
 			<input type="submit" name="submit" value="Skicka kommentar">
 		</div> <!-- .white-box -->
 	</div>
-</div>
 </form>
+
+</div> <!-- .row -->
+
+
 <?php
 	}
 	else

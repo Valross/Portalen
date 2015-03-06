@@ -152,23 +152,21 @@ function loadArrangingPartyries()
 
 	if(count($arrangingPartyries) > 0)
 	{
-		echo '<div class="row">
-					<div class="col-sm-12">
+		echo '<div class="col-sm-3">
 						<div class="white-box">';
 		if(count($arrangingPartyries) > 1)
-			echo '<h2>Arrangerande Festerier</h1>';
+			echo '<h4>Arrangerande festerier</h4>';
 		else
-			echo '<h2>Arrangerande Festeri</h1>';
+			echo '<h4>Arrangerande festeri</h4>';
 
 		for($i = 0; $i < count($arrangingPartyries); ++$i)
 		{
-			echo '<div>';
-			echo '<p>'.$arrangingPartyries[$i]['name'].'</p>';
-			echo '</div>';
+			echo '<p>';
+			echo $arrangingPartyries[$i]['name'];
+			echo '</p>';
 		}
 		echo '			</div>
-					</div>
-				</div>';
+					</div>';
 	}
 }
 
@@ -183,23 +181,21 @@ function loadWorkingPartyries()
 
 	if(count($workingPartyries) > 0)
 	{
-		echo '<div class="row">
-					<div class="col-sm-12">
+		echo '<div class="col-sm-3">
 						<div class="white-box">';
 		if(count($workingPartyries) > 1)
-			echo '<h2>Arbetande Festerier</h1>';
+			echo '<h4>Arbetande festerier</h4>';
 		else
-			echo '<h2>Arbetande Festeri</h1>';
+			echo '<h4>Arbetande festeri</h4>';
 
 		for($i = 0; $i < count($workingPartyries); ++$i)
 		{
-			echo '<div>';
-			echo '<p>'.$workingPartyries[$i]['name'].'</p>';
-			echo '</div>';
+			echo '<p>';
+			echo $workingPartyries[$i]['name'];
+			echo '</p>';
 		}
 		echo '			</div>
-					</div>
-				</div>';
+					</div>';
 	}
 }
 
@@ -217,23 +213,22 @@ function loadComments()
 
 	if(count($DAComments) > 0)
 	{
-		echo '<div class="row">
-					<div class="col-sm-12">
+		echo '<div class="col-sm-7">
 						<div class="white-box">';
-		echo '<h1>Kommentarer</h1>';
+		echo '<h3>Kommentarer ('.count($DAComments).')</h3>';
 	
 
 		for($i = 0; $i < count($DAComments); ++$i)
 		{
-			echo '<div>';
-			echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="100" height="100" class="page-header-img">';
-			echo '<p>'.$DAComments[$i]['date_written'].'</p>';
-			echo '<p>'.$DAComments[$i]['comment'].'</p>';
+			echo '<div class="comment">';
+			echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="64" height="64" class="img-circle">';
+			echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
+			echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
+			echo $DAComments[$i]['comment'].'</p>';
 			echo '</div>';
 		}
-		echo '			</div>
-					</div>
-				</div>';
+		echo '			</div> <!-- .white-box -->
+					</div> <!-- .col-sm-7 -->';
 	}
 }
 

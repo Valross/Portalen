@@ -325,6 +325,7 @@ fieldset[disabled] {
 		background: #fff;
 		border: 1px solid #e3e9eb;
 		margin-bottom: 20px;
+		overflow: hidden;
 	}
 	.white-box p, 
 	.white-box h1, 

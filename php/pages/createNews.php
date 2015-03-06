@@ -16,6 +16,16 @@ if(isset($_POST['submit']) && checkAdminAccess())
 		</script>
 		<?php
 	}
+
+	else
+	{
+		?>
+		<script>
+			window.location = "?page=start";
+			alert("Fel: Du måste fylla i båda fält.")
+		</script>
+		<?php
+	}
 	
 }
 ?>

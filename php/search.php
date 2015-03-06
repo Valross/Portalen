@@ -8,11 +8,13 @@ include_once('DBQuery.php');
 
 if(isset($_POST['submitSearch'])){ 
 	if(isset($_GET['go'])){
-		if(preg_match("/[A-Za-z]+/", $_POST['name'])){ 
-		   $name=DBQuery::safeString($_POST['name']); 
+		if(preg_match("/[A-Za-z]+/", $_POST['search_term'])){ 
+		   
+		   $searchTerm=DBQuery::safeString($_POST['search_term']); 
 
-		   $result = DBQuery::sql("SELECT id, name, last_name, mail FROM user WHERE name LIKE '%" . $name . "%' OR last_name LIKE '%" . $name  ."%'"); 
-
+		   // USERS
+		   $result = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
+		   			 WHERE name LIKE '%" . $search_term . "%' OR last_name LIKE '%" . $search_term  ."%'"); 
 		   for($i=0; $i < count($result); ++$i){ 
 	        	$firstName = $result[$i]['name']; 
 	        	$lastName = $result[$i]['last_name']; 
@@ -25,6 +27,12 @@ if(isset($_POST['submitSearch'])){
 	  			echo "<li>" . "<a href=mailto:" . $mail . ">" . $mail . "</a></li>\n"; 
 	  			echo "</ul>"; 
 	  		} 
+
+	  		// TEAMS
+
+	  		// EVENTS
+
+	  		// UH...ACHIEVEMENTS?
 		}   
 	}
 }

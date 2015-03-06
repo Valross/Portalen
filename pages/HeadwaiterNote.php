@@ -2,23 +2,12 @@
 	if(checkAdminAccess())
 	{
 ?>
-<div class="row">
-	<div class="col-sm-8">
-		<div class="page-header">
-		<img src="<?php echo loadHeadwaiterAvatar(); ?>" width="100" height="100" class="page-header-img">
-			<h1 class="header-img"><?php loadHeadwaiterName(); ?></h1>
-		</div>
-	</div>
-</div> <!-- .row -->
 
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1>
-
-				<?php loadEventName(); ?>
-
-			</h1>
+			<h1><?php loadEventName(); ?></h1>
+			<h4><img src="<?php echo loadHeadwaiterAvatar(); ?>" width="32" height="32" class="img-circle"> <?php loadHeadwaiterName(); ?></h4>
 		</div>
 	</div>
 </div>
@@ -41,56 +30,55 @@
 			  	</tbody>
 				</table>
 			</div>
-		</div>
-	</div>
-</div>
+		</div> <!-- col-sm-12 -->
+	</div> <!-- .row -->
 
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="white-box">
-		<h3>Maten</h3>
+		<h4>Maten</h4>
 			<p>
 
 			<?php loadFood(); ?>
 			
 			</p>
-		<h3>Drinkfakturering</h3>
+		<h4>Drinkfakturering</h4>
 			<p>
 
 			<?php loadInvoiceDrinks(); ?>
 			
 			</p>
-		<h3>Toast</h3>
+		<h4>Toast</h4>
 			<p>
 
 			<?php loadToast(); ?>
 			
 			</p>
-		<h3>Arrangörerna</h3>
+		<h4>Arrangörerna</h4>
 			<p>
 
 			<?php loadOrganizers(); ?>
 			
 			</p>
-		<h3>Trappans Personal</h3>
+		<h4>Trappans Personal</h4>
 			<p>
 
 			<?php loadStairStaff(); ?>
 			
 			</p>
-		<h3>Arrangörernas Personal</h3>
+		<h4>Arrangörernas Personal</h4>
 			<p>
 
 			<?php loadOrganizersStaff(); ?>
 			
 			</p>
-		<h3>Svinn</h3>
+		<h4>Svinn</h4>
 			<p>
 
 			<?php loadSwine(); ?>
 			
 			</p>
-		<h3>Meddelande</h3>
+		<h4>Meddelande</h4>
 			<p>
 
 			<?php loadMessage(); ?>

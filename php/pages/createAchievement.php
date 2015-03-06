@@ -20,6 +20,8 @@ if(isset($_POST['submit']))
 	$points = $_POST['points'];
 	$description = $_POST['description'];
 	$icon = $_POST['icon'];
+	if($icon == '')
+		$icon = 'fa fa-cloud fa-fw fa-lg';
 
 	if($name != '')
 	{
@@ -79,7 +81,7 @@ function loadAll()
 	if(isset($_POST['chooseAchievement']))
 	{
 		$achievement = $_POST['achievement'];
-		if($achievement != '')
+		if($achievement != 'typeno')
 			loadCreateAchievementTools($achievement);
 	}
 }

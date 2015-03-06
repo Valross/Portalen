@@ -307,7 +307,7 @@ function loadComments()
 	{
 		$event_id = $_GET['id'];
 
-		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written FROM event_comments 
+		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written, user_id FROM event_comments 
 								WHERE event_id = '$event_id'");
 
 		if(count($event_comments) > 0)
@@ -315,13 +315,16 @@ function loadComments()
 			echo '
 						<div class="col-sm-7">
 							<div class="white-box">';
-			echo '<h3>Kommentarer (x) <-- antal</h3>';
+			echo '<h3>Kommentarer ('.count($event_comments).')</h3>';
 
 			for($i = 0; $i < count($event_comments); ++$i)
 			{
+				$user_id = $event_comments[$i]['user_id'];
+				$commenter = DBQuery::sql("SELECT id, name, last_name FROM user 
+								WHERE id = '$user_id'");
 				echo '<div class="comment">';
 				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
-				echo '<p><a href="">Namnet Namnsson</a> ';
+				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
 				echo $event_comments[$i]['comment'].'</p>';
 				echo '</div>';

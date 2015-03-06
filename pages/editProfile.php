@@ -40,12 +40,17 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Ändra visningsbild</h3>
-	
+			<img src="<?php echo loadAvatar(); ?>" class="img-circle" style="float: left; margin: 0 20px;" width="100" height="100">
+
+<div style="float: left; margin-left: 20px;">
 	<form action="" method="post" enctype="multipart/form-data">
-		<p>Välj bild:</p>
-    	<input type="file" name="fileToUpload" id="fileToUpload">
+		<h4>Välj ny vissningsbild</h4>
+    	<input type="file" name="fileToUpload" id="fileToUpload" style="margin-left: 20px;">
     	<input type="submit" value="Ladda upp" name="UploadAvatar">
 	</form>
+</div>
+	
+
 	</div> <!-- .white-box -->
 
 	<div class="white-box">

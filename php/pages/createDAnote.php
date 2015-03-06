@@ -8,6 +8,7 @@ $date = $dates->format('Y-m-d H:i:s');
 if(isset($_POST['submit']) && checkAdminAccess())
 {
 	$event = $_POST['event'];
+	$salesTotal = $_POST['salesTotal'];
 	$salesEntry = $_POST['salesEntry'];
 	$salesBar = $_POST['salesBar'];
 	$cash = $_POST['cash'];
@@ -15,10 +16,10 @@ if(isset($_POST['submit']) && checkAdminAccess())
 	$salesSpenta = $_POST['salesSpenta'];
 	$message = $_POST['message'];
 
-	if($event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
+	if($event != 'typeno' && $salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{
-		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message, date_written)
-						VALUES ('$_SESSION[user_id]', '$event', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message', '$date')");
+		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_total, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message, date_written)
+						VALUES ('$_SESSION[user_id]', '$event', '$salesTotal', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message', '$date')");
 	}	
 	if(count($_POST['partyriesArranging']) > 0)
 	{
@@ -83,28 +84,25 @@ function loadArrangingPartyries()
 {
 	$partyries = DBQuery::sql("SELECT id, name FROM partyries");
 	?>
-		<div class="two-column">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = 0; $i < count($partyries)-5; ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="A<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+
+			<label for="A<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			<?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
 		</div>
-		<div class="two-column-padding">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = count($partyries)-5; $i < count($partyries); ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="A<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			<label for="A<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesArranging[]" id="A<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			 <?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
@@ -116,28 +114,24 @@ function loadWorkingPartyries()
 {
 	$partyries = DBQuery::sql("SELECT id, name FROM partyries");
 	?>
-		<div class="two-column">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = 0; $i < count($partyries)-5; ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			<label for="<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
+			<?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>
 		</div>
-		<div class="two-column-padding">
+		<div class="two-column-checkboxes">
 	<?php
 	for($i = count($partyries)-5; $i < count($partyries); ++$i)
 	{
 		?>
-			<div class="fifty-percent-width">
-			<input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>">
-			<label for="<?php echo $partyries[$i]['name']; ?>"><?php echo $partyries[$i]['name']; ?></label>
-			</div>
+			
+			<label for="<?php echo $partyries[$i]['name']; ?>" class="label-wo-styling"><input type="checkbox" name="partyriesWorking[]" id="<?php echo $partyries[$i]['name']; ?>" value="<?php echo $partyries[$i]['id']; ?>"> <?php echo $partyries[$i]['name']; ?></label>
 		<?php
 	}
 	?>

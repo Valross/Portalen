@@ -17,6 +17,9 @@ if(isset($_POST['submit']) && checkAdminAccess())
 	        DBQuery::sql("UPDATE user_work
 				  SET checked=1
 				  WHERE work_slot_id='$slot'");	    
+	        $user_id = DBQuery::sql("SELECT user_id FROM user_work
+							WHERE work_slot_id = '$slot'");
+	        checkIfAchievement($user_id[0]['user_id']);
 	    }
 	}
 }
@@ -70,8 +73,7 @@ function loadWorkSlots()
 {
 	if(isset($_GET['id']))
 	{
-		echo '<div class="row">
-				<div class="col-sm-6">
+		echo '<div class="col-sm-6">
 					<div class="white-box">';
 		$event_id = $_GET['id'];
 		$user_id = $_SESSION['user_id'];
@@ -93,12 +95,13 @@ function loadWorkSlots()
 
 		if(count($groups) > 0)
 		{
-			echo '<h3>Checka pass för '.loadEventName($event_id).'</h3>';
+			echo '<h3>Checka pass för ';
+			echo loadEventName($event_id).'</h3>';
 			echo '<form action="" method="post">';
 
 			for($i = 0; $i < count($groups); ++$i)
 			{
-				echo '<p>'.$groups[$i]['name'].'</p>';
+				echo '<p><strong>'.$groups[$i]['name'].'</strong></p>';
 				for($j = 0; $j < count($slots); ++$j)
 				{
 					$work_slot_id = $slots[$j]['id'];
@@ -122,9 +125,9 @@ function loadWorkSlots()
 							echo '<a class="list-group-item">';
 							echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
 							echo $start.$end;
+							echo loadUserAvatar($bookedSlot[0]['user_id']);
 							echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 							echo " (".$slots[$j]['points'].' poäng)';
-							echo loadUserAvatar($bookedSlot[0]['user_id']);
 							echo '</a>';
 						}
 					}
@@ -134,8 +137,7 @@ function loadWorkSlots()
 			echo '</form>';
 		}
 		echo '</div> <!-- .white-box -->
-			</div>
-		</div>';
+			</div>';
 	}
 }
 

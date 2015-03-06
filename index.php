@@ -146,7 +146,7 @@ include_once('php/pageManager.php');
 		  <div id="footer">
 			  <div class="container-fluid">
 			  <div class="row">
-				  <div class="col-sm-8">
+				  <div class="col-sm-12">
 					  <p>Trappans Personalportal. <br />Kontakta Trappans <a href="#">webbansvarig</a> vid problem eller frågor.
 				  </div>
 			</div> <!-- .row -->

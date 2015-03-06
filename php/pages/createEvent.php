@@ -43,6 +43,14 @@ if(isset($_POST['submit']) && checkAdminAccess())
 			</script>
 			<?php
 		}
+		else{
+			?>
+			<script>
+				window.location = "?page=createEvent";
+				alert("Det blev fel, du måste fylla i alla fält samt bestämma tider.")
+			</script>
+			<?php
+		}
 	}
 }
 function loadTypes()

@@ -39,19 +39,19 @@ for ($i=0; $i < $howMany; ++$i) {
 
 		switch($eventType){
 			case 1:		//pub
-				$class = "event-success"; //grön
+				$class = "event-pub"; //grön
 				break;
 			case 2:		//nattklubb
-				$class = "event-special"; //lila
+				$class = "event-nattklubb"; //lila
 				break;
 			case 3:		//sittning
-				$class = "event-warning"; //gul
+				$class = "event-sittning"; //gul
 				break;
 			case 4:		//personalaktivitet
-				$class = "event-important";	  //???
+				$class = "event-personalaktivitet";	  //???
 				break;
 			case 5:		//möte
-				$class = "event-info"; //blå
+				$class = "event-mote"; //blå
 				break;
 			default:
 				$class = "event-inverse"; //grå

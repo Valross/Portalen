@@ -310,6 +310,23 @@
   background-color: #ffe6ff;
   border: 1px solid #800080;
 }
+
+#cal-day-box .day-highlight.dh-event-personalaktivitet {
+  border: 1px solid #ad2121;
+}
+#cal-day-box .day-highlight.dh-event-sittning {
+  border: 1px solid #e3bc08;
+}
+#cal-day-box .day-highlight.dh-event-mote {
+  border: 1px solid #1e90ff;
+}
+#cal-day-box .day-highlight.dh-event-pub {
+  border: 1px solid #006400;
+}
+#cal-day-box .day-highlight.dh-event-nattklubb {
+  background-color: #ffe6ff;
+  border: 1px solid #800080;
+}
 .event {
   display: block;
   background-color: #c3c3c3;
@@ -349,6 +366,23 @@
 .event-special {
   background-color: #800080;
 }
+
+.event-personalaktivitet {
+  background-color: #ad2121;
+}
+.event-mote {
+  background-color: #1e90ff;
+}
+.event-sittning {
+  background-color: #e3bc08;
+}
+.event-pub {
+  background-color: #006400;
+}
+.event-nattklubb {
+  background-color: #800080;
+}
+
 .day-highlight:hover,
 .day-highlight {
   background-color: #dddddd;
@@ -375,6 +409,27 @@
 }
 .day-highlight.dh-event-special:hover,
 .day-highlight.dh-event-special {
+  background-color: #ffe6ff;
+}
+
+.day-highlight.dh-event-personalaktivitet:hover,
+.day-highlight.dh-event-personalaktivitet {
+  background-color: #fae3e3;
+}
+.day-highlight.dh-event-sittning:hover,
+.day-highlight.dh-event-sittning {
+  background-color: #fdf1ba;
+}
+.day-highlight.dh-event-mote:hover,
+.day-highlight.dh-event-mote {
+  background-color: #d1e8ff;
+}
+.day-highlight.dh-event-pub:hover,
+.day-highlight.dh-event-pub {
+  background-color: #caffca;
+}
+.day-highlight.dh-event-nattklubb:hover,
+.day-highlight.dh-event-nattklubb {
   background-color: #ffe6ff;
 }
 .cal-row-head [class*="cal-cell"]:first-child,

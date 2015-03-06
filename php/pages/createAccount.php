@@ -22,6 +22,16 @@ if(isset($_POST['submit']) && checkAdminAccess())
 		</script>
 		<?php
 	}
+
+	else
+	{
+		?>
+		<script>
+			window.location = "?page=createAccount";
+			alert("Fel: Du måste fylla i alla fält!")
+		</script>
+		<?php	
+	}
 	
 }
 ?>

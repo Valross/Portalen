@@ -14,7 +14,8 @@ if(isset($_POST['submitSearch'])){
 
 		   // USERS
 		   $result = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
-		   			 WHERE name LIKE '%" . $search_term . "%' OR last_name LIKE '%" . $search_term  ."%'"); 
+		   			 WHERE name LIKE '%" . $searchTerm . "%' OR last_name LIKE '%" . $searchTerm  ."%'"); 
+		   echo "<p>Användare: </p>";
 		   for($i=0; $i < count($result); ++$i){ 
 	        	$firstName = $result[$i]['name']; 
 	        	$lastName = $result[$i]['last_name']; 

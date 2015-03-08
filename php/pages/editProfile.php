@@ -189,12 +189,23 @@ if(isset($_POST['changePass'])) {
 
 if(isset($_POST['UploadAvatar'])) {
 
+	// User info
+	$userId = $_SESSION['user_id'];
+	// echo "Debug: id = " . $userId;  
+
+	$extension = end(explode(".", $_FILES["fileToUpload"]["name"]));
+
 	// The directory where images will be saved
-	$target_dir = "img/avatars/";
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$targetDir = "img/avatars/";
+	// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$targetName = $profileName . $userId . "." . $extension;
+	$targetFile = $targetDir . $targetName;
+
+	echo "Debug: borde heta " . $targetName;
+
 	$uploadOk = 1;
 
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$imageFileType = pathinfo($targetFile,PATHINFO_EXTENSION);
 
 	// Check if file is an image
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -228,21 +239,23 @@ if(isset($_POST['UploadAvatar'])) {
 
 	// Else if everything is ok, attempt uploading file
 	else {
+		// $img = ($_FILES['fileToUpload']['name']); 
 		$img = ($_FILES['fileToUpload']['name']); 
+
 
 		// Update database
 		DBQuery::sql("UPDATE user
-					  SET avatar = '$img'
+					  SET avatar = '$targetName';
 					  WHERE id='$_SESSION[user_id]'");   
 
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
 	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
 	        
 	        //relocate
 			?>
 			<script>
 				window.location = "?page=editProfile";		//TO DO: hard code url
-				alert("Din bild \"" + "<?php echo $img; ?>" + "\" har laddats upp!");
+				alert("Din profilbild har uppdaterats!");
 			</script>
 			<?php
 		}

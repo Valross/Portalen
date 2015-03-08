@@ -241,16 +241,21 @@ if(isset($_POST['UploadAvatar'])) {
 	else {
 		// $img = ($_FILES['fileToUpload']['name']); 
 		$img = ($_FILES['fileToUpload']['name']); 
+		echo " //// " . $img;
 
+
+		$testResult = DBQuery::sql("SELECT id FROM user WHERE id='$_SESSION[user_id]'");
+		$testId = $testResult[0]['id'];
+		echo " /// Debug: testId = " . $testId;
 
 		// Update database
 		DBQuery::sql("UPDATE user
-					  SET avatar = '$targetName';
-					  WHERE id='$_SESSION[user_id]'");   
+					  SET avatar = '$targetName'
+					  WHERE id='$_SESSION[user_id]'");  
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
 	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
-	        
+	        echo "   SUCCESS";
 	        //relocate
 			?>
 			<script>

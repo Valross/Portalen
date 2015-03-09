@@ -205,8 +205,6 @@ if(isset($_POST['UploadAvatar'])) {
 
 	$uploadOk = 1;
 
-	$imageFileType = pathinfo($targetFile,PATHINFO_EXTENSION);
-
 	// Check if file is an image
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
@@ -221,8 +219,8 @@ if(isset($_POST['UploadAvatar'])) {
     }
 
     // Check if image file type is valid
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
+	if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
+	&& $extension != "gif" ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 	    $uploadOk = 0;
 	}

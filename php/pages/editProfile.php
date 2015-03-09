@@ -235,17 +235,24 @@ if(isset($_POST['UploadAvatar'])) {
 
 	// Else everything is ok, attempt uploading file
 	else {
+		// Delete existing image if exists
+		$exts = array( "jpg", "jpeg", "png", "gif" );
+		for ($i=0; $i < sizeof($exts); ++$i) { 
+			if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $exts[$i]))
+				unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $exts[$i]);
+		}
+
 		// Update database
 		DBQuery::sql("UPDATE user
 					  SET avatar = '$targetName'
 					  WHERE id='$_SESSION[user_id]'");  
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
+	        // echo "Din bild " . $targetName . " har laddats upp";
 	        //relocate
 			?>
 			<script>
-				window.location = "?page=editProfile";		//TO DO: hard code url
+				//window.location = "?page=editProfile";		//TO DO: hard code url
 				alert("Din profilbild har uppdaterats!");
 			</script>
 			<?php

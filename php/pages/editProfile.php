@@ -193,7 +193,8 @@ if(isset($_POST['UploadAvatar'])) {
 	$userId = $_SESSION['user_id'];
 
 	// Get image extension
-	$extension = end(explode(".", $_FILES["fileToUpload"]["name"]));
+	$temp = explode(".", $_FILES["fileToUpload"]["name"]);
+	$extension = end($temp);
 
 	$allowedExtensions = array("jpg", "jpeg", "png", "gif");
 
@@ -218,8 +219,10 @@ if(isset($_POST['UploadAvatar'])) {
     }
 
     // Check if image file type is allowed
-	if($extension != $allowedExtensions[0] && $extension != $allowedExtensions[1] 
-		&& $extension != $allowedExtensions[2] && $extension != $allowedExtensions[3] ) {
+	if ($extension != $allowedExtensions[0] 
+		&& $extension != $allowedExtensions[1] 
+		&& $extension != $allowedExtensions[2] 
+		&& $extension != $allowedExtensions[3] ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 	    $uploadOk = 0;
 	}

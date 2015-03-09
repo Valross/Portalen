@@ -195,12 +195,13 @@ if(isset($_POST['UploadAvatar'])) {
 	// Get image extension
 	$extension = end(explode(".", $_FILES["fileToUpload"]["name"]));
 
+	$allowedExtensions = array("jpg", "jpeg", "png", "gif");
+
 	// The directory where image will be saved
 	$targetDir = "img/avatars/";
 	$targetName = $profileName . $_SESSION['user_id'] . "." . $extension;
 	$targetFile = $targetDir . $targetName;
 
-	// Bool to regulate if upload is ok
 	$uploadOk = 1;
 
 	// Check if file is an image
@@ -217,8 +218,8 @@ if(isset($_POST['UploadAvatar'])) {
     }
 
     // Check if image file type is allowed
-	if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
-	&& $extension != "gif" ) {
+	if($extension != $allowedExtensions[0] && $extension != $allowedExtensions[1] 
+		&& $extension != $allowedExtensions[2] && $extension != $allowedExtensions[3] ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 	    $uploadOk = 0;
 	}
@@ -236,10 +237,9 @@ if(isset($_POST['UploadAvatar'])) {
 	// Else everything is ok, attempt uploading file
 	else {
 		// Delete existing image if exists
-		$exts = array( "jpg", "jpeg", "png", "gif" );
-		for ($i=0; $i < sizeof($exts); ++$i) { 
-			if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $exts[$i]))
-				unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $exts[$i]);
+		for ($i=0; $i < sizeof($allowedExtensions); ++$i) { 
+			if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]))
+				unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]);
 		}
 
 		// Update database
@@ -252,7 +252,7 @@ if(isset($_POST['UploadAvatar'])) {
 	        //relocate
 			?>
 			<script>
-				//window.location = "?page=editProfile";		//TO DO: hard code url
+				window.location = "?page=editProfile";		//TO DO: hard code url
 				alert("Din profilbild har uppdaterats!");
 			</script>
 			<?php

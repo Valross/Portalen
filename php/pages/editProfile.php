@@ -189,12 +189,21 @@ if(isset($_POST['changePass'])) {
 
 if(isset($_POST['UploadAvatar'])) {
 
-	// The directory where images will be saved
-	$target_dir = "img/avatars/";
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$uploadOk = 1;
+	// User ID to be used in image name
+	$userId = $_SESSION['user_id'];
 
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	// Get image extension
+	$temp = explode(".", $_FILES["fileToUpload"]["name"]);
+	$extension = end($temp);
+
+	$allowedExtensions = array("jpg", "jpeg", "png", "gif");
+
+	// The directory where image will be saved
+	$targetDir = "img/avatars/";
+	$targetName = $profileName . $_SESSION['user_id'] . "." . $extension;
+	$targetFile = $targetDir . $targetName;
+
+	$uploadOk = 1;
 
 	// Check if file is an image
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -209,9 +218,11 @@ if(isset($_POST['UploadAvatar'])) {
         $uploadOk = 0;
     }
 
-    // Check if image file type is valid
-	if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	&& $imageFileType != "gif" ) {
+    // Check if image file type is allowed
+	if ($extension != $allowedExtensions[0] 
+		&& $extension != $allowedExtensions[1] 
+		&& $extension != $allowedExtensions[2] 
+		&& $extension != $allowedExtensions[3] ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 	    $uploadOk = 0;
 	}
@@ -222,27 +233,30 @@ if(isset($_POST['UploadAvatar'])) {
 	    $uploadOk = 0;
 	}
 
-	// If image doesn't pass, print feedback 
+	// Image doesn't pass
 	if ($uploadOk == 0)
 	    echo "Din fil kunde inte laddas upp.";
 
-	// Else if everything is ok, attempt uploading file
+	// Else everything is ok, attempt uploading file
 	else {
-		$img = ($_FILES['fileToUpload']['name']); 
+		// Delete existing image if exists
+		for ($i=0; $i < sizeof($allowedExtensions); ++$i) { 
+			if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]))
+				unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]);
+		}
 
 		// Update database
 		DBQuery::sql("UPDATE user
-					  SET avatar = '$img'
-					  WHERE id='$_SESSION[user_id]'");   
+					  SET avatar = '$targetName'
+					  WHERE id='$_SESSION[user_id]'");  
 
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
-	        
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+	        // echo "Din bild " . $targetName . " har laddats upp";
 	        //relocate
 			?>
 			<script>
 				window.location = "?page=editProfile";		//TO DO: hard code url
-				alert("Din bild \"" + "<?php echo $img; ?>" + "\" har laddats upp!");
+				alert("Din profilbild har uppdaterats!");
 			</script>
 			<?php
 		}

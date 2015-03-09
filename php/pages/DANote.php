@@ -208,7 +208,7 @@ function loadComments()
 
 	$da_note_id = $da_note[0]['id'];
 
-	$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written FROM da_note_comments 
+	$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written, user_id FROM da_note_comments 
 							WHERE da_note_id = '$da_note_id'");
 
 	if(count($DAComments) > 0)
@@ -220,9 +220,15 @@ function loadComments()
 
 		for($i = 0; $i < count($DAComments); ++$i)
 		{
+			$user_id = $DAComments[$i]['user_id'];
+			$comment_id = $DAComments[$i]['id'];
+
+			$commenter = DBQuery::sql("SELECT name, last_name FROM user 
+							WHERE id = '$user_id' AND id IN
+							(SELECT user_id FROM da_note_comments WHERE id = '$comment_id')");
 			echo '<div class="comment">';
 			echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="64" height="64" class="img-circle">';
-			echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
+			echo '<p><a href="?page=userProfile&id='.$DAComments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 			echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
 			echo $DAComments[$i]['comment'].'</p>';
 			echo '</div>';

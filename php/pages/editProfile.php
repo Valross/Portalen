@@ -189,20 +189,18 @@ if(isset($_POST['changePass'])) {
 
 if(isset($_POST['UploadAvatar'])) {
 
-	// User info
+	// User ID to be used in image name
 	$userId = $_SESSION['user_id'];
-	// echo "Debug: id = " . $userId;  
 
+	// Get image extension
 	$extension = end(explode(".", $_FILES["fileToUpload"]["name"]));
 
-	// The directory where images will be saved
+	// The directory where image will be saved
 	$targetDir = "img/avatars/";
-	// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-	$targetName = $profileName . $userId . "." . $extension;
+	$targetName = $profileName . $_SESSION['user_id'] . "." . $extension;
 	$targetFile = $targetDir . $targetName;
 
-	echo "Debug: borde heta " . $targetName;
-
+	// Bool to regulate if upload is ok
 	$uploadOk = 1;
 
 	// Check if file is an image
@@ -218,7 +216,7 @@ if(isset($_POST['UploadAvatar'])) {
         $uploadOk = 0;
     }
 
-    // Check if image file type is valid
+    // Check if image file type is allowed
 	if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
 	&& $extension != "gif" ) {
 	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -231,21 +229,12 @@ if(isset($_POST['UploadAvatar'])) {
 	    $uploadOk = 0;
 	}
 
-	// If image doesn't pass, print feedback 
+	// Image doesn't pass
 	if ($uploadOk == 0)
 	    echo "Din fil kunde inte laddas upp.";
 
-	// Else if everything is ok, attempt uploading file
+	// Else everything is ok, attempt uploading file
 	else {
-		// $img = ($_FILES['fileToUpload']['name']); 
-		$img = ($_FILES['fileToUpload']['name']); 
-		echo " //// " . $img;
-
-
-		$testResult = DBQuery::sql("SELECT id FROM user WHERE id='$_SESSION[user_id]'");
-		$testId = $testResult[0]['id'];
-		echo " /// Debug: testId = " . $testId;
-
 		// Update database
 		DBQuery::sql("UPDATE user
 					  SET avatar = '$targetName'
@@ -253,7 +242,6 @@ if(isset($_POST['UploadAvatar'])) {
 
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
 	        // echo "Din bild " . basename( $_FILES["fileToUpload"]["name"]). " har laddats upp";
-	        echo "   SUCCESS";
 	        //relocate
 			?>
 			<script>

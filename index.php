@@ -108,8 +108,8 @@ include_once('php/pageManager.php');
 				<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-6" id="search">
-						<!-- <form  method="post" action="php/search.php?go"  id="searchform">  -->
-							<!-- <button type="submit" name="submitSearch" ><span class="fa fa-search"></span></button> -->
+						<form  method="post" action="php/searchPage.php?go"  id="searchform"> 
+							<button type="submit" name="submitSearch" ><span class="fa fa-search"></span></button>
 							
 							<!-- search field -->
 							<input type="text" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">

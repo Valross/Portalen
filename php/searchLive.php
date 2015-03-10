@@ -12,32 +12,27 @@ $html .= '</a>';
 $html .= '</li>';
 
 // Get Search
-$searchString = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['query']);
+$searchString = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['query']);	//fixa åäö
 $searchString = DBQuery::safeString($searchString);
 
 // Check Length More Than One Character
-if (strlen($searchString) >= 1 && $searchString !== ' ') {
-
+if (strlen($searchString) > 1 && $searchString !== ' ') {
 	$noResults = 1;
 
 	// Search users
 	$users = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
 			WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'");
 
-	if(count($users) != 0){
+	if(count($users) > 0){
 		$noResults = 0;
 		echo "Användare";
 		
 		for ($i=0; $i < count($users); ++$i) { 
 
-			// $display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
+			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>", $users[$i]['name']);
 
-			// insert name
-			$output = str_replace('nameString', $users[$i]['name'], $html);
-
-			// insert url
+			$output = str_replace('nameString', $users[$i]['name'] . " " . $users[$i]['last_name'], $html);
 			$output = str_replace('urlString', "http://www.example.com", $output);
-
 			echo($output);
 	 	} 	
 	}
@@ -45,20 +40,17 @@ if (strlen($searchString) >= 1 && $searchString !== ' ') {
 	// Search events
 	$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'"); 
 
-	if(count($events) != 0){
+	if(count($events) > 0){
 		$noResults = 0;
 		echo "Evenemang";
 		
 		for ($i=0; $i < count($events); ++$i) { 
+			$eventId = $events[$i]['id'];
 
 			// $display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
 
-			// insert name
 			$output = str_replace('nameString', $events[$i]['name'], $html);
-
-			// insert url
-			$output = str_replace('urlString', "http://www.example.com", $output);
-
+			$output = str_replace('urlString', "?page=event&id=$eventId", $output);
 			echo($output);
 	 	} 	
 	}
@@ -66,20 +58,16 @@ if (strlen($searchString) >= 1 && $searchString !== ' ') {
 	// Search teams
 	$teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'"); 
 
-	if(count($teams) != 0){
+	if(count($teams) > 0){
 		$noResults = 0;
 		echo "Lag";
 		
 		for ($i=0; $i < count($teams); ++$i) { 
-
+			$teamId =  $teams[$i]['id'];
 			// $display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
 
-			// insert name
 			$output = str_replace('nameString', $teams[$i]['name'], $html);
-
-			// insert url
-			$output = str_replace('urlString', "http://www.example.com", $output);
-
+			$output = str_replace('urlString', "?page=group&id=$teamId", $output);
 			echo($output);
 	 	} 	
 	}
@@ -88,7 +76,7 @@ if (strlen($searchString) >= 1 && $searchString !== ' ') {
 	if($noResults) {
 		// Format No Results Output
 		$output = str_replace('urlString', 'javascript:void(0);', $html);
-		$output = str_replace('nameString', '<b>Inga resultat</b>', $output);
+		$output = str_replace('nameString', 'Inga resultat', $output);
 
 		echo($output);
 	}

@@ -21,6 +21,9 @@ include_once('php/pageManager.php');
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 	<link rel="stylesheet" href="css/calendar.css">
+	<!-- // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -105,10 +108,16 @@ include_once('php/pageManager.php');
 				<div class="container-fluid">
 				<div class="row">
 					<div class="col-sm-6" id="search">
-						<form  method="post" action="php/search.php?go"  id="searchform"> 
+						<form  method="post" action="php/searchPage.php?go"  id="searchform"> 
 							<button type="submit" name="submitSearch" ><span class="fa fa-search"></span></button>
-							<input type="search" name="search_term" placeholder="Sök på portalen...">
-						</form>
+							
+							<!-- search field -->
+							<input type="text" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">
+							
+							<!-- show results after input -->
+							<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
+							<ul id="results"></ul>
+						<!-- </form> -->
 					</div>
 					<div class="col-sm-6 text-right">
 					<div class="dropdown">

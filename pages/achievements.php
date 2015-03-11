@@ -16,20 +16,13 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
-			<h1>Top 10</h1>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-6">
-		<div class="white-box">
+			<h3>Topp 10</h3>
 			<table class="table table-hover">
 		      	<thead>
 			        <tr>
 			          	<th>#</th>
 			          	<th>Namn</th>
-					  	<th>Achievement-poäng</th>
+					  	<th>Poäng</th>
 			        </tr>
 			    </thead>
 				<tbody>
@@ -42,13 +35,12 @@
 		</div>
 	<div class="col-sm-6">
 		<div class="white-box">
-			<table class="table table-hover">
-				<tbody>
+			<h3>Lista över alla achievements</h3>
+			<div class="list-group">
 
-				  	<?php loadAchievements() ?>
+				<?php loadAchievements() ?>
 
-			  	</tbody>
-				</table>
+			</div>
 		</div>
 	</div>
 </div>

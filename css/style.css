@@ -34,7 +34,6 @@
 
 
 
-
 /* =Base
 -------------------------------------------------------------- */
 
@@ -360,6 +359,7 @@ fieldset[disabled] {
 		Typ fixa en div som sköter marginen ist för att tilldela den till massa återkommande taggar. /Andreas */
 	}
 	
+	
 	.white-box p.bg-warning {
 		padding: 15px;
 	}
@@ -425,6 +425,7 @@ fieldset[disabled] {
 		padding: 3px 5px;
 	  	font-size: 10px;
 	  	border-radius: 50%;
+		float: none;
 	}
 	a:hover .badge.on-top-of-element {
 		background: #444;
@@ -531,12 +532,12 @@ fieldset[disabled] {
 		padding: 5px 45px 5px 0;
 	}
 	
-	/* Bootstrap table class modification */
-	
-	.col-sm-12 .white-box .table {
-	  width: 96.5%;
+	.table {
+	  width: 100% !important;
+	  max-width: 100% !important;
+	  margin-left: 0px !important;
 	}
-	
+
 	/* Bootstrap calendar modification */
 	
     

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2015 at 05:07 PM
+-- Generation Time: Mar 11, 2015 at 05:32 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -205,7 +205,8 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
-  KEY `name_3` (`name`)
+  KEY `name_3` (`name`),
+  FULLTEXT KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 --
@@ -440,7 +441,11 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  FULLTEXT KEY `message` (`message`),
+  FULLTEXT KEY `title` (`title`),
+  FULLTEXT KEY `title_2` (`title`),
+  FULLTEXT KEY `message_2` (`message`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -588,7 +593,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 0, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '0000-00-00', 2, 10, NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '0000-00-00', 3, 10, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, 0, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
@@ -645,6 +650,7 @@ CREATE TABLE IF NOT EXISTS `work_group` (
   `description` text,
   `facebook_group` text,
   `icon` text NOT NULL,
+  `hex` varchar(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `name_2` (`name`)
@@ -654,21 +660,21 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 -- Dumping data for table `work_group`
 --
 
-INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`) VALUES
-(1, 'Driftgruppen', '', '', ''),
-(2, 'Webb', '', '', ''),
-(3, 'Kock', '', '', ''),
-(4, 'Bar', 'YEAH BAR', 'www.facebook.com', ''),
-(5, 'DJ', '', '', ''),
-(6, 'Värd', '', '', ''),
-(7, 'Dagsansvarig', '', '', ''),
-(8, 'Event', '', '', ''),
-(9, 'Marknadsföring', '', '', ''),
-(10, 'Ljud & Ljus', '', '', ''),
-(11, 'Servering', '', '', ''),
-(12, 'Hovmästare', '', '', ''),
-(13, 'Alla', '', '', ''),
-(14, 'Vimmel', 'vimmel yeah!', 'www.facebook.com', '');
+INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`, `hex`) VALUES
+(1, 'Driftgruppen', '', '', '', ''),
+(2, 'Webb', '', '', '', ''),
+(3, 'Kock', '', '', '', ''),
+(4, 'Bar', 'YEAH BAR', 'www.facebook.com', '', ''),
+(5, 'DJ', '', '', '', ''),
+(6, 'Värd', '', '', '', ''),
+(7, 'Dagsansvarig', '', '', '', ''),
+(8, 'Event', '', '', '', ''),
+(9, 'Marknadsföring', '', '', '', ''),
+(10, 'Ljud & Ljus', '', '', '', ''),
+(11, 'Servering', '', '', '', ''),
+(12, 'Hovmästare', '', '', '', ''),
+(13, 'Alla', 'Typ', '', 'fa fa-diamond fa-fw fa-lg', 'ffffff'),
+(14, 'Vimmel', 'vimmel yeah!', 'www.facebook.com', '', '');
 
 -- --------------------------------------------------------
 

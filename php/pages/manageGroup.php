@@ -19,11 +19,13 @@ if(isset($_POST['submit']))
 	$id = $_POST['id'];
 	$facebookGroup = $_POST['facebookGroup'];
 	$description = $_POST['description'];
+	$hex = $_POST['hex'];
+	$icon = $_POST['icon'];
 
 	if($groupName != '')
 	{
 		DBQuery::sql("UPDATE work_group
-				  SET name = '$groupName', facebook_group = '$facebookGroup', description = '$description'
+				  SET name = '$groupName', facebook_group = '$facebookGroup', description = '$description', hex = '$hex', icon = '$icon'
 				  WHERE id = '$id'");
 	}
 }
@@ -74,7 +76,7 @@ function loadAllGroupsAsOption()
 
 function loadGroupManageTools($group)
 {
-	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group FROM work_group 
+	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group, icon, hex FROM work_group 
 						WHERE id = '$group'
 						ORDER BY name");
 
@@ -87,6 +89,10 @@ function loadGroupManageTools($group)
 			<input type="text" name="groupName" id="groupName" value="'.$group_name[0]['name'].'">
 			<label for="facebookGroup">Facebookgrupp</label>
 			<input type="text" name="facebookGroup" id="facebookGroup" value="'.$group_name[0]['facebook_group'].'">
+			<label for="icon">Ikon <span class="fa fa-cloud fa-fw fa-lg"></span></label>
+			<input type="text" name="icon" id="icon" placeholder="fa fa-cloud fa-fw fa-lg" value="'.$group_name[0]['icon'].'">
+			<label for="hex">#Hexkod</label>
+			<input type="text" name="hex" id="hex" placeholder="ffffff" value="'.$group_name[0]['hex'].'">
 			<label for="description">Beskrivning</label>
 			<textarea rows="6" cols="50" name="description" id="description" class="bottom-border">'.$group_name[0]['description'].'</textarea>
 			<input type="hidden" name="id" id="id" value="'.$group_name[0]['id'].'">';

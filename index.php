@@ -109,10 +109,10 @@ include_once('php/pageManager.php');
 				<div class="row">
 					<div class="col-sm-6" id="search">
 						<form  method="post" action="php/searchPage.php?go"  id="searchform"> 
-							<button type="submit" name="submitSearch" ><span class="fa fa-search"></span></button>
+							<button type="submit" name="submitSearch"><span class="fa fa-search"></span></button>
 							
 							<!-- search field -->
-							<input type="text" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">
+							<input type="search" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">
 							
 							<!-- show results after input -->
 							<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>

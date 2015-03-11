@@ -28,11 +28,12 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		echo "Användare";
 		
 		for ($i=0; $i < count($users); ++$i) { 
+			$userId = $users[$i]['id'];
 
 			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>", $users[$i]['name']);
 
 			$output = str_replace('nameString', $users[$i]['name'] . " " . $users[$i]['last_name'], $html);
-			$output = str_replace('urlString', "http://www.example.com", $output);
+			$output = str_replace('urlString', "?page=userProfile&id=$userId", $output);
 			echo($output);
 	 	} 	
 	}

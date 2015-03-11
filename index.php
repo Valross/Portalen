@@ -117,7 +117,7 @@ include_once('php/pageManager.php');
 							<!-- show results after input -->
 							<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
 							<ul id="results"></ul>
-						<!-- </form> -->
+						</form>
 					</div>
 					<div class="col-sm-6 text-right">
 					<div class="dropdown">

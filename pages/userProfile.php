@@ -55,9 +55,13 @@
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Är med i följande lag</h3>
+			<div class="list-group">
 			<?php loadGroups(); ?>
+			</div>
 		</div>
 	</div>
+</div> <!-- .row -->
+<div class="row">
 	<?php addToGroup(); ?>
 	<?php removeFromGroup(); ?>
 </div> <!-- .row -->

@@ -143,15 +143,86 @@ include_once('php/pageManager.php');
 				</div>
 			</div> <!-- #topbar -->
 
-		  <div id="content">
-			  
+
+
+
 			  <div id="search-result">
+				  <div class="search-result-container">
 			  	<div class="container-fluid">
+					
+					<!-- 
+						##############
+						HÅRDKODAD SÖKRESULTATSLISTA 
+						##############
+						
+						
+					<div class="col-sm-4">
+						<h3>Evenemang</h3>
+						<div class="list-group">											
+							<a href="?page=group&id=13" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								Ett evenemang
+							</a>
+							<a href="?page=group&id=4" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								som är helt
+							</a>
+							<a href="?page=group&id=7" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								Crayzay
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<h3>Användare</h3>
+						<div class="list-group">											
+							<a href="?page=group&id=13" class="list-group-item with-thumbnail">
+								<img src="img/avatars/portalen_bild.jpg" class="img-circle list-group-thumbnail" width="32" height="32">
+								Namn Namnsson
+							</a>
+							<a href="?page=group&id=4" class="list-group-item with-thumbnail">
+								<img src="img/avatars/portalen_bild.jpg" class="img-circle list-group-thumbnail" width="32" height="32">
+								Bjärka Gunnarsdotter
+							</a>
+							<a href="?page=group&id=7" class="list-group-item with-thumbnail">
+								<img src="img/avatars/portalen_bild.jpg" class="img-circle list-group-thumbnail" width="32" height="32">
+								Wooop Antonsson
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<h3>Lag</h3>
+						<div class="list-group">											
+							<a href="?page=group&id=13" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								Alla
+							</a>
+							<a href="?page=group&id=4" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								Bartastic
+							</a>
+							<a href="?page=group&id=7" class="list-group-item with-thumbnail">
+								<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+								Dagsansvarig
+							</a>
+						</div>
+					</div>
+					
+					###########
+					SLUT PÅ HÅRDKODAT -->
+					
 					<!-- show results after search input -->
 					<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
 					<ul id="results"></ul>
-				</div>
-			  </div>
+					
+				</div> <!-- .container-fluid -->
+				</div> <!-- .search-result-container -->
+			  </div> <!-- #search-result -->
+
+
+
+
+		  <div id="content">
 			  	     		 
 			  <div class="container-fluid">
 					<?php content(); ?>  

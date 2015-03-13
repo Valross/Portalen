@@ -228,7 +228,6 @@ fieldset[disabled] {
 		background: #363430;
 		z-index: 999;
 	} 
-	
 	#content,
 	#footer {
 		padding: 0 20px;
@@ -243,14 +242,14 @@ fieldset[disabled] {
 	}	
 	
 	#search-result {
-		position: absolute;
-		top: 55px;
-		left: 0;
-		z-index: 997;
-		width: 100%;
-		padding: 0 20px;
 		background: #fff;
+		/*
+		-webkit-box-shadow: 0px 4px 31px 0px rgba(204,204,204,1);
+		-moz-box-shadow: 0px 4px 31px 0px rgba(204,204,204,1);
+		box-shadow: 0px 4px 31px 0px rgba(204,204,204,1); 
+		*/
 	}
+
 
 /* =Modules
 -------------------------------------------------------------- */
@@ -818,7 +817,7 @@ fieldset[disabled] {
 			overflow: scroll;
 		} 
 		#topbar .container-fluid {
-			max-width: 1155px;
+			max-width: 1150px;
 			width: auto;
 			margin-left: 240px;
 		}
@@ -830,6 +829,18 @@ fieldset[disabled] {
 			height: 100%;
 			margin: -56px 0 -4em 240px;
 			padding-top: 56px;
+		}
+		#search-result {
+			position: absolute;
+			top: 55px;
+			left: 240px;
+			right: 0;
+			z-index: 997;
+			padding: 0 10px 10px 10px;
+		}
+		.search-result-container {
+			max-width: 1150px;
+			width: auto;
 		}
 		#footer, .push {
 		height: 4em;

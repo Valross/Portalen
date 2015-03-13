@@ -106,8 +106,8 @@ include_once('php/pageManager.php');
 		  	<div id="topbar">
 				<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-6" id="search">
-						<form  method="post" action="php/searchPage.php?go"  id="searchform"> 
+					<div class="col-sm-6" id="search"> <!-- "php/pages/searchPage.php?go" -->
+						<form  method="post" action="?page=searchPage"  id="searchform"> 
 							<button type="submit" name="submitSearch"><span class="fa fa-search"></span></button>
 							
 							<!-- search field -->

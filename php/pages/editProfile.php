@@ -203,68 +203,82 @@ if(isset($_POST['UploadAvatar'])) {
 	$targetName = $profileName . $_SESSION['user_id'] . "." . $extension;
 	$targetFile = $targetDir . $targetName;
 
-	$uploadOk = 1;
+	// Check if file was selected
+	if ($_FILES['fileToUpload']['error'] !== UPLOAD_ERR_OK) {
+   		?>
+		<script>
+			window.location = "?page=editProfile";
+			alert("Du har inte valt en bild");
+		</script>
+		<?php
+		exit;
+	}
 
 	// Check if file is an image
 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 
-    if($check !== false) {
-        // echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    }
-
-    else {
-        echo "Filen är inte en bild.";
-        $uploadOk = 0;
-    }
+	if ($check == false) {
+		?>
+		<script>
+			window.location = "?page=editProfile";
+			alert("Filen är inte en bild");
+		</script>
+		<?php
+		exit;
+	}
 
     // Check if image file type is allowed
 	if ($extension != $allowedExtensions[0] 
 		&& $extension != $allowedExtensions[1] 
 		&& $extension != $allowedExtensions[2] 
 		&& $extension != $allowedExtensions[3] ) {
-	    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	    $uploadOk = 0;
+	    ?>
+		<script>
+			window.location = "?page=editProfile";
+			alert("Bara JPG-, JPEG-, PNG- och GIF-bilder tillåts");
+		</script>
+		<?php
+		exit;
 	}
 
 	// Check so file size isn't batshit crazy
 	if ($_FILES["fileToUpload"]["size"] > 25000000) {
-	    echo "Sorry, your file is too large.";
-	    $uploadOk = 0;
+		?>
+		<script>
+			window.location = "?page=editProfile";
+			alert("Vafan gör du bilden är skitstor");
+		</script>
+		<?php
+		exit;
 	}
 
-	// Image doesn't pass
-	if ($uploadOk == 0)
-	    echo "Din fil kunde inte laddas upp.";
-
-	// Else everything is ok, attempt uploading file
-	else {
-		// Delete existing image if exists
-		for ($i=0; $i < sizeof($allowedExtensions); ++$i) { 
-			if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]))
-				unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]);
-		}
-
-		// Update database
-		DBQuery::sql("UPDATE user
-					  SET avatar = '$targetName'
-					  WHERE id='$_SESSION[user_id]'");  
-
-		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
-	        // echo "Din bild " . $targetName . " har laddats upp";
-	        //relocate
-			?>
-			<script>
-				window.location = "?page=editProfile";		//TO DO: hard code url
-				alert("Din profilbild har uppdaterats!");
-			</script>
-			<?php
-		}
-
-	    else
-	        echo "Din bild kunde inte laddas upp.";
+	// Delete user's existing avatar if exists
+	for ($i=0; $i < sizeof($allowedExtensions); ++$i) { 
+		if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]))
+			unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]);
 	}
 
+	// Update database ref to new avatar
+	DBQuery::sql("UPDATE user
+				  SET avatar = '$targetName'
+				  WHERE id='$_SESSION[user_id]'");  
+
+	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+        // echo "DEBUG: din bild " . $targetName . " har laddats upp";
+		?>
+		<script>
+			window.location = "?page=editProfile";
+		</script>
+		<?php
+	}
+
+    else{
+    	?>
+        <script>
+	        alert("Pga. orsaker kunde din bild inte laddas upp, kontakta webbansvarig");
+		</script>
+		<?php
+    }
 }
 
 ?>

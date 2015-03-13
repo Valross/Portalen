@@ -36,6 +36,15 @@ if(isset($_POST['log_in']))
 		</script>
 		<?php
 	}
+
+	else{
+		?>
+		<script>
+			window.location = "index.php?page=start";
+			alert("Fel användarnamn eller lösenord");
+		</script>
+		<?php
+	}
 }
 
 ?>

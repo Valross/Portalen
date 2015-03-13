@@ -30,9 +30,10 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		for ($i=0; $i < count($users); ++$i) { 
 			$userId = $users[$i]['id'];
 
-			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>", $users[$i]['name']);
+			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
+				, $users[$i]['name'] . " " . $users[$i]['last_name']);
 
-			$output = str_replace('nameString', $users[$i]['name'] . " " . $users[$i]['last_name'], $html);
+			$output = str_replace('nameString', $display_name, $html);
 			$output = str_replace('urlString', "?page=userProfile&id=$userId", $output);
 			echo($output);
 	 	} 	
@@ -48,9 +49,10 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		for ($i=0; $i < count($events); ++$i) { 
 			$eventId = $events[$i]['id'];
 
-			// $display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
+			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
+				, $events[$i]['name']);
 
-			$output = str_replace('nameString', $events[$i]['name'], $html);
+			$output = str_replace('nameString', $display_name, $html);
 			$output = str_replace('urlString', "?page=event&id=$eventId", $output);
 			echo($output);
 	 	} 	
@@ -65,9 +67,11 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		
 		for ($i=0; $i < count($teams); ++$i) { 
 			$teamId =  $teams[$i]['id'];
-			// $display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
 
-			$output = str_replace('nameString', $teams[$i]['name'], $html);
+			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
+				, $teams[$i]['name']);
+
+			$output = str_replace('nameString', $display_name, $html);
 			$output = str_replace('urlString', "?page=group&id=$teamId", $output);
 			echo($output);
 	 	} 	

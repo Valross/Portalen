@@ -226,17 +226,31 @@ fieldset[disabled] {
 
 	#sidebar {
 		background: #363430;
+		z-index: 999;
 	} 
 	
 	#content,
 	#footer {
 		padding: 0 20px;
+		position: relative;
 	}
 	#topbar {
 	width: auto;
 	background: #fff;
 	padding: 0 10px;
+	position: relative;
+	z-index: 998;
 	}	
+	
+	#search-result {
+		position: absolute;
+		top: 55px;
+		left: 0;
+		z-index: 997;
+		width: 100%;
+		padding: 0 20px;
+		background: #fff;
+	}
 
 /* =Modules
 -------------------------------------------------------------- */
@@ -802,7 +816,6 @@ fieldset[disabled] {
 			bottom: 0;
 			width: 240px;
 			overflow: scroll;
-			z-index: 10;
 		} 
 		#topbar .container-fluid {
 			max-width: 1155px;

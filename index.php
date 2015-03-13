@@ -113,10 +113,6 @@ include_once('php/pageManager.php');
 							
 							<!-- search field -->
 							<input type="search" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">
-							
-							<!-- show results after input -->
-							<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
-							<ul id="results"></ul>
 						</form>
 					</div>
 					<div class="col-sm-6 text-right">
@@ -147,7 +143,16 @@ include_once('php/pageManager.php');
 				</div>
 			</div> <!-- #topbar -->
 
-		  <div id="content">	     		 
+		  <div id="content">
+			  
+			  <div id="search-result">
+			  	<div class="container-fluid">
+					<!-- show results after search input -->
+					<h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
+					<ul id="results"></ul>
+				</div>
+			  </div>
+			  	     		 
 			  <div class="container-fluid">
 					<?php content(); ?>  
 			  </div>

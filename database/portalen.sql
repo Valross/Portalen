@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2015 at 01:48 PM
+-- Generation Time: Mar 15, 2015 at 02:22 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -72,41 +72,41 @@ CREATE TABLE IF NOT EXISTS `achievement` (
 --
 
 INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
-(1, 'Logga in', 'Logga in för första gången!', 'fa fa-cloud fa-fw fa-lg', 5),
+(1, 'Logga in', 'Logga in för första gången!', 'fa fa-unlock fa-fw fa-lg', 5),
 (2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', 'fa fa-cloud fa-fw fa-lg', 5),
-(3, 'För att du är värd det', 'Jobba värd 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(4, 'Bartastic', 'Jobba bar 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(5, 'Kocktastic', 'Jobba kock 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(6, 'Winner winner Chicken Dinner', 'Jobba DA 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(7, 'Jack of all trades', 'Jobba minst 10 pass som bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 25),
-(8, 'Barlicious', 'Jobba bar 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(9, 'Barbar', 'Jobba bar 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(10, 'Barkungen', 'Jobba bar 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(11, 'Kocky', 'Jobba kock 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(12, 'Gordon Ramsay', 'Jobba kock 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(13, 'Pommeskungen', 'Jobba kock 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(14, 'Så jävla värt', 'Jobba värd 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(15, 'Värdtastic', 'Jobba värd 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(16, 'En värdig värd i en värd värld', 'Jobba värd 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(17, 'Som en Chef', 'Jobba DA 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(18, 'DA#3', 'Jobba DA 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(19, 'DA#4', 'Jobba DA 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(20, 'Bara för att det är kul', 'Jobba minst 12p i en period', 'fa fa-cloud fa-fw fa-lg', 15),
-(21, 'Hardly working', 'Jobba minst 25p i en period', 'fa fa-cloud fa-fw fa-lg', 25),
-(22, '<3', 'Jobba 250p totalt', 'fa fa-cloud fa-fw fa-lg', 25),
-(23, 'Dinner is served', 'Jobba servering 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(24, 'Servering#2', 'Jobba servering 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(25, 'Servering#3', 'Jobba servering 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(26, 'Servering#4', 'Jobba servering 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(27, 'Tallriksmodellen', 'Jobba minst 1 pass som bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 5),
-(28, 'Alla#1', 'Jobba alla 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(29, 'Alla#2', 'Jobba alla 8 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(30, 'Alla#3', 'Jobba alla 15 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(31, 'Alla#4', 'Jobba alla 25 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
-(32, 'Hovis#1', 'Jobba hovis 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(33, 'Hovis#2', 'Jobba hovis 8 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
-(34, 'Hovis#3', 'Jobba hovis 15 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
-(35, 'Hovis#4', 'Jobba hovis 25 gånger', 'fa fa-cloud fa-fw fa-lg', 25);
+(3, 'För att du är värd det', 'Jobba värd 25 gånger', 'fa fa-user-secret fa-fw fa-lg', 15),
+(4, 'Bartastic', 'Jobba bar 2 gånger', 'fa fa-glass fa-fw fa-lg', 5),
+(5, 'Kocktastic', 'Jobba kock 2 gånger', 'fa fa-bug fa-fw fa-lg', 5),
+(6, 'Winner winner Chicken Dinner', 'Jobba DA 2 gånger', 'fa fa-key fa-fw fa-lg', 5),
+(7, 'Jack of all trades', 'Jobba minst 10 pass som bar, värd, kock, servering och alla', 'fa fa-bars fa-fw fa-lg', 25),
+(8, 'Barlicious', 'Jobba bar 10 gånger', 'fa fa-glass fa-fw fa-lg', 10),
+(9, 'Barbar', 'Jobba bar 25 gånger', 'fa fa-glass fa-fw fa-lg', 15),
+(10, 'Barkungen', 'Jobba bar 50 gånger', 'fa fa-glass fa-fw fa-lg', 25),
+(11, 'Kocky', 'Jobba kock 25 gånger', 'fa fa-bug fa-fw fa-lg', 15),
+(12, 'Gordon Ramsay', 'Jobba kock 50 gånger', 'fa fa-bug fa-fw fa-lg', 25),
+(13, 'Pommeskungen', 'Jobba kock 10 gånger', 'fa fa-bug fa-fw fa-lg', 10),
+(14, 'Så jävla värt', 'Jobba värd 50 gånger', 'fa fa-user-secret fa-fw fa-lg', 25),
+(15, 'Värdtastic', 'Jobba värd 2 gånger', 'fa fa-user-secret fa-fw fa-lg', 5),
+(16, 'En värdig värd i en värd värld', 'Jobba värd 10 gånger', 'fa fa-user-secret fa-fw fa-lg', 10),
+(17, 'Som en Chef', 'Jobba DA 10 gånger', 'fa fa-key fa-fw fa-lg', 10),
+(18, 'DA#3', 'Jobba DA 25 gånger', 'fa fa-key fa-fw fa-lg', 15),
+(19, 'DA#4', 'Jobba DA 50 gånger', 'fa fa-key fa-fw fa-lg', 25),
+(20, 'Bara för att det är kul', 'Jobba minst 12p i en period', 'fa fa-bookmark fa-fw fa-lg', 15),
+(21, 'Hardly working', 'Jobba minst 25p i en period', 'fa fa-bookmark fa-fw fa-lg', 25),
+(22, '<3', 'Jobba 250p totalt', 'fa fa-university fa-fw fa-lg', 25),
+(23, 'Dinner is served', 'Jobba servering 2 gånger', 'fa fa-cutlery fa-fw fa-lg', 5),
+(24, 'Servering#2', 'Jobba servering 10 gånger', 'fa fa-cutlery fa-fw fa-lg', 10),
+(25, 'Servering#3', 'Jobba servering 25 gånger', 'fa fa-cutlery fa-fw fa-lg', 15),
+(26, 'Servering#4', 'Jobba servering 50 gånger', 'fa fa-cutlery fa-fw fa-lg', 25),
+(27, 'Tallriksmodellen', 'Jobba minst 1 pass som bar, värd, kock, servering och alla', 'fa fa-bars fa-fw fa-lg', 5),
+(28, 'Alla#1', 'Jobba alla 2 gånger', 'fa fa-star fa-fw fa-lg', 5),
+(29, 'Alla#2', 'Jobba alla 8 gånger', 'fa fa-star fa-fw fa-lg', 10),
+(30, 'Alla#3', 'Jobba alla 15 gånger', 'fa fa-star fa-fw fa-lg', 15),
+(31, 'Alla#4', 'Jobba alla 25 gånger', 'fa fa-star fa-fw fa-lg', 25),
+(32, 'Hovis#1', 'Jobba hovis 2 gånger', 'fa fa-female fa-fw fa-lg', 5),
+(33, 'Hovis#2', 'Jobba hovis 8 gånger', 'fa fa-female fa-fw fa-lg', 10),
+(34, 'Hovis#3', 'Jobba hovis 15 gånger', 'fa fa-female fa-fw fa-lg', 15),
+(35, 'Hovis#4', 'Jobba hovis 25 gånger', 'fa fa-female fa-fw fa-lg', 25);
 
 -- --------------------------------------------------------
 

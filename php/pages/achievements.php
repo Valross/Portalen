@@ -45,7 +45,7 @@ function loadTop10()
 function loadAchievements()
 {
 	$achievements = DBQuery::sql("SELECT id, name, description, points, icon FROM achievement
-						ORDER BY id");
+						ORDER BY name");
 	$howMany = count($achievements);
 	for($i = 0; $i < $howMany; ++$i)
 	{

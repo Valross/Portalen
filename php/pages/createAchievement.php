@@ -110,10 +110,10 @@ function loadCreateAchievementTools($achievement)
 			<input type="text" name="name" id="name" value="'.$achievement_name[0]['name'].'">
 			<label for="points">Poäng <span class="fa fa-diamond fa-fw fa-lg"></span></label>
 			<input type="text" name="points" id="points" value="'.$achievement_name[0]['points'].'">
-			<label for="icon">Ikon <span class="fa fa-cloud fa-fw fa-lg"></span></label>
+			<label for="icon">Ikon <span class="'.$achievement_name[0]['icon'].'"></span></label>
 			<input type="text" name="icon" id="icon" placeholder="fa fa-cloud fa-fw fa-lg" value="'.$achievement_name[0]['icon'].'">
 			<label for="description">Beskrivning</label>
-			<textarea rows="6" cols="50" name="description" id="description" class="bottom-border">'.$achievement_name[0]['description'].'</textarea>
+			<textarea rows="2" cols="50" name="description" id="description" class="bottom-border">'.$achievement_name[0]['description'].'</textarea>
 			<input type="hidden" name="id" id="id" value="'.$achievement_name[0]['id'].'">';
 
 	echo '<input type="submit" name="submit" value="Spara">';

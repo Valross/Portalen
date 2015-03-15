@@ -306,7 +306,7 @@ function loadWorkSlots()
 					else
 						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
 
-					if(checkAdminAccess() || count($localUserBookedThisEvent) > 0)
+					if(checkAdminAccess() || count($localUserBookedThisSlot) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
 
 					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';

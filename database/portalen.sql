@@ -237,8 +237,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
-  KEY `name_3` (`name`),
-  FULLTEXT KEY `name` (`name`)
+  KEY `name_3` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
@@ -474,11 +473,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  FULLTEXT KEY `message` (`message`),
-  FULLTEXT KEY `title` (`title`),
-  FULLTEXT KEY `title_2` (`title`),
-  FULLTEXT KEY `message_2` (`message`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --

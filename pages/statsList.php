@@ -24,8 +24,7 @@
 				  	<?php loadStats(); ?>
 
 			  	</tbody>
-				</table>
-			</div>
+			</table>
 		</div>
 	</div>
 </div>

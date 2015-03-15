@@ -174,11 +174,14 @@ function loadUserName()
 {
 	$user_id = $_GET['id'];
 
-	$user_name = DBQuery::sql("SELECT name, last_name FROM user  
+	$user = DBQuery::sql("SELECT name, last_name, achievement_points FROM user  
 							WHERE id = '$user_id'");
 
-	if(isset($user_name[0]['name']))
-		echo $user_name[0]['name'].' '.$user_name[0]['last_name'];
+	if(isset($user[0]['name']))
+	{
+		echo $user[0]['name'].' '.$user[0]['last_name'];
+		echo ' - <span class="fa fa-diamond fa-fw"></span><a href="?page=browseUserAchievements&id='.$user_id.'">'.$user[0]['achievement_points'].'</a>';
+	}
 	else
 		echo 'John Doe';
 }

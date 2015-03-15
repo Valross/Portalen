@@ -16,3 +16,28 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="white-box">
+			<h3>
+				Antal gemensamma pass
+			</h3>
+
+		  	<table class="table table-hover">
+		      	<thead>
+			        <tr>
+			          	<th>Namn</th>
+			          	<th>Antal pass</th>
+			        </tr>
+			    </thead>
+				<tbody>
+
+				  	<?php loadColleagueStats(); ?>
+
+			  	</tbody>
+			</table>
+			  	
+		</div>
+	</div>
+</div>

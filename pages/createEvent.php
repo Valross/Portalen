@@ -138,35 +138,6 @@ function removeSlot(id)
 		<input type="submit" name="submit" value="Skapa evenemang">
 </div> <!-- .white-box -->
 </div> <!-- .col-sm-6 -->			
-<div class="col-sm-6">
-	<div class="white-box">
-		<h3>Lägg till pass</h3>	
-			<p class="bg-warning">Observera! Du måste skapa och färdigställa alla pass innan du trycker på knappen "Skapa evenemang".</p>
-		
-			<input type="button" value="Lägg till pass" onClick="addGroup()"/>
-			<input id="group_amount" type="number" value="1" style="width:40px;"/>
-			
-			<label for="group">Typ av pass</label>
-			<select id="group" name="group">
-				<?php loadGroups(); ?>
-			</select>
-			
-			<div class="input-group date datetimepicker">
-				<label for="slot_start">Passets starttid</label>
-				<input id="slot_start"type="text" value="<?php echo $dateNoTime; ?>">
-				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-			</div>
-			<div class="input-group date datetimepicker">
-				<label for="slot_end">Passets sluttid</label>
-				<input id="slot_end" type="text" value="<?php echo $dateNoTime; ?>">
-				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-			</div>
-			<label for="slot_points">Poäng</label>
-			<input id="slot_points" type="number" value="0">
-		<div id="added_groups"></div>
-	</div> <!-- .white-box -->
-</div> <!-- .col-sm-6 -->
-</div> <!-- .row -->
 </form>
 <?php
 	}

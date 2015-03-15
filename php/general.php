@@ -608,14 +608,40 @@ function checkIfAchievement($user_id)
 										AND event_type_id != 5");
 
 	$workedPointsResult = DBQuery::sql("SELECT points FROM work_slot 
+									WHERE id IN
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
+									");
+
+	$periods = DBQuery::sql("SELECT id FROM period");
+	
+	for($i = 1; $i < count($periods); ++$i)
+	{
+		$workedPointsThatPeriod = DBQuery::sql("SELECT points FROM work_slot 
 									WHERE event_id IN
 										(SELECT id FROM event WHERE period_id IN 
-											(SELECT id FROM period)
-										) 
+											(SELECT id FROM period
+											WHERE id = '$i')
+										)
 									AND id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
 									");
 
+		$workedPointsPeriod = 0;
+		for($j = 0; $j < count($workedPointsThatPeriod); ++$j)
+		{
+			$workedPointsPeriod = $workedPointsPeriod + $workedPointsThatPeriod[$j]['points'];
+		}
+
+		if($workedPointsPeriod >= 12)
+		{
+			unlockAchievementForUser($user_id, 20); //Jobba 12p i en period
+			if($workedPointsPeriod >= 25)
+			{
+				unlockAchievementForUser($user_id, 21); //Jobba 25p i en period
+			}
+		}
+	}
+	
 	$workedPointsTotal = 0;
 	if(count($workedPointsResult) > 0)
 	{

@@ -77,7 +77,7 @@ function loadWorkSlots()
 					<div class="white-box">';
 		$event_id = $_GET['id'];
 		$user_id = $_SESSION['user_id'];
-		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id FROM work_slot 
+		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
 							WHERE event_id = '$event_id'
 							");
 
@@ -121,27 +121,24 @@ function loadWorkSlots()
 									WHERE event_id = '$event_id')
 								AND work_slot_id = '$work_slot_id'");
 
-						$bookedSlotIsChecked = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+						if(count($bookedSlot) > 0)
+						{
+							$bookedSlotIsChecked = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 								WHERE work_slot_id IN
 									(SELECT id FROM work_slot 
 									WHERE event_id = '$event_id')
 								AND work_slot_id = '$work_slot_id'
 								AND checked = 1");
 
-						if(count($bookedSlot) > 0)
-						{
-							// echo '<a class="list-group-item">';
 							echo '<li class="list-group-item">';
 							if(count($bookedSlotIsChecked) > 0)
 								echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'" checked>';
 							else
 								echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
 							echo $start.$end;
-							// echo loadUserAvatar($bookedSlot[0]['user_id']);
-							// echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
 							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> '.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 							echo " (".$slots[$j]['points'].' poäng)';
-							// echo '</a>';
+							echo " (".$slots[$j]['wage'].' kr/h)';
 						}
 					}
 				}

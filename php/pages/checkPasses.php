@@ -54,7 +54,7 @@ function loadEventName($event_id)
 							WHERE id = '$event_id'");
 
 	if(count($event_name) > 0)
-		echo $event_name[0]['name'];
+		echo '<a href="?page=event&id='.$event_id.'">'.$event_name[0]['name'].'</a>';
 	else
 		echo "Något gick fel!";
 }
@@ -120,15 +120,28 @@ function loadWorkSlots()
 									(SELECT id FROM work_slot 
 									WHERE event_id = '$event_id')
 								AND work_slot_id = '$work_slot_id'");
+
+						$bookedSlotIsChecked = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+								WHERE work_slot_id IN
+									(SELECT id FROM work_slot 
+									WHERE event_id = '$event_id')
+								AND work_slot_id = '$work_slot_id'
+								AND checked = 1");
+
 						if(count($bookedSlot) > 0)
 						{
-							echo '<a class="list-group-item">';
-							echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
+							// echo '<a class="list-group-item">';
+							echo '<li class="list-group-item">';
+							if(count($bookedSlotIsChecked) > 0)
+								echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'" checked>';
+							else
+								echo '<input type="checkbox" name="slot[]" id="'.$slots[$j]['id'].'" value="'.$slots[$j]['id'].'">';
 							echo $start.$end;
-							echo loadUserAvatar($bookedSlot[0]['user_id']);
-							echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+							// echo loadUserAvatar($bookedSlot[0]['user_id']);
+							// echo ' '.loadNameFromUser($bookedSlot[0]['user_id']).' ';
+							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> '.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 							echo " (".$slots[$j]['points'].' poäng)';
-							echo '</a>';
+							// echo '</a>';
 						}
 					}
 				}

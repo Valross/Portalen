@@ -32,6 +32,23 @@ if(isset($_POST['submit'])) {
     }
 }
 
+if(isset($_POST['eventInfo'])) {
+	$start_time = $_POST['start_h'];
+	$end_time = $_POST['end_h'];
+	$start_date = $_POST['start_d'];
+	$end_date = $_POST['end_d'];
+	$info = $_POST['info'];
+	$event_id = $_GET['id'];
+
+	$start = $start_date[0].' '.$start_time[0].':00';
+	$end = $end_date[0].' '.$end_time[0].':00';
+
+    DBQuery::sql("UPDATE event
+		  SET start_time = '$start', end_time = '$end',
+		  		info = '$info'
+		  WHERE id='$event_id'");
+}
+
 if(isset($_POST['submitComment']))
 {
 	$comment = $_POST['comment'];
@@ -110,17 +127,63 @@ function loadEventDescription()
 	$start = $eventStart->format('Y-m-d H:i');
 	$end = $eventEnd->format('Y-m-d H:i');
 
-	if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
+	$start_h = $eventStart->format('H:i');
+	$end_h = $eventEnd->format('H:i');
+	$start_d = $eventStart->format('Y-m-d');
+	$end_d = $eventEnd->format('Y-m-d');
+
+	if(checkAdminAccess())
 	{
-		echo "<tr><td><strong>Börjar</strong></td><td>".$start."</td></tr>";
-		echo "<tr><td><strong>Slutar</strong></td><td>".$end."</td></tr>";
-		echo "<tr><td><strong>Information</td><td>".$event_info[0]['info']."</td></tr>";
+		echo '<form action="" method="post">';
+		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
+		{
+			echo "<tr><td><strong>Börjar</strong></td><td>";
+			echo '<input type="text" class="input-book-long" name="start_d" id="start_d" value="'.$start_d.'">';
+			echo '<input type="text" class="input-book" name="start_h" id="start_h" value="'.$start_h.'"> ';
+			echo "</td></tr>";
+
+			echo "<tr><td><strong>Slutar</strong></td><td>";
+			echo '<input type="text" class="input-book-long" name="end_d" id="end_d" value="'.$end_d.'">';
+			echo '<input type="text" class="input-book" name="end_h" id="end_h" value="'.$end_h.'"> ';
+			echo "</td></tr>";
+
+			echo "<tr><td><strong>Information</strong></td><td>";
+			echo '<textarea rows="4" name="info" id="info" class="bottom-border">'.$event_info[0]['info'].'</textarea>';
+			echo "</td></tr>";
+		}
+		else
+		{
+			echo "<tr><td><strong>Öppnar</strong></td><td>";
+			echo '<input type="text" class="input-book-long" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
+			echo '<input type="text" class="input-book" name="start_h[]" id="start_h[]" value="'.$start_h.'"> ';
+			echo "</td></tr>";
+
+			echo "<tr><td><strong>Stänger</strong></td><td>";
+			echo '<input type="text" class="input-book-long" name="end_d[]" id="end_d[]" value="'.$end_d.'">';
+			echo '<input type="text" class="input-book" name="end_h[]" id="end_h[]" value="'.$end_h.'"> ';
+			echo "</td></tr>";
+
+			echo "<tr><td><strong>Information</strong></td><td>";
+			echo '<textarea rows="4" name="info" id="info" class="bottom-border">'.$event_info[0]['info'].'</textarea>';
+			echo "</td></tr>";
+		}
+		echo '<tr><td><input type="submit" name="eventInfo" value="Spara"></td></tr>';
+		echo '</form>';
 	}
 	else
 	{
-		echo "<tr><td><strong>Öppnar</strong></td><td>".$start."</td></tr>";
-		echo "<tr><td><strong>Stänger</strong></td><td>".$end."</td></tr>";
-		echo "<tr><td><strong>Information</strong></td><td>".$event_info[0]['info']."</td></tr>";
+		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
+		{
+			echo "<tr><td><strong>Börjar</strong></td><td>".$start."</td></tr>";
+			echo "<tr><td><strong>Slutar</strong></td><td>".$end."</td></tr>";
+			echo "<tr><td><strong>Information</td><td>".$event_info[0]['info']."</td></tr>";	
+		}
+		else
+		{
+			echo "<tr><td><strong>Öppnar</strong></td><td>".$start."</td></tr>";
+			echo "<tr><td><strong>Stänger</strong></td><td>".$end."</td></tr>";
+			echo "<tr><td><strong>Information</strong></td><td>".$event_info[0]['info']."</td></tr>";
+		}
 	}
 }
 

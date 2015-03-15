@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-
+unlockAchievementForUser($_SESSION['user_id'], 1);
 
 function loadTitle()
 {

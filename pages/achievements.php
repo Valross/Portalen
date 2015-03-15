@@ -30,9 +30,9 @@
 				  	<?php loadTop10() ?>
 
 			  	</tbody>
-				</table>
-			</div>
+			</table>
 		</div>
+	</div>
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Lista över alla achievements</h3>

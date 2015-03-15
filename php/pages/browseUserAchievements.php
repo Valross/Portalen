@@ -3,8 +3,9 @@
 function loadAchievementsUnlocked()
 {
 	$user_id = $_GET['id'];
-	$achievements_unlocked = DBQuery::sql("SELECT achievement_id, user_id FROM achievement_unlocked
-										WHERE user_id = '$user_id'");
+	$achievements_unlocked = DBQuery::sql("SELECT achievement_id, user_id, date_unlocked FROM achievement_unlocked
+										WHERE user_id = '$user_id'
+										ORDER BY date_unlocked DESC");
 
 	for($i = 0; $i < count($achievements_unlocked); ++$i)
 	{
@@ -18,7 +19,7 @@ function loadAchievementsUnlocked()
 					<i class="<?php echo $achievements[0]['icon'];?>"></i>
 				    <span class="badge on-top-of-element"><?php echo $achievements[0]['points'];?></span>
 				</a>
-				<?php echo $achievements[0]['name'];?>
+				<?php echo $achievements[0]['name'].' ('.$achievements_unlocked[$i]['date_unlocked'].')';?>
 			</td>
 		</tr>
 		<?php

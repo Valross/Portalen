@@ -522,6 +522,10 @@ function loadNameFromUser($user_id)
 
 function unlockAchievementForUser($user_id, $achievement_id)
 {
+	$dates = new DateTime;
+	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+	$date = $dates->format('Y-m-d H:i:s');
+	
 	$achievement = DBQuery::sql("SELECT id, points FROM achievement WHERE id = '$achievement_id'");
 
 	$achievement_unlocked = DBQuery::sql("SELECT achievement_id FROM achievement_unlocked 
@@ -533,8 +537,8 @@ function unlockAchievementForUser($user_id, $achievement_id)
 	
 	if(count($achievement_unlocked) == 0)
 	{
-		DBQuery::sql("INSERT INTO achievement_unlocked (user_id, achievement_id)
-							VALUES ('$user_id', '$achievement_id')");
+		DBQuery::sql("INSERT INTO achievement_unlocked (user_id, achievement_id, date_unlocked)
+							VALUES ('$user_id', '$achievement_id', '$date')");
 
 		DBQuery::sql("UPDATE user
 				  SET achievement_points = '$total_points', 
@@ -587,6 +591,14 @@ function checkIfAchievement($user_id)
 											WHERE user_id = '$user_id' AND group_id = 11)) 
 										AND event_type_id != 5");
 
+	$workedHeadwaiter = DBQuery::sql("SELECT id FROM event 
+									WHERE id IN
+										(SELECT event_id FROM work_slot 
+										WHERE id IN 
+											(SELECT work_slot_id FROM user_work
+											WHERE user_id = '$user_id' AND group_id = 12)) 
+										AND event_type_id != 5");
+
 	$workedDA = DBQuery::sql("SELECT id FROM event 
 									WHERE id IN
 										(SELECT event_id FROM work_slot 
@@ -595,26 +607,166 @@ function checkIfAchievement($user_id)
 											WHERE user_id = '$user_id' AND group_id = 7)) 
 										AND event_type_id != 5");
 
-	if(count($workedGuard) >= 5) //Jobba värd 5 gånger
+	$workedPointsResult = DBQuery::sql("SELECT points FROM work_slot 
+									WHERE event_id IN
+										(SELECT id FROM event WHERE period_id IN 
+											(SELECT id FROM period)
+										) 
+									AND id IN
+										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
+									");
+
+	$workedPointsTotal = 0;
+	if(count($workedPointsResult) > 0)
 	{
-		unlockAchievementForUser($user_id, 3);
+		for($i = 0; $i < count($workedPointsResult); ++$i)
+			$workedPointsTotal = $workedPointsTotal + $workedPointsResult[$i]['points'];
 	}
-	if(count($workedChef) >= 5) //Jobba kock 5 gånger
+
+	//--------------------------------------------------------------------------------------------------------------------
+
+	//Totalpoäng
+	if($workedPointsTotal >= 250)
 	{
-		unlockAchievementForUser($user_id, 5);
+		unlockAchievementForUser($user_id, 22); //Jobba minst 250p
 	}
-	if(count($workedBar) >= 5) //Jobba bar 5 gånger
+
+	//Alla
+	if(count($workedAll) >= 2) 
 	{
-		unlockAchievementForUser($user_id, 4);
+		unlockAchievementForUser($user_id, 28); //Jobba alla 2 gånger
+		if(count($workedAll) >= 8) 
+		{
+			unlockAchievementForUser($user_id, 29); //Jobba alla 8 gånger
+			if(count($workedAll) >= 15) 
+			{
+				unlockAchievementForUser($user_id, 30); //Jobba alla 15 gånger
+				if(count($workedAll) >= 25) 
+				{
+					unlockAchievementForUser($user_id, 31); //Jobba alla 25 gånger
+				}
+			}
+		}
 	}
-	if(count($workedDA) >= 5) //Jobba bar 5 gånger
+
+	//Värd
+	if(count($workedGuard) >= 2) 
 	{
-		unlockAchievementForUser($user_id, 6);
+		unlockAchievementForUser($user_id, 15); //Jobba värd 2 gånger
+		if(count($workedGuard) >= 10) 
+		{
+			unlockAchievementForUser($user_id, 16); //Jobba värd 10 gånger
+			if(count($workedGuard) >= 25) 
+			{
+				unlockAchievementForUser($user_id, 3); //Jobba värd 25 gånger
+				if(count($workedGuard) >= 50) 
+				{
+					unlockAchievementForUser($user_id, 14); //Jobba värd 50 gånger
+				}
+			}
+		}
 	}
+
+	//Kock
+	if(count($workedChef) >= 2)
+	{
+		unlockAchievementForUser($user_id, 5); //Jobba kock 2 gånger
+		if(count($workedChef) >= 10) 
+		{
+			unlockAchievementForUser($user_id, 13); //Jobba kock 10 gånger
+			if(count($workedChef) >= 25) 
+			{
+				unlockAchievementForUser($user_id, 11); //Jobba kock 25 gånger
+				if(count($workedChef) >= 50) 
+				{
+					unlockAchievementForUser($user_id, 12); //Jobba kock 50 gånger
+				}
+			}
+		}
+	}
+
+	//Bar
+	if(count($workedBar) >= 2) 
+	{
+		unlockAchievementForUser($user_id, 4); //Jobba bar 2 gånger
+		if(count($workedBar) >= 10) 
+		{
+			unlockAchievementForUser($user_id, 8); //Jobba bar 10 gånger
+			if(count($workedBar) >= 25) 
+			{
+				unlockAchievementForUser($user_id, 9); //Jobba bar 25 gånger
+				if(count($workedBar) >= 50) 
+				{
+					unlockAchievementForUser($user_id, 10); //Jobba bar 50 gånger
+				}
+			}
+		}
+	}
+
+	//DA
+	if(count($workedDA) >= 2)
+	{
+		unlockAchievementForUser($user_id, 6); //Jobba DA 2 gånger
+		if(count($workedDA) >= 10) 
+		{
+			unlockAchievementForUser($user_id, 17); //Jobba DA 10 gånger
+			if(count($workedDA) >= 25) 
+			{
+				unlockAchievementForUser($user_id, 18); //Jobba DA 25 gånger
+				if(count($workedDA) >= 50) 
+				{
+					unlockAchievementForUser($user_id, 19); //Jobba DA 50 gånger
+				}
+			}
+		}
+	}
+
+	//Servering
+	if(count($workedServe) >= 2) 
+	{
+		unlockAchievementForUser($user_id, 23); //Jobba Servering 2 gånger
+		if(count($workedServe) >= 10)
+		{
+			unlockAchievementForUser($user_id, 24); //Jobba Servering 10 gånger
+			if(count($workedServe) >= 25)
+			{
+				unlockAchievementForUser($user_id, 25); //Jobba Servering 25 gånger
+				if(count($workedServe) >= 50)
+				{
+					unlockAchievementForUser($user_id, 26); //Jobba Servering 50 gånger
+				}
+			}
+		}
+	}
+
+	//Hovis
+	if(count($workedHeadwaiter) >= 2) 
+	{
+		unlockAchievementForUser($user_id, 32); //Jobba Hovis 2 gånger
+		if(count($workedHeadwaiter) >= 8)
+		{
+			unlockAchievementForUser($user_id, 33); //Jobba Hovis 8 gånger
+			if(count($workedHeadwaiter) >= 15)
+			{
+				unlockAchievementForUser($user_id, 34); //Jobba Hovis 15 gånger
+				if(count($workedHeadwaiter) >= 25)
+				{
+					unlockAchievementForUser($user_id, 35); //Jobba Hovis 25 gånger
+				}
+			}
+		}
+	}
+
+	//Jobba allt
 	if(count($workedBar) >= 1 && count($workedChef) >= 1 && count($workedGuard) >= 1 
-			&& count($workedServe) >= 1 && count($workedAll) >= 1) //Jobba alla pass (Jack of all trades)
+			&& count($workedServe) >= 1 && count($workedAll) >= 1) 
 	{
-		unlockAchievementForUser($user_id, 7);
+		unlockAchievementForUser($user_id, 7); //Jobba allt 1 pass
+		if(count($workedBar) >= 10 && count($workedChef) >= 10 && count($workedGuard) >= 10 
+			&& count($workedServe) >= 10 && count($workedAll) >= 10)
+		{
+			unlockAchievementForUser($user_id, 7); //Jobba allt 10 pass
+		}
 	}
 }
 

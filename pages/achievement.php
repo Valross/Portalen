@@ -7,9 +7,37 @@
 </div> <!-- .row -->
 
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-7">
 		<div class="white-box">
 			<?php loadAchievement() ?>
 		</div>
 	</div>
 </div>
+
+<?php 
+	if(anyoneUnlockedThisAchievement())
+	{
+?>
+<div class="row">
+	<div class="col-sm-7">
+		<div class="white-box">
+		<table class="table table-hover">
+	      	<thead>
+		        <tr>
+		          	<th>#</th>
+		          	<th>Namn</th>
+				  	<th>Datum</th>
+		        </tr>
+		    </thead>
+			<tbody>
+
+			  	<?php loadPeopleWhoUnlockedThisAchievement() ?>
+
+		  	</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+<?php
+	}
+?>

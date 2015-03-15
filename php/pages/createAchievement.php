@@ -92,7 +92,7 @@ function loadAllAchievementsAsOption()
 	for($i = 0; $i < count($achievements); ++$i)
 	{
 		?>
-			<option value="<?php echo $achievements[$i]['id']; ?>"><?php echo $achievements[$i]['name']; ?></option>
+			<option value="<?php echo $achievements[$i]['id']; ?>"><?php echo $achievements[$i]['name'].' ('.$achievements[$i]['id'].')'; ?></option>
 		<?php
 	}
 }

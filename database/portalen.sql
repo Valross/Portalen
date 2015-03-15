@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2015 at 05:32 PM
+-- Generation Time: Mar 15, 2015 at 01:48 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `achievement` (
   `icon` varchar(35) DEFAULT NULL,
   `points` int(11) NOT NULL DEFAULT '5',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `achievement`
@@ -74,11 +74,39 @@ CREATE TABLE IF NOT EXISTS `achievement` (
 INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
 (1, 'Logga in', 'Logga in för första gången!', 'fa fa-cloud fa-fw fa-lg', 5),
 (2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', 'fa fa-cloud fa-fw fa-lg', 5),
-(3, 'För att du är Värd det', 'Jobba som värd 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(4, 'Bartastic', 'Jobba som bartender 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(5, 'Kocktastic', 'Jobba som kock 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(6, 'DA-tastic', 'Jobba som DA 5 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
-(7, 'Jack of all trades', 'Jobba minst ett pass som: bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 10);
+(3, 'För att du är värd det', 'Jobba värd 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(4, 'Bartastic', 'Jobba bar 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(5, 'Kocktastic', 'Jobba kock 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(6, 'Winner winner Chicken Dinner', 'Jobba DA 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(7, 'Jack of all trades', 'Jobba minst 10 pass som bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 25),
+(8, 'Barlicious', 'Jobba bar 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(9, 'Barbar', 'Jobba bar 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(10, 'Barkungen', 'Jobba bar 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(11, 'Kocky', 'Jobba kock 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(12, 'Gordon Ramsay', 'Jobba kock 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(13, 'Pommeskungen', 'Jobba kock 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(14, 'Så jävla värt', 'Jobba värd 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(15, 'Värdtastic', 'Jobba värd 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(16, 'En värdig värd i en värd värld', 'Jobba värd 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(17, 'Som en Chef', 'Jobba DA 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(18, 'DA#3', 'Jobba DA 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(19, 'DA#4', 'Jobba DA 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(20, 'Bara för att det är kul', 'Jobba minst 12p i en period', 'fa fa-cloud fa-fw fa-lg', 15),
+(21, 'Hardly working', 'Jobba minst 25p i en period', 'fa fa-cloud fa-fw fa-lg', 25),
+(22, '<3', 'Jobba 250p totalt', 'fa fa-cloud fa-fw fa-lg', 25),
+(23, 'Dinner is served', 'Jobba servering 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(24, 'Servering#2', 'Jobba servering 10 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(25, 'Servering#3', 'Jobba servering 25 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(26, 'Servering#4', 'Jobba servering 50 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(27, 'Tallriksmodellen', 'Jobba minst 1 pass som bar, värd, kock, servering och alla', 'fa fa-cloud fa-fw fa-lg', 5),
+(28, 'Alla#1', 'Jobba alla 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(29, 'Alla#2', 'Jobba alla 8 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(30, 'Alla#3', 'Jobba alla 15 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(31, 'Alla#4', 'Jobba alla 25 gånger', 'fa fa-cloud fa-fw fa-lg', 25),
+(32, 'Hovis#1', 'Jobba hovis 2 gånger', 'fa fa-cloud fa-fw fa-lg', 5),
+(33, 'Hovis#2', 'Jobba hovis 8 gånger', 'fa fa-cloud fa-fw fa-lg', 10),
+(34, 'Hovis#3', 'Jobba hovis 15 gånger', 'fa fa-cloud fa-fw fa-lg', 15),
+(35, 'Hovis#4', 'Jobba hovis 25 gånger', 'fa fa-cloud fa-fw fa-lg', 25);
 
 -- --------------------------------------------------------
 
@@ -89,6 +117,7 @@ INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
 CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
   `user_id` int(11) NOT NULL,
   `achievement_id` int(11) NOT NULL,
+  `date_unlocked` date NOT NULL,
   KEY `user_id` (`user_id`,`achievement_id`),
   KEY `achievement_id` (`achievement_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -97,9 +126,12 @@ CREATE TABLE IF NOT EXISTS `achievement_unlocked` (
 -- Dumping data for table `achievement_unlocked`
 --
 
-INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`) VALUES
-(2, 1),
-(2, 3);
+INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`, `date_unlocked`) VALUES
+(2, 1, '0000-00-00'),
+(2, 3, '0000-00-00'),
+(2, 6, '0000-00-00'),
+(2, 15, '2015-03-15'),
+(2, 23, '2015-03-15');
 
 -- --------------------------------------------------------
 
@@ -205,8 +237,9 @@ CREATE TABLE IF NOT EXISTS `event` (
   PRIMARY KEY (`id`),
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
-  KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+  KEY `name_3` (`name`),
+  FULLTEXT KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `event`
@@ -235,7 +268,8 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (49, 'Webbmöte', 'Webbmöte jao', '2015-02-18 17:15:00', '2015-02-18 19:00:00', 2, 5),
 (50, 'Passtest', 'Fan svårt att få det att funka', '2015-02-19 17:15:00', '2015-03-25 19:00:00', 2, 3),
 (51, 'Test wage', 'Yep', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
-(52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2);
+(52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
+(53, 'Testpub', 'Tesssssssssssssst', '2015-03-12 00:00:00', '2015-03-13 00:00:00', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -440,7 +474,11 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  FULLTEXT KEY `message` (`message`),
+  FULLTEXT KEY `title` (`title`),
+  FULLTEXT KEY `title_2` (`title`),
+  FULLTEXT KEY `message_2` (`message`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -588,7 +626,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 0, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '0000-00-00', 3, 10, NULL, NULL),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpa', 'Derp', '123654879', 'WOPP', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '0000-00-00', 4, 35, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00', 0, 0, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
@@ -626,12 +664,30 @@ CREATE TABLE IF NOT EXISTS `user_work` (
 --
 
 INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
-(89, 1, 0),
+(89, 1, 1),
+(90, 2, 1),
 (91, 2, 1),
-(93, 3, 0),
-(94, 2, 0),
+(93, 3, 1),
+(94, 2, 1),
 (95, 2, 1),
-(96, 2, 1);
+(96, 2, 1),
+(99, 2, 1),
+(100, 1, 1),
+(112, 2, 1),
+(113, 2, 1),
+(114, 2, 1),
+(115, 2, 1),
+(116, 2, 1),
+(117, 2, 1),
+(118, 2, 1),
+(119, 2, 1),
+(120, 2, 1),
+(121, 2, 1),
+(122, 2, 1),
+(123, 2, 1),
+(124, 2, 1),
+(125, 2, 1),
+(126, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -708,7 +764,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -784,7 +840,22 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (108, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (109, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (110, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
-(111, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00');
+(111, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(112, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(113, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(114, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(115, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(116, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(117, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(118, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(119, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(120, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(121, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(122, 7, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
+(123, 11, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(124, 11, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(125, 11, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(126, 11, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00');
 
 --
 -- Constraints for dumped tables

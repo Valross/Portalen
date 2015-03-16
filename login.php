@@ -26,9 +26,14 @@ if(isset($_POST['log_in']))
 		$_SESSION['last_name'] = $result[0]['last_name'];
 		$user_id = $result[0]['id'];
 		$number_of_sessions = $result[0]['number_of_sessions']+1;
+
+		$dates = new DateTime;
+		$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+		$date = $dates->format('Y-m-d H:i:s');
+
 		//Change to hardcoded url later to get rid of index.php in url
 		DBQuery::sql("UPDATE user
-			  SET number_of_sessions = '$number_of_sessions'
+			  SET number_of_sessions = '$number_of_sessions', latest_session = '$date'
 			  WHERE id='$user_id'");
 		?>
 		<script>

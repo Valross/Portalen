@@ -409,13 +409,23 @@ function loadComments()
 			for($i = 0; $i < count($event_comments); ++$i)
 			{
 				$user_id = $event_comments[$i]['user_id'];
+				$my_user_id = $_SESSION['user_id'];
+				$this_comment_id = $event_comments[$i]['id'];
 				$commenter = DBQuery::sql("SELECT id, name, last_name FROM user 
 								WHERE id = '$user_id'");
+
+				$myComment = DBQuery::sql("SELECT id FROM event_comments 
+								WHERE id = '$this_comment_id'
+								AND user_id = '$my_user_id'");
+
 				echo '<div class="comment">';
 				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
 				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
 				echo $event_comments[$i]['comment'].'</p>';
+				if(checkAdminAccess() || count($myComment) > 0)
+					echo '<a href=?page=removeEventComment&event_id='.$event_id.'&comment_id='.$event_comments[$i]['id'].
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 				echo '</div>';
 			}
 			echo '			</div>

@@ -13,7 +13,9 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<button type="button" class="btn btn-page-header"><i class="fa fa-trash fa-lg fa-margin-right"></i> Avsluta medlemskap</button>
+		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>">
+		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
+		</a>
 	</div>
 </div> <!-- .row -->
 

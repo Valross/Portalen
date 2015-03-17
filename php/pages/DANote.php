@@ -222,6 +222,11 @@ function loadComments()
 		{
 			$user_id = $DAComments[$i]['user_id'];
 			$comment_id = $DAComments[$i]['id'];
+			$my_user_id = $_SESSION['user_id'];
+
+			$myComment = DBQuery::sql("SELECT id FROM da_note_comments 
+							WHERE id = '$comment_id'
+							AND user_id = '$my_user_id'");
 
 			$commenter = DBQuery::sql("SELECT name, last_name FROM user 
 							WHERE id = '$user_id' AND id IN
@@ -231,6 +236,9 @@ function loadComments()
 			echo '<p><a href="?page=userProfile&id='.$DAComments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 			echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
 			echo $DAComments[$i]['comment'].'</p>';
+			if(checkAdminAccess() || count($myComment) > 0)
+					echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 			echo '</div>';
 		}
 		echo '			</div> <!-- .white-box -->

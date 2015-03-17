@@ -13,7 +13,7 @@ function loadAll()
 					echo '<div class="news-info"><span>';
 					echo loadUserAvatar($news[$i]['id']);
 					echo loadUserName($news[$i]['id']);
-					echo '</span> <span class="time">- '.loadDate($news[$i]['id']).'</span></div>';
+					echo '</span> <span class="time">- '.loadDate($news[$i]['id']).'</span>'.loadRemove($news[$i]['id']).'</div>';
 					echo '<p>'.loadMessage($news[$i]['id']).'</p>';
 		echo    '</div>
 			 </div>';
@@ -25,6 +25,13 @@ function loadTitle($news_id)
 	$news = DBQuery::sql("SELECT title FROM news
 							WHERE id = '$news_id'");
 	return $news[0]['title'];
+}
+
+function loadRemove($news_id)
+{
+	if(checkAdminAccess())
+		echo '<a href=?page=removeNews&news_id='.$news_id.
+				' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 }
 
 function loadMessage($news_id)

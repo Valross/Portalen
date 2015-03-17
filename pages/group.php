@@ -10,7 +10,9 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Information</h3>
-	<p><?php echo $groupDescription; ?></p>
+		<p>
+			<?php loadGroupInfo(); ?>
+		</p>
 
 
 		<table class="basic-table">
@@ -29,7 +31,7 @@
 		<div class="white-box">
 			<h3>Medlemmar (<?php echo $nMembers; ?>)</h3>
 			<div class="list-group">
-			<?php loadMembersOfGroup(); ?>
+				<?php loadMembersOfGroup(); ?>
 			</div>
 		</div>
 	</div>

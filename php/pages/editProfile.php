@@ -265,6 +265,7 @@ if(isset($_POST['UploadAvatar'])) {
 
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
         // echo "DEBUG: din bild " . $targetName . " har laddats upp";
+        unlockAchievementForUser($_SESSION['user_id'], 36); //Lås upp "Ladda upp en profilbild"
 		?>
 		<script>
 			window.location = "?page=editProfile";

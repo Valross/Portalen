@@ -232,7 +232,7 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND user_id = '$user_id'");
 
-	$groups = DBQuery::sql("SELECT id, name, main_group, sub_group FROM work_group 
+	$groups = DBQuery::sql("SELECT id, name, main_group, sub_group, icon, hex FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
 							ORDER BY name");
@@ -245,7 +245,15 @@ function loadWorkSlots()
 	{
 		$number = 0;
 		if($groups[$i]['main_group'] == NULL)
-			echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'" class="black-link"><strong>'.$groups[$i]['name'].'</strong></a></li>';
+		{
+			echo '<li class="list-group-item with-thumbnail">';
+			
+			if($groups[$i]['icon'] != '')
+				echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>';
+			else
+				echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+			echo '<a href="?page=group&id='.$groups[$i]['id'].'" class="black-link"><strong>'.$groups[$i]['name'].'</strong></a></li>';
+		}
 		for($j = 0; $j < count($slots); ++$j)
 		{
 			$work_slot_id = $slots[$j]['id'];

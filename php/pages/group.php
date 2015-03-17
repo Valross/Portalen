@@ -58,8 +58,13 @@ function loadGroupName()
 {
 	$group_id = $_GET['id'];
 
-	$groupName = DBQuery::sql("SELECT name FROM work_group 
+	$groupName = DBQuery::sql("SELECT name, icon FROM work_group 
 							WHERE id = '$group_id'");
+	
+	if($groupName[0]['icon'] != '')
+		echo '<span class="'.$groupName[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+	else
+		echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
 	echo $groupName[0]['name'];
 }
 

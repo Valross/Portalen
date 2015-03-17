@@ -415,7 +415,7 @@ function loadAvatarFromUser($user_id, $size)
 
 function loadMyGroups()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+	$groups = DBQuery::sql("SELECT id, name, icon, hex FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
 							ORDER BY name");
@@ -427,7 +427,12 @@ function loadMyGroups()
 							WHERE user_id = '$_SESSION[user_id]' AND group_id = '$group_id'");
 		?>
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
-				<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+				<?php 
+				if($groups[$i]['icon'] != '')
+					echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>'; 
+				else
+					echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+				?>
 				<?php echo $groups[$i]['name']; ?>
 				<span class="list-group-item-text pull-right"><?php echo 'sedan '.$group_members[0]['member_since']; ?></span>
 			</a>
@@ -437,21 +442,21 @@ function loadMyGroups()
 
 function loadMyGroupsOption()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+	$groups = DBQuery::sql("SELECT id, name, icon FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$_SESSION[user_id]')
 							ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['icon'].$groups[$i]['name']; ?></option>
 		<?php
 	}
 }
 
 function loadAllGroups()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	$groups = DBQuery::sql("SELECT id, name, icon, hex FROM work_group ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		$group_id = $groups[$i]['id'];
@@ -462,7 +467,13 @@ function loadAllGroups()
 
 		?>
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
-				<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+				
+				<?php 
+				if($groups[$i]['icon'] != '')
+					echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>'; 
+				else
+					echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+				?>
 				<?php echo $groups[$i]['name']; ?>
 				<span class="badge"><?php echo count($members); ?></span>
 			</a>
@@ -472,11 +483,11 @@ function loadAllGroups()
 
 function loadAllGroupsOption()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	$groups = DBQuery::sql("SELECT id, name, icon FROM work_group ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		?>
-			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
+			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['icon'].$groups[$i]['name']; ?></option>
 		<?php
 	}
 }

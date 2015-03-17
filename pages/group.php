@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
 			<h1 class="header-img"><?php loadGroupName(); ?> - <a href="?page=groups">Alla lag</a></h1> 
 		</div>
 	</div>

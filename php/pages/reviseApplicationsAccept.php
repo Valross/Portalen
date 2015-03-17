@@ -13,15 +13,32 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 	$date = $dates->format('Y-m-d');
 
 	// echo "DEBUG name = " . $name . ", lastName = " . $lastName . ", ssn = " . $ssn . ", mail = " . $mail;
-	echo "ID = " . $appId;
+	// echo "ID = " . $appId;
 
 	//add applicant to user
 	$tempPassword = "trappan";
 	DBQuery::sql("INSERT INTO user (user_name, mail, ssn, password, name, last_name)
 						VALUES ('$mail', '$mail', '$ssn', '$tempPassword', '$name', '$lastName')");
 
-	// DBQuery::sql("INSERT INTO group_member (group_id, user_id, group_leader, member_since)
-	// 					VALUES ('$mail', '$mail', '0', '$date')");
+	$user = DBQuery::sql("SELECT id FROM user
+							ORDER BY id DESC");
+
+	$user_id = $user[0]['id'];
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+						VALUES ('13', '$user_id', '$date')"); //Lägg till i Alla
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+						VALUES ('15', '$user_id', '$date')"); //Lägg till i Bar - Nybyggare
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+						VALUES ('16', '$user_id', '$date')"); //Lägg till i Kock - Nybyggare
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+						VALUES ('17', '$user_id', '$date')"); //Lägg till i Servering - Nybyggare
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
+						VALUES ('25', '$user_id', '$date')"); //Lägg till i Värd - Nybyggare
 
 	//send confirmation email
 	//...

@@ -1,7 +1,10 @@
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
-			<h1><span class="fa fa-users fa-fw fa-lg"></span> Lagsidor</h1>
+			<h1>
+			<span class="fa fa-users fa-fw fa-lg"></span> Lagsidor - 
+			<a href="?page=manageGroup">Hantera Lag</a>
+			</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

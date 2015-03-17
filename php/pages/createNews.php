@@ -3,8 +3,8 @@ include_once('php/DBQuery.php');
 
 if(isset($_POST['submit']) && checkAdminAccess())
 {
-	$title = $_POST['title'];
-	$message = $_POST['message'];
+	$title = strip_tags($_POST['title']);
+	$message = strip_tags($_POST['message'], allowed_tags());
 	
 	if($title != '' && $message != '')
 	{

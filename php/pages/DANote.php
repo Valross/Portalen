@@ -6,7 +6,7 @@ $date = $dates->format('Y-m-d H:i:s');
 
 if(isset($_POST['submit']))
 {
-	$comment = $_POST['comment'];
+	$comment = strip_tags($_POST['comment'], allowed_tags());
 	$da_note_event_id = $_GET['id'];
 
 	$da_note = DBQuery::sql("SELECT id FROM da_note

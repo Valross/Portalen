@@ -3,11 +3,11 @@ include_once('php/DBQuery.php');
 
 if(isset($_POST['submit']) && checkAdminAccess())
 {
-	$name = $_POST['name'];
-	$info = $_POST['info'];
-	$type = $_POST['type'];
-	$start = $_POST['start'];
-	$end = $_POST['end'];
+	$name = strip_tags($_POST['name']);
+	$info = strip_tags($_POST['info'], allowed_tags());
+	$type = strip_tags($_POST['type']);
+	$start = strip_tags($_POST['start']);
+	$end = strip_tags($_POST['end']);
 	
 	$periodId = DBQuery::sql("SELECT id FROM period WHERE start_date < '$start' AND end_date > '$start'");
 	

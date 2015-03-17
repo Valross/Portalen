@@ -3,14 +3,14 @@ include_once('php/DBQuery.php');
 
 if(isset($_POST['submit']) && checkAdminAccess())
 {
-	$userName = $_POST['user_name'];
-	$password = $_POST['password'];
+	$userName = strip_tags($_POST['user_name']);
+	$password = strip_tags($_POST['password']);
 	$passwordMD5 = md5('d98b05a7c7add6fa22b8de62444da5a5'.$password.'d99947dd2b0329f55babeaa6597fb7c8');
 	$passwordMD5 = md5($passwordMD5);
-	$ssn = $_POST['ssn'];
-	$mail = $_POST['mail'];
-	$name = $_POST['name'];
-	$lastName = $_POST['last_name'];
+	$ssn = strip_tags($_POST['ssn']);
+	$mail = strip_tags($_POST['mail']);
+	$name = strip_tags($_POST['name']);
+	$lastName = strip_tags($_POST['last_name']);
 	
 	if($userName != '' && $password != '' && $ssn != '' && $mail != '' && $name != '' && $lastName != '')
 	{

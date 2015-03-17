@@ -1,7 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
 	
-	
 //Score progress bar calculation
 $dates = new DateTime;
 $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
@@ -58,6 +57,12 @@ if($workedPointsPercent > 100)
 if($bookedPointsPercent > 100 - $workedPointsPercent)
 {
 	$bookedPointsPercent = 100 - $workedPointsPercent;
+}
+
+//Allowed tags
+function allowed_tags()
+{
+	return '<i>';
 }
 
 //

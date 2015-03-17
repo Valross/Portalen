@@ -3,18 +3,18 @@ include_once('php/DBQuery.php');
 
 if(isset($_POST['submit']))
 {
-	$event = $_POST['event'];
-	$nOfSitting = $_POST['n_of_sitting'];
-	$food = $_POST['food'];
-	$invoiceDrinks = $_POST['invoice_drinks'];
-	$nOfWaitingOrganizers = $_POST['n_of_waiting_organizers'];
-	$nOfWaitingStair = $_POST['n_of_waiting_stair'];
-	$toast = $_POST['toast'];
-	$organizers = $_POST['organizers'];
-	$stairStaff = $_POST['stair_staff'];
-	$organizersStaff = $_POST['organizers_staff'];
-	$swine = $_POST['swine'];
-	$message = $_POST['message'];
+	$event = strip_tags($_POST['event'], allowed_tags());
+	$nOfSitting = strip_tags($_POST['n_of_sitting'], allowed_tags());
+	$food = strip_tags($_POST['food'], allowed_tags());
+	$invoiceDrinks = strip_tags($_POST['invoice_drinks'], allowed_tags());
+	$nOfWaitingOrganizers = strip_tags($_POST['n_of_waiting_organizers'], allowed_tags());
+	$nOfWaitingStair = strip_tags($_POST['n_of_waiting_stair'], allowed_tags());
+	$toast = strip_tags($_POST['toast'], allowed_tags());
+	$organizers = strip_tags($_POST['organizers'], allowed_tags());
+	$stairStaff = strip_tags($_POST['stair_staff'], allowed_tags());
+	$organizersStaff = strip_tags($_POST['organizers_staff'], allowed_tags());
+	$swine = strip_tags($_POST['swine'], allowed_tags());
+	$message = strip_tags($_POST['message'], allowed_tags());
 
 	
 	if($event != 'typeno' && $nOfSitting != '' && $food != '' && $invoiceDrinks != '' && $nOfWaitingOrganizers != '' 

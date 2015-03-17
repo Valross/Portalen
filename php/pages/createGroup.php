@@ -15,11 +15,11 @@ else
 
 if(isset($_POST['submit']))
 {
-	$groupName = $_POST['groupName'];
-	$id = $_POST['id'];
-	$facebookGroup = $_POST['facebookGroup'];
-	$description = $_POST['description'];
-	$main_group = $_POST['main_group'];
+	$groupName = strip_tags($_POST['groupName']);
+	$id = strip_tags($_POST['id']);
+	$facebookGroup = strip_tags($_POST['facebookGroup']);
+	$description = strip_tags($_POST['description'], allowed_tags());
+	$main_group = strip_tags($_POST['main_group']);
 
 	if($groupName != '')
 	{

@@ -7,14 +7,14 @@ $date = $dates->format('Y-m-d H:i:s');
 
 if(isset($_POST['submit']) && checkAdminAccess())
 {
-	$event = $_POST['event'];
-	$salesTotal = $_POST['salesTotal'];
-	$salesEntry = $_POST['salesEntry'];
-	$salesBar = $_POST['salesBar'];
-	$cash = $_POST['cash'];
-	$nOfPeople = $_POST['nOfPeople'];
-	$salesSpenta = $_POST['salesSpenta'];
-	$message = $_POST['message'];
+	$event = strip_tags($_POST['event']);
+	$salesTotal = strip_tags($_POST['salesTotal']);
+	$salesEntry = strip_tags($_POST['salesEntry']);
+	$salesBar = strip_tags($_POST['salesBar']);
+	$cash = strip_tags($_POST['cash']);
+	$nOfPeople = strip_tags($_POST['nOfPeople']);
+	$salesSpenta = strip_tags($_POST['salesSpenta']);
+	$message = strip_tags($_POST['message'];, allowed_tags());
 
 	if($event != 'typeno' && $salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{

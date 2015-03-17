@@ -51,7 +51,7 @@ if(isset($_POST['eventInfo'])) {
 
 if(isset($_POST['submitComment']))
 {
-	$comment = $_POST['comment'];
+	$comment = strip_tags($_POST['comment'], allowed_tags());
 	$event_id = $_GET['id'];
 	
 	if($comment != '')

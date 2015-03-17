@@ -15,11 +15,11 @@ else
 
 if(isset($_POST['submit']))
 {
-	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$points = $_POST['points'];
-	$description = $_POST['description'];
-	$icon = $_POST['icon'];
+	$id = strip_tags($_POST['id']);
+	$name = strip_tags($_POST['name'], allowed_tags());
+	$points = strip_tags($_POST['points']);
+	$description = strip_tags($_POST['description'], allowed_tags());
+	$icon = strip_tags($_POST['icon']);
 	if($icon == '')
 		$icon = 'fa fa-cloud fa-fw fa-lg';
 

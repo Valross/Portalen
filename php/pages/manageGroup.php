@@ -15,12 +15,12 @@ else
 
 if(isset($_POST['submit']))
 {
-	$groupName = $_POST['groupName'];
-	$id = $_POST['id'];
-	$facebookGroup = $_POST['facebookGroup'];
-	$description = $_POST['description'];
-	$hex = $_POST['hex'];
-	$icon = $_POST['icon'];
+	$groupName = strip_tags($_POST['groupName']);
+	$id = strip_tags($_POST['id']);
+	$facebookGroup = strip_tags($_POST['facebookGroup']);
+	$description = strip_tags($_POST['description'], allowed_tags());
+	$hex = strip_tags($_POST['hex']);
+	$icon = strip_tags($_POST['icon']);
 	$main_group = $_POST['main_group'];
 	$sub_group = $_POST['sub_group'];
 

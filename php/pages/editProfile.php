@@ -53,14 +53,14 @@ else
 
 //When first submit button is pressed
 if(isset($_POST['changeInfo'])) {
-	$phoneNumber = DBQuery::safeString($_POST['phone_number']);
-	$ssn = DBQuery::safeString($_POST['ssn']);
-	$mail = DBQuery::safeString($_POST['mail']);
-	$address = DBQuery::safeString($_POST['address']);
-	$major = DBQuery::safeString($_POST['major']);
-	$name = DBQuery::safeString($_POST['name']);
-	$lastName = DBQuery::safeString($_POST['last_name']);
-	$description = DBQuery::safeString($_POST['description']);
+	$phoneNumber = strip_tags(DBQuery::safeString($_POST['phone_number']));
+	$ssn = strip_tags(DBQuery::safeString($_POST['ssn']));
+	$mail = strip_tags(DBQuery::safeString($_POST['mail']));
+	$address = strip_tags(DBQuery::safeString($_POST['address']));
+	$major = strip_tags(DBQuery::safeString($_POST['major']));
+	$name = strip_tags(DBQuery::safeString($_POST['name']));
+	$lastName = strip_tags(DBQuery::safeString($_POST['last_name']));
+	$description = strip_tags(DBQuery::safeString($_POST['description']), allowed_tags());
 
 	//Initiate string for SET statement in SQL query
 	$queryString = "";

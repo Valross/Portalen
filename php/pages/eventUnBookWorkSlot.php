@@ -7,7 +7,10 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 	$user_id = $_GET['user_id'];
 	$work_slot_id = $_GET['work_slot_id'];
 
-	if($user_id == $_SESSION['user_id'] || $checkAdminAccess())
+	$localUserBookedThisSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+						WHERE user_id = '$user_id' AND work_slot_id = '$work_slot_id'");
+
+	if(count($localUserBookedThisSlot) > 0 || checkAdminAccess())
 	{
 		DBQuery::sql("DELETE FROM user_work
         					WHERE '$work_slot_id' = work_slot_id");

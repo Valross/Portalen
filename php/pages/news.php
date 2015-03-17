@@ -31,7 +31,7 @@ function loadMessage($news_id)
 {
 	$news = DBQuery::sql("SELECT message FROM news
 							WHERE id = '$news_id'");
-	return $news[0]['message'];
+	return nl2br($news[0]['message']);
 }
 
 function loadNewsAvatar($user_id)

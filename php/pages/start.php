@@ -16,7 +16,7 @@ function loadMessage()
 {
 	$groups = DBQuery::sql("SELECT message, date FROM news ORDER BY date");
 	if(count($groups) > 0)
-		echo $groups[count($groups)-1]['message'];
+		echo nl2br($groups[count($groups)-1]['message']);
 }
 
 function loadNewsAvatar($user_id)

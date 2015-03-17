@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-newspaper-o fa-fw fa-lg"></span> Skapa nyhet</h1>
+			<h1><span class="fa fa-newspaper-o fa-fw fa-lg"></span> Skriv nyhet</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

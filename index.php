@@ -86,7 +86,7 @@ include_once('php/pageManager.php');
 	  							<li><a></a></li>
 
 	  							<li><a href="?page=createEvent"><span class="fa fa-calendar fa-fw fa-lg"></span>Skapa evenemang</a></li>
-	  							<li><a href="?page=createNews"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Skapa en nyhet</a></li>
+	  							<li><a href="?page=createNews"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Skriv nyhet</a></li>
 	  							<li><a href="?page=reviseApplications"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ansökningar</a></li>
 	  							<li><a href="?page=staffList"><span class="fa fa-list fa-fw fa-lg"></span>Personallista</a></li>
 	  							<li><a href="?page=createAccount"><span class="fa fa-user-plus fa-fw fa-lg"></span>Skapa nytt konto</a></li>

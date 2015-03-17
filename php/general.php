@@ -62,7 +62,7 @@ if($bookedPointsPercent > 100 - $workedPointsPercent)
 //Allowed tags
 function allowed_tags()
 {
-	return '<i>';
+	return '<i>\n';
 }
 
 //

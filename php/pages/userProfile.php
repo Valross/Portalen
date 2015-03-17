@@ -206,6 +206,16 @@ function loadUserAvatar()
 	}
 }
 
+function loadEdit()
+{
+	$user_id = $_GET['id'];
+	if(checkAdminAccess())
+	{
+		echo ' - <a href="?page=editOtherProfile&id='.$user_id.'">
+			<span class="fa fa-pencil-square-o fa-fw fa-lg"></span>Redigera</a>';
+	}
+}
+
 function loadLastWorked()
 {
 	$user_id = $_GET['id'];

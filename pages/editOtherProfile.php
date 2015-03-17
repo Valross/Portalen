@@ -1,9 +1,14 @@
+<?php
+	if(checkAdminAccess())
+	{
+?>
 <div class="row">
 	<div class="col-sm-8">
 		<div class="page-header">
 		<h1>
 		<span class="fa fa-cog fa-fw fa-lg"></span>
-		 Inställningar 
+		 Inställningar för 
+		 <a href="?page=userProfile&id=<?php echo $user_id; ?>"><?php echo loadNameFromUser($user_id); ?></a>
 		</h1>
 		</div>
 	</div>
@@ -18,12 +23,12 @@
 	<div class="white-box">
 		<h3>Redigera profil</h3>
 	<form action="" method="post">
-		<label for="name">Förnamn (Går inte att ändra)</label>
-		<input type="text" value="<?php echo $profileName; ?>" name="name" id="name" readonly>
-		<label for="last_name">Efternamn (Går inte att ändra)</label>
-		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name" readonly>
-	  	<label for="ssn">Personnummer (Går inte att ändra)</label>
-	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååmmddxxxx" name="ssn" id="ssn" maxlength="10" readonly>
+		<label for="name">Förnamn</label>
+		<input type="text" value="<?php echo $profileName; ?>" name="name" id="name">
+		<label for="last_name">Efternamn</label>
+		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name">
+	  	<label for="ssn">Personnummer</label>
+	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååmmddxxxx" name="ssn" id="ssn" maxlength="10">
 	  	<label for="phone_number">Mobilnummer</label>
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="15">
 		<label for="mail">Mailadress</label>
@@ -43,7 +48,7 @@
 <div class="col-sm-6">
 	<div class="white-box">
 		<h3>Ändra visningsbild</h3>
-			<img src="<?php echo loadAvatar(); ?>" class="img-circle" style="float: left; margin: 0 20px;" width="100" height="100">
+			<?php echo loadAvatarFromUser($user_id, 100); ?>
 
 <div style="float: left; margin-left: 20px;">
 	<form action="" method="post" enctype="multipart/form-data">
@@ -70,3 +75,15 @@
 	</div> <!-- .white-box -->
 </div>
 </div> <!-- .row -->
+<?php
+	}
+	else
+	{
+		?>
+			<script>
+				window.location = "?page=start";
+				alert("Sluta försöka hacka sidan!")
+			</script>
+		<?php
+	}
+?>

@@ -1,53 +1,53 @@
 <?php
 include_once('php/DBQuery.php');
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_GET['id'];
 
 //Current variables
 //Separate file? Combine with part of php/pages/profile.php?
-$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$_SESSION[user_id]' AND mail IS NOT NULL");
+$result = DBQuery::sql("SELECT mail FROM user WHERE id = '$user_id' AND mail IS NOT NULL");
 if(count($result) == 1)
 	$profileMail = $result[0]["mail"];
 else
 	$profileMail = "";
 
-$result = DBQuery::sql("SELECT address FROM user WHERE id = '$_SESSION[user_id]' AND address IS NOT NULL");
+$result = DBQuery::sql("SELECT address FROM user WHERE id = '$user_id' AND address IS NOT NULL");
 if(count($result) == 1)
 	$profileAddress = $result[0]["address"];
 else
 	$profileAddress = "";
 
-$result = DBQuery::sql("SELECT major FROM user WHERE id = '$_SESSION[user_id]' AND major IS NOT NULL");
+$result = DBQuery::sql("SELECT major FROM user WHERE id = '$user_id' AND major IS NOT NULL");
 if(count($result) == 1)
 	$profileMajor = $result[0]["major"];
 else
 	$profileMajor = "";
 
-$result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
+$result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$user_id' AND phone_number IS NOT NULL");
 if(count($result) == 1)
 	$profileNumber = $result[0]["phone_number"];
 else
 	$profileNumber = "";
 
-$result = DBQuery::sql("SELECT ssn FROM user WHERE id = '$_SESSION[user_id]' AND ssn IS NOT NULL");
+$result = DBQuery::sql("SELECT ssn FROM user WHERE id = '$user_id' AND ssn IS NOT NULL");
 if(count($result) == 1)
 	$profileSsn = $result[0]["ssn"];
 else
 	$profileSsn = "";
 
-$result = DBQuery::sql("SELECT name FROM user WHERE id = '$_SESSION[user_id]' AND name IS NOT NULL");
+$result = DBQuery::sql("SELECT name FROM user WHERE id = '$user_id' AND name IS NOT NULL");
 if(count($result) == 1)
 	$profileName = $result[0]["name"];
 else
 	$profileName = "";
 
-$result = DBQuery::sql("SELECT last_name FROM user WHERE id = '$_SESSION[user_id]' AND last_name IS NOT NULL");
+$result = DBQuery::sql("SELECT last_name FROM user WHERE id = '$user_id' AND last_name IS NOT NULL");
 if(count($result) == 1)
 	$profileLastName = $result[0]["last_name"];
 else
 	$profileLastName = "";
 
-$result = DBQuery::sql("SELECT description FROM user WHERE id = '$_SESSION[user_id]' AND description IS NOT NULL");
+$result = DBQuery::sql("SELECT description FROM user WHERE id = '$user_id' AND description IS NOT NULL");
 if(count($result) == 1)
 	$profileDescription = $result[0]["description"];
 else
@@ -125,13 +125,13 @@ if(isset($_POST['changeInfo'])) {
 
 	DBQuery::sql("UPDATE user
 				  SET $queryString
-				  WHERE id='$_SESSION[user_id]'");
+				  WHERE id='$user_id'");
 
 		//relocate
 		?>
 		<script>
-			window.location = "?page=editProfile";		//TO DO: hard code url
-			alert("Ditt nya liv är sparat!") 	 //TO DO: Proper user feedback
+			window.location = "?page=userProfile&id=<?php echo $user_id; ?>";
+			alert("Personens nya liv är sparat!") 	 //TO DO: Proper user feedback
 		</script>
 		<?php
 
@@ -149,7 +149,7 @@ if(isset($_POST['changePass'])) {
 	$oldPasswordMD5 = md5($oldPasswordMD5);
 	
 	//validate old (hashed) password
-	$result = DBQuery::sql("SELECT user_name FROM user WHERE id = '$_SESSION[user_id]' AND BINARY password = '$oldPasswordMD5'");
+	$result = DBQuery::sql("SELECT user_name FROM user WHERE id = '$user_id' AND BINARY password = '$oldPasswordMD5'");
 	if(count($result) == 1){
 
 		//validate confirmed password
@@ -161,7 +161,7 @@ if(isset($_POST['changePass'])) {
 
 			DBQuery::sql("UPDATE user
 				    	  SET password='$passwordMD5'
-				  		  WHERE id='$_SESSION[user_id]'");
+				  		  WHERE id='$user_id'");
 
 			?>
 			<script>
@@ -192,7 +192,7 @@ if(isset($_POST['changePass'])) {
 if(isset($_POST['UploadAvatar'])) {
 
 	// User ID to be used in image name
-	$userId = $_SESSION['user_id'];
+	$userId = $user_id;
 
 	// Get image extension
 	$temp = explode(".", $_FILES["fileToUpload"]["name"]);
@@ -202,7 +202,7 @@ if(isset($_POST['UploadAvatar'])) {
 
 	// The directory where image will be saved
 	$targetDir = "img/avatars/";
-	$targetName = $profileName . $_SESSION['user_id'] . "." . $extension;
+	$targetName = $profileName . $user_id . "." . $extension;
 	$targetFile = $targetDir . $targetName;
 
 	// Check if file was selected
@@ -256,21 +256,21 @@ if(isset($_POST['UploadAvatar'])) {
 
 	// Delete user's existing avatar if exists
 	for ($i=0; $i < sizeof($allowedExtensions); ++$i) { 
-		if (file_exists($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]))
-			unlink($targetDir . $profileName . $_SESSION['user_id'] . "." . $allowedExtensions[$i]);
+		if (file_exists($targetDir . $profileName . $user_id . "." . $allowedExtensions[$i]))
+			unlink($targetDir . $profileName . $user_id . "." . $allowedExtensions[$i]);
 	}
 
 	// Update database ref to new avatar
 	DBQuery::sql("UPDATE user
 				  SET avatar = '$targetName'
-				  WHERE id='$_SESSION[user_id]'");  
+				  WHERE id='$user_id'");  
 
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
         // echo "DEBUG: din bild " . $targetName . " har laddats upp";
-        unlockAchievementForUser($_SESSION['user_id'], 36); //Lås upp "Ladda upp en profilbild"
+        unlockAchievementForUser($user_id, 36); //Lås upp "Ladda upp en profilbild"
 		?>
 		<script>
-			window.location = "?page=userProfile&id=<?php echo $user_id; ?>";	
+			window.location = "?page=editProfile";
 		</script>
 		<?php
 	}

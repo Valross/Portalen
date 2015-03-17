@@ -21,11 +21,14 @@ if(isset($_POST['submit']))
 	$description = $_POST['description'];
 	$hex = $_POST['hex'];
 	$icon = $_POST['icon'];
+	$main_group = $_POST['main_group'];
+	$sub_group = $_POST['sub_group'];
 
 	if($groupName != '')
 	{
 		DBQuery::sql("UPDATE work_group
-				  SET name = '$groupName', facebook_group = '$facebookGroup', description = '$description', hex = '$hex', icon = '$icon'
+				  SET name = '$groupName', facebook_group = '$facebookGroup', description = '$description', 
+				  hex = '$hex', icon = '$icon', sub_group = $sub_group, main_group = $main_group
 				  WHERE id = '$id'");
 	}
 }
@@ -35,7 +38,11 @@ function loadAll()
 	echo '<div class="row">
 			<div class="col-sm-12">
 				<div class="page-header">
-					<h1>Hantera Lag</h1>
+					<h1>
+					Hantera Lag - 
+					<a href="?page=createGroup">Skapa Lag</a> - 
+					<a href="?page=manageGroupLeader">Hantera Lagledare</a>
+					</h1>
 				</div>
 			</div>
 		</div> <!-- .row -->';
@@ -48,8 +55,9 @@ function loadAll()
 			<select name="group" id="group" class="bottom-border">
 				<option id="typeno" value="typeno">Välj lag</option>';
 	loadAllGroupsAsOption();
-	echo '</select>
-		<input type="submit" name="chooseGroup" value="Välj">';
+	echo '</select>';
+
+	echo '<input type="submit" name="chooseGroup" value="Välj">';
 	
 	echo 			'</div>
 				</form>
@@ -68,15 +76,28 @@ function loadAllGroupsAsOption()
 	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
-		?>
-			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo $groups[$i]['name']; ?></option>
-		<?php
+		echo '<option value="'.$groups[$i]['id'].'">'.$groups[$i]['name'].'</option>';
+	}
+}
+
+function loadAllOtherGroupsAsOption($this_group_id, $selected_group)
+{
+	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
+	for($i = 0; $i < count($groups); ++$i)
+	{
+		if($groups[$i]['id'] != $this_group_id)
+		{
+			if($groups[$i]['id'] == $selected_group)
+				echo '<option selected="selected" value="'.$groups[$i]['id'].'">'.$groups[$i]['name'].'</option>';
+			else
+				echo '<option value="'.$groups[$i]['id'].'">'.$groups[$i]['name'].'</option>';
+		}
 	}
 }
 
 function loadGroupManageTools($group)
 {
-	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group, icon, hex FROM work_group 
+	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group, icon, hex, sub_group, main_group FROM work_group 
 						WHERE id = '$group'
 						ORDER BY name");
 
@@ -96,6 +117,18 @@ function loadGroupManageTools($group)
 			<label for="description">Beskrivning</label>
 			<textarea rows="6" cols="50" name="description" id="description" class="bottom-border">'.$group_name[0]['description'].'</textarea>
 			<input type="hidden" name="id" id="id" value="'.$group_name[0]['id'].'">';
+
+	echo '<label for="main_group">Huvudlag</label>
+			<select name="main_group" id="main_group" class="bottom-border">
+				<option id="typeno" value="NULL">Välj huvudlaget - om detta inte är ett</option>';
+	loadAllOtherGroupsAsOption($group, $group_name[0]['main_group']);
+	echo '</select>';
+
+	echo '<label for="sub_group">Nybyggarlag</label>
+			<select name="sub_group" id="sub_group" class="bottom-border">
+				<option id="typeno" value="NULL">Välj nybyggarlaget - om detta inte är ett</option>';
+	loadAllOtherGroupsAsOption($group, $group_name[0]['sub_group']);
+	echo '</select>';
 
 
 	echo '<input type="submit" name="submit" value="Spara">';

@@ -509,6 +509,24 @@ function checkAdminAccess()
 		return false;
 }
 
+function checkAdminAccessForUser($user_id)
+{
+	$adminAccess = DBQuery::sql("SELECT access_id, group_id FROM group_access
+						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4) AND
+						group_id IN
+							(SELECT group_id FROM group_member
+							WHERE user_id = '$user_id' AND (group_id = 1 OR group_id = 7))");
+
+	$adminAccessUser = DBQuery::sql("SELECT access_id FROM user_access
+						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4)
+						AND user_id = '$user_id'");
+
+	if(count($adminAccess) > 0 || count($adminAccessUser) > 0)
+		return true;
+	else
+		return false;
+}
+
 function loadNameFromUser($user_id)
 {
 	$results = DBQuery::sql("SELECT name, last_name FROM user WHERE id = '$user_id'");

@@ -109,9 +109,22 @@ function loadEventName()
 	$da_note = DBQuery::sql("SELECT event_id FROM da_note
 							WHERE event_id = '$event_id'");
 
+	$headwaiter_note = DBQuery::sql("SELECT event_id FROM headwaiter_note
+							WHERE event_id = '$event_id'");
+
+	if(checkAdminAccess())
+	{
+		echo ' - <a href="?page=checkPasses&id='.$event_id.'">Checka Pass</a>';
+	}
+
 	if(count($da_note) > 0 && checkAdminAccess())
 	{
 		echo ' - <a href="?page=DANote&id='.$da_note[0]['event_id'].'">DA-lapp</a>';
+	}
+
+	if(count($headwaiter_note) > 0 && checkAdminAccess())
+	{
+		echo ' - <a href="?page=HeadwaiterNote&id='.$headwaiter_note[0]['event_id'].'">Hovis-lapp</a>';
 	}
 }
 

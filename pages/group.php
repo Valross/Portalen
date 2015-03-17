@@ -20,11 +20,10 @@
 				<td><strong>Lagchef(er)</strong></td>
 				<td><?php loadGroupLeader(); ?></td>
 			</tr>
-			<tr>
-				<td><strong>Facebookgrupp</strong></td>
-				<td><?php loadFacebookGroupURL(); ?></td>
-			</tr>
+			<?php loadFacebookGroupURL(); ?>
+			<?php loadApplyForGroupButton(); ?>
 		</table>
+		<?php loadApplications(); ?>
 	</div> <!-- .white-box -->
 </div> <!-- col-sm-6 -->
 	<div class="col-sm-6">

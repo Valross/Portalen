@@ -2,6 +2,9 @@
 include_once("php/DBQuery.php");
 
 $group_id = $_GET['id'];
+$dates = new DateTime;
+$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+$date = $dates->format('Y-m-d');
 
 $members = DBQuery::sql("SELECT name, last_name, id FROM user 
 							WHERE id IN 
@@ -9,14 +12,26 @@ $members = DBQuery::sql("SELECT name, last_name, id FROM user
 
 $nMembers = count($members);
 
-if(isset($_POST['submit']))
+if(isset($_POST['accept']))
 {
-	if(isset($_POST['addGroup'])) 
-	{
-		$addGroup = $_POST['addGroup'];
-		DBQuery::sql("INSERT INTO group_member (group_id, user_id)
-							VALUES ('$addGroup', '$_SESSION[user_id]')"); //ändra $_SESSION[user_id] till dens profil det är
-	}
+	$group_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	DBQuery::sql("INSERT INTO group_member (group_id, user_id, group_leader, member_since)
+						VALUES ('$group_id', '$user_id', '0', '$date')");
+
+	DBQuery::sql("DELETE FROM group_application 
+					WHERE user_id = '$user_id'
+					AND group_id = '$group_id'");
+}
+if(isset($_POST['deny']))
+{
+	$group_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	DBQuery::sql("DELETE FROM group_application 
+					WHERE user_id = '$user_id'
+					AND group_id = '$group_id'");
 }
 
 function loadGroupName()
@@ -100,21 +115,83 @@ function loadGroupLeader()
 
 function loadFacebookGroupURL()
 {
+	$user_id = $_SESSION['user_id'];
 	$group_id = $_GET['id'];
 
 	$facebookGroupURL = DBQuery::sql("SELECT facebook_group FROM work_group 
 							WHERE id = '$group_id'");
 
-	for($i = 0; $i < count($facebookGroupURL); ++$i)
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+								WHERE group_id = '$group_id'
+								AND user_id = '$user_id'");
+
+	if(count($memberOfGroup) > 0)
 	{
-		?>
-		<a href=<?php echo '"'.$facebookGroupURL[$i]['facebook_group'].'"'; ?> class="">
-				<?php echo $facebookGroupURL[$i]['facebook_group']; ?>
-		</a>
-		<?php
+		echo '<tr><td><strong>Facebookgrupp</strong></td>';
+		echo '<td><a href="'.$facebookGroupURL[0]['facebook_group'].'"class="">';
+		echo $facebookGroupURL[0]['facebook_group'].'</a></td></tr>';	
 	}
-	if(count($facebookGroupURL) == 0)
-		echo 'ej angivet';
+}
+
+function loadApplyForGroupButton()
+{
+	$group_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+							WHERE group_id = '$group_id'
+							AND user_id = '$user_id'");
+
+	$alreadyApplied = DBQuery::sql("SELECT group_id, user_id FROM group_application 
+							WHERE group_id = '$group_id'
+							AND user_id = '$user_id'");
+
+	if(count($memberOfGroup) == 0)
+	{
+		if(count($alreadyApplied) == 0)
+		{
+			echo '<form action="" method="post">';
+			echo '<tr><td><input type="submit" name="apply" value="Sök detta laget"></td></tr>';
+			echo '</form>';
+		}
+		else
+			echo '<tr><td>Du söker det här laget</td></tr>';
+		
+	}
+}
+
+function loadApplications()
+{
+	$group_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	$leaderOfGroup = DBQuery::sql("SELECT user_id FROM work_group_leaders 
+							WHERE work_group_id = '$group_id'
+							AND user_id = '$user_id'");
+
+	$applications = DBQuery::sql("SELECT id, group_id, user_id FROM group_application
+								WHERE group_id = '$group_id'");
+
+	if(count($leaderOfGroup) > 0)
+	{
+		echo '<h3>Ansökningar</h3>';
+		if(count($applications) > 0)
+		{
+			echo '<form action="" method="post">';
+			for($i = 0; $i < count($applications); ++$i)
+			{
+				echo '<p>';
+				echo '<input type="checkbox" name="applications[]" id="'.$applications[$i]['id'].'" value="'.$applications[$i]['id'].'">';
+				echo '<a href="?page=userProfile&id='.$user_id.'" class="work-slot-user black-link"> '.loadAvatarFromUser($user_id, 20).loadNameFromUser($user_id).'</a>';
+				echo '</p>';
+			}
+			echo '<input type="submit" name="accept" value="Acceptera">';
+			echo '<input type="submit" name="deny" value="Neka">';
+			echo '</form>';
+		}
+		else
+			echo '<p>Inga ansökningar just nu</p>';
+	}
 }
 
 ?>

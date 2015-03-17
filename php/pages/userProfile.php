@@ -89,7 +89,7 @@ function loadGroups()
 {
 	$user_id = $_GET['id'];
 
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+	$groups = DBQuery::sql("SELECT id, name, icon, hex FROM work_group 
 							WHERE id IN 
 							(SELECT group_id FROM group_member WHERE user_id = '$user_id')
 							ORDER BY name");
@@ -100,7 +100,12 @@ function loadGroups()
 							WHERE user_id = '$user_id' AND group_id = '$group_id'");
 		?>
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
-				<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>
+				<?php 
+				if($groups[$i]['icon'] != '')
+					echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>'; 
+				else
+					echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+				?>
 				<?php echo $groups[$i]['name']; ?>
 				<span class="list-group-item-text pull-right"><?php echo 'sedan '.$group_members[0]['member_since']; ?></span>
 			</a>

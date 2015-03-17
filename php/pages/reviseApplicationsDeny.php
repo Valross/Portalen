@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['id'])){
+if(isset($_GET['id']) && checkAdminAccess()){
 	$appId=$_GET['id'];
 
 	// echo "ID = " . $appId;

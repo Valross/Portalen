@@ -9,13 +9,13 @@ if(isset($_POST['submit']))
 	{
 		$addGroup = $_POST['addGroup'];
 		DBQuery::sql("INSERT INTO group_member (group_id, user_id)
-							VALUES ('$addGroup', '$user_id')"); //ändra $user_id till dens profil det är
+							VALUES ('$addGroup', '$user_id')"); 
 	}
 	if(isset($_POST['removeGroup']))
 	{
 		$removeGroup = $_POST['removeGroup'];
 		DBQuery::sql("DELETE FROM group_member
-							WHERE $removeGroup = group_id AND '$user_id' = user_id"); //ändra $user_id till dens profil det är
+							WHERE $removeGroup = group_id AND '$user_id' = user_id");
 	}
 }
 

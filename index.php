@@ -122,7 +122,7 @@ include_once('php/pageManager.php');
 						</button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
-						    <li role="presentation"><a role="menuitem" href="?page=profile"><span class="fa fa-user fa-fw"></span> Min profil</a></li>
+						    <li role="presentation"><a role="menuitem" href="?page=userProfile&id=<?php echo $_SESSION['user_id']; ?>"><span class="fa fa-user fa-fw"></span> Min profil</a></li>
 							<li role="presentation"><a role="menuitem" href="?page=workedEvents"><span class="fa fa-history fa-fw"></span> Arbetade pass</a></li>
 						    <li role="presentation"><a role="menuitem" href="?page=editProfile"><span class="fa fa-cog fa-fw"></span> Inställningar</a></li>
 							<li role="presentation" class="divider"></li>

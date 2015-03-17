@@ -219,9 +219,10 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND user_id = '$user_id'");
 
-	$groups = DBQuery::sql("SELECT id, name FROM work_group 
+	$groups = DBQuery::sql("SELECT id, name, main_group, sub_group FROM work_group 
 							WHERE id IN 
-							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')");
+							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
+							ORDER BY name");
 
 	if(checkAdminAccess())
 	{
@@ -230,7 +231,8 @@ function loadWorkSlots()
 	for($i = 0; $i < count($groups); ++$i)
 	{
 		$number = 0;
-		echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'" class="black-link"><strong>'.$groups[$i]['name'].'</strong></a></li>';
+		if($groups[$i]['main_group'] == NULL)
+			echo '<li class="list-group-item with-thumbnail"><span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span> <a href="?page=group&id='.$groups[$i]['id'].'" class="black-link"><strong>'.$groups[$i]['name'].'</strong></a></li>';
 		for($j = 0; $j < count($slots); ++$j)
 		{
 			$work_slot_id = $slots[$j]['id'];
@@ -240,7 +242,7 @@ function loadWorkSlots()
 											(SELECT work_slot_id FROM user_work)
 										AND id = '$work_slot_id'");
 			
-			if($slots[$j]['group_id'] == $groups[$i]['id'])
+			if(($slots[$j]['group_id'] == $groups[$i]['id'] || $slots[$j]['group_id'] == $groups[$i]['sub_group']) && $groups[$i]['main_group'] == 0)
 			{
 				$slotStart = new DateTime($slots[$j]['start_time']);
 				$slotEnd = new DateTime($slots[$j]['end_time']);
@@ -258,7 +260,10 @@ function loadWorkSlots()
 
 				if(checkAdminAccess())
 				{
-					echo '<li class="list-group-item">'.$number.'. ';
+					if($slots[$j]['group_id'] == $groups[$i]['sub_group'])
+						echo '<li class="list-group-item">'.$number.'! ';
+					else
+						echo '<li class="list-group-item">'.$number.'. ';
 					echo '<input type="text" class="input-book-long" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
 					echo '<input type="text" class="input-book" name="start_h[]" id="start_h[]" value="'.$start_h.'"> ';
 					echo '<input type="text" class="input-book-long" name="end_d[]" id="end_d[]" value="'.$end_d.'">';

@@ -2,7 +2,7 @@
 	<div class="col-sm-8">
 		<div class="page-header">
 		<img src="<?php echo loadAvatar(); ?>" width="100" height="100" class="page-header-img img-circle">
-			<h1 class="header-img"><?php echo $_SESSION['name'].' '.$_SESSION['last_name']; ?></h1>
+			<h1 class="header-img"><?php loadUserName(); ?></h1>
 		</div>
 	</div>
 </div> <!-- .row -->

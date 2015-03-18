@@ -26,7 +26,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($users) > 0){
 		$noResults = 0;
-		echo "Användare";
+		echo "<p>Användare</p>";
 		
 		for ($i=0; $i < count($users) and $i <= $maxResultsPerCategory; ++$i) { 
 			$userId = $users[$i]['id'];
@@ -50,11 +50,12 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 	}
 
 	// Search events
-	$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'"); 
+	$dateTimestamp = date('Y-m-d h:i:s', time());
+	$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%' AND start_time > '$dateTimestamp' ORDER BY start_time ASC"); 
 
 	if(count($events) > 0){
 		$noResults = 0;
-		echo "Evenemang";
+		echo "<p>Evenemang</p>";
 		
 		for ($i=0; $i < count($events) and $i <= $maxResultsPerCategory; ++$i) { 
 			$eventId = $events[$i]['id'];
@@ -81,7 +82,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($teams) > 0){
 		$noResults = 0;
-		echo "Lag";
+		echo "<p>Lag</p>";
 		
 		for ($i=0; $i < count($teams) and $i <= $maxResultsPerCategory; ++$i) { 
 			$teamId =  $teams[$i]['id'];

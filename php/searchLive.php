@@ -3,12 +3,21 @@ include_once('DBQuery.php');
 
 
 // Define Output HTML Formating
-$html = '';
-$html .= '<li class="result">';
-$html .= '<a target="_blank" href="urlString">';
-$html .= '<h3>nameString</h3>';
-$html .= '</a>';
-$html .= '</li>';
+$defaultHtml  = '';
+$defaultHtml .= '<li class="result">';
+$defaultHtml .= '<a target="_blank" href="urlString">';
+$defaultHtml .= '<h3>nameString</h3>';
+$defaultHtml .= '</a>';
+$defaultHtml .= '</li>';
+
+$eventHtml  = '';
+$eventHtml .= '<li class="result">';
+$eventHtml .= '<a target="_blank" href="urlString">';
+$eventHtml .= '<h3>nameString</h3>';
+$eventHtml .= '<h4>dateString</h4>';
+$eventHtml .= '</a>';
+$eventHtml .= '</li>';
+
 
 // Get Search
 $searchString = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['query']);	//fixa åäö
@@ -34,13 +43,13 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 				, $users[$i]['name'] . " " . $users[$i]['last_name']);
 
 			if(!($i == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $html);
+				$output = str_replace('nameString', $display_name, $defaultHtml);
 				$output = str_replace('urlString', "?page=userProfile&id=$userId", $output);
 			}
 
 			// If results limit reached, print dots or something
 			else{
-				$output = str_replace('nameString', "...", $html);
+				$output = str_replace('nameString', "...", $defaultHtml);
 				$output = str_replace('urlString', "", $output);
 			}
 
@@ -59,18 +68,21 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		
 		for ($i=0; $i < count($events) and $i <= $maxResultsPerCategory; ++$i) { 
 			$eventId = $events[$i]['id'];
+			$eventDate = $events[$i]['start_time'];
 
 			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
 				, $events[$i]['name']);
 
+
 			if(!($i == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $html);
+				$output = str_replace('nameString', $display_name, $eventHtml);
+				$output = str_replace('dateString', $eventDate, $output);
 				$output = str_replace('urlString', "?page=event&id=$eventId", $output);
 			}
 
 			// If results limit reached, print dots or something
 			else{
-				$output = str_replace('nameString', "...", $html);
+				$output = str_replace('nameString', "...", $defaultHtml);
 				$output = str_replace('urlString', "", $output);
 			}
 			echo($output);
@@ -82,18 +94,20 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 		$noResults = 0;
  		for ($j=0; $j < count($pastEvents) and $j <= $maxResultsPerCategory - count($events); ++$j) { 
  			$eventId = $pastEvents[$j]['id'];
+			$eventDate = $pastEvents[$j]['start_time'];
 
 			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
 				, $pastEvents[$j]['name']);
 
 			if(!($j == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $html);
+				$output = str_replace('nameString', $display_name, $eventHtml);
+				$output = str_replace('dateString', $eventDate, $output);
 				$output = str_replace('urlString', "?page=event&id=$eventId", $output);
 			}
 
 			// If results limit reached, print dots or something
 			else{
-				$output = str_replace('nameString', "...", $html);
+				$output = str_replace('nameString', "...", $defaultHtml);
 				$output = str_replace('urlString', "", $output);
 			}
 			echo($output);
@@ -114,13 +128,13 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 				, $teams[$i]['name']);
 
 			if(!($i == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $html);
+				$output = str_replace('nameString', $display_name, $defaultHtml);
 				$output = str_replace('urlString', "?page=group&id=$teamId", $output);
 			}
 
 			// If results limit reached, print dots or something
 			else{
-				$output = str_replace('nameString', "...", $html);
+				$output = str_replace('nameString', "...", $defaultHtml);
 				$output = str_replace('urlString', "", $output);
 			}
 			echo($output);
@@ -129,7 +143,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	// No-results-found output
 	if($noResults) {
-		$output = str_replace('urlString', 'javascript:void(0);', $html);
+		$output = str_replace('urlString', 'javascript:void(0);', $defaultHtml);
 		$output = str_replace('nameString', 'Inga resultat', $output);
 
 		echo($output);

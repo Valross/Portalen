@@ -102,7 +102,7 @@ function loadEventName()
 							WHERE id = '$event_id'");
 
 	if(count($event_name) > 0)
-		echo $event_name[0]['name'];
+		echo '<span class="fa fa-picture-o fa-fw fa-lg"></span>'.$event_name[0]['name'];
 	else
 		echo "Nu har du kommit lite fel!";
 
@@ -114,7 +114,7 @@ function loadEventName()
 
 	if(checkAdminAccess())
 	{
-		echo ' - <a href="?page=checkPasses&id='.$event_id.'">Checka Pass</a>';
+		echo ' - <a href="?page=checkPasses&id='.$event_id.'"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 	}
 
 	if(count($da_note) > 0 && checkAdminAccess())

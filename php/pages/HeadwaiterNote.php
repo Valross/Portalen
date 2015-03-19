@@ -1,5 +1,31 @@
 <?php
 
+$dates = new DateTime;
+$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+$date = $dates->format('Y-m-d H:i:s');
+
+if(isset($_POST['submit']))
+{
+	$comment = strip_tags($_POST['comment'], allowed_tags());
+	$headwaiter_note_event_id = $_GET['id'];
+
+	$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
+							WHERE event_id = '$headwaiter_note_event_id'");
+
+	$headwaiter_note_id = $headwaiter_note[0]['id'];
+	
+	if($comment != '')
+	{
+		DBQuery::sql("INSERT INTO headwaiter_note_comments (user_id, headwaiter_note_id, comment, date_written)
+						VALUES ('$_SESSION[user_id]', '$headwaiter_note_id', '$comment', '$date')");
+		?>
+		<script>
+			window.location = <?php echo '?page=headwaiterNote&id='.$headwaiter_note_event_id; ?>;
+		</script>
+		<?php
+	}
+}
+
 function loadEventName()
 {
 	$event_id = $_GET['id'];
@@ -146,6 +172,75 @@ function loadHeadwaiterAvatar()
 			return 'img/avatars/no_face_small.png';
 		}
 		return 'img/avatars/'.$results[0]['avatar'];
+	}
+}
+
+function loadCommentAvatar($comment_id)
+{
+	$event_id = $_GET['id'];
+
+	$user = DBQuery::sql("SELECT user_id FROM headwaiter_note_comments 
+						WHERE headwaiter_note_id IN
+							(SELECT id FROM headwaiter_note 
+							WHERE event_id = '$event_id')
+						AND id = '$comment_id'"); 
+	if(count($user) > 0)
+		$user_id = $user[0]['user_id'];
+
+	if(isset($user_id))
+	{
+		$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
+		if(count($results) == 0)
+		{
+			return 'img/avatars/no_face_small.png';
+		}
+		return 'img/avatars/'.$results[0]['avatar'];
+	}
+}
+
+function loadComments()
+{
+	$headwaiter_note_event_id = $_GET['id'];
+	$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
+							WHERE event_id = '$headwaiter_note_event_id'");
+
+	$headwaiter_note_id = $headwaiter_note[0]['id'];
+
+	$headwaiter_comments = DBQuery::sql("SELECT id, headwaiter_note_id, comment, date_written, user_id FROM headwaiter_note_comments 
+							WHERE headwaiter_note_id = '$headwaiter_note_id'");
+
+	if(count($headwaiter_comments) > 0)
+	{
+		echo '<div class="col-sm-7">
+						<div class="white-box">';
+		echo '<h3>Kommentarer ('.count($headwaiter_comments).')</h3>';
+	
+
+		for($i = 0; $i < count($headwaiter_comments); ++$i)
+		{
+			$user_id = $headwaiter_comments[$i]['user_id'];
+			$comment_id = $headwaiter_comments[$i]['id'];
+			$my_user_id = $_SESSION['user_id'];
+
+			$myComment = DBQuery::sql("SELECT id FROM headwaiter_note_comments 
+							WHERE id = '$comment_id'
+							AND user_id = '$my_user_id'");
+
+			$commenter = DBQuery::sql("SELECT name, last_name FROM user 
+							WHERE id = '$user_id' AND id IN
+							(SELECT user_id FROM headwaiter_note_comments WHERE id = '$comment_id')");
+			echo '<div class="comment">';
+			echo '<img src="'.loadCommentAvatar($headwaiter_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
+			echo '<p><a href="?page=userProfile&id='.$headwaiter_comments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
+			echo '<span class="time">- '.$headwaiter_comments[$i]['date_written'].'</span><br />';
+			echo $headwaiter_comments[$i]['comment'].'</p>';
+			if(checkAdminAccess() || count($myComment) > 0)
+					echo '<a href=?page=removeHeadwaiterNoteComment&headwaiter_note_id='.$headwaiter_note_event_id.'&comment_id='.$headwaiter_comments[$i]['id'].
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+			echo '</div>';
+		}
+		echo '			</div> <!-- .white-box -->
+					</div> <!-- .col-sm-7 -->';
 	}
 }
 

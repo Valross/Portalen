@@ -50,7 +50,7 @@ function loadAchievements()
 	for($i = 0; $i < $howMany; ++$i)
 	{
 		?>
-				<a href="?page=achievement&id=<?php echo $achievements[$i]['id'];?>" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="<?php echo $achievements[$i]['description'];?>"> 
+				<a href="?page=achievement&id=<?php echo $achievements[$i]['id'];?>" class="list-group-item black-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $achievements[$i]['description'];?>"> 
 					<i class="<?php echo $achievements[$i]['icon'];?>"></i>
 				    <span class="badge on-top-of-element"><?php echo $achievements[$i]['points'];?></span>
 					<?php echo $achievements[$i]['name'];?>

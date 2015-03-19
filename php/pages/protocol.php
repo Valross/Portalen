@@ -14,6 +14,14 @@ function loadProtocolLink()
 	}
 }
 
+function loadRemove()
+{
+	$group_id = $_GET['group_id'];
+	$protocol_id = $_GET['id'];
+	echo '<a href=?page=removeProtocol&protocol_id='.$protocol_id.'&group_id='.$group_id.
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+}
+
 function loadProtocolTitle()
 {
 	$protocol_id = $_GET['id'];

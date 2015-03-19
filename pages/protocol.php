@@ -18,7 +18,10 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
-			<h3>Meddelande</h3>
+			<h3>	
+				Meddelande
+				<?php loadRemove(); ?>
+			</h3>
 			<p>
 			<?php loadProtocolMessage(); ?>
 			</p>

@@ -9,7 +9,10 @@
 <div class="row">
 <div class="col-sm-6">
 	<div class="white-box">
-		<h3>Information</h3>
+		<h3>
+			Information
+			<?php loadProtocolLink(); ?>
+		</h3>
 		<p>
 			<?php loadGroupInfo(); ?>
 		</p>

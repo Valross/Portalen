@@ -48,6 +48,20 @@ function loadGroupName()
 	echo $groupName[0]['name'];
 }
 
+function loadProtocolLink()
+{
+	$user_id = $_SESSION['user_id'];
+	$group_id = $_GET['id'];
+
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+								WHERE group_id = '$group_id'
+								AND user_id = '$user_id'");
+	if(count($memberOfGroup) > 0)
+	{
+		echo ' - <a href="?page=browseProtocol&group_id='.$group_id.'"><span class="fa fa-list-alt fa-fw fa-lg"></span>Protokoll</a>';
+	}
+}
+
 function loadGroupInfo()
 {
 	$group_id = $_GET['id'];

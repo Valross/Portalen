@@ -19,7 +19,11 @@ if(isset($_POST['submit'])) {
     	$start_date = $p_start_date[$i];
     	$end_date = $p_end_date[$i];
     	$points = $p_points[$i];
+    	if($points < 0 || $points > 10)
+    		$points = 0;
     	$wage = $p_wage[$i];
+    	if($wage < 0 || $wage > 170)
+    		$wage = 0;
     	$work_slot_id = $p_work_slot_id[$i];
 
     	$start = $start_date.' '.$start_time.':00';

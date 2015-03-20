@@ -131,9 +131,10 @@ include_once('php/pageManager.php');
 					</div> <!-- .dropdown -->
 					
 					<div class="notifications">
-						<a href="#" data-toggle="tooltip" data-placement="bottom" title="1 oläst händelse"> 
-							<i class="fa fa-newspaper-o"></i>
-						    <span class="badge on-top-of-element">1</span>
+						<a href="?page=browseUserNotifications&user_id=<?php echo $_SESSION['user_id']; ?>" 
+							data-toggle="tooltip" data-placement="bottom" title="<?php loadAmountOfUnseenNotifications(); ?> oläst händelse"> 
+							<i class="fa fa-globe"></i>
+						    <span class="badge on-top-of-element"><?php loadAmountOfUnseenNotifications(); ?></span>
 						</a>
 					</div>
 					

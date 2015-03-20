@@ -554,6 +554,26 @@ function loadNameFromUser($user_id)
 	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
+function loadAmountOfUnseenNotifications()
+{
+	$user_id = $_SESSION['user_id'];
+	$notifications = DBQuery::sql("SELECT id FROM notification
+										WHERE user_id = '$user_id' AND seen IS NULL");
+
+	echo count($notifications);
+}
+
+function notify($user_id, $notification_type, $info)
+{
+	$dates = new DateTime;
+	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+	$date = $dates->format('Y-m-d H:i:s');
+
+	if($user_id != '' && $notification_type != '' && $info != '')
+		DBQuery::sql("INSERT INTO notification (user_id, notification_type, info, date)
+							VALUES ('$user_id', '$notification_type', '$info', '$date')");
+}
+
 function unlockAchievementForUser($user_id, $achievement_id)
 {
 	$dates = new DateTime;
@@ -577,6 +597,8 @@ function unlockAchievementForUser($user_id, $achievement_id)
 		DBQuery::sql("UPDATE user
 				  SET achievement_points = '$total_points', 
 				  WHERE id='$user_id'");
+
+		notify($user_id, 1, $achievement_id);
 	}
 }
 

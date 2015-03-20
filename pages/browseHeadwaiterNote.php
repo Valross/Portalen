@@ -18,6 +18,7 @@
 			        <tr>
 			          	<th>#</th>
 			          	<th>Sittning</th>
+			          	<th>Datum</th>
 			          	<th>Antal sittande</th>
 			          	<th>Hovis</th>
 			        </tr>

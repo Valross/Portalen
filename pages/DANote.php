@@ -23,7 +23,7 @@
 			          	<th>Bar (kr)</th>
 					  	<th>Cash (kr)</th>
 					  	<th>Inklick</th>
-					  	<th># Spenta</th>
+					  	<th>Gränga</th>
 			        </tr>
 			    </thead>
 				<tbody>

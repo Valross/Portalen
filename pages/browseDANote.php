@@ -18,11 +18,13 @@
 			        <tr>
 			          	<th>#</th>
 			          	<th>Event</th>
-			          	<th>Entré (kr)</th>
-			          	<th>Bar (kr)</th>
-					  	<th>Cash (kr)</th>
-					  	<th>Inklick</th>
-					  	<th># Spenta</th>
+			          	<th><a href="?page=browseDANote&sort=start_date">Datum</a></th>
+			          	<th><a href="?page=browseDANote&sort=total">Totalt (kr)</a></th>
+			          	<th><a href="?page=browseDANote&sort=sales_entry">Entré (kr)</a></th>
+			          	<th><a href="?page=browseDANote&sort=sales_bar">Bar (kr)</a></th>
+					  	<th><a href="?page=browseDANote&sort=cash">Cash (kr)</a></th>
+					  	<th><a href="?page=browseDANote&sort=nOfPeople">Inklick</a></th>
+					  	<th><a href="?page=browseDANote&sort=sales_spenta">Gränga</a></th>
 					  	<th>DA</th>
 			        </tr>
 			    </thead>

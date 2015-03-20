@@ -12,7 +12,8 @@ function loadHeadwaiterAvatar($headwaiter_id)
 
 function loadAllHeadwaiterNotes()
 {
-	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.user_id, headwaiter_note.n_of_sitting, event.name FROM headwaiter_note 
+	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.user_id, headwaiter_note.n_of_sitting, 
+											event.name, event.start_time FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id 
 							ORDER BY event.start_time DESC");
 
@@ -25,6 +26,7 @@ function loadAllHeadwaiterNotes()
 				<td><?php echo $i+1;?></td>
 				<td><a href=<?php echo '"?page=HeadwaiterNote&id='.$HeadwaiterNotes[$i]['event_id'].'"'; ?>>
 				<?php echo $HeadwaiterNotes[$i]['name']; ?></a></td>
+				<td><?php echo $HeadwaiterNotes[$i]['start_time']; ?></td>
 				<td><?php echo $HeadwaiterNotes[$i]['n_of_sitting']; ?></td>
 				<td><a href=<?php echo '?page=userProfile&id='.$HeadwaiterNotes[$i]['user_id']; ?>>
 				<img src="<?php echo loadHeadwaiterAvatar($HeadwaiterNotes[$i]['user_id']); ?>" width="25" height="25" class="img-circle"></a></td>

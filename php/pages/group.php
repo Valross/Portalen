@@ -62,6 +62,20 @@ function loadProtocolLink()
 	}
 }
 
+function loadDotLink()
+{
+	$user_id = $_SESSION['user_id'];
+	$group_id = $_GET['id'];
+
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+								WHERE group_id = '$group_id'
+								AND user_id = '$user_id'");
+	if(count($memberOfGroup) > 0)
+	{
+		echo ' - <a href="?page=browseDots&group_id='.$group_id.'" class="black-link"><span class="fa fa-ellipsis-v fa-fw fa-lg"></span>Punkter</a>';
+	}
+}
+
 function loadGroupInfo()
 {
 	$group_id = $_GET['id'];

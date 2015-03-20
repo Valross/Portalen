@@ -12,6 +12,7 @@
 		<h3>
 			Information
 			<?php loadProtocolLink(); ?>
+			<?php loadDotLink(); ?>
 		</h3>
 		<p>
 			<?php loadGroupInfo(); ?>

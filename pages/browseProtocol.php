@@ -5,7 +5,12 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-list-alt fa-fw fa-lg"></span> Protokoll - <?php loadGroupName(); ?></h1>
+			<h1>
+				<span class="fa fa-list-alt fa-fw fa-lg"></span>
+				 Protokoll
+				  - <?php loadGroupName(); ?>
+				  -<?php loadDotsLink(); ?>
+			 </h1>
 		</div>
 	</div>
 </div>

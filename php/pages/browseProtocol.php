@@ -4,10 +4,29 @@ function loadGroupName()
 {
 	$group_id = $_GET['group_id'];
 
-	$group_name = DBQuery::sql("SELECT name, id FROM work_group 
+	$group_name = DBQuery::sql("SELECT name, id, icon, hex FROM work_group 
 						WHERE id = '$group_id'");
 
+	if($group_name[0]['icon'] != '')
+		echo '<span class="'.$group_name[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+	else
+		echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+
 	echo '<a href="?page=group&id='.$group_name[0]['id'].'">'.$group_name[0]['name'].'</a>';
+}
+
+function loadDotsLink()
+{
+	$user_id = $_SESSION['user_id'];
+	$group_id = $_GET['group_id'];
+
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+								WHERE group_id = '$group_id'
+								AND user_id = '$user_id'");
+	if(count($memberOfGroup) > 0)
+	{
+		echo '<a href="?page=browseDots&group_id='.$group_id.'"><span class="fa fa-ellipsis-v fa-fw fa-lg"></span>Punkter</a>';
+	}
 }
 
 function loadProtocolLink()

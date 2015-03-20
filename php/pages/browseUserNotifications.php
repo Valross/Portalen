@@ -7,7 +7,7 @@ function loadNotificationsDebug()
 										WHERE user_id = '$user_id'
 										ORDER BY date DESC");
 
-	for($i = 0; $i < count($notifications); ++$i)
+	for($i = 0; $i < count($notifications) && $i < 5; ++$i)
 	{
 		$notification_id = $notifications[$i]['id'];
 		
@@ -29,6 +29,17 @@ function loadNotifications()
 										WHERE user_id = '$user_id'
 										ORDER BY date DESC");
 
+	$unseen_notifications = DBQuery::sql("SELECT id FROM notification
+										WHERE user_id = '$user_id' AND seen IS NULL");
+
+	for($i = 0; $i < count($unseen_notifications); ++$i)
+	{
+		$id = $unseen_notifications[$i]['id'];
+		DBQuery::sql("UPDATE notification
+			  SET seen = 1
+			  WHERE id='$id'");
+	}
+
 	for($i = 0; $i < count($notifications) && $i < 20; ++$i)
 	{
 		$info = $notifications[$i]['info'];
@@ -36,8 +47,15 @@ function loadNotifications()
 		$notification_type = DBQuery::sql("SELECT type FROM notification_type
 										WHERE id = '$type_id'");
 
-		echo '<div class="col-sm-7">
-					<div class="white-box">';
+		$notification_id = $notifications[$i]['id'];
+		$unseen_notification = DBQuery::sql("SELECT id FROM notification
+										WHERE user_id = '$user_id' AND seen IS NULL
+										AND id = '$notification_id'");
+		echo '<div class="col-sm-7">';
+		if(count($unseen_notification) == 0)
+			echo 	'<div class="white-box">';
+		else
+			echo 	'<div class="white-box red">';
 		echo '<h2>'.$notification_type[0]['type'].'</h2>';
 		echo '<div class="news-info">';
 
@@ -169,17 +187,6 @@ function loadNotifications()
 
 		echo    '</div>
 			 </div>';
-	}
-
-	$unseen_notifications = DBQuery::sql("SELECT id FROM notification
-										WHERE user_id = '$user_id' AND seen IS NULL");
-
-	for($i = 0; $i < count($unseen_notifications); ++$i)
-	{
-		$id = $unseen_notifications[$i]['id'];
-		DBQuery::sql("UPDATE notification
-			  SET seen = 1
-			  WHERE id='$id'");
 	}
 }
 

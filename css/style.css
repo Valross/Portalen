@@ -372,6 +372,10 @@ fieldset[disabled] {
 		padding: 15px;
 	}
 
+	.red {
+		background: #ffd3d3;
+	}
+
 	
 	/* Buttons */
 	

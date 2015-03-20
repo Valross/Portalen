@@ -17,9 +17,21 @@ if(isset($_POST['submit']) && checkAdminAccess())
 						ORDER BY date_written DESC");
 
 		$protocol_id = $protocol[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = '$group_id')");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 7, $protocol_id);
+		}
 		?>
 		<script>
-			window.location = "?page=protocol&id=<?php echo $protocol_id; ?>";
+			window.location = "?page=protocol&id=<?php echo $protocol_id; ?>
+					&group_id=<?php echo $group_id; ?>";
 		</script>
 		<?php
 	}

@@ -39,50 +39,133 @@ function loadNotifications()
 		echo '<div class="col-sm-7">
 					<div class="white-box">';
 		echo '<h2>'.$notification_type[0]['type'].'</h2>';
-		echo '<div class="news-info"><span>';
+		echo '<div class="news-info">';
 
 		if($notification_type[0]['type'] == 'Achievement')
 		{
 			$achievement = DBQuery::sql("SELECT id, name, description, points, icon FROM achievement
 									WHERE id = '$info'");
-						
-			echo $achievement[0]['name'];
-			
-			echo '</span><span class="time"> - '.$notifications[$i]['date'].'</span></div>';
-			echo '<p>Du låste upp ';
-			echo '<a href="?page=achievement&id='.$achievement[0]['id'].'" ';
-			echo 'class="black-link" data-toggle="tooltip" 
-						data-placement="bottom" title="'.$achievement[0]['description'].'">';
-			echo '<i class="'.$achievement[0]['icon'].'"></i>';
-			echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>'.
-					$achievement[0]['name'].'</a>.';
+			if(count($slot) > 0)
+			{			
+				echo '<span>';
+				echo $achievement[0]['name'];
+				echo '</span>';
+
+				echo '<span class="time"> - '.$notifications[$i]['date'].'</span></div>';
+				echo '<p>Du låste upp ';
+				echo '<a href="?page=achievement&id='.$achievement[0]['id'].'" ';
+				echo 'class="black-link" data-toggle="tooltip" 
+							data-placement="bottom" title="'.$achievement[0]['description'].'">';
+				echo '<i class="'.$achievement[0]['icon'].'"></i>';
+				echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>'.
+						$achievement[0]['name'].'</a></p>.';
+			}
+			else
+			{
+				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
+				echo '</div>';
+			}
 		}
 		else if($notification_type[0]['type'] == 'Avbokning')
 		{
 			$slot = DBQuery::sql("SELECT event_id, group_id, start_time FROM work_slot
 									WHERE id = '$info'");
 
-			$info_user_id = strchr($info," "); //Gives second part of the string
-			$event_id = $slot[0]['event_id'];
-			$group_id = $slot[0]['group_id'];
-			$group = DBQuery::sql("SELECT name FROM work_group
-									WHERE id = '$group_id'");
-			
-			$event = DBQuery::sql("SELECT id, name FROM event
-									WHERE id = '$event_id'");
+			if(count($slot) > 0)
+			{
+				$info_user_id = strchr($info," "); //Gives second part of the string
+				$event_id = $slot[0]['event_id'];
+				$group_id = $slot[0]['group_id'];
+				$group = DBQuery::sql("SELECT name FROM work_group
+										WHERE id = '$group_id'");
+				
+				$event = DBQuery::sql("SELECT id, name FROM event
+										WHERE id = '$event_id'");
 
-			$user = DBQuery::sql("SELECT id, name, last_name FROM user
-									WHERE id = '$info_user_id'");
-						
-			echo $event[0]['name'];
-			
-			echo '</span><span class="time"> - '.$notifications[$i]['date'].'</span></div>';
-			echo '<p>Avbokning på ';
-			echo '<a href="?page=event&id='.$event[0]['id'].'" ';
-			echo 'class="">'.$event[0]['name'].'</a>';
-			echo ' från <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
-			echo ' av <a href="?page=userProfile&id='.$info_user_id.'">'.$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+				$user = DBQuery::sql("SELECT id, name, last_name FROM user
+										WHERE id = '$info_user_id'");
+							
+				echo '<span>';
+				echo $event[0]['name'];
+				echo '</span>';
+				
+				echo '<span class="time"> - '.$notifications[$i]['date'].'</span></div>';
+				echo '<p>Avbokning på ';
+				echo '<a href="?page=event&id='.$event[0]['id'].'" ';
+				echo 'class="">'.$event[0]['name'].'</a>';
+				echo ' från <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
+				echo ' av <a href="?page=userProfile&id='.$info_user_id.'">'.$user[0]['name'].' '.$user[0]['last_name'].'</a></p>';
+			}
+			else
+			{
+				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
+				echo '</div>';
+			}
 		}
+		else if($notification_type[0]['type'] == 'Punkt')
+		{
+			$dot = DBQuery::sql("SELECT comment, group_id, user_id FROM dot
+									WHERE id = '$info'");
+
+			if(count($dot) > 0)
+			{
+				$comment = $dot[0]['comment'];
+				$group_id = $dot[0]['group_id'];
+				$user_id = $dot[0]['user_id'];
+				$group = DBQuery::sql("SELECT name FROM work_group
+										WHERE id = '$group_id'");
+
+				$user = DBQuery::sql("SELECT id, name, last_name FROM user
+										WHERE id = '$user_id'");
+				
+				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
+				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+				echo ' har skrivit en punkt i ';
+				echo '<a href="?page=dot&id='.$info.'&group_id='.$group_id.'" ';
+				echo 'class="">'.$group[0]['name'].'</a>';
+				echo ' för <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a></p>';
+			}
+			else
+			{
+				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
+				echo '</div>';
+			}
+		}
+		else if($notification_type[0]['type'] == 'Protokoll')
+		{
+			$protocol = DBQuery::sql("SELECT group_id, title, user_id FROM protocol
+									WHERE id = '$info'");
+
+			if(count($protocol) > 0)
+			{
+				$title = $protocol[0]['title'];
+				$group_id = $protocol[0]['group_id'];
+				$user_id = $protocol[0]['user_id'];
+				$group = DBQuery::sql("SELECT name FROM work_group
+										WHERE id = '$group_id'");
+
+				$user = DBQuery::sql("SELECT id, name, last_name FROM user
+										WHERE id = '$user_id'");
+							
+				echo '<span>';
+				echo $title;
+				echo '</span>';
+				
+				echo '<span class="time"> - '.$notifications[$i]['date'].'</span></div>';
+				echo '<p>Nytt protokoll ';
+				echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'" ';
+				echo 'class="">'.$title.'</a>';
+				echo ' i <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
+				echo ' av <a href="?page=userProfile&id='.$user_id.'">'.$user[0]['name'].' '.$user[0]['last_name'].'</a></p>';
+			}
+			else
+			{
+				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
+				echo '</div>';
+			}
+		}
+		else
+			echo '</div>';
 
 		echo    '</div>
 			 </div>';

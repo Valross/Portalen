@@ -10,6 +10,23 @@ if(isset($_POST['submit']))
 	{
 		DBQuery::sql("INSERT INTO dot (user_id, group_id, comment, date_written)
 						VALUES ('$_SESSION[user_id]', '$group_id', '$comment', '$date')");
+
+		$dot = DBQuery::sql("SELECT id FROM dot 
+						WHERE group_id = '$group_id'
+						ORDER BY date_written DESC");
+
+		$dot_id = $dot[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = '$group_id')");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 6, $dot_id);
+		}
 	}
 }
 

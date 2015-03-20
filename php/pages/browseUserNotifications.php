@@ -29,38 +29,61 @@ function loadNotifications()
 										WHERE user_id = '$user_id'
 										ORDER BY date DESC");
 
-	for($i = 0; $i < count($notifications); ++$i)
+	for($i = 0; $i < count($notifications) && $i < 20; ++$i)
 	{
 		$info = $notifications[$i]['info'];
 		$type_id = $notifications[$i]['notification_type'];
 		$notification_type = DBQuery::sql("SELECT type FROM notification_type
 										WHERE id = '$type_id'");
 
+		echo '<div class="col-sm-7">
+					<div class="white-box">';
+		echo '<h2>'.$notification_type[0]['type'].'</h2>';
+		echo '<div class="news-info"><span>';
+
 		if($notification_type[0]['type'] == 'Achievement')
+		{
 			$achievement = DBQuery::sql("SELECT id, name, description, points, icon FROM achievement
 									WHERE id = '$info'");
+						
+			echo $achievement[0]['name'];
+			
+			echo '</span><span class="time"> - '.$notifications[$i]['date'].'</span></div>';
+			echo '<p>Du låste upp ';
+			echo '<a href="?page=achievement&id='.$achievement[0]['id'].'" ';
+			echo 'class="black-link" data-toggle="tooltip" 
+						data-placement="bottom" title="'.$achievement[0]['description'].'">';
+			echo '<i class="'.$achievement[0]['icon'].'"></i>';
+			echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>'.
+					$achievement[0]['name'].'</a>.';
+		}
+		else if($notification_type[0]['type'] == 'Avbokning')
+		{
+			$slot = DBQuery::sql("SELECT event_id, group_id, start_time FROM work_slot
+									WHERE id = '$info'");
 
-		echo '<div class="col-sm-7">
-				<div class="white-box">';
-					echo '<h2>'.$notification_type[0]['type'].'</h2>';
-					echo '<div class="news-info"><span>';
-					
-					if($notification_type[0]['type'] == 'Achievement')
-					{
-						echo $achievement[0]['name'];
-					}
-					
-					echo '</span> <span class="time">- '.$notifications[$i]['date'].'</span></div>';
-					if($notification_type[0]['type'] == 'Achievement')
-					{
-						echo '<p>Du låste upp ';
-						echo '<a href="?page=achievement&id='.$achievement[$i]['id'].'" ';
-						echo 'class="black-link" data-toggle="tooltip" 
-									data-placement="bottom" title="'.$achievement[$i]['description'].'">';
-						echo '<i class="'.$achievement[$i]['icon'].'"></i>';
-						echo '<span class="badge on-top-of-element">'.$achievement[$i]['points'].'</span>'.
-								$achievement[$i]['name'].'</a>.';
-					}
+			$info_user_id = strchr($info," "); //Gives second part of the string
+			$event_id = $slot[0]['event_id'];
+			$group_id = $slot[0]['group_id'];
+			$group = DBQuery::sql("SELECT name FROM work_group
+									WHERE id = '$group_id'");
+			
+			$event = DBQuery::sql("SELECT id, name FROM event
+									WHERE id = '$event_id'");
+
+			$user = DBQuery::sql("SELECT id, name, last_name FROM user
+									WHERE id = '$info_user_id'");
+						
+			echo $event[0]['name'];
+			
+			echo '</span><span class="time"> - '.$notifications[$i]['date'].'</span></div>';
+			echo '<p>Avbokning på ';
+			echo '<a href="?page=event&id='.$event[0]['id'].'" ';
+			echo 'class="">'.$event[0]['name'].'</a>';
+			echo ' från <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
+			echo ' av <a href="?page=userProfile&id='.$info_user_id.'">'.$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+		}
+
 		echo    '</div>
 			 </div>';
 	}

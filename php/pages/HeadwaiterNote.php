@@ -233,7 +233,8 @@ function loadComments()
 			echo '<img src="'.loadCommentAvatar($headwaiter_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
 			echo '<p><a href="?page=userProfile&id='.$headwaiter_comments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 			echo '<span class="time">- '.$headwaiter_comments[$i]['date_written'].'</span><br />';
-			echo $headwaiter_comments[$i]['comment'].'</p>';
+			echo nl2br($headwaiter_comments[$i]['comment']);
+			echo '</p>';
 			if(checkAdminAccess() || count($myComment) > 0)
 					echo '<a href=?page=removeHeadwaiterNoteComment&headwaiter_note_id='.$headwaiter_note_event_id.'&comment_id='.$headwaiter_comments[$i]['id'].
 							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';

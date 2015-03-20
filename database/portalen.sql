@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2015 at 01:36 PM
+-- Generation Time: Mar 20, 2015 at 03:45 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `achievement` (
 
 INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`) VALUES
 (1, 'Logga in', 'Logga in för första gången!', 'fa fa-unlock fa-fw fa-lg', 5),
-(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', 'fa fa-cloud fa-fw fa-lg', 5),
+(2, 'Ordinarie Bartender', 'Bli uppgraderad från Nybyggare - Bar!', 'fa fa-glass fa-fw fa-lg', 5),
 (3, 'För att du är värd det', 'Jobba värd 25 gånger', 'fa fa-user-secret fa-fw fa-lg', 15),
 (4, 'Bartastic', 'Jobba bar 2 gånger', 'fa fa-glass fa-fw fa-lg', 5),
 (5, 'Kocktastic', 'Jobba kock 2 gånger', 'fa fa-bug fa-fw fa-lg', 5),
@@ -142,7 +142,10 @@ INSERT INTO `achievement_unlocked` (`user_id`, `achievement_id`, `date_unlocked`
 (2, 21, '2015-03-15'),
 (3, 20, '2015-03-15'),
 (3, 1, '2015-03-17'),
-(8, 36, '2015-03-17');
+(8, 36, '2015-03-17'),
+(2, 22, '2015-03-20'),
+(1, 28, '2015-03-20'),
+(8, 28, '2015-03-20');
 
 -- --------------------------------------------------------
 
@@ -589,6 +592,51 @@ INSERT INTO `news` (`id`, `title`, `message`, `date`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE IF NOT EXISTS `notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `notification_type` int(11) NOT NULL,
+  `info` int(11) NOT NULL,
+  `seen` int(11) DEFAULT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`notification_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`, `date`) VALUES
+(1, 2, 1, 22, 1, '0000-00-00 00:00:00'),
+(2, 1, 1, 28, NULL, '0000-00-00 00:00:00'),
+(3, 8, 1, 28, NULL, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_type`
+--
+
+CREATE TABLE IF NOT EXISTS `notification_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `notification_type`
+--
+
+INSERT INTO `notification_type` (`id`, `type`) VALUES
+(1, 'Achievement');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `partyries`
 --
 
@@ -746,13 +794,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
-(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 30, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '123654879', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-19', 15, 65, NULL, NULL),
+(1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-27', 0, 35, '1337-000000000', 'Ja'),
+(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '123654879', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-19', 15, 90, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-03-17', 1, 15, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
 (7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', 0, 0, NULL, NULL),
-(8, 'Test2', 'test', '9999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-17', 6, 40, NULL, NULL),
+(8, 'Test2', 'test', '9999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-17', 6, 45, NULL, NULL),
 (9, '123', '123', '1245241241', 'trappan', '1', '2', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-17 19:00:26', '0000-00-00', 0, 0, NULL, NULL),
 (11, 'Test3', 'test', '9000000000', '2bac9f5e083e2843e8893f11abef6618', 'Tess', 'Tre', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-18 18:20:25', '0000-00-00', 0, 0, NULL, NULL);
 
@@ -852,28 +900,28 @@ CREATE TABLE IF NOT EXISTS `work_group` (
 --
 
 INSERT INTO `work_group` (`id`, `name`, `description`, `facebook_group`, `icon`, `hex`, `sub_group`, `main_group`) VALUES
-(1, 'Driftgruppen', '', '', '', '', NULL, NULL),
-(2, 'Webb', '', '', '', '', NULL, NULL),
+(1, 'Driftgruppen', '', '', 'fa fa-users fa-fw fa-lg', '', NULL, NULL),
+(2, 'Webb', '', '', 'fa fa-cloud fa-fw fa-lg', '', NULL, NULL),
 (3, 'Kock', '', '', 'fa fa-bug fa-fw fa-lg', '', 16, NULL),
 (4, 'Bar', 'YEAH BAR', 'www.facebook.com', 'fa fa-glass fa-fw fa-lg', '', 15, NULL),
-(5, 'DJ', '', '', '', '', 28, NULL),
-(6, 'Värd', '', '', '', '', 25, NULL),
-(7, 'Dagsansvarig', '', '', '', '', NULL, NULL),
-(8, 'Event', '', '', '', '', NULL, NULL),
-(9, 'Marknadsföring', '', '', '', '', NULL, NULL),
-(10, 'Ljud & Ljus', '', '', '', '', 26, NULL),
+(5, 'DJ', '', '', 'fa fa-headphones fa-fw fa-lg', '', 28, NULL),
+(6, 'Värd', '', '', 'fa fa-user-secret fa-fw fa-lg', '', 25, NULL),
+(7, 'Dagsansvarig', '', '', 'fa fa-key fa-fw fa-lg', '', NULL, NULL),
+(8, 'Event', '', '', 'fa fa-music fa-fw fa-lg', '', NULL, NULL),
+(9, 'Marknadsföring', '', '', 'fa fa-cubes fa-fw fa-lg', '', NULL, NULL),
+(10, 'Ljud & Ljus', '', '', 'fa fa-lightbulb-o fa-fw fa-lg', '', 26, NULL),
 (11, 'Servering', '', '', 'fa fa-cutlery fa-fw fa-lg', '', 17, NULL),
-(12, 'Hovmästare', '', '', 'fa fa-cutlery fa-fw fa-lg', '', 27, NULL),
-(13, 'Alla', 'Typ', '', 'fa fa-diamond fa-fw fa-lg', 'ffffff', NULL, NULL),
+(12, 'Hovmästare', '', '', 'fa fa-female fa-fw fa-lg', '', 27, NULL),
+(13, 'Alla', 'Typ', '', 'fa fa-globe fa-fw fa-lg', 'ffffff', NULL, NULL),
 (14, 'Vimmel', 'vimmel yeah!', 'www.facebook.com', 'fa fa-camera-retro fa-fw fa-lg', '', NULL, NULL),
 (15, 'Bar - Nybyggare', '', '', 'fa fa-glass fa-fw fa-lg', '', NULL, 4),
 (16, 'Kock - Nybyggare', '', '', 'fa fa-bug fa-fw fa-lg', '', NULL, 3),
 (17, 'Servering - Nybyggare', '', '', 'fa fa-cutlery fa-fw fa-lg', '', NULL, 11),
-(25, 'Värd - Nybyggare', '', '', '', '', NULL, 6),
-(26, 'Ljud & Ljus - Lärling', '', '', '', '', NULL, 10),
-(27, 'Pingu', '', '', '', '', NULL, 12),
-(28, 'DJ - Nybyggare', '', '', '', '', NULL, 5),
-(29, 'Nybyggare', '', '', '', '', NULL, NULL);
+(25, 'Värd - Nybyggare', '', '', 'fa fa-user-secret fa-fw fa-lg', '', NULL, 6),
+(26, 'Ljud & Ljus - Lärling', '', '', 'fa fa-lightbulb-o fa-fw fa-lg', '', NULL, 10),
+(27, 'Pingu', '', '', 'fa fa-female fa-fw fa-lg', '', NULL, 12),
+(28, 'DJ - Nybyggare', '', '', 'fa fa-headphones fa-fw fa-lg', '', NULL, 5),
+(29, 'Nybyggare', '', '', 'fa fa-user-plus fa-fw fa-lg', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -916,7 +964,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=147 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=148 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -974,13 +1022,13 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (87, 13, 48, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (88, 2, 49, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
 (89, 2, 50, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
-(90, 13, 50, 0, 0, '2015-02-19 16:00:00', '2015-02-20 05:00:00'),
+(90, 13, 50, 200, 0, '2015-02-19 16:00:00', '2015-02-20 05:00:00'),
 (91, 6, 50, 0, 0, '2015-02-18 19:00:00', '2015-02-19 05:00:00'),
 (93, 7, 50, 0, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (94, 7, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (95, 7, 51, 4, 40, '2015-02-18 16:00:00', '2015-02-19 04:00:00'),
 (96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00'),
-(99, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(99, 13, 50, 250, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (100, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (101, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (102, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
@@ -1016,7 +1064,8 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (143, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (144, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (145, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
-(146, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00');
+(146, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
+(147, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00');
 
 --
 -- Constraints for dumped tables

@@ -5,16 +5,16 @@ include_once('DBQuery.php');
 // Define Output HTML Formating
 $defaultHtml  = '';
 $defaultHtml .= '<li class="result">';
-$defaultHtml .= '<a target="_blank" href="urlString">';
-$defaultHtml .= '<h3>nameString</h3>';
+$defaultHtml .= '<a target="_blank" href="urlString" class="black-link">';
+$defaultHtml .= '<p>nameString</p>';
 $defaultHtml .= '</a>';
 $defaultHtml .= '</li>';
 
 $eventHtml  = '';
 $eventHtml .= '<li class="result">';
-$eventHtml .= '<a target="_blank" href="urlString">';
-$eventHtml .= '<h3>nameString</h3>';
-$eventHtml .= '<h4>dateString</h4>';
+$eventHtml .= '<a target="_blank" href="urlString" class="black-link">';
+$eventHtml .= '<p>nameString - ';
+$eventHtml .= '<span class="time">dateString</span></p>';
 $eventHtml .= '</a>';
 $eventHtml .= '</li>';
 

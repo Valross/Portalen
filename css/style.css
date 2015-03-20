@@ -496,7 +496,7 @@ fieldset[disabled] {
 	ul#results {
 		display: none;
 		width: 360px;
-		margin-top: 4px;
+		margin-top: 0px;
 		border: 1px solid #ababab;
 		-webkit-border-radius: 2px;
 		-moz-border-radius: 2px;
@@ -506,7 +506,7 @@ fieldset[disabled] {
 		box-shadow: rgba(0, 0, 0, .15) 0 1px 3px;
 	}
 	ul#results li {
-		padding: 8px;
+		padding: 4px;
 		cursor: pointer;
 		border-top: 1px solid #cdcdcd;
 		transition: background-color .3s ease-in-out;

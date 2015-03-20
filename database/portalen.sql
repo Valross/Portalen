@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2015 at 04:46 PM
+-- Generation Time: Mar 20, 2015 at 01:36 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -245,6 +245,30 @@ INSERT INTO `da_note_comments` (`id`, `da_note_id`, `comment`, `date_written`, `
 (2, 1, 'wrr', '2015-02-19 00:00:00', 2),
 (4, 27, 'top lel\r\n', '2015-02-19 00:00:00', 2),
 (5, 27, 'CRAZY men ändå <i>rätt</i> najs...', '2015-03-17 00:00:00', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dot`
+--
+
+CREATE TABLE IF NOT EXISTS `dot` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(400) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `date_written` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`,`user_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `dot`
+--
+
+INSERT INTO `dot` (`id`, `comment`, `group_id`, `date_written`, `user_id`) VALUES
+(1, '*första punkten', 7, '2015-03-20 13:20:48', 2);
 
 -- --------------------------------------------------------
 
@@ -526,7 +550,15 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
   PRIMARY KEY (`id`),
   KEY `headwaiter_note_id` (`headwaiter_note_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `headwaiter_note_comments`
+--
+
+INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `user_id`) VALUES
+(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 17:55:55', 2),
+(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 12:41:54', 2);
 
 -- --------------------------------------------------------
 
@@ -676,7 +708,6 @@ CREATE TABLE IF NOT EXISTS `protocol` (
 --
 
 INSERT INTO `protocol` (`id`, `title`, `message`, `date_written`, `user_id`, `group_id`) VALUES
-(1, 'Protokoll', 'Mahan sjunger och dansar fan rätt fint asså', '2015-03-19 15:33:36', 2, 7),
 (4, 'Protokolllll', 'Mahan gillar musik som är typiskt stereotypisk för honom', '2015-03-19 15:38:01', 2, 7);
 
 -- --------------------------------------------------------
@@ -943,21 +974,21 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (87, 13, 48, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (88, 2, 49, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
 (89, 2, 50, 0, 0, '2015-02-18 17:15:00', '2015-02-18 19:00:00'),
-(90, 13, 50, 68, 0, '2015-02-19 16:00:00', '2015-02-20 05:00:00'),
+(90, 13, 50, 0, 0, '2015-02-19 16:00:00', '2015-02-20 05:00:00'),
 (91, 6, 50, 0, 0, '2015-02-18 19:00:00', '2015-02-19 05:00:00'),
-(93, 7, 50, 13, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
-(94, 7, 50, 13, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(93, 7, 50, 0, 40, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
+(94, 7, 50, 0, 0, '2015-02-18 00:00:00', '2015-02-18 00:00:00'),
 (95, 7, 51, 4, 40, '2015-02-18 16:00:00', '2015-02-19 04:00:00'),
 (96, 7, 52, 5, 86, '2015-02-25 19:00:00', '2015-02-26 05:15:00'),
 (99, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
-(100, 13, 50, -2, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(100, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (101, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (102, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (106, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (107, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (108, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (109, 5, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
-(111, 13, 50, 24, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(111, 13, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
 (112, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
 (113, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
 (114, 6, 53, 0, 0, '2015-03-12 00:00:00', '2015-03-13 00:00:00'),
@@ -1018,6 +1049,13 @@ ALTER TABLE `da_note`
 ALTER TABLE `da_note_comments`
   ADD CONSTRAINT `da_note_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `da_note_comments_ibfk_3` FOREIGN KEY (`da_note_id`) REFERENCES `da_note` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dot`
+--
+ALTER TABLE `dot`
+  ADD CONSTRAINT `dot_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `dot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`

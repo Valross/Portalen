@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-pencil fa-fw fa-lg"></span> Skapa ny Hovis-lapp</h1>
+			<h1><span class="fa fa-pencil fa-fw fa-lg"></span> Skriv Hovis-lapp</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

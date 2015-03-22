@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2015 at 03:45 PM
+-- Generation Time: Mar 22, 2015 at 03:56 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -264,14 +264,16 @@ CREATE TABLE IF NOT EXISTS `dot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `dot`
 --
 
 INSERT INTO `dot` (`id`, `comment`, `group_id`, `date_written`, `user_id`) VALUES
-(1, '*första punkten', 7, '2015-03-20 13:20:48', 2);
+(1, '*första punkten', 7, '2015-03-20 13:20:48', 2),
+(4, '*fuck spenta', 1, '2015-03-20 19:16:51', 8),
+(5, '*i love cats', 1, '2015-03-20 19:30:46', 8);
 
 -- --------------------------------------------------------
 
@@ -487,6 +489,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 INSERT INTO `group_member` (`group_id`, `user_id`, `member_since`) VALUES
 (1, 1, '0000-00-00'),
 (1, 2, '2015-03-04'),
+(1, 8, '0000-00-00'),
 (2, 1, '0000-00-00'),
 (2, 2, '2015-02-05'),
 (4, 1, '0000-00-00'),
@@ -599,21 +602,31 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `notification_type` int(11) NOT NULL,
-  `info` int(11) NOT NULL,
+  `info` varchar(15) NOT NULL,
   `seen` int(11) DEFAULT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `notification`
 --
 
 INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`, `date`) VALUES
-(1, 2, 1, 22, 1, '0000-00-00 00:00:00'),
-(2, 1, 1, 28, NULL, '0000-00-00 00:00:00'),
-(3, 8, 1, 28, NULL, '0000-00-00 00:00:00');
+(1, 2, 1, '22', 1, '0000-00-00 00:00:00'),
+(2, 1, 1, '28', NULL, '0000-00-00 00:00:00'),
+(3, 8, 1, '28', 1, '0000-00-00 00:00:00'),
+(6, 2, 2, '148 8', 1, '2015-03-20 17:46:38'),
+(7, 1, 2, '148 8', NULL, '2015-03-20 17:46:38'),
+(8, 1, 7, '7', NULL, '2015-03-20 18:30:17'),
+(9, 2, 7, '7', 1, '2015-03-20 18:30:17'),
+(10, 1, 7, '8', NULL, '2015-03-20 18:36:07'),
+(11, 2, 7, '8', 1, '2015-03-20 18:36:07'),
+(12, 1, 6, '4', NULL, '2015-03-20 19:16:51'),
+(13, 2, 6, '4', 1, '2015-03-20 19:16:51'),
+(14, 1, 6, '5', NULL, '2015-03-20 19:30:46'),
+(15, 2, 6, '5', 1, '2015-03-20 19:30:46');
 
 -- --------------------------------------------------------
 
@@ -625,14 +638,23 @@ CREATE TABLE IF NOT EXISTS `notification_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `notification_type`
 --
 
 INSERT INTO `notification_type` (`id`, `type`) VALUES
-(1, 'Achievement');
+(1, 'Achievement'),
+(2, 'Avbokning'),
+(3, 'DA-lapp'),
+(4, 'Hovis-lapp'),
+(5, 'Uppgradering'),
+(6, 'Punkt'),
+(7, 'Protokoll'),
+(8, 'Kommentar'),
+(9, 'Ansökan - Portalen'),
+(10, 'Ansökan - Lag');
 
 -- --------------------------------------------------------
 
@@ -749,14 +771,15 @@ CREATE TABLE IF NOT EXISTS `protocol` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `protocol`
 --
 
 INSERT INTO `protocol` (`id`, `title`, `message`, `date_written`, `user_id`, `group_id`) VALUES
-(4, 'Protokolllll', 'Mahan gillar musik som är typiskt stereotypisk för honom', '2015-03-19 15:38:01', 2, 7);
+(4, 'Protokolllll', 'Mahan gillar musik som är typiskt stereotypisk för honom', '2015-03-19 15:38:01', 2, 7),
+(7, 'Weeeeeeeee im a cat', 'meow', '2015-03-20 18:30:17', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -800,7 +823,7 @@ INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00', 0, 0, NULL, NULL),
 (7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00', 0, 0, NULL, NULL),
-(8, 'Test2', 'test', '9999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-17', 6, 45, NULL, NULL),
+(8, 'Test2', 'test', '9999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-20', 7, 45, NULL, NULL),
 (9, '123', '123', '1245241241', 'trappan', '1', '2', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-17 19:00:26', '0000-00-00', 0, 0, NULL, NULL),
 (11, 'Test3', 'test', '9000000000', '2bac9f5e083e2843e8893f11abef6618', 'Tess', 'Tre', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-18 18:20:25', '0000-00-00', 0, 0, NULL, NULL);
 
@@ -847,7 +870,6 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (100, 1, 1),
 (101, 5, 1),
 (102, 7, 0),
-(111, 8, 1),
 (112, 2, 1),
 (113, 2, 1),
 (114, 2, 1),
@@ -964,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=148 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -1065,7 +1087,8 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (144, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (145, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (146, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
-(147, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00');
+(147, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
+(148, 7, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00');
 
 --
 -- Constraints for dumped tables

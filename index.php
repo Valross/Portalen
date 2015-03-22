@@ -134,7 +134,7 @@ include_once('php/pageManager.php');
 						<a href="?page=browseUserNotifications&user_id=<?php echo $_SESSION['user_id']; ?>" 
 							data-toggle="tooltip" data-placement="bottom" title="<?php loadAmountOfUnseenNotifications(); ?> oläst händelse"> 
 							<i class="fa fa-globe"></i>
-						    <span class="badge on-top-of-element"><?php loadAmountOfUnseenNotifications(); ?></span>
+						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
 						</a>
 					</div>
 					

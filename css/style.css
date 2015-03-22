@@ -442,10 +442,6 @@ fieldset[disabled] {
 	a:hover .badge.on-top-of-element {
 		background: #444;
 	}
-
-	.red-background {
-		background: #ce4141;
-	}
 	
 	/* Search form in #topbar */
 	

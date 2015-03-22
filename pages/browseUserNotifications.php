@@ -9,7 +9,7 @@
 	</div>
 </div> <!-- .row -->
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h4>
@@ -35,6 +35,6 @@
 				</table>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <?php loadNotifications() ?>

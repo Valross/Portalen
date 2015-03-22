@@ -18,6 +18,22 @@ if(isset($_POST['submit']))
 	{
 		DBQuery::sql("INSERT INTO headwaiter_note_comments (user_id, headwaiter_note_id, comment, date_written)
 						VALUES ('$_SESSION[user_id]', '$headwaiter_note_id', '$comment', '$date')");
+
+		$headwaiter_note_comment = DBQuery::sql("SELECT id FROM headwaiter_note_comments 
+						ORDER BY date_written DESC");
+
+		$headwaiter_note_comment_id = $headwaiter_note_comment[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = 7 OR group_id = 1 OR group_id = 12)");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 12, $headwaiter_note_comment_id);
+		}
 		?>
 		<script>
 			window.location = <?php echo '?page=headwaiterNote&id='.$headwaiter_note_event_id; ?>;

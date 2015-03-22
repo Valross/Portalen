@@ -62,6 +62,25 @@ if(isset($_POST['submitComment']))
 	{
 		DBQuery::sql("INSERT INTO event_comments (user_id, event_id, comment, date_written)
 						VALUES ('$_SESSION[user_id]', '$event_id', '$comment', '$date')");
+
+		$comment = DBQuery::sql("SELECT id FROM event_comments 
+						ORDER BY date_written DESC");
+
+		$comment_id = $comment[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM user_work
+								WHERE work_slot_id IN
+									(SELECT id FROM work_slot
+									WHERE event_id = '$event_id'))");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 8, $comment_id);
+		}
+
 		?>
 		<script>
 			window.location = <?php echo '?page=event&id='.$event_id; ?>;

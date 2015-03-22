@@ -24,6 +24,22 @@ if(isset($_POST['submit']))
 			n_of_waiting_organizers, n_of_waiting_stair, toast, organizers, stair_staff, organizers_staff, swine, message)
 						VALUES ('', '$_SESSION[user_id]', '$event', '$nOfSitting', '$food', '$invoiceDrinks', '$nOfWaitingOrganizers', '$nOfWaitingStair', 
 							'$toast', '$organizers', '$stairStaff', '$organizersStaff', '$swine', '$message')");
+
+		$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note 
+						ORDER BY date_written DESC");
+
+		$headwaiter_note_id = $headwaiter_note[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = 7 OR group_id = 1 OR group_id = 12)");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 4, $headwaiter_note_id);
+		}
 		?>
 		<script>
 			window.location = "?page=browseHeadwaiterNote";

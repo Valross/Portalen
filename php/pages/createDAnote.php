@@ -14,14 +14,31 @@ if(isset($_POST['submit']) && checkAdminAccess())
 	$cash = strip_tags($_POST['cash']);
 	$nOfPeople = strip_tags($_POST['nOfPeople']);
 	$salesSpenta = strip_tags($_POST['salesSpenta']);
-	$message = strip_tags($_POST['message'];, allowed_tags());
+	$message = strip_tags($_POST['message'], allowed_tags());
 
 	if($event != 'typeno' && $salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{
 		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_total, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message, date_written)
 						VALUES ('$_SESSION[user_id]', '$event', '$salesTotal', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message', '$date')");
+
+		$DA_note = DBQuery::sql("SELECT id FROM da_note 
+						ORDER BY date_written DESC");
+
+		$DA_note_id = $DA_note[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = 7 OR group_id = 1 OR group_id = 12)");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 3, $DA_note_id);
+		}
 	}	
-	if(count($_POST['partyriesArranging']) > 0)
+	// if(count($_POST['partyriesArranging']) > 0)
+	if(isset($_POST['partyriesArranging']))
 	{
         $partyriesArranging = $_POST['partyriesArranging'];
         $partyriesArrangingCounter = count($partyriesArranging);
@@ -33,7 +50,8 @@ if(isset($_POST['submit']) && checkAdminAccess())
 							VALUES ('$event', '$partyriesArranging_id')");
         }
 	}
-	if(count($_POST['partyriesWorking']) > 0)
+	// if(count($_POST['partyriesWorking']) > 0)
+	if(isset($_POST['partyriesWorking']))
 	{
         $partyriesWorking = $_POST['partyriesWorking'];
         $partyriesWorkingCounter = count($partyriesWorking);

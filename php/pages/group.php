@@ -12,26 +12,55 @@ $members = DBQuery::sql("SELECT name, last_name, id FROM user
 
 $nMembers = count($members);
 
-if(isset($_POST['accept']))
+if(isset($_POST['apply']))
 {
 	$group_id = $_GET['id'];
 	$user_id = $_SESSION['user_id'];
 
-	DBQuery::sql("INSERT INTO group_member (group_id, user_id, group_leader, member_since)
-						VALUES ('$group_id', '$user_id', '0', '$date')");
+	$leadersOfGroup = DBQuery::sql("SELECT user_id FROM work_group_leaders 
+							WHERE work_group_id = '$group_id'");
 
-	DBQuery::sql("DELETE FROM group_application 
-					WHERE user_id = '$user_id'
-					AND group_id = '$group_id'");
+	for($i = 0; $i < count($leadersOfGroup); ++$i)
+	{
+		DBQuery::sql("INSERT INTO group_application (group_id, user_id)
+							VALUES ('$group_id', '$user_id')");
+
+		$application_id = DBQuery::sql("SELECT id FROM group_application 
+							ORDER BY id DESC");
+
+		notify($leadersOfGroup[$i]['user_id'], 10, $application_id[0]);
+	}
+}
+if(isset($_POST['accept']))
+{
+	$group_id = $_GET['id'];
+	$users = $_POST['applications'];
+
+	for($i = 0; $i < count($users); ++$i)
+	{
+		$user_id = $users[$i];
+		DBQuery::sql("INSERT INTO group_member (group_id, user_id)
+							VALUES ('$group_id', '$user_id')");
+
+		DBQuery::sql("DELETE FROM group_application 
+						WHERE user_id = '$user_id'
+						AND group_id = '$group_id'");
+
+		notify($user_id, 5, $group_id);
+	}
 }
 if(isset($_POST['deny']))
 {
 	$group_id = $_GET['id'];
-	$user_id = $_SESSION['user_id'];
+	$users = $_POST['applications'];
 
-	DBQuery::sql("DELETE FROM group_application 
-					WHERE user_id = '$user_id'
-					AND group_id = '$group_id'");
+	for($i = 0; $i < count($users); ++$i)
+	{
+		$user_id = $users[$i];
+		DBQuery::sql("DELETE FROM group_application 
+						WHERE user_id = '$user_id'
+						AND group_id = '$group_id'");
+	}
 }
 
 function loadGroupName()
@@ -208,8 +237,9 @@ function loadApplications()
 			echo '<form action="" method="post">';
 			for($i = 0; $i < count($applications); ++$i)
 			{
+				$user_id = $applications[$i]['user_id'];
 				echo '<p>';
-				echo '<input type="checkbox" name="applications[]" id="'.$applications[$i]['id'].'" value="'.$applications[$i]['id'].'">';
+				echo '<input type="checkbox" name="applications[]" id="'.$applications[$i]['user_id'].'" value="'.$applications[$i]['user_id'].'">';
 				echo '<a href="?page=userProfile&id='.$user_id.'" class="work-slot-user black-link"> '.loadAvatarFromUser($user_id, 20).loadNameFromUser($user_id).'</a>';
 				echo '</p>';
 			}

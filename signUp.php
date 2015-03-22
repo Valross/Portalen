@@ -64,6 +64,23 @@
                 DBQuery::sql("INSERT INTO application (name, last_name, mail, ssn)
                 			  VALUES ('$firstName', '$lastName', '$mail', '$ssn')"); //group id?
 
+                $users = DBQuery::sql("SELECT id FROM user
+                            WHERE id IN
+                                (SELECT user_id FROM group_member
+                                WHERE group_id = 1)");
+
+                $info = $firstName.' '.$lastName;
+                $dates = new DateTime;
+                $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+                $date = $dates->format('Y-m-d H:i:s');
+
+                for($i = 0; $i < count($users); ++$i)
+                {
+                    $user_id = $users[$i]['id'];
+                    DBQuery::sql("INSERT INTO notification (user_id, notification_type, info, date)
+                            VALUES ('$user_id', '9', '$info', '$date')");
+                }
+
                 //INSERT TEAMS INTO DB
                 $appId = DBQuery::$lastId;
                 // echo "lag: ";

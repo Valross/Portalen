@@ -18,6 +18,22 @@ if(isset($_POST['submit']))
 	{
 		DBQuery::sql("INSERT INTO da_note_comments (user_id, da_note_id, comment, date_written)
 						VALUES ('$_SESSION[user_id]', '$da_note_id', '$comment', '$date')");
+
+		$da_note_comment = DBQuery::sql("SELECT id FROM da_note_comments 
+						ORDER BY date_written DESC");
+
+		$da_note_comment_id = $da_note_comment[0]['id'];
+
+		$users = DBQuery::sql("SELECT id FROM user
+							WHERE id IN
+								(SELECT user_id FROM group_member
+								WHERE group_id = 7 OR group_id = 1 OR group_id = 12)");
+
+		for($i = 0; $i < count($users); ++$i)
+		{
+			if($users[$i]['id'] != $_SESSION['user_id'])
+				notify($users[$i]['id'], 11, $da_note_comment_id);
+		}
 		?>
 		<script>
 			window.location = <?php echo '?page=DANote&id='.$da_note_event_id; ?>;

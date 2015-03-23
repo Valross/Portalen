@@ -567,14 +567,14 @@ function loadNameFromUser($user_id)
 
 function loadPageNumbers($currentPage, $lastPage, $page, $append)
 {
-	echo '<div class="col-sm-7">
-					<div class="white-box">';
 	echo '<p>';
 
 	if($currentPage == 0)
 	{
-		echo 'Första ';
-		echo '<a href="?page='.$page.'&pageNumber='.($currentPage+1).$append.'">'.($currentPage+1).'</a> ';
+		echo 'Första (0) ';
+
+		if($currentPage < $lastPage-1)
+			echo '<a href="?page='.$page.'&pageNumber='.($currentPage+1).$append.'">'.($currentPage+1).'</a> ';
 
 		if($lastPage > $currentPage+2)
 			echo '... ';
@@ -589,9 +589,10 @@ function loadPageNumbers($currentPage, $lastPage, $page, $append)
 		if($currentPage-2 > 0)
 			echo '... ';
 
-		echo '<a href="?page='.$page.'&pageNumber='.($currentPage-1).$append.'">'.($currentPage-1).'</a> ';
+		if($currentPage > 1)
+			echo '<a href="?page='.$page.'&pageNumber='.($currentPage-1).$append.'">'.($currentPage-1).'</a> ';
 		
-		echo 'Sista ';
+		echo 'Sista ('.$lastPage.')';
 	}
 	else
 	{
@@ -621,8 +622,6 @@ function loadPageNumbers($currentPage, $lastPage, $page, $append)
 	}
 
 	echo '</p>';
-	echo    '</div>
-		 </div>';
 }
 
 function loadAmountOfUnseenNotifications()

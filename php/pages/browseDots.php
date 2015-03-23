@@ -86,14 +86,24 @@ function loadComments()
 							WHERE group_id = '$group_id'
 							ORDER BY date_written DESC");
 
-	if(count($dots) > 0)
+	if(isset($_GET['pageNumber']))
+		$currentPage = $_GET['pageNumber'];
+	else
+		$currentPage = 0;
+
+	$itemsPerPage = 10;
+	$totalItems = count($dots);
+	$lastPage = floor(($totalItems / $itemsPerPage));
+	$startItem = $currentPage * $itemsPerPage;
+
+	if(count($dots) > 0 && $currentPage <= $lastPage)
 	{
 		echo '<div class="col-sm-7">
 						<div class="white-box">';
 		echo '<h3>Punkter ('.count($dots).')</h3>';
 	
 
-		for($i = 0; $i < count($dots); ++$i)
+		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($dots); ++$i)
 		{
 			$user_id = $dots[$i]['user_id'];
 			$comment_id = $dots[$i]['id'];
@@ -120,6 +130,8 @@ function loadComments()
 		}
 		echo '			</div> <!-- .white-box -->
 					</div> <!-- .col-sm-7 -->';
+		$append = '&group_id='.$group_id;
+		loadPageNumbers($currentPage, $lastPage, 'browseDots', $append);
 	}
 }
 ?>

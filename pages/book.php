@@ -1,3 +1,4 @@
+<?php loadTitleForBrowser('Boka pass'); ?>
 <div class="row">	
 	<div class="col-sm-6">
 		<div class="page-header">

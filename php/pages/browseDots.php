@@ -43,6 +43,7 @@ function loadGroupName()
 		echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
 
 	echo '<a href="?page=group&id='.$group_name[0]['id'].'">'.$group_name[0]['name'].'</a>';
+	loadTitleForBrowser('Punkter - '.$group_name[0]['name']);
 }
 
 function loadProtocolLink()
@@ -93,7 +94,7 @@ function loadComments()
 
 	$itemsPerPage = 10;
 	$totalItems = count($dots);
-	$lastPage = floor(($totalItems / $itemsPerPage));
+	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 	$startItem = $currentPage * $itemsPerPage;
 
 	if(count($dots) > 0 && $currentPage <= $lastPage)
@@ -131,7 +132,11 @@ function loadComments()
 		echo '			</div> <!-- .white-box -->
 					</div> <!-- .col-sm-7 -->';
 		$append = '&group_id='.$group_id;
+		echo '<div class="col-sm-7">
+					<div class="white-box">';
 		loadPageNumbers($currentPage, $lastPage, 'browseDots', $append);
+		echo    	'</div>
+			 </div>';
 	}
 }
 ?>

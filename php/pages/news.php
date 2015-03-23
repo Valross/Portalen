@@ -13,7 +13,7 @@ function loadAll()
 
 	$itemsPerPage = 4;
 	$totalItems = count($news);
-	$lastPage = floor(($totalItems / $itemsPerPage));
+	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 	$startItem = $currentPage * $itemsPerPage;
 
 	if($currentPage <= $lastPage)
@@ -31,7 +31,11 @@ function loadAll()
 			echo    '</div>
 				 </div>';
 		}
+		echo '<div class="col-sm-7">
+					<div class="white-box">';
 		loadPageNumbers($currentPage, $lastPage, 'news', '');
+		echo    	'</div>
+			 </div>';
 	}		
 }
 

@@ -18,23 +18,45 @@ function loadAllHeadwaiterNotes()
 							INNER JOIN event ON headwaiter_note.event_id = event.id 
 							ORDER BY event.start_time DESC");
 
+	if(isset($_GET['pageNumber']))
+		$currentPage = $_GET['pageNumber'];
+	else
+		$currentPage = 0;
+
+	$itemsPerPage = 10;
+	$totalItems = count($HeadwaiterNotes);
+	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
+	$startItem = $currentPage * $itemsPerPage;
+
 	if(count($HeadwaiterNotes) > 0 && checkAdminAccess())
 	{
-		for($i = 0; $i < count($HeadwaiterNotes); ++$i)
+		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($HeadwaiterNotes); ++$i)
 		{
-			?>
-			<tr>
-				<td><?php echo $i+1;?></td>
-				<td><a href=<?php echo '"?page=HeadwaiterNote&id='.$HeadwaiterNotes[$i]['event_id'].'"'; ?>>
-				<?php echo $HeadwaiterNotes[$i]['name']; ?></a></td>
-				<td><?php echo $HeadwaiterNotes[$i]['start_time']; ?></td>
-				<td><?php echo $HeadwaiterNotes[$i]['n_of_sitting']; ?></td>
-				<td><a href=<?php echo '?page=userProfile&id='.$HeadwaiterNotes[$i]['user_id']; ?>>
-				<img src="<?php echo loadHeadwaiterAvatar($HeadwaiterNotes[$i]['user_id']); ?>" width="25" height="25" class="img-circle"></a></td>
-			</tr>
-			<?php
+			echo '<tr>';
+				echo '<td>'.($i+1).'</td>';
+				echo '<td><a href="?page=HeadwaiterNote&id='.$HeadwaiterNotes[$i]['event_id'].'">';
+				echo $HeadwaiterNotes[$i]['name'].'</a></td>';
+				echo '<td>'.$HeadwaiterNotes[$i]['start_time'].'</td>';
+				echo '<td>'.$HeadwaiterNotes[$i]['n_of_sitting'].'</td>';
+				echo '<td><a href="?page=userProfile&id='.$HeadwaiterNotes[$i]['user_id'].'">';
+				echo '<img src="'.loadHeadwaiterAvatar($HeadwaiterNotes[$i]['user_id']).'" width="25" height="25" class="img-circle"></a></td>';
+			echo '</tr>';
 		}
 	}
+	if(isset($_GET['sort']))
+		$append = '&sort='.$_GET['sort'];
+	else
+		$append = '';
+	echo '</tbody></table>';
+	echo '		</div>
+			</div>
+		</div>
+	</div>';
+	echo '<div class="col-sm-12">
+				<div class="white-box">';
+	loadPageNumbers($currentPage, $lastPage, 'browseHeadwaiterNote', $append);
+	echo    	'</div>
+		 </div>';
 }
 
 ?>

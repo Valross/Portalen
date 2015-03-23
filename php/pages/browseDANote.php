@@ -38,27 +38,49 @@ function loadAllDANotes()
 
 	$DANotes = DBQuery::sql($DANotes_sql);
 
-	if(count($DANotes) > 0 && checkAdminAccess())
+	if(isset($_GET['pageNumber']))
+		$currentPage = $_GET['pageNumber'];
+	else
+		$currentPage = 0;
+
+	$itemsPerPage = 10;
+	$totalItems = count($DANotes);
+	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
+	$startItem = $currentPage * $itemsPerPage;
+
+	if(count($DANotes) > 0 && checkAdminAccess() && $currentPage <= $lastPage)
 	{
-		for($i = 0; $i < count($DANotes); ++$i)
+		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($DANotes); ++$i)
 		{
-			?>
-			<tr>
-				<td><?php echo $i+1;?></td>
-				<td><a href=<?php echo '"?page=DANote&id='.$DANotes[$i]['event_id'].'"'; ?>>
-				<?php echo $DANotes[$i]['name']; ?></a></td>
-				<td><?php echo $DANotes[$i]['start_time']; ?></td>
-				<td><?php echo $DANotes[$i]['sales_total']; ?></td>
-				<td><?php echo $DANotes[$i]['sales_entry']; ?></td>
-				<td><?php echo $DANotes[$i]['sales_bar']; ?></td>
-				<td><?php echo $DANotes[$i]['cash']; ?></td>
-				<td><?php echo $DANotes[$i]['n_of_people']; ?></td>
-				<td><?php echo $DANotes[$i]['sales_spenta']; ?></td>
-				<td><a href=<?php echo '?page=userProfile&id='.$DANotes[$i]['user_id']; ?>>
-				<img src="<?php echo loadDAAvatar($DANotes[$i]['user_id']); ?>" width="25" height="25" class="img-circle"></a></td>
-			</tr>
-			<?php
+			echo '<tr>';
+				echo '<td>'.($i+1).'</td>';
+				echo '<td><a href="?page=DANote&id='.$DANotes[$i]['event_id'].'">';
+				echo $DANotes[$i]['name'].'</a></td>';
+				echo '<td>'.$DANotes[$i]['start_time'].'</td>';
+				echo '<td>'.$DANotes[$i]['sales_total'].'</td>';
+				echo '<td>'.$DANotes[$i]['sales_entry'].'</td>';
+				echo '<td>'.$DANotes[$i]['sales_bar'].'</td>';
+				echo '<td>'.$DANotes[$i]['cash'].'</td>';
+				echo '<td>'.$DANotes[$i]['n_of_people'].'</td>';
+				echo '<td>'.$DANotes[$i]['sales_spenta'].'</td>';
+				echo '<td><a href="?page=userProfile&id='.$DANotes[$i]['user_id'].'">';
+				echo '<img src="'.loadDAAvatar($DANotes[$i]['user_id']).'" width="25" height="25" class="img-circle"></a></td>';
+			echo '</tr>';
 		}
+		if(isset($_GET['sort']))
+			$append = '&sort='.$_GET['sort'];
+		else
+			$append = '';
+		echo '</tbody></table>';
+		echo '		</div>
+				</div>
+			</div>
+		</div>';
+		echo '<div class="col-sm-12">
+					<div class="white-box">';
+		loadPageNumbers($currentPage, $lastPage, 'browseDANote', $append);
+		echo    	'</div>
+			 </div>';
 	}
 }
 

@@ -5,7 +5,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-user-secret fa-fw fa-lg"></span> DA-lappar - <a href="?page=browseHeadwaiterNote">Hovis-lappar</a></h1>
+			<h1><span class="fa fa-key fa-fw fa-lg"></span> DA-lappar - 
+			<a href="?page=browseHeadwaiterNote"><span class="fa fa-female fa-fw fa-lg"></span>Hovis-lappar</a></h1>
 		</div>
 	</div>
 </div>
@@ -30,14 +31,8 @@
 			    </thead>
 				<tbody>
 
-				  	<?php loadAllDANotes(); ?>
+			  	<?php loadAllDANotes(); ?>
 
-			  	</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
 <?php
 	}
 	else

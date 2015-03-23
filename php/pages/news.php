@@ -30,68 +30,8 @@ function loadAll()
 			echo    '</div>
 				 </div>';
 		}
-		loadPageNumbers($currentPage, $lastPage);
+		loadPageNumbers($currentPage, $lastPage, 'news', '');
 	}		
-}
-	
-function loadPageNumbers($currentPage, $lastPage)
-{
-	echo '<div class="col-sm-7">
-					<div class="white-box">';
-	echo '<p>';
-
-	if($currentPage == 0)
-	{
-		echo 'Första ';
-		echo '<a href="?page=news&pageNumber='.($currentPage+1).'">'.($currentPage+1).'</a> ';
-
-		if($lastPage > $currentPage+2)
-			echo '... ';
-
-		if($lastPage > $currentPage+2)
-			echo '<a href="?page=news&pageNumber='.($lastPage).'">Sista</a> ';
-	}
-	else if($currentPage == $lastPage)
-	{
-		echo '<a href="?page=news&pageNumber=0">Första</a> ';
-
-		if($currentPage-2 > 0)
-			echo '... ';
-
-		echo '<a href="?page=news&pageNumber='.($currentPage-1).'">'.($currentPage-1).'</a> ';
-		
-		echo 'Sista ';
-	}
-	else
-	{
-		echo '<a href="?page=news&pageNumber=0">Första</a> ';
-
-		if($currentPage-2 > 0)
-			echo '... ';
-
-		if($currentPage-1 > 0)
-			echo '<a href="?page=news&pageNumber='.($currentPage-1).'">'.($currentPage-1).'</a> ';
-		
-		echo $currentPage.' ';
-
-		if($currentPage < $lastPage)
-		{
-			if($currentPage == $lastPage-1)
-				echo '<a href="?page=news&pageNumber='.($currentPage+1).'">Sista</a> ';
-			else
-				echo '<a href="?page=news&pageNumber='.($currentPage+1).'">'.($currentPage+1).'</a> ';
-		}
-
-		if($lastPage > $currentPage+2)
-			echo '... ';
-		
-		if($lastPage > $currentPage+1)
-			echo '<a href="?page=news&pageNumber='.($lastPage).'">Sista</a> ';
-	}
-
-	echo '</p>';
-	echo    '</div>
-		 </div>';
 }
 
 function loadTitle($news_id)

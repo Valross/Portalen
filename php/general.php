@@ -554,6 +554,66 @@ function loadNameFromUser($user_id)
 	return $results[0]['name'].' '.$results[0]['last_name'];
 }
 
+function loadPageNumbers($currentPage, $lastPage, $page, $append)
+{
+	echo '<div class="col-sm-7">
+					<div class="white-box">';
+	echo '<p>';
+
+	if($currentPage == 0)
+	{
+		echo 'Första ';
+		echo '<a href="?page='.$page.'&pageNumber='.($currentPage+1).$append.'">'.($currentPage+1).'</a> ';
+
+		if($lastPage > $currentPage+2)
+			echo '... ';
+
+		if($lastPage != $currentPage)
+			echo '<a href="?page='.$page.'&pageNumber='.($lastPage).$append.'">Sista ('.$lastPage.')</a> ';
+	}
+	else if($currentPage == $lastPage)
+	{
+		echo '<a href="?page='.$page.'&pageNumber=0'.$append.'">Första (0)</a> ';
+
+		if($currentPage-2 > 0)
+			echo '... ';
+
+		echo '<a href="?page='.$page.'&pageNumber='.($currentPage-1).$append.'">'.($currentPage-1).'</a> ';
+		
+		echo 'Sista ';
+	}
+	else
+	{
+		echo '<a href="?page='.$page.'&pageNumber=0'.$append.'">Första (0)</a> ';
+
+		if($currentPage-2 > 0)
+			echo '... ';
+
+		if($currentPage-1 > 0)
+			echo '<a href="?page='.$page.'&pageNumber='.($currentPage-1).$append.'">'.($currentPage-1).'</a> ';
+		
+		echo $currentPage.' ';
+
+		if($currentPage < $lastPage)
+		{
+			if($currentPage == $lastPage-1)
+				echo '<a href="?page='.$page.'&pageNumber='.($currentPage+1).$append.'">Sista ('.$lastPage.')</a> ';
+			else
+				echo '<a href="?page='.$page.'&pageNumber='.($currentPage+1).$append.'">'.($currentPage+1).'</a> ';
+		}
+
+		if($lastPage > $currentPage+2)
+			echo '... ';
+		
+		if($lastPage > $currentPage+1)
+			echo '<a href="?page='.$page.'&pageNumber='.($lastPage).$append.'">Sista ('.$lastPage.')</a> ';
+	}
+
+	echo '</p>';
+	echo    '</div>
+		 </div>';
+}
+
 function loadAmountOfUnseenNotifications()
 {
 	$user_id = $_SESSION['user_id'];

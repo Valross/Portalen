@@ -52,15 +52,20 @@ if(isset($_POST['submit']))
 
 function loadMyHeadWaiterEvents()
 {
-	$groups = DBQuery::sql("SELECT id, name, start_time, event_type_id FROM event 
-							WHERE event_type_id != 5
-							ORDER BY start_time DESC"); //fixa så att endast jobbpass där man varit Hovis kommer upp
+	$user_id = $_SESSION['user_id'];
+	$events = DBQuery::sql("SELECT id, name, start_time, event_type_id FROM event 
+							WHERE event_type_id != 5 AND id IN
+								(SELECT event_id FROM work_slot
+								WHERE group_id = 12 AND id IN
+									(SELECT work_slot_id FROM user_work
+									WHERE user_id = '$user_id'))
+							AND id NOT IN
+								(SELECT event_id FROM headwaiter_note)
+							ORDER BY start_time DESC"); 
 
-	for($i = 0; $i < count($groups); ++$i)
+	for($i = 0; $i < count($events); ++$i)
 	{
-		?>
-			<option value="<?php echo $groups[$i]['id']; ?>"><?php echo($groups[$i]['name'].' '.$groups[$i]['start_time']); ?></option>
-		<?php
+		echo '<option value="'.$events[$i]['id'].'">'.$events[$i]['name'].' - '.$events[$i]['start_time'].'</option>';
 	}
 }
 

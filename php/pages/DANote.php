@@ -1,9 +1,5 @@
 <?php
 
-$dates = new DateTime;
-$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
-$date = $dates->format('Y-m-d H:i:s');
-
 if(isset($_POST['submit']))
 {
 	$comment = strip_tags($_POST['comment'], allowed_tags());
@@ -16,8 +12,8 @@ if(isset($_POST['submit']))
 	
 	if($comment != '')
 	{
-		DBQuery::sql("INSERT INTO da_note_comments (user_id, da_note_id, comment, date_written)
-						VALUES ('$_SESSION[user_id]', '$da_note_id', '$comment', '$date')");
+		DBQuery::sql("INSERT INTO da_note_comments (user_id, da_note_id, comment)
+						VALUES ('$_SESSION[user_id]', '$da_note_id', '$comment')");
 
 		$da_note_comment = DBQuery::sql("SELECT id FROM da_note_comments 
 						ORDER BY date_written DESC");
@@ -50,11 +46,10 @@ function loadEventName()
 							WHERE id = '$event_id'");
 	loadTitleForBrowser('DA-lapp - '.$eventName[0]['name']);
 
-	?>
-	<a href=<?php echo '?page=event&id='.$event_id; ?>>
-	<?php
+	echo '<a href=?page=event&id='.$event_id.'>';
+
 	$eventStart = new DateTime($eventName[0]['start_time']);
-	$start = $eventStart->format('Y-m-d');
+	$start = $eventStart->format('D Y-m-d');
 	echo $eventName[0]['name'].'</a> - '.$start;
 }
 
@@ -65,16 +60,15 @@ function loadDAStats()
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.sales_total, da_note.sales_entry, da_note.sales_bar, da_note.cash, 
 									da_note.n_of_people, da_note.sales_spenta, da_note.message, event.name FROM da_note 
 							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
-	?>
-	<tr>
-		<td><?php echo $DANotes[0]['sales_total']; ?></td>
-		<td><?php echo $DANotes[0]['sales_entry']; ?></td>
-		<td><?php echo $DANotes[0]['sales_bar']; ?></td>
-		<td><?php echo $DANotes[0]['cash']; ?></td>
-		<td><?php echo $DANotes[0]['n_of_people']; ?></td>
-		<td><?php echo $DANotes[0]['sales_spenta']; ?></td>
-	</tr>
-	<?php
+
+	echo '<tr>';
+		echo '<td>'.$DANotes[0]['sales_total'].'</td>';
+		echo '<td>'.$DANotes[0]['sales_entry'].'</td>';
+		echo '<td>'.$DANotes[0]['sales_bar'].'</td>';
+		echo '<td>'.$DANotes[0]['cash'].'</td>';
+		echo '<td>'.$DANotes[0]['n_of_people'].'</td>';
+		echo '<td>'.$DANotes[0]['sales_spenta'].'</td>';
+	echo '</tr>';
 }
 
 function loadDAMessage()
@@ -101,14 +95,10 @@ function loadDAName()
 
 	if(isset($DA_name[0]['name'])) 
 	{
-		?>
-			<a href=<?php echo '?page=userProfile&id='.$DA_id; ?>>
-		<?php
-			echo $DA_name[0]['name'].' '.$DA_name[0]['last_name'];
-		?>
-			</a>
-		<?php
-			echo ' - '.$DA_note_date;
+		echo '<a href=?page=userProfile&id='.$DA_id.'>';
+		echo $DA_name[0]['name'].' '.$DA_name[0]['last_name'];
+		echo '</a>';
+		echo ' - '.$DA_note_date;
 	}
 	else
 		echo 'John Doe';

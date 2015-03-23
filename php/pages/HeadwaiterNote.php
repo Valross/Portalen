@@ -1,9 +1,5 @@
 <?php
 
-$dates = new DateTime;
-$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
-$date = $dates->format('Y-m-d H:i:s');
-
 if(isset($_POST['submit']))
 {
 	$comment = strip_tags($_POST['comment'], allowed_tags());
@@ -16,8 +12,8 @@ if(isset($_POST['submit']))
 	
 	if($comment != '')
 	{
-		DBQuery::sql("INSERT INTO headwaiter_note_comments (user_id, headwaiter_note_id, comment, date_written)
-						VALUES ('$_SESSION[user_id]', '$headwaiter_note_id', '$comment', '$date')");
+		DBQuery::sql("INSERT INTO headwaiter_note_comments (user_id, headwaiter_note_id, comment)
+						VALUES ('$_SESSION[user_id]', '$headwaiter_note_id', '$comment')");
 
 		$headwaiter_note_comment = DBQuery::sql("SELECT id FROM headwaiter_note_comments 
 						ORDER BY date_written DESC");
@@ -48,9 +44,13 @@ function loadEventName()
 	
 	$eventName = DBQuery::sql("SELECT name, start_time FROM event
 							WHERE id = '$event_id'");
+	loadTitleForBrowser('Hovis-lapp - '.$eventName[0]['name']);
 
-	loadTitleForBrowser($eventName[0]['name']);
-	echo $eventName[0]['name'].' '.$eventName[0]['start_time'];
+	echo '<a href=?page=event&id='.$event_id.'>';
+
+	$eventStart = new DateTime($eventName[0]['start_time']);
+	$start = $eventStart->format('D Y-m-d');
+	echo $eventName[0]['name'].'</a> - '.$start;
 }
 
 function loadHeadwaiterStats()
@@ -60,13 +60,12 @@ function loadHeadwaiterStats()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.n_of_sitting, 
 		headwaiter_note.n_of_waiting_organizers, headwaiter_note.n_of_waiting_stair, event.name FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
-	?>
-	<tr>
-		<td><?php echo $HeadwaiterNotes[0]['n_of_sitting']; ?></td>
-		<td><?php echo $HeadwaiterNotes[0]['n_of_waiting_organizers']; ?></td>
-		<td><?php echo $HeadwaiterNotes[0]['n_of_waiting_stair']; ?></td>
-	</tr>
-	<?php
+
+	echo '<tr>';
+		echo '<td>'.$HeadwaiterNotes[0]['n_of_sitting'].'</td>';
+		echo '<td>'.$HeadwaiterNotes[0]['n_of_waiting_organizers'].'</td>';
+		echo '<td>'.$HeadwaiterNotes[0]['n_of_waiting_stair'].'</td>';
+	echo '</tr>';
 }
 
 function loadFood()
@@ -153,22 +152,20 @@ function loadHeadwaiterName()
 {
 	$event_id = $_GET['id'];
 
-	$headwaiter = DBQuery::sql("SELECT user_id FROM headwaiter_note 
+	$headwaiter = DBQuery::sql("SELECT user_id, date_written FROM headwaiter_note 
 						WHERE event_id = '$event_id'"); 
+	
 	$headwaiter_id = $headwaiter[0]['user_id'];
-
+	$headwaiter_note_date = $headwaiter[0]['date_written'];
 	$headwaiter_name = DBQuery::sql("SELECT name, last_name FROM user  
 							WHERE id = '$headwaiter_id'");
 
 	if(isset($headwaiter_name[0]['name'])) 
 	{
-		?>
-			<a href=<?php echo '?page=userProfile&id='.$headwaiter_id; ?>>
-		<?php
-			echo $headwaiter_name[0]['name'].' '.$headwaiter_name[0]['last_name'];
-		?>
-			</a>
-		<?php
+		echo '<a href=?page=userProfile&id='.$headwaiter_id.'>';
+		echo $headwaiter_name[0]['name'].' '.$headwaiter_name[0]['last_name'];
+		echo '</a>';
+		echo ' - '.$headwaiter_note_date;
 	}
 	else
 		echo 'John Doe';

@@ -237,13 +237,23 @@ function loadAge()
 {
 	$user_id = $_GET['id'];
 
-	$user_name = DBQuery::sql("SELECT ssn FROM user  
+	$user = DBQuery::sql("SELECT ssn FROM user  
 							WHERE id = '$user_id'");
 
-	// $slotStart = new DateTime($slots[$j]['start_time']);
-	// $start_h = $slotStart->format('H:i');
+	$birth = substr($user[0]['ssn'], 0, 8);
+	$birthYear = substr($birth, 0, 4);
+	$birthMonth = substr($birth, 4, 2);
+	$birthDay = substr($birth, 6, 2);
+	$birthTime = date_create($birthYear.'-'.$birthMonth.'-'.$birthDay);
 
-	echo 'to be calculated';
+	$dates = new DateTime;
+	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
+	$dateNoTime = $dates->format('Y-m-d');
+	
+	$age = $birthTime->diff($dates);
+	$ageString = $age->format('%y år');
+
+	echo $ageString;
 }
 
 ?>

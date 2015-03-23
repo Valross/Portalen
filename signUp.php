@@ -150,7 +150,7 @@
 			<label for="mail">Mailadress (LIU-mail)</label>
 				<input type="text" name="mail" id="mail" placeholder="Jambo007@student.liu.se" maxlength="30" />
 			<label for="ssn">Personnummer</label>
-				<input type="text" name="ssn" id="ssn" placeholder="ååmmddxxxx" maxlength="10" />
+				<input type="text" name="ssn" id="ssn" placeholder="ååååmmddxxxx" maxlength="12" />
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>

@@ -12,7 +12,7 @@ if(isset($_POST['submit']) && checkAdminAccess())
 						VALUES ('$title', '$message', '$date', '$_SESSION[user_id]')");
 		?>
 		<script>
-			window.location = "?page=start";
+			window.location = "?page=news";
 		</script>
 		<?php
 	}

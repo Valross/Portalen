@@ -48,6 +48,7 @@ function loadEventName()
 	
 	$eventName = DBQuery::sql("SELECT name, start_time FROM event
 							WHERE id = '$event_id'");
+	loadTitleForBrowser('DA-lapp - '.$eventName[0]['name']);
 
 	?>
 	<a href=<?php echo '?page=event&id='.$event_id; ?>>

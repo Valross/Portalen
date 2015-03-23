@@ -9,6 +9,7 @@ function loadUserName()
 	echo loadAvatarFromUser($user_id, 100);
 	echo $user[0]['name'].' '.$user[0]['last_name'];
 	echo '</a>';
+	loadTitleForBrowser('Gemensamma pass - '.$user[0]['name'].' '.$user[0]['last_name']);
 }
 
 function loadColleagueStats()

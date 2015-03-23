@@ -396,6 +396,17 @@ function loadAvailableMeetings()
 		<?php
 	}
 }
+
+function loadTitleForBrowser($title)
+{
+	echo '<title>';
+	if($title != '')
+		echo $title;
+	else
+		echo 'Trappans personalportal';
+	echo '</title>';
+}
+
 //
 //Load avatar
 function loadAvatar()

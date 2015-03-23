@@ -5,6 +5,7 @@ function loadAchievement()
 	$achievement_id = $_GET['id'];
 	$achievements = DBQuery::sql("SELECT id, name, description, points, icon FROM achievement
 								WHERE id = '$achievement_id'");
+	loadTitleForBrowser($achievements[0]['name']);
 	?>
 		<h1>
 			<i class="<?php echo $achievements[0]['icon'];?>"></i>

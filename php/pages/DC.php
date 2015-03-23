@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('DC-verktyg');
 
 function loadAllTools()
 {

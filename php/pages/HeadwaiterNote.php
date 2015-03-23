@@ -48,6 +48,8 @@ function loadEventName()
 	
 	$eventName = DBQuery::sql("SELECT name, start_time FROM event
 							WHERE id = '$event_id'");
+
+	loadTitleForBrowser($eventName[0]['name']);
 	echo $eventName[0]['name'].' '.$eventName[0]['start_time'];
 }
 

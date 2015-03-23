@@ -6,6 +6,7 @@ function loadGroupName()
 
 	$group_name = DBQuery::sql("SELECT name, id, icon, hex FROM work_group 
 						WHERE id = '$group_id'");
+	loadTitleForBrowser('Protokoll - '.$group_name[0]['name']);
 
 	if($group_name[0]['icon'] != '')
 		echo '<span class="'.$group_name[0]['icon'].' list-group-thumbnail group-badge webb"></span>';

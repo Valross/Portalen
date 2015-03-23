@@ -74,6 +74,7 @@ function loadGroupName()
 		echo '<span class="'.$groupName[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
 	else
 		echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+	loadTitleForBrowser($groupName[0]['name']);
 	echo $groupName[0]['name'];
 }
 

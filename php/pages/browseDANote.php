@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('DA-lappar');
 
 function loadDAAvatar($DA_id)
 {

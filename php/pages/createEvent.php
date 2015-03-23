@@ -1,5 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
+loadTitleForBrowser('Skapa event');
 
 if(isset($_POST['submit']) && checkAdminAccess())
 {

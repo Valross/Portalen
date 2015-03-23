@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Personallista');
 
 function loadStats()
 {

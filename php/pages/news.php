@@ -3,6 +3,7 @@ include_once('php/DBQuery.php');
 
 function loadAll()
 {
+	loadTitleForBrowser('Nyheter');
 	$news = DBQuery::sql("SELECT id, date FROM news ORDER BY date DESC");
 
 	if(isset($_GET['pageNumber']))

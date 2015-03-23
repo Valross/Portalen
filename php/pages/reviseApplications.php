@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Ansökningar');
 
 function loadApplications()
 {

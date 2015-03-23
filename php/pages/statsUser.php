@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Din statistik');
 
 function loadStats()
 {

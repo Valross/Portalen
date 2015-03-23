@@ -1,5 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
+loadTitleForBrowser('Hantera eventmallar');
 
 if(checkAdminAccess())
 	loadAll();

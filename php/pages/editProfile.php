@@ -2,6 +2,7 @@
 include_once('php/DBQuery.php');
 
 $user_id = $_SESSION['user_id'];
+loadTitleForBrowser('Redigera profil');
 
 //Current variables
 //Separate file? Combine with part of php/pages/profile.php?

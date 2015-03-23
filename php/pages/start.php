@@ -1,5 +1,6 @@
 <?php
 include_once('php/DBQuery.php');
+loadTitleForBrowser('');
 
 $user_id = $_SESSION['user_id'];
 

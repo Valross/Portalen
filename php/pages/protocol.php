@@ -29,6 +29,7 @@ function loadProtocolTitle()
 	$protocol = DBQuery::sql("SELECT title FROM protocol 
 						WHERE id = '$protocol_id'"); 
 
+	loadTitleForBrowser($protocol[0]['title']);
 	echo $protocol[0]['title'];
 }
 

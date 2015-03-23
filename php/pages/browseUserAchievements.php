@@ -43,6 +43,7 @@ function loadName()
 
 	if(isset($user_name[0]['name'])) 
 	{
+		loadTitleForBrowser('Upplåsta Achievements - '.$user_name[0]['name']);
 		?>
 			<a href=<?php echo '?page=userProfile&id='.$user_id; ?>>
 		<?php

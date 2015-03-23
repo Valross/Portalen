@@ -1,6 +1,8 @@
 <?php
 include_once('php/DBQuery.php');
 
+loadTitleForBrowser('Checka pass');
+
 $dates = new DateTime;
 $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
 $date = $dates->format('Y-m-d H:i:s');

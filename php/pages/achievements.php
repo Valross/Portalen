@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Achievements');
 
 function updateAchievementPoints()
 {

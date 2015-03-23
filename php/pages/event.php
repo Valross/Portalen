@@ -125,7 +125,10 @@ function loadEventName()
 							WHERE id = '$event_id'");
 
 	if(count($event_name) > 0)
+	{
 		echo '<span class="fa fa-picture-o fa-fw fa-lg"></span>'.$event_name[0]['name'];
+		loadTitleForBrowser($event_name[0]['name']);
+	}
 	else
 		echo "Nu har du kommit lite fel!";
 

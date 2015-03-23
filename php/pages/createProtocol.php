@@ -53,6 +53,7 @@ function loadGroupName()
 
 	$group_name = DBQuery::sql("SELECT name, id FROM work_group 
 						WHERE id = '$group_id'");
+	loadTitleForBrowser('Skapa Protokoll - '.$group_name[0]['name']);
 
 	echo '<a href="?page=group&id='.$group_name[0]['id'].'">'.$group_name[0]['name'].'</a>';
 }

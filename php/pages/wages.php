@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Löner');
 
 function loadStats()
 {

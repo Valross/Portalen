@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Arbetade evenemang');
 
 function loadStats()
 {

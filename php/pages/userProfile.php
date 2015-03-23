@@ -186,6 +186,7 @@ function loadUserName()
 	{
 		echo $user[0]['name'].' '.$user[0]['last_name'];
 		echo ' - <span class="fa fa-diamond fa-fw"></span><a href="?page=browseUserAchievements&id='.$user_id.'">'.$user[0]['achievement_points'].'</a>';
+		loadTitleForBrowser($user[0]['name'].' '.$user[0]['last_name']);
 	}
 	else
 		echo 'John Doe';

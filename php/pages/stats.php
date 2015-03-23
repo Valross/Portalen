@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Statistik');
 
 function loadAllTools()
 {

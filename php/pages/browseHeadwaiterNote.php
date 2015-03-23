@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Hovis-lappar');
 
 function loadHeadwaiterAvatar($headwaiter_id)
 {

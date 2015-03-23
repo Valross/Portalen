@@ -1,4 +1,5 @@
 <?php
+loadTitleForBrowser('Händelser');
 
 function loadNotificationsDebug()
 {

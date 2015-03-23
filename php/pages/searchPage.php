@@ -5,6 +5,7 @@
 
 <?php
 include_once('php/DBQuery.php');
+loadTitleForBrowser('Sökresultat');
 
 if(isset($_POST['submitSearch'])){ 
 	// if(isset($_GET['go'])){

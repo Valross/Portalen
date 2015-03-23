@@ -178,7 +178,7 @@ function loadColleagueStats()
 			
 			?>
 			<tr>
-				<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
+				<td><?php echo '<a href=?page=statsUserCompareWork&user_id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
 				<td><?php echo $workedSameEventCounter ?></td>
 			</tr>
 			<?php

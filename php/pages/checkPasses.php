@@ -43,9 +43,8 @@ function loadMyDAEvents()
 	{
 		for($i = 0; $i < count($events); ++$i)
 		{
-			?>
-				<a class="list-group-item" href=<?php echo '"?page=checkPasses&id='.$events[$i]['id'].'"'; ?>><?php echo $events[$i]['name']; ?></a>
-			<?php
+			echo '<a class="list-group-item" href="?page=checkPasses&id='.$events[$i]['id'].'">'
+				.$events[$i]['name'].' - '.$events[$i]['start_time'].'</a>';
 		}
 	}
 }
@@ -80,8 +79,7 @@ function loadWorkSlots()
 		$event_id = $_GET['id'];
 		$user_id = $_SESSION['user_id'];
 		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
-							WHERE event_id = '$event_id'
-							");
+							WHERE event_id = '$event_id'");
 
 		$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 							WHERE work_slot_id IN
@@ -91,8 +89,10 @@ function loadWorkSlots()
 
 		$groups = DBQuery::sql("SELECT id, name FROM work_group 
 								WHERE id IN 
-								(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
-								");
+									(SELECT group_id FROM work_slot 
+									WHERE event_id = '$event_id'
+									AND id IN
+										(SELECT work_slot_id FROM user_work))");
 
 
 		if(count($groups) > 0)

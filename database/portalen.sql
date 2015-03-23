@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2015 at 06:02 PM
+-- Generation Time: Mar 23, 2015 at 09:00 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `application_group` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`application_id`),
   KEY `application_id` (`application_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `application_group`
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   `n_of_people` int(11) NOT NULL,
   `sales_spenta` int(11) NOT NULL,
   `message` varchar(4000) NOT NULL,
-  `date_written` date NOT NULL,
+  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
@@ -224,21 +224,21 @@ CREATE TABLE IF NOT EXISTS `da_note` (
 --
 
 INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
-(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
-(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-19'),
-(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-22'),
-(29, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(30, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(31, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(32, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(33, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(34, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(35, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(36, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(37, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(38, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(39, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22'),
-(40, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22');
+(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00 00:00:00'),
+(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-18 23:00:00'),
+(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-21 23:00:00'),
+(29, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(30, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(31, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(32, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(33, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(34, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(35, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(36, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(37, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(38, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
+(39, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-21 23:00:00'),
+(40, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-21 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `dot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `dot`
@@ -292,7 +292,40 @@ CREATE TABLE IF NOT EXISTS `dot` (
 INSERT INTO `dot` (`id`, `comment`, `group_id`, `date_written`, `user_id`) VALUES
 (1, '*första punkten', 7, '2015-03-20 13:20:48', 2),
 (4, '*fuck spenta', 1, '2015-03-20 19:16:51', 8),
-(5, '*i love cats', 1, '2015-03-20 19:30:46', 8);
+(5, '*i love cats', 1, '2015-03-20 19:30:46', 8),
+(6, '*', 7, '2015-03-23 19:47:25', 2),
+(7, '*', 7, '2015-03-23 19:47:27', 2),
+(8, '*', 7, '2015-03-23 19:47:27', 2),
+(9, '*', 7, '2015-03-23 19:47:27', 2),
+(10, '*', 7, '2015-03-23 19:47:27', 2),
+(11, '*', 7, '2015-03-23 19:47:28', 2),
+(12, '*', 7, '2015-03-23 19:47:28', 2),
+(13, '*', 7, '2015-03-23 19:47:28', 2),
+(14, '*', 7, '2015-03-23 19:47:29', 2),
+(15, '*', 7, '2015-03-23 19:47:30', 2),
+(16, '*', 7, '2015-03-23 19:47:30', 2),
+(17, '*', 7, '2015-03-23 19:47:31', 2),
+(18, '*', 7, '2015-03-23 19:47:31', 2),
+(19, '*', 7, '2015-03-23 19:47:32', 2),
+(20, '*', 7, '2015-03-23 19:47:32', 2),
+(21, '*', 7, '2015-03-23 19:47:32', 2),
+(22, '*', 7, '2015-03-23 19:47:33', 2),
+(23, '*', 7, '2015-03-23 19:47:33', 2),
+(24, '*', 7, '2015-03-23 19:47:34', 2),
+(25, '*', 7, '2015-03-23 19:48:14', 2),
+(26, '*', 7, '2015-03-23 19:48:15', 2),
+(27, '*', 7, '2015-03-23 19:48:16', 2),
+(28, '*', 7, '2015-03-23 19:48:16', 2),
+(29, '*', 7, '2015-03-23 19:48:18', 2),
+(30, '*', 7, '2015-03-23 19:48:18', 2),
+(31, '*', 7, '2015-03-23 19:48:19', 2),
+(32, '*', 7, '2015-03-23 19:48:19', 2),
+(33, '*', 7, '2015-03-23 19:48:19', 2),
+(34, '*', 7, '2015-03-23 19:48:20', 2),
+(35, '*', 7, '2015-03-23 19:48:20', 2),
+(36, '*', 7, '2015-03-23 19:48:21', 2),
+(37, '*', 7, '2015-03-23 19:48:21', 2),
+(38, '*\r\n', 28, '2015-03-23 19:58:56', 2);
 
 -- --------------------------------------------------------
 
@@ -590,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `headwaiter_note_id` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `date_written` datetime NOT NULL,
+  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `headwaiter_note_id` (`headwaiter_note_id`,`user_id`),
@@ -602,9 +635,9 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
 --
 
 INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `user_id`) VALUES
-(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 17:55:55', 2),
-(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 12:41:54', 2),
-(5, 5, 'lol', '2015-03-22 17:56:01', 2);
+(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 16:55:55', 2),
+(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 11:41:54', 2),
+(5, 5, 'lol', '2015-03-22 16:56:01', 2);
 
 -- --------------------------------------------------------
 
@@ -647,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 --
 -- Dumping data for table `notification`
@@ -716,7 +749,42 @@ INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`
 (62, 8, 11, '9', 1, '2015-03-22 16:52:51'),
 (63, 1, 11, '9', NULL, '2015-03-22 16:52:51'),
 (64, 8, 12, '5', 1, '2015-03-22 16:56:01'),
-(65, 1, 12, '5', NULL, '2015-03-22 16:56:01');
+(65, 1, 12, '5', NULL, '2015-03-22 16:56:01'),
+(66, 2, 10, '7', 0, '2015-03-21 23:00:00'),
+(67, 2, 1, '1', 1, '2015-03-22 17:05:10'),
+(68, 2, 1, '1', 0, '2015-03-22 17:05:10'),
+(69, 1, 6, '6', NULL, '2015-03-23 18:47:25'),
+(70, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
+(71, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
+(72, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
+(73, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
+(74, 1, 6, '11', NULL, '2015-03-23 18:47:28'),
+(75, 1, 6, '11', NULL, '2015-03-23 18:47:28'),
+(76, 1, 6, '11', NULL, '2015-03-23 18:47:29'),
+(77, 1, 6, '14', NULL, '2015-03-23 18:47:29'),
+(78, 1, 6, '15', NULL, '2015-03-23 18:47:30'),
+(79, 1, 6, '16', NULL, '2015-03-23 18:47:30'),
+(80, 1, 6, '17', NULL, '2015-03-23 18:47:31'),
+(81, 1, 6, '18', NULL, '2015-03-23 18:47:31'),
+(82, 1, 6, '19', NULL, '2015-03-23 18:47:32'),
+(83, 1, 6, '20', NULL, '2015-03-23 18:47:32'),
+(84, 1, 6, '21', NULL, '2015-03-23 18:47:33'),
+(85, 1, 6, '22', NULL, '2015-03-23 18:47:33'),
+(86, 1, 6, '23', NULL, '2015-03-23 18:47:34'),
+(87, 1, 6, '24', NULL, '2015-03-23 18:47:34'),
+(88, 1, 6, '25', NULL, '2015-03-23 18:48:14'),
+(89, 1, 6, '26', NULL, '2015-03-23 18:48:16'),
+(90, 1, 6, '27', NULL, '2015-03-23 18:48:16'),
+(91, 1, 6, '28', NULL, '2015-03-23 18:48:17'),
+(92, 1, 6, '29', NULL, '2015-03-23 18:48:18'),
+(93, 1, 6, '30', NULL, '2015-03-23 18:48:18'),
+(94, 1, 6, '31', NULL, '2015-03-23 18:48:19'),
+(95, 1, 6, '32', NULL, '2015-03-23 18:48:19'),
+(96, 1, 6, '33', NULL, '2015-03-23 18:48:19'),
+(97, 1, 6, '34', NULL, '2015-03-23 18:48:20'),
+(98, 1, 6, '35', NULL, '2015-03-23 18:48:20'),
+(99, 1, 6, '36', NULL, '2015-03-23 18:48:21'),
+(100, 1, 6, '37', NULL, '2015-03-23 18:48:21');
 
 -- --------------------------------------------------------
 
@@ -863,7 +931,7 @@ CREATE TABLE IF NOT EXISTS `protocol` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `protocol`
@@ -883,7 +951,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL,
   `mail` varchar(100) NOT NULL,
-  `ssn` varchar(10) NOT NULL,
+  `ssn` varchar(12) NOT NULL,
   `password` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -910,7 +978,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-26 23:00:00', 0, 35, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '9901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '123654879', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-18 23:00:00', 15, 90, NULL, NULL),
+(2, 'test', 'ankan@mail.com', '199901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '123654879', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-23 19:39:33', 18, 90, NULL, NULL),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-03-16 23:00:00', 1, 15, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
@@ -1219,8 +1287,8 @@ ALTER TABLE `da_note_comments`
 -- Constraints for table `dot`
 --
 ALTER TABLE `dot`
-  ADD CONSTRAINT `dot_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `dot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `dot_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `dot_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `event`
@@ -1281,8 +1349,8 @@ ALTER TABLE `headwaiter_note`
 -- Constraints for table `headwaiter_note_comments`
 --
 ALTER TABLE `headwaiter_note_comments`
-  ADD CONSTRAINT `headwaiter_note_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `headwaiter_note_comments_ibfk_1` FOREIGN KEY (`headwaiter_note_id`) REFERENCES `headwaiter_note` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `headwaiter_note_comments_ibfk_1` FOREIGN KEY (`headwaiter_note_id`) REFERENCES `headwaiter_note` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `headwaiter_note_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news`
@@ -1308,8 +1376,8 @@ ALTER TABLE `partyries_work`
 -- Constraints for table `protocol`
 --
 ALTER TABLE `protocol`
-  ADD CONSTRAINT `protocol_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `protocol_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `protocol_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `protocol_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_access`
@@ -1329,8 +1397,8 @@ ALTER TABLE `user_work`
 -- Constraints for table `work_group`
 --
 ALTER TABLE `work_group`
-  ADD CONSTRAINT `work_group_ibfk_2` FOREIGN KEY (`sub_group`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `work_group_ibfk_1` FOREIGN KEY (`main_group`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `work_group_ibfk_1` FOREIGN KEY (`main_group`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `work_group_ibfk_2` FOREIGN KEY (`sub_group`) REFERENCES `work_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `work_group_leaders`

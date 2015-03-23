@@ -81,8 +81,8 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=checkPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka av pass</a></li>
 	  							<li><a href="?page=createDANote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv DA-lapp</a></li>
 	  							<li><a href="?page=createHeadWaiterNote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv Hovis-lapp</a></li>
-	  							<li><a href="?page=browseDANote"><span class="fa fa-user-secret fa-fw fa-lg"></span>Läs DA-lappar</a></li>
-	  							<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-user-secret fa-fw fa-lg"></span>Läs Hovis-lappar</a></li>
+	  							<li><a href="?page=browseDANote"><span class="fa fa-key fa-fw fa-lg"></span>Läs DA-lappar</a></li>
+	  							<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-female fa-fw fa-lg"></span>Läs Hovis-lappar</a></li>
 	  							<li><a></a></li>
 
 	  							<li><a href="?page=createEvent"><span class="fa fa-calendar fa-fw fa-lg"></span>Skapa evenemang</a></li>

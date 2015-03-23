@@ -75,6 +75,7 @@ function loadAllProtocols()
 				<td><?php echo $i+1;?></td>
 				<td><a href=<?php echo '"?page=protocol&id='.$protocols[$i]['id'].'&group_id='.$protocols[$i]['group_id'].'"'; ?>>
 				<?php echo $protocols[$i]['title']; ?></a></td>
+				<td><?php echo $protocols[$i]['date_written']; ?></td>
 				<td><a href=<?php echo '?page=userProfile&id='.$protocols[$i]['user_id']; ?>>
 				<img src="<?php echo loadProtocolAvatar($protocols[$i]['user_id']); ?>" width="25" height="25" class="img-circle"></a></td>
 			</tr>

@@ -26,6 +26,7 @@
 			        <tr>
 			          	<th>#</th>
 			          	<th>Titel</th>
+			          	<th>Datum</th>
 					  	<th>Sekreterare</th>
 			        </tr>
 			    </thead>

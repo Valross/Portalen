@@ -177,7 +177,7 @@ function loadNotifications()
 				$comment = $dot[0]['comment'];
 				$group_id = $dot[0]['group_id'];
 				$user_id = $dot[0]['user_id'];
-				$group = DBQuery::sql("SELECT name FROM work_group
+				$group = DBQuery::sql("SELECT name, icon FROM work_group
 										WHERE id = '$group_id'");
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
@@ -185,10 +185,15 @@ function loadNotifications()
 				
 				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
 				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
-				echo ' har skrivit en punkt i ';
-				echo '<a href="?page=dot&id='.$info.'&group_id='.$group_id.'" ';
-				echo 'class="">'.$group[0]['name'].'</a>';
-				echo ' för <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>.</p>';
+				echo ' har skrivit en ';
+				echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'" ';
+				echo 'class="">punkt</a> i ';
+				echo '<a href="?page=group&id='.$group_id.'">';
+
+				if($group[0]['icon'] != '')
+					echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+				echo $group[0]['name'].'</a>.</p>';
 			}
 			else
 			{

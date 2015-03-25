@@ -136,7 +136,7 @@ include_once('php/pageManager.php');
 						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
 						</button>
 						
-						<ul class="dropdown-menu is-floated-parent dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
+						<ul class="dropdown-menu is-floated-parent" role="menu" aria-labelledby="userDropdown">
 						    <?php loadDropDownNotifications(); ?>
 					  	</ul>
 					</div> <!-- .dropdown -->

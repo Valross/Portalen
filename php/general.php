@@ -640,7 +640,7 @@ function loadDropDownNotifications()
 										WHERE user_id = '$user_id'
 										ORDER BY date DESC");
 
-	for($i = 0; $i < count($notifications) && $i < 3; ++$i)
+	for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 	{
 		$info = $notifications[$i]['info'];
 		$type_id = $notifications[$i]['notification_type'];
@@ -651,33 +651,26 @@ function loadDropDownNotifications()
 		$unseen_notification = DBQuery::sql("SELECT id FROM notification
 										WHERE user_id = '$user_id' AND seen IS NULL
 										AND id = '$notification_id'");
-		echo '<div class="col-sm-7">';
-		if(count($unseen_notification) == 0)
-			echo 	'<div class="white-box">';
-		else
-			echo 	'<div class="white-box red">';
-		echo '<h2>'.$notification_type[0]['type'].'</h2>';
-		echo '<div class="news-info">';
 
 		if($notification_type[0]['type'] == 'Achievement')
 		{
 			$achievement = DBQuery::sql("SELECT id, name, description, points, icon FROM achievement
 									WHERE id = '$info'");
 			if(count($achievement) > 0)
-			{			
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>Du låste upp ';
-				echo '<a href="?page=achievement&id='.$achievement[0]['id'].'" ';
-				echo 'class="black-link" data-toggle="tooltip" 
-							data-placement="bottom" title="'.$achievement[0]['description'].'">';
+			{
+				echo '<a href="?page=achievement&id='.$info.'"class="list-group-item with-thumbnail black-link">';
+				echo 'Du låste upp ';
 				echo '<i class="'.$achievement[0]['icon'].'"></i>';
-				echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>'.
-						$achievement[0]['name'].'</a>.</p>.';
+				echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>';
+				echo $achievement[0]['name'].'.';
+
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Avbokning')
@@ -699,17 +692,21 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$info_user_id'");
 				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>Avbokning på ';
-				echo '<a href="?page=event&id='.$event[0]['id'].'" ';
-				echo 'class="">'.$event[0]['name'].'</a>';
-				echo ' från <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
-				echo ' av <a href="?page=userProfile&id='.$info_user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>.</p>';
+				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har avbokat sig från sitt ';
+				echo $group[0]['name'].'-pass';
+
+				echo ' i ';
+				echo $event[0]['name'].'.';
+
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'DA-lapp')
@@ -726,18 +723,20 @@ function loadDropDownNotifications()
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a> ';
-				echo ' har skrivit en DA-lapp för <a href="?page=DANote&id='.$event_id.'" ';
-				echo 'class="">'.$event[0]['name'].'</a>.';
-				echo '</p>';
+
+				echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har skrivit en ';
+				echo '<span class="fa fa-key fa-fw fa-lg"></span>';
+				echo 'DA-lapp.';
+
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Hovis-lapp')
@@ -754,28 +753,38 @@ function loadDropDownNotifications()
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a> ';
-				echo ' har skrivit en Hovis-lapp för <a href="?page=HeadwaiterNote&id='.$event_id.'" ';
-				echo 'class="">'.$event[0]['name'].'</a>.';
-				echo '</p>';
+
+				echo '<a href="?page=HeadwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har skrivit en ';
+				echo '<span class="fa fa-female fa-fw fa-lg"></span>';
+				echo 'Hovis-lapp.';
+
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Uppgradering')
 		{
 			$group_id = $info;
-			$group = DBQuery::sql("SELECT name FROM work_group
+			$group = DBQuery::sql("SELECT name, icon FROM work_group
 									WHERE id = '$group_id'");
-			
-			echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-			echo '<p>Din ansökan om att gå med i <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a> har blivit godkänd, grattis!</p>';
+
+			echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+			echo 'Din ansökan om att gå med i ';
+
+			if($group[0]['icon'] != '')
+				echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+			echo $group[0]['name'];
+			echo ' har blivit godkänd, grattis!';
+			echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+			echo '</a>';
 		}
 		else if($notification_type[0]['type'] == 'Punkt')
 		{
@@ -787,23 +796,27 @@ function loadDropDownNotifications()
 				$comment = $dot[0]['comment'];
 				$group_id = $dot[0]['group_id'];
 				$user_id = $dot[0]['user_id'];
-				$group = DBQuery::sql("SELECT name FROM work_group
+				$group = DBQuery::sql("SELECT name, icon FROM work_group
 										WHERE id = '$group_id'");
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+				echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har skrivit en punkt i ';
-				echo '<a href="?page=dot&id='.$info.'&group_id='.$group_id.'" ';
-				echo 'class="">'.$group[0]['name'].'</a>';
-				echo ' för <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>.</p>';
+	
+				if($group[0]['icon'] != '')
+					echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+				echo $group[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Protokoll')
@@ -816,23 +829,27 @@ function loadDropDownNotifications()
 				$title = $protocol[0]['title'];
 				$group_id = $protocol[0]['group_id'];
 				$user_id = $protocol[0]['user_id'];
-				$group = DBQuery::sql("SELECT name FROM work_group
+				$group = DBQuery::sql("SELECT name, icon FROM work_group
 										WHERE id = '$group_id'");
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>Nytt protokoll ';
-				echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'" ';
-				echo 'class="">'.$title.'</a>';
-				echo ' i <a href="?page=group&id='.$group_id.'">'.$group[0]['name'].'</a>';
-				echo ' av <a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>.</p>';
+
+				echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har skrivit ett protokoll i ';
+	
+				if($group[0]['icon'] != '')
+					echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+				echo $group[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Kommentar - Event')
@@ -849,18 +866,19 @@ function loadDropDownNotifications()
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
+
+				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har kommenterat i evenemanget ';
-				echo '<a href="?page=event&id='.$event[0]['id'].'" class="">'.$event[0]['name'].'</a>.';
-				echo '</p>';
+
+				echo $event[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Ansökan - Portalen')
@@ -894,8 +912,8 @@ function loadDropDownNotifications()
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Kommentar - DA-lapp')
@@ -926,8 +944,8 @@ function loadDropDownNotifications()
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
 		else if($notification_type[0]['type'] == 'Kommentar - Hovis-lapp')
@@ -958,15 +976,11 @@ function loadDropDownNotifications()
 			}
 			else
 			{
-				echo '<p><i>Det verkar som att det här inlägget är borttaget.</i></p>';
-				echo '</div>';
+				echo '<a class="list-group-item with-thumbnail black-link">
+					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
-		else
-			echo '</div>';
 
-		echo    '</div>
-			 </div>';
 		DBQuery::sql("UPDATE notification
 			SET seen = 1
 			WHERE id='$notification_id'");

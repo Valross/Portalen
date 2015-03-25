@@ -403,6 +403,7 @@ fieldset[disabled] {
 	
 	.dropdown-menu {
 	  min-width: 200px;
+	  max-width: 400px;
 	  padding: 5px 0;
 	  margin: 2px 0 0;
 	  background-color: #ffffff;
@@ -417,6 +418,25 @@ fieldset[disabled] {
 	  color: #444;
 	}
 	.dropdown-menu .fa {
+		margin-right: 10px;
+	}
+	.dropdown-notifications-menu {
+	  min-width: 250px;
+	  max-width: 350px;
+	  padding: 5px 0;
+	  margin: 2px 0 0;
+	  background-color: #ffffff;
+	  border: 1px solid #dddddd;
+	  border: 1px solid rgba(0, 0, 0, 0.1);
+	  border-radius: 4px;
+	  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	}
+	.dropdown-notifications-menu > li > a {
+	  padding: 5px 16px;
+	  color: #444;
+	}
+	.dropdown-notifications-menu .fa {
 		margin-right: 10px;
 	}
 	
@@ -783,6 +803,9 @@ fieldset[disabled] {
 -------------------------------------------------------------- */
 	
 	.dropdown-menu.is-floated-parent {
+		top: 58px;
+	}
+	.dropdown-notifications-menu.is-floated-parent {
 		top: 58px;
 	}
 	

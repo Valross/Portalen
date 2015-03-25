@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-loadTitleForBrowser('Checka pass');
+loadTitleForBrowser('Gamla pass');
 
 $dates = new DateTime;
 $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
@@ -26,15 +26,11 @@ if(isset($_POST['submit']) && checkAdminAccess())
 	}
 }
 
-function loadMyDAEvents()
+function loadOldEvents()
 {
 	$user_id = $_SESSION['user_id'];
 	$events = DBQuery::sql("SELECT id, name, start_time, event_type_id FROM event 
-							WHERE event_type_id != 5 AND id IN
-								(SELECT event_id FROM work_slot
-								WHERE group_id = 7 AND id IN
-									(SELECT work_slot_id FROM user_work
-									WHERE user_id = '$user_id'))
+							WHERE event_type_id != 5 AND start_time > '".date('Y-m-d',strtotime('-8 week'))." 00:00:00'
 							ORDER BY start_time DESC"); 
 
 	if(count($events) == 0)
@@ -43,7 +39,7 @@ function loadMyDAEvents()
 	{
 		for($i = 0; $i < count($events); ++$i)
 		{
-			echo '<a class="list-group-item black-link" href="?page=checkPasses&id='.$events[$i]['id'].'">'
+			echo '<a class="list-group-item black-link" href="?page=checkPassesAllEvents&id='.$events[$i]['id'].'">'
 				.$events[$i]['name'].' - '.$events[$i]['start_time'].'</a>';
 		}
 	}

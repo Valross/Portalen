@@ -5,8 +5,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-check-square-o fa-fw fa-lg"></span> Checka pass
-			 - <a href="?page=checkUncheckedPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Ocheckade pass</a>
+			<h1><span class="fa fa-check-square-o fa-fw fa-lg"></span> Ocheckade pass
+			 - <a href="?page=checkPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka pass</a>
 			 - <a href="?page=checkPassesAllEvents"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Gamla pass</a>
 			</h1>
 		</div>
@@ -18,7 +18,7 @@
 	<div class="white-box">
 		<h3>Välj evenemang</h3>
 		<div class="list-group">
-			<?php loadMyDAEvents(); ?>
+			<?php loadUncheckedEvents(); ?>
 		</div>
 	</div> <!-- .white-box -->
 </div>

@@ -127,16 +127,27 @@ include_once('php/pageManager.php');
 						    <li role="presentation"><a role="menuitem" href="?page=editProfile"><span class="fa fa-cog fa-fw"></span> Inställningar</a></li>
 							<li role="presentation" class="divider"></li>
 						    <li role="presentation"><a role="menuitem" href="logout.php"><span class="fa fa-power-off fa-fw"></span> Logga ut</a></li>
-						  </ul>
+						</ul>
+					</div> <!-- .dropdown -->
+
+					<div class="dropdown">
+						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
+							<i class="fa fa-globe"></i>
+						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
+						</button>
+						
+						<ul class="dropdown-menu is-floated-parent dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
+						    <?php loadDropDownNotifications(); ?>
+					  	</ul>
 					</div> <!-- .dropdown -->
 					
-					<div class="notifications">
+					<!-- <div class="notifications">
 						<a href="?page=browseUserNotifications&user_id=<?php echo $_SESSION['user_id']; ?>" 
 							data-toggle="tooltip" data-placement="bottom" title="<?php loadAmountOfUnseenNotifications(); ?> oläst händelse"> 
 							<i class="fa fa-globe"></i>
 						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
 						</a>
-					</div>
+					</div> -->
 					
 					</div>
 				</div> <!-- .row -->

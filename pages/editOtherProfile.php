@@ -39,6 +39,8 @@
 		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address">
 		<label for="mail">Utbildning</label>
 		<input type="text" value="<?php echo $profileMajor; ?>" name="major" id="major">
+		<label for="mail">Specialkost</label>
+		<input type="text" value="<?php echo $profileSpecialFood; ?>" name="special_food" id="special_food">
 		
 		<label for="description">Presentation</label>
 		<textarea rows="5" cols="50" value="" name="description" id="description" maxlength="150" class="bottom-border"><?php echo $profileDescription; ?></textarea>

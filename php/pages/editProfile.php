@@ -24,6 +24,12 @@ if(count($result) == 1)
 else
 	$profileMajor = "";
 
+$result = DBQuery::sql("SELECT special_food FROM user WHERE id = '$_SESSION[user_id]' AND special_food IS NOT NULL");
+if(count($result) == 1)
+	$profileSpecialFood = $result[0]["special_food"];
+else
+	$profileSpecialFood = "";
+
 $result = DBQuery::sql("SELECT phone_number FROM user WHERE id = '$_SESSION[user_id]' AND phone_number IS NOT NULL");
 if(count($result) == 1)
 	$profileNumber = $result[0]["phone_number"];
@@ -61,6 +67,7 @@ if(isset($_POST['changeInfo'])) {
 	$mail = strip_tags(DBQuery::safeString($_POST['mail']));
 	$address = strip_tags(DBQuery::safeString($_POST['address']));
 	$major = strip_tags(DBQuery::safeString($_POST['major']));
+	$specialFood = strip_tags(DBQuery::safeString($_POST['special_food']));
 	$name = strip_tags(DBQuery::safeString($_POST['name']));
 	$lastName = strip_tags(DBQuery::safeString($_POST['last_name']));
 	$description = strip_tags(DBQuery::safeString($_POST['description']), allowed_tags());
@@ -98,6 +105,13 @@ if(isset($_POST['changeInfo'])) {
 			$queryString = $queryString . ", major='$major'";
 		else
 			$queryString = $queryString . "major='$major'";
+	}
+
+	if ($specialFood != '') {
+		if ($queryString != '')
+			$queryString = $queryString . ", special_food='$specialFood'";
+		else
+			$queryString = $queryString . "special_food='$specialFood'";
 	}
 
 	if ($name != '') {

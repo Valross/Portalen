@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2015 at 05:09 PM
+-- Generation Time: Mar 25, 2015 at 11:31 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -416,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `event_template` (
 --
 
 INSERT INTO `event_template` (`id`, `name`, `start_time`, `end_time`, `event_type_id`) VALUES
-(5, 'Onsdagspub', '18:00:00', '23:01:00', 1),
+(5, 'Onsdagspub', '18:00:00', '23:00:00', 1),
 (6, 'Vanlig nattklubb', '22:00:00', '03:00:00', 2),
 (7, 'Vanlig pub', '18:00:00', '01:00:00', 1),
 (9, 'Webbmöte', '17:15:00', '19:00:00', 5),
@@ -434,20 +434,25 @@ CREATE TABLE IF NOT EXISTS `event_template_group` (
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `points` int(11) NOT NULL,
+  `wage` int(11) NOT NULL,
   `event_template_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `event_template_id` (`event_template_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `event_template_group`
 --
 
-INSERT INTO `event_template_group` (`id`, `start_time`, `end_time`, `points`, `event_template_id`, `group_id`) VALUES
-(1, '2014-03-06 17:00:00', '2014-03-07 00:00:00', 3, 5, 5),
-(2, '2015-02-25 17:15:00', '2015-02-25 19:00:00', 0, 9, 2);
+INSERT INTO `event_template_group` (`id`, `start_time`, `end_time`, `points`, `wage`, `event_template_id`, `group_id`) VALUES
+(2, '2015-02-25 17:15:00', '2015-02-25 19:00:00', 0, 0, 9, 2),
+(12, '2015-01-01 17:00:00', '2015-01-02 02:00:00', 0, 0, 5, 13),
+(13, '2015-01-01 17:00:00', '2015-01-02 02:00:00', 0, 0, 5, 4),
+(14, '2015-01-01 17:00:00', '2015-01-02 02:00:00', 0, 0, 5, 4),
+(15, '2015-01-01 17:00:00', '2015-01-02 02:00:00', 0, 0, 5, 15),
+(16, '2015-01-01 17:00:00', '2015-01-02 02:00:00', 0, 0, 5, 15);
 
 -- --------------------------------------------------------
 
@@ -1133,7 +1138,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=150 ;
 
 --
 -- Dumping data for table `work_slot`

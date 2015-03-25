@@ -12,6 +12,16 @@ $members = DBQuery::sql("SELECT name, last_name, id FROM user
 
 $nMembers = count($members);
 
+if(isset($_POST['leave']))
+{
+	$group_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	DBQuery::sql("DELETE FROM group_member 
+					WHERE user_id = '$user_id'
+					AND group_id = '$group_id'");
+}
+
 if(isset($_POST['apply']))
 {
 	$group_id = $_GET['id'];
@@ -20,17 +30,16 @@ if(isset($_POST['apply']))
 	$leadersOfGroup = DBQuery::sql("SELECT user_id FROM work_group_leaders 
 							WHERE work_group_id = '$group_id'");
 
-	for($i = 0; $i < count($leadersOfGroup); ++$i)
-	{
-		DBQuery::sql("INSERT INTO group_application (group_id, user_id)
+	DBQuery::sql("INSERT INTO group_application (group_id, user_id)
 							VALUES ('$group_id', '$user_id')");
 
-		$application_id = DBQuery::sql("SELECT id FROM group_application 
+	$application_id = DBQuery::sql("SELECT id FROM group_application 
 							ORDER BY id DESC");
 
+	for($i = 0; $i < count($leadersOfGroup); ++$i)
 		notify($leadersOfGroup[$i]['user_id'], 10, $application_id[0]);
-	}
 }
+
 if(isset($_POST['accept']))
 {
 	$group_id = $_GET['id'];
@@ -49,6 +58,7 @@ if(isset($_POST['accept']))
 		notify($user_id, 5, $group_id);
 	}
 }
+
 if(isset($_POST['deny']))
 {
 	$group_id = $_GET['id'];
@@ -114,6 +124,23 @@ function loadGroupInfo()
 							WHERE id = '$group_id'");
 
 	echo $groupName[0]['description'];
+}
+
+function loadLeaveGroupButton()
+{
+	$user_id = $_SESSION['user_id'];
+	$group_id = $_GET['id'];
+
+	$memberOfGroup = DBQuery::sql("SELECT group_id FROM group_member 
+								WHERE group_id = '$group_id'
+								AND user_id = '$user_id'");
+
+	if(count($memberOfGroup) > 0)
+	{
+		echo '<form action="" method="post">';
+		echo '<input type="submit" name="leave" value="Gå ur laget">';
+		echo '</form>';
+	}
 }
 
 function loadMemberAvatar($user_id)

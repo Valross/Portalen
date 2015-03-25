@@ -32,7 +32,7 @@
 </div> <!-- col-sm-6 -->
 	<div class="col-sm-6">
 		<div class="white-box">
-			<h3>Medlemmar (<?php echo $nMembers; ?>)</h3>
+			<h3>Medlemmar (<?php echo $nMembers; ?>) <?php loadLeaveGroupButton(); ?></h3>
 			<div class="list-group">
 				<?php loadMembersOfGroup(); ?>
 			</div>

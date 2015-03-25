@@ -30,17 +30,6 @@ function loadNotifications()
 										WHERE user_id = '$user_id'
 										ORDER BY date DESC");
 
-	$unseen_notifications = DBQuery::sql("SELECT id FROM notification
-										WHERE user_id = '$user_id' AND seen IS NULL");
-
-	for($i = 0; $i < count($unseen_notifications); ++$i)
-	{
-		$id = $unseen_notifications[$i]['id'];
-		DBQuery::sql("UPDATE notification
-			  SET seen = 1
-			  WHERE id='$id'");
-	}
-
 	for($i = 0; $i < count($notifications) && $i < 20; ++$i)
 	{
 		$info = $notifications[$i]['info'];
@@ -368,6 +357,9 @@ function loadNotifications()
 
 		echo    '</div>
 			 </div>';
+		DBQuery::sql("UPDATE notification
+			SET seen = 1
+			WHERE id='$notification_id'");
 	}
 }
 

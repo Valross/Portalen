@@ -231,9 +231,7 @@ function loadGroups()
 	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
 	for($i = 0; $i < count($groups); ++$i)
 	{
-		?>
-			<option value="<?php echo $groups[$i]['id']; ?>" name="group[]"><?php echo $groups[$i]['name']; ?></option>
-		<?php
+		echo '<option value="'.$groups[$i]['id'].'" name="group[]">'.$groups[$i]['name'].'</option>';
 	}
 }
 

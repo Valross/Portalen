@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2015 at 09:00 PM
+-- Generation Time: Mar 25, 2015 at 05:09 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   `n_of_people` int(11) NOT NULL,
   `sales_spenta` int(11) NOT NULL,
   `message` varchar(4000) NOT NULL,
-  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_written` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
@@ -224,21 +224,21 @@ CREATE TABLE IF NOT EXISTS `da_note` (
 --
 
 INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
-(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00 00:00:00'),
-(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-18 23:00:00'),
-(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-21 23:00:00'),
-(29, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(30, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(31, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(32, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(33, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(34, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(35, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(36, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(37, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(38, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-21 23:00:00'),
-(39, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-21 23:00:00'),
-(40, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-21 23:00:00');
+(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
+(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-19'),
+(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-22'),
+(29, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(30, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(31, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(32, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(33, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(34, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(35, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(36, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(37, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(38, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
+(39, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22'),
+(40, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22');
 
 -- --------------------------------------------------------
 
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `dot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `dot`
@@ -293,39 +293,26 @@ INSERT INTO `dot` (`id`, `comment`, `group_id`, `date_written`, `user_id`) VALUE
 (1, '*första punkten', 7, '2015-03-20 13:20:48', 2),
 (4, '*fuck spenta', 1, '2015-03-20 19:16:51', 8),
 (5, '*i love cats', 1, '2015-03-20 19:30:46', 8),
-(6, '*', 7, '2015-03-23 19:47:25', 2),
-(7, '*', 7, '2015-03-23 19:47:27', 2),
-(8, '*', 7, '2015-03-23 19:47:27', 2),
-(9, '*', 7, '2015-03-23 19:47:27', 2),
-(10, '*', 7, '2015-03-23 19:47:27', 2),
-(11, '*', 7, '2015-03-23 19:47:28', 2),
-(12, '*', 7, '2015-03-23 19:47:28', 2),
-(13, '*', 7, '2015-03-23 19:47:28', 2),
-(14, '*', 7, '2015-03-23 19:47:29', 2),
-(15, '*', 7, '2015-03-23 19:47:30', 2),
-(16, '*', 7, '2015-03-23 19:47:30', 2),
-(17, '*', 7, '2015-03-23 19:47:31', 2),
-(18, '*', 7, '2015-03-23 19:47:31', 2),
-(19, '*', 7, '2015-03-23 19:47:32', 2),
-(20, '*', 7, '2015-03-23 19:47:32', 2),
-(21, '*', 7, '2015-03-23 19:47:32', 2),
-(22, '*', 7, '2015-03-23 19:47:33', 2),
-(23, '*', 7, '2015-03-23 19:47:33', 2),
-(24, '*', 7, '2015-03-23 19:47:34', 2),
-(25, '*', 7, '2015-03-23 19:48:14', 2),
-(26, '*', 7, '2015-03-23 19:48:15', 2),
-(27, '*', 7, '2015-03-23 19:48:16', 2),
-(28, '*', 7, '2015-03-23 19:48:16', 2),
-(29, '*', 7, '2015-03-23 19:48:18', 2),
-(30, '*', 7, '2015-03-23 19:48:18', 2),
-(31, '*', 7, '2015-03-23 19:48:19', 2),
-(32, '*', 7, '2015-03-23 19:48:19', 2),
-(33, '*', 7, '2015-03-23 19:48:19', 2),
-(34, '*', 7, '2015-03-23 19:48:20', 2),
-(35, '*', 7, '2015-03-23 19:48:20', 2),
-(36, '*', 7, '2015-03-23 19:48:21', 2),
-(37, '*', 7, '2015-03-23 19:48:21', 2),
-(38, '*\r\n', 28, '2015-03-23 19:58:56', 2);
+(6, '*', 7, '2015-03-23 15:34:11', 2),
+(7, '*', 7, '2015-03-23 15:34:12', 2),
+(8, '*', 7, '2015-03-23 15:34:13', 2),
+(9, '*', 7, '2015-03-23 15:34:13', 2),
+(10, '*', 7, '2015-03-23 15:34:13', 2),
+(11, '*', 7, '2015-03-23 15:34:13', 2),
+(12, '*', 7, '2015-03-23 15:34:14', 2),
+(13, '*', 7, '2015-03-23 15:34:14', 2),
+(14, '*', 7, '2015-03-23 15:34:14', 2),
+(15, '*', 7, '2015-03-23 15:34:14', 2),
+(16, '*', 7, '2015-03-23 15:34:15', 2),
+(17, '*', 7, '2015-03-23 15:34:15', 2),
+(18, '*', 7, '2015-03-23 15:34:15', 2),
+(19, '*', 7, '2015-03-23 15:34:16', 2),
+(20, '*', 7, '2015-03-23 15:34:16', 2),
+(21, '*', 7, '2015-03-23 15:34:16', 2),
+(22, '*', 7, '2015-03-23 15:34:17', 2),
+(23, '*', 7, '2015-03-23 15:34:17', 2),
+(24, '*', 7, '2015-03-23 15:34:17', 2),
+(25, '*', 7, '2015-03-23 15:34:17', 2);
 
 -- --------------------------------------------------------
 
@@ -520,14 +507,16 @@ CREATE TABLE IF NOT EXISTS `group_application` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`group_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `group_application`
 --
 
 INSERT INTO `group_application` (`id`, `user_id`, `group_id`) VALUES
-(7, 2, 5);
+(7, 2, 5),
+(9, 2, 8),
+(8, 2, 12);
 
 -- --------------------------------------------------------
 
@@ -554,7 +543,6 @@ INSERT INTO `group_member` (`group_id`, `user_id`, `member_since`) VALUES
 (2, 1, '0000-00-00 00:00:00'),
 (2, 2, '2015-02-04 23:00:00'),
 (4, 1, '0000-00-00 00:00:00'),
-(4, 2, '0000-00-00 00:00:00'),
 (7, 1, '0000-00-00 00:00:00'),
 (7, 2, '0000-00-00 00:00:00'),
 (9, 2, '0000-00-00 00:00:00'),
@@ -623,7 +611,7 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `headwaiter_note_id` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_written` datetime NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `headwaiter_note_id` (`headwaiter_note_id`,`user_id`),
@@ -635,9 +623,9 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
 --
 
 INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `user_id`) VALUES
-(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 16:55:55', 2),
-(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 11:41:54', 2),
-(5, 5, 'lol', '2015-03-22 16:56:01', 2);
+(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 17:55:55', 2),
+(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 12:41:54', 2),
+(5, 5, 'lol', '2015-03-22 17:56:01', 2);
 
 -- --------------------------------------------------------
 
@@ -653,7 +641,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `news`
@@ -663,7 +651,23 @@ INSERT INTO `news` (`id`, `title`, `message`, `date`, `user_id`) VALUES
 (1, 'Hej', 'Då', '2015-02-12 14:53:09', 2),
 (2, 'Nya pass och personalfest!', 'Hej!  Nu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan!  Glöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen.  Ha det bra!', '2015-02-27 11:20:14', 2),
 (3, 'Nyhetsbrev', 'Hej! \nNu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan! \n\nGlöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen. \n\nHa det bra!', '2015-02-27 11:40:17', 2),
-(4, 'Portalen snart färdig!', 'Det ryktas om att portalen snart är färdig och redo för användning. \n\n\nSpännande tycker webblaget. \n\n\nJapp.', '2015-03-17 20:07:58', 2);
+(4, 'Portalen snart färdig!', 'Det ryktas om att portalen snart är färdig och redo för användning. \n\n\nSpännande tycker webblaget. \n\n\nJapp.', '2015-03-17 20:07:58', 2),
+(5, '1', '2', '2015-03-23 14:26:03', 2),
+(6, '3', '4', '2015-03-23 14:26:16', 2),
+(7, '5', '6', '2015-03-23 14:26:25', 2),
+(8, '7', '8', '2015-03-23 14:26:32', 2),
+(9, '1', '2', '2015-03-23 14:54:57', 2),
+(10, '1', '2', '2015-03-23 14:54:59', 2),
+(11, '1', '2', '2015-03-23 14:55:01', 2),
+(12, '1', '2', '2015-03-23 14:55:03', 2),
+(13, '1', '2', '2015-03-23 14:55:05', 2),
+(14, '1', '2', '2015-03-23 14:55:07', 2),
+(15, '1', '2', '2015-03-23 14:55:09', 2),
+(16, '1', '2', '2015-03-23 14:55:11', 2),
+(17, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:00', 2),
+(18, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:37', 2),
+(19, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:52', 2),
+(20, 'Nya portalen', 'Fan rätt fräscht asså.', '2015-03-25 17:09:04', 2);
 
 -- --------------------------------------------------------
 
@@ -680,7 +684,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
 
 --
 -- Dumping data for table `notification`
@@ -750,41 +754,26 @@ INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`
 (63, 1, 11, '9', NULL, '2015-03-22 16:52:51'),
 (64, 8, 12, '5', 1, '2015-03-22 16:56:01'),
 (65, 1, 12, '5', NULL, '2015-03-22 16:56:01'),
-(66, 2, 10, '7', 0, '2015-03-21 23:00:00'),
-(67, 2, 1, '1', 1, '2015-03-22 17:05:10'),
-(68, 2, 1, '1', 0, '2015-03-22 17:05:10'),
-(69, 1, 6, '6', NULL, '2015-03-23 18:47:25'),
-(70, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
-(71, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
-(72, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
-(73, 1, 6, '7', NULL, '2015-03-23 18:47:27'),
-(74, 1, 6, '11', NULL, '2015-03-23 18:47:28'),
-(75, 1, 6, '11', NULL, '2015-03-23 18:47:28'),
-(76, 1, 6, '11', NULL, '2015-03-23 18:47:29'),
-(77, 1, 6, '14', NULL, '2015-03-23 18:47:29'),
-(78, 1, 6, '15', NULL, '2015-03-23 18:47:30'),
-(79, 1, 6, '16', NULL, '2015-03-23 18:47:30'),
-(80, 1, 6, '17', NULL, '2015-03-23 18:47:31'),
-(81, 1, 6, '18', NULL, '2015-03-23 18:47:31'),
-(82, 1, 6, '19', NULL, '2015-03-23 18:47:32'),
-(83, 1, 6, '20', NULL, '2015-03-23 18:47:32'),
-(84, 1, 6, '21', NULL, '2015-03-23 18:47:33'),
-(85, 1, 6, '22', NULL, '2015-03-23 18:47:33'),
-(86, 1, 6, '23', NULL, '2015-03-23 18:47:34'),
-(87, 1, 6, '24', NULL, '2015-03-23 18:47:34'),
-(88, 1, 6, '25', NULL, '2015-03-23 18:48:14'),
-(89, 1, 6, '26', NULL, '2015-03-23 18:48:16'),
-(90, 1, 6, '27', NULL, '2015-03-23 18:48:16'),
-(91, 1, 6, '28', NULL, '2015-03-23 18:48:17'),
-(92, 1, 6, '29', NULL, '2015-03-23 18:48:18'),
-(93, 1, 6, '30', NULL, '2015-03-23 18:48:18'),
-(94, 1, 6, '31', NULL, '2015-03-23 18:48:19'),
-(95, 1, 6, '32', NULL, '2015-03-23 18:48:19'),
-(96, 1, 6, '33', NULL, '2015-03-23 18:48:19'),
-(97, 1, 6, '34', NULL, '2015-03-23 18:48:20'),
-(98, 1, 6, '35', NULL, '2015-03-23 18:48:20'),
-(99, 1, 6, '36', NULL, '2015-03-23 18:48:21'),
-(100, 1, 6, '37', NULL, '2015-03-23 18:48:21');
+(66, 1, 6, '6', NULL, '2015-03-23 14:34:11'),
+(67, 1, 6, '7', NULL, '2015-03-23 14:34:12'),
+(68, 1, 6, '8', NULL, '2015-03-23 14:34:13'),
+(69, 1, 6, '8', NULL, '2015-03-23 14:34:13'),
+(70, 1, 6, '8', NULL, '2015-03-23 14:34:13'),
+(71, 1, 6, '8', NULL, '2015-03-23 14:34:13'),
+(72, 1, 6, '12', NULL, '2015-03-23 14:34:14'),
+(73, 1, 6, '12', NULL, '2015-03-23 14:34:14'),
+(74, 1, 6, '14', NULL, '2015-03-23 14:34:14'),
+(75, 1, 6, '15', NULL, '2015-03-23 14:34:14'),
+(76, 1, 6, '16', NULL, '2015-03-23 14:34:15'),
+(77, 1, 6, '17', NULL, '2015-03-23 14:34:15'),
+(78, 1, 6, '18', NULL, '2015-03-23 14:34:15'),
+(79, 1, 6, '19', NULL, '2015-03-23 14:34:16'),
+(80, 1, 6, '20', NULL, '2015-03-23 14:34:16'),
+(81, 1, 6, '21', NULL, '2015-03-23 14:34:16'),
+(82, 1, 6, '22', NULL, '2015-03-23 14:34:17'),
+(83, 1, 6, '23', NULL, '2015-03-23 14:34:17'),
+(84, 1, 6, '24', NULL, '2015-03-23 14:34:17'),
+(85, 2, 6, '25', 1, '2015-03-23 14:34:17');
 
 -- --------------------------------------------------------
 
@@ -978,12 +967,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-26 23:00:00', 0, 35, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '199901011245', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '123654879', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-23 19:39:33', 18, 90, NULL, NULL),
+(2, 'test', 'ankan@mail.com', '199311111122', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '1236548792', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-03-25 14:07:36', 16, 90, NULL, 'KATTER'),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-03-16 23:00:00', 1, 15, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
-(7, 'HEEEJ', 'jjasdj', 'asdfsfs', '640702a7a1279095e6da83ba8f768cbf', 'dsads', 'MDMASDSD', '', NULL, '', NULL, NULL, NULL, NULL, '2014-10-22 15:41:02', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
-(8, 'Test2', 'test', '9999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-22 16:07:27', 8, 45, NULL, NULL),
+(8, 'Test2', 'test', '1999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-25 14:38:34', 9, 45, NULL, NULL),
 (9, '123', '123', '1245241241', 'trappan', '1', '2', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-17 19:00:26', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (11, 'Test3', 'test', '9000000000', '2bac9f5e083e2843e8893f11abef6618', 'Tess', 'Tre', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-18 18:20:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL);
 
@@ -1029,7 +1017,6 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (99, 2, 1),
 (100, 1, 1),
 (101, 5, 1),
-(102, 7, 0),
 (112, 2, 1),
 (113, 2, 1),
 (114, 2, 1),
@@ -1050,7 +1037,6 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (137, 8, 1),
 (141, 9, 1),
 (142, 8, 1),
-(143, 7, 1),
 (144, 6, 1),
 (145, 3, 1),
 (146, 1, 1);

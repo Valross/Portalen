@@ -8,14 +8,13 @@ function loadStats()
 	$howMany = count($users);
 	for($j = 0; $j < $howMany; ++$j)
 	{
-		?>
-		<tr>
-			<td><?php echo $j+1;?></td>
-			<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
-			<td><?php loadMemberSince($users[$j]['id']); ?></td>
-			<td><?php loadLastWorked($users[$j]['id']); ?></td>
-		</tr>
-		<?php
+		echo '<tr>';
+			echo '<td>'.($j+1).'</td>';
+			echo '<td><a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</a></td>';
+			echo '<td>'.loadMemberSince($users[$j]['id']).'</td>';
+			echo '<td>'.loadLatestSession($users[$j]['id']).'</td>';
+			echo '<td>'.loadLastWorked($users[$j]['id']).'</td>';
+		echo '</tr>';
 	}
 }
 
@@ -24,7 +23,15 @@ function loadMemberSince($user_id)
 	$memberSince = DBQuery::sql("SELECT date_created FROM user 
 									WHERE id = '$user_id'");
 	if(count($memberSince) > 0)
-		echo $memberSince[0]['date_created'];
+		return $memberSince[0]['date_created'];
+}
+
+function loadLatestSession($user_id)
+{
+	$latestSession = DBQuery::sql("SELECT latest_session FROM user 
+									WHERE id = '$user_id'");
+	if(count($latestSession) > 0)
+		return $latestSession[0]['latest_session'];
 }
 
 function loadLastWorked($user_id)
@@ -37,9 +44,9 @@ function loadLastWorked($user_id)
 										WHERE user_id = '$user_id' AND checked = 1))
 								ORDER BY start_time DESC");
 	if(count($lastWorked) > 0)
-		echo '<a href=?page=event&id='.$lastWorked[0]['id'].'>'.$lastWorked[0]['name'].' ('.$lastWorked[0]['start_time'].')'.'</a>';
+		return '<a href=?page=event&id='.$lastWorked[0]['id'].'>'.$lastWorked[0]['name'].' ('.$lastWorked[0]['start_time'].')'.'</a>';
 	else
-		echo 'Har ej jobbat';
+		return 'Har ej jobbat';
 }
 
 ?>

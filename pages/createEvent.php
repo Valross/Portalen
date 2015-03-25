@@ -95,49 +95,52 @@ function removeSlot(id)
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-calendar fa-fw fa-lg"></span> Skapa evenemang</h1>
+			<h1><span class="fa fa-calendar fa-fw fa-lg"></span> Skapa evenemang
+			 - <a href="?page=multiEventCreate"><span class="fa fa-calendar fa-fw fa-lg"></span>Multieventskapare</a>
+			</h1>
 		</div>
 	</div>
 </div> <!-- .row -->
 
 <form action="" method="post">
 <div class="row">
-<div class="col-sm-6">
-	<div class="white-box">
-		<h3>Evenemangsinformation</h3>
+	<div class="col-sm-6">
+		<div class="white-box">
+			<h3>Evenemangsinformation</h3>
 
-		<label for="template">Mall</label>
-		<select name="template" id="template" onchange="getTemplate(this.value)">
-			<option value="no">Ingen mall</option>
-			<?php loadTemplates(); ?>
-		</select>
-		
-		<label for="type">Evenemangstyp</label>
-		<select name="type" id="type">
-			<option id="typeno" value="no">Välj typ</option>
-			<?php loadTypes(); ?>
-		</select>
-
-		<div class="input-group date datetimepicker">
-			<label for="start">Starttid</label>
-			<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
-	        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-		</div>
+			<label for="template">Mall</label>
+			<select name="template" id="template" onchange="getTemplate(this.value)">
+				<option value="no">Ingen mall</option>
+				<?php loadTemplates(); ?>
+			</select>
 			
-		<div class="input-group date datetimepicker">
-			<label for="end">Sluttid</label>
-			<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>">
-			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-		</div>
-		
-		<label for="name">Namn</label>
-		<input type="text" name="name" id="name">
-		<label for="info">Beskrivning</label>
-		<textarea rows="6" name="info" id="info" class="bottom-border"></textarea>
-		
-		<input type="submit" name="submit" value="Skapa evenemang">
-</div> <!-- .white-box -->
-</div> <!-- .col-sm-6 -->			
+			<label for="type">Evenemangstyp</label>
+			<select name="type" id="type">
+				<option id="typeno" value="no">Välj typ</option>
+				<?php loadTypes(); ?>
+			</select>
+
+			<div class="input-group date datetimepicker">
+				<label for="start">Starttid</label>
+				<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
+		        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+				
+			<div class="input-group date datetimepicker">
+				<label for="end">Sluttid</label>
+				<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>">
+				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+			
+			<label for="name">Namn</label>
+			<input type="text" name="name" id="name">
+			<label for="info">Beskrivning</label>
+			<textarea rows="6" name="info" id="info" class="bottom-border"></textarea>
+			
+			<input type="submit" name="submit" value="Skapa evenemang">
+		</div> <!-- .white-box -->
+	</div> <!-- .col-sm-6 -->
+</div> <!-- .row -->			
 </form>
 <?php
 	}

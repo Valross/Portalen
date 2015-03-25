@@ -649,7 +649,7 @@ function loadDropDownNotifications()
 
 		$notification_id = $notifications[$i]['id'];
 		$unseen_notification = DBQuery::sql("SELECT id FROM notification
-										WHERE user_id = '$user_id' AND seen IS NULL
+										WHERE seen IS NULL
 										AND id = '$notification_id'");
 
 		if($notification_type[0]['type'] == 'Achievement')
@@ -658,7 +658,11 @@ function loadDropDownNotifications()
 									WHERE id = '$info'");
 			if(count($achievement) > 0)
 			{
-				echo '<a href="?page=achievement&id='.$info.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=achievement&id='.$info.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
+				
 				echo 'Du låste upp ';
 				echo '<i class="'.$achievement[0]['icon'].'"></i>';
 				echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>';
@@ -692,7 +696,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$info_user_id'");
 				
-				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har avbokat sig från sitt ';
 				echo $group[0]['name'].'-pass';
@@ -724,7 +731,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 
-				echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har skrivit en ';
 				echo '<span class="fa fa-key fa-fw fa-lg"></span>';
@@ -754,7 +764,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 
-				echo '<a href="?page=HeadwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=HeadwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har skrivit en ';
 				echo '<span class="fa fa-female fa-fw fa-lg"></span>';
@@ -775,7 +788,10 @@ function loadDropDownNotifications()
 			$group = DBQuery::sql("SELECT name, icon FROM work_group
 									WHERE id = '$group_id'");
 
-			echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+			echo '<a href="?page=group&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+			if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 			echo 'Din ansökan om att gå med i ';
 
 			if($group[0]['icon'] != '')
@@ -802,7 +818,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 				
-				echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har skrivit en punkt i ';
 	
@@ -835,7 +854,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 
-				echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har skrivit ett protokoll i ';
 	
@@ -867,7 +889,10 @@ function loadDropDownNotifications()
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 
-				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link">';
+				echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
 				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
 				echo ' har kommenterat i evenemanget ';
 
@@ -883,11 +908,15 @@ function loadDropDownNotifications()
 		}
 		else if($notification_type[0]['type'] == 'Ansökan - Portalen')
 		{
-			echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-			echo '<p>';
-			echo '<a href="?page=reviseApplications" ';
-			echo 'class="">'.$info.'</a> har gjort en ansökan till portalen.';
-			echo '</p>';
+			echo '<a href="?page=reviseApplications"class="list-group-item with-thumbnail black-link';
+			if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
+			echo loadAvatarFromUser(-1, 25).$info;
+			echo ' har gjort en ansökan till portalen.';
+
+			echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+			echo '</a>';
 		}
 		else if($notification_type[0]['type'] == 'Ansökan - Lag')
 		{
@@ -896,19 +925,26 @@ function loadDropDownNotifications()
 			if(count($application) > 0)
 			{
 				$group_id = $application[0]['group_id'];
-				$group = DBQuery::sql("SELECT name FROM work_group
+				$group = DBQuery::sql("SELECT name, icon FROM work_group
 											WHERE id = '$group_id'");
 
 				$user_id = $application[0]['user_id'];
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 											WHERE id = '$user_id'");
 
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
-				echo ' har gjort en ansökan till ditt lag ';
-				echo '<a href="?page=group&id='.$application[0]['group_id'].'" class="">'.$group[0]['name'].'</a>.';
-				echo '</p>';
+				echo '<a href="?page=group&id='.$group_id.'" class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har sökt till ditt lag ';
+	
+				if($group[0]['icon'] != '')
+					echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+				echo $group[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
@@ -934,13 +970,19 @@ function loadDropDownNotifications()
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
-				echo ' har kommenterat i DA-lappen ';
-				echo '<a href="?page=DANote&id='.$event[0]['id'].'" class="">'.$event[0]['name'].'</a>';
-				echo '</p>';
+
+				echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har kommenterat i ';
+				echo '<span class="fa fa-key fa-fw fa-lg"></span>';
+				echo 'DA-lappen ';
+
+				echo $event[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
@@ -966,13 +1008,19 @@ function loadDropDownNotifications()
 
 				$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
-				
-				echo '<span class="time">'.$notifications[$i]['date'].'</span></div>';
-				echo '<p>';
-				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
-				echo ' har kommenterat i Hovis-lappen ';
-				echo '<a href="?page=HeadwaiterNote&id='.$event[0]['id'].'" class="">'.$event[0]['name'].'</a>';
-				echo '</p>';
+
+				echo '<a href="?page=headwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+				if(count($unseen_notification) > 0)
+					echo ' new-notification';
+				echo '">';
+				echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+				echo ' har kommenterat i ';
+				echo '<span class="fa fa-female fa-fw fa-lg"></span>';
+				echo 'Hovis-lappen ';
+
+				echo $event[0]['name'];
+				echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+				echo '</a>';
 			}
 			else
 			{
@@ -980,10 +1028,9 @@ function loadDropDownNotifications()
 					<i>Det verkar som att det här inlägget är borttaget.</i></a>';
 			}
 		}
-
-		DBQuery::sql("UPDATE notification
-			SET seen = 1
-			WHERE id='$notification_id'");
+		// DBQuery::sql("UPDATE notification
+		// 	SET seen = 1
+		// 	WHERE id='$notification_id'");
 	}
 	echo '<li role="presentation"><a role="menuitem" href="?page=browseUserNotifications&user_id='.$_SESSION['user_id'].'"><span class="fa fa-globe fa-fw"></span> Alla händelser</a></li>';
 }

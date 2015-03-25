@@ -139,16 +139,7 @@ include_once('php/pageManager.php');
 						<ul class="dropdown-menu is-floated-parent" role="menu" aria-labelledby="userDropdown">
 						    <?php loadDropDownNotifications(); ?>
 					  	</ul>
-					</div> <!-- .dropdown -->
-					
-					<!-- <div class="notifications">
-						<a href="?page=browseUserNotifications&user_id=<?php echo $_SESSION['user_id']; ?>" 
-							data-toggle="tooltip" data-placement="bottom" title="<?php loadAmountOfUnseenNotifications(); ?> oläst händelse"> 
-							<i class="fa fa-globe"></i>
-						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
-						</a>
-					</div> -->
-					
+					</div> <!-- .dropdown -->					
 					</div>
 				</div> <!-- .row -->
 				</div>

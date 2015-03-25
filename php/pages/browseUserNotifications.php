@@ -62,7 +62,7 @@ function loadNotifications()
 							data-placement="bottom" title="'.$achievement[0]['description'].'">';
 				echo '<i class="'.$achievement[0]['icon'].'"></i>';
 				echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>'.
-						$achievement[0]['name'].'</a>.</p>.';
+						$achievement[0]['name'].'</a>.</p>';
 			}
 			else
 			{
@@ -273,7 +273,7 @@ function loadNotifications()
 			if(count($application) > 0)
 			{
 				$group_id = $application[0]['group_id'];
-				$group = DBQuery::sql("SELECT name FROM work_group
+				$group = DBQuery::sql("SELECT name, icon FROM work_group
 											WHERE id = '$group_id'");
 
 				$user_id = $application[0]['user_id'];
@@ -284,7 +284,12 @@ function loadNotifications()
 				echo '<p>';
 				echo '<a href="?page=userProfile&id='.$user_id.'">'.loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'].'</a>';
 				echo ' har gjort en ansökan till ditt lag ';
-				echo '<a href="?page=group&id='.$application[0]['group_id'].'" class="">'.$group[0]['name'].'</a>.';
+				echo '<a href="?page=group&id='.$application[0]['group_id'].'" class="">';
+
+				if($group[0]['icon'] != '')
+					echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+
+				echo $group[0]['name'].'</a>.';
 				echo '</p>';
 			}
 			else

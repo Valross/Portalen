@@ -8,7 +8,9 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<button type="button" class="btn btn-page-header"><i class="fa fa-trash fa-lg fa-margin-right"></i> Avsluta medlemskap</button>
+		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>">
+		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
+		</a>
 	</div>
 </div> <!-- .row -->
 
@@ -23,9 +25,9 @@
 		<label for="last_name">Efternamn (Går inte att ändra)</label>
 		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name" readonly>
 	  	<label for="ssn">Personnummer (Går inte att ändra)</label>
-	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååmmddxxxx" name="ssn" id="ssn" maxlength="10" readonly>
+	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååååmmddxxxx" name="ssn" id="ssn" maxlength="12" pattern=".{12,12}" required title="12 siffror">
 	  	<label for="phone_number">Mobilnummer</label>
-	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="15">
+	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="10" pattern=".{10,10}" required title="10 siffror">
 		<label for="mail">Mailadress</label>
 		<input type="text" value="<?php echo $profileMail; ?>" name="mail" id="mail">
 		<label for="mail">Adress</label>

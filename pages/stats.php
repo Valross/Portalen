@@ -9,7 +9,9 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
-			<?php loadAllTools() ?>
+			<div class="list-group">
+				<?php loadAllTools() ?>
+			</div>
 		</div>
 	</div>
 </div>

@@ -15,7 +15,8 @@ function loadAchievementsUnlocked()
 		?>
 		<tr>
 			<td>
-				<a href="?page=achievement&id=<?php echo $achievements[0]['id'];?>" data-toggle="tooltip" data-placement="bottom" title="<?php echo $achievements[0]['description'];?>"> 
+				<a href="?page=achievement&id=<?php echo $achievements[0]['id'];?>" data-toggle="tooltip" class="black-link"
+					data-placement="bottom" title="<?php echo $achievements[0]['description'];?>"> 
 					<i class="<?php echo $achievements[0]['icon'];?>"></i>
 				    <span class="badge on-top-of-element"><?php echo $achievements[0]['points'];?></span>
 				</a>

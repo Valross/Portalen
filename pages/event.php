@@ -29,7 +29,7 @@
 		</div> <!-- .white-box -->
 		
 		<?php
-			if(checkAdminAccess())
+			if(checkAdminAccess() == 1)
 			{
 		?>
 		<div class="white-box">

@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Hantera lagledare');
 
-if(checkAdminAccess())
+if(checkAdminAccess() == 1)
 	loadAll();
 else
 {
@@ -85,7 +85,7 @@ function loadAllPeopleWithAdminAccess($group)
 
 	for($i = 0; $i < count($users); ++$i)
 	{
-		if(checkAdminAccessForUser($users[$i]['id']))
+		if(checkAdminAccessForUser($users[$i]['id']) == 1)
 		{
 			if(!in_array($users[$i]['id'], $group_leader))
 				echo '<option value="'.$users[$i]['id'].'">'.$users[$i]['name'].' '.$users[$i]['last_name'].'</option>';

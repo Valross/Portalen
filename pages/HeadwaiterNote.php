@@ -1,5 +1,5 @@
 <?php
-	if(checkAdminAccess())
+	if(checkAdminAccess() <= 3)
 	{
 ?>
 

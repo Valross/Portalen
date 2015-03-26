@@ -28,7 +28,7 @@ function loadAllHeadwaiterNotes()
 	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 	$startItem = $currentPage * $itemsPerPage;
 
-	if(count($HeadwaiterNotes) > 0 && checkAdminAccess())
+	if(count($HeadwaiterNotes) > 0 && checkAdminAccess() <= 3)
 	{
 		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($HeadwaiterNotes); ++$i)
 		{

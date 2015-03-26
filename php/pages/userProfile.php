@@ -133,7 +133,7 @@ function addToGroup()
 {
 	$user_id = $_SESSION['user_id'];
 
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		?>
 		<div class="col-sm-6">
@@ -156,7 +156,7 @@ function removeFromGroup()
 {
 	$user_id = $_SESSION['user_id'];
 
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		?>
 		<div class="col-sm-6">
@@ -210,7 +210,7 @@ function loadUserAvatar()
 function loadEdit()
 {
 	$user_id = $_GET['id'];
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		echo ' - <a href="?page=editOtherProfile&id='.$user_id.'">
 			<span class="fa fa-pencil-square-o fa-fw fa-lg"></span>Redigera</a>';

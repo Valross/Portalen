@@ -3,7 +3,7 @@ loadTitleForBrowser('DC-verktyg');
 
 function loadAllTools()
 {
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		echo '<a href="?page=wages" class="list-group-item">Löner</a>';
 		echo '<a href="?page=createGroup" class="list-group-item">Skapa grupp</a>';

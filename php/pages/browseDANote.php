@@ -48,7 +48,7 @@ function loadAllDANotes()
 	$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 	$startItem = $currentPage * $itemsPerPage;
 
-	if(count($DANotes) > 0 && checkAdminAccess() && $currentPage <= $lastPage)
+	if(count($DANotes) > 0 && checkAdminAccess() <= 2 && $currentPage <= $lastPage)
 	{
 		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($DANotes); ++$i)
 		{

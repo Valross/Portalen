@@ -11,7 +11,7 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 	$localUserBookedThisSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
 						WHERE user_id = '$user_id' AND work_slot_id = '$work_slot_id'");
 
-	if(count($localUserBookedThisSlot) > 0 && !checkAdminAccess())
+	if(count($localUserBookedThisSlot) > 0 && checkAdminAccess() == 4)
 	{
 		$event = DBQuery::sql("SELECT event_type_id FROM event 
 						WHERE id = '$event_id'");
@@ -29,7 +29,7 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 				notify($group_leader[$i]['user_id'], 2, $info);
 		}
 	}
-	if(count($localUserBookedThisSlot) > 0 || checkAdminAccess())
+	if(count($localUserBookedThisSlot) > 0 || checkAdminAccess() == 1)
 	{
 		DBQuery::sql("DELETE FROM user_work
         					WHERE '$work_slot_id' = work_slot_id");

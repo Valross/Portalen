@@ -4,7 +4,7 @@ loadTitleForBrowser('');
 
 function loadPeople()
 {
-	if(isset($_GET['event_id']) && isset($_GET['work_slot_id']) && checkAdminAccess())
+	if(isset($_GET['event_id']) && isset($_GET['work_slot_id']) && checkAdminAccess() == 1)
 	{
 		$event_id = $_GET['event_id'];
 		$work_slot_id = $_GET['work_slot_id'];

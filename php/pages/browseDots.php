@@ -124,7 +124,7 @@ function loadComments()
 			echo '<span class="time">- '.$dots[$i]['date_written'].'</span><br />';
 			echo nl2br($dots[$i]['comment']);
 			echo '</p>';
-			if(checkAdminAccess() || count($myComment) > 0)
+			if(checkAdminAccess() == 1 || count($myComment) > 0)
 					echo '<a href=?page=removeDot&dot_id='.$comment_id.'&group_id='.$group_id.
 							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 			echo '</div>';

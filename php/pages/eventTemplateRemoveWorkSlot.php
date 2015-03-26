@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('');
 
-if(isset($_GET['event_template_id']) && isset($_GET['work_slot_id']) && checkAdminAccess())
+if(isset($_GET['event_template_id']) && isset($_GET['work_slot_id']) && checkAdminAccess() == 1)
 {
 	$event_template_id = $_GET['event_template_id'];
 	$work_slot_id = $_GET['work_slot_id'];

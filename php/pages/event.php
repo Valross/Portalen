@@ -89,7 +89,7 @@ if(isset($_POST['submitComment']))
 	}
 }
 
-if(isset($_POST['addSlot']) && checkAdminAccess())
+if(isset($_POST['addSlot']) && checkAdminAccess() == 1)
 {
 	$group_id = $_POST['group'];
 	$amount = $_POST['amount'];
@@ -138,17 +138,17 @@ function loadEventName()
 	$headwaiter_note = DBQuery::sql("SELECT event_id FROM headwaiter_note
 							WHERE event_id = '$event_id'");
 
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		echo ' - <a href="?page=checkPasses&id='.$event_id.'"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 	}
 
-	if(count($da_note) > 0 && checkAdminAccess())
+	if(count($da_note) > 0 && checkAdminAccess() == 1)
 	{
 		echo ' - <a href="?page=DANote&id='.$da_note[0]['event_id'].'">DA-lapp</a>';
 	}
 
-	if(count($headwaiter_note) > 0 && checkAdminAccess())
+	if(count($headwaiter_note) > 0 && checkAdminAccess() == 1)
 	{
 		echo ' - <a href="?page=HeadwaiterNote&id='.$headwaiter_note[0]['event_id'].'">Hovis-lapp</a>';
 	}
@@ -171,7 +171,7 @@ function loadEventDescription()
 	$start_d = $eventStart->format('Y-m-d');
 	$end_d = $eventEnd->format('Y-m-d');
 
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		echo '<form action="" method="post">';
 		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
@@ -261,7 +261,7 @@ function loadWorkSlots()
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
 							ORDER BY name");
 
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 	{
 		echo '<form action="" method="post">';
 	}
@@ -303,7 +303,7 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND work_slot_id = '$work_slot_id'");
 
-				if(checkAdminAccess())
+				if(checkAdminAccess() == 1)
 				{
 					if($slots[$j]['group_id'] == $groups[$i]['sub_group'])
 						echo '<li class="list-group-item">'.$number.'! ';
@@ -356,7 +356,7 @@ function loadWorkSlots()
 					else
 						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
 
-					if(checkAdminAccess() || count($localUserBookedThisSlot) > 0)
+					if(checkAdminAccess() == 1 || count($localUserBookedThisSlot) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
 
 					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
@@ -381,7 +381,7 @@ function loadWorkSlots()
 			}
 		}
 	}
-	if(checkAdminAccess() && count($groups) > 0)
+	if(checkAdminAccess() == 1 && count($groups) > 0)
 	{
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';
@@ -447,7 +447,7 @@ function loadComments()
 				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
 				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
 				echo $event_comments[$i]['comment'].'</p>';
-				if(checkAdminAccess() || count($myComment) > 0)
+				if(checkAdminAccess() == 1 || count($myComment) > 0)
 					echo '<a href=?page=removeEventComment&event_id='.$event_id.'&comment_id='.$event_comments[$i]['id'].
 							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 				echo '</div>';

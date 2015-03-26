@@ -48,7 +48,7 @@ function loadTitle($news_id)
 
 function loadRemove($news_id)
 {
-	if(checkAdminAccess())
+	if(checkAdminAccess() == 1)
 		echo '<a href=?page=removeNews&news_id='.$news_id.
 				' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 }

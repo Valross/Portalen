@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skriv DA-lapp');
 
-if(isset($_POST['submit']) && checkAdminAccess())
+if(isset($_POST['submit']) && checkAdminAccess() <= 2)
 {
 	$event = strip_tags($_POST['event']);
 	$salesTotal = strip_tags($_POST['salesTotal']);

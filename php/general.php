@@ -520,20 +520,36 @@ function checkIfMemberOfGroup($user_id, $group_id)
 function checkAdminAccess()
 {
 	$user_id = $_SESSION['user_id'];
-	$adminAccess = DBQuery::sql("SELECT access_id, group_id FROM group_access
-						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4) AND
+	$DG = DBQuery::sql("SELECT access_id FROM group_access
+						WHERE access_id = 1 AND
 						group_id IN
 							(SELECT group_id FROM group_member
-							WHERE user_id = '$user_id' AND (group_id = 1 OR group_id = 7))");
+							WHERE user_id = '$user_id')");
+
+	$DA = DBQuery::sql("SELECT access_id FROM group_access
+						WHERE access_id = 2 AND
+						group_id IN
+							(SELECT group_id FROM group_member
+							WHERE user_id = '$user_id')");
+
+	$hovis = DBQuery::sql("SELECT access_id FROM group_access
+						WHERE access_id = 3 AND
+						group_id IN
+							(SELECT group_id FROM group_member
+							WHERE user_id = '$user_id')");
 
 	$adminAccessUser = DBQuery::sql("SELECT access_id FROM user_access
-						WHERE (access_id = 1 OR access_id = 2 OR access_id = 4)
+						WHERE access_id = 1
 						AND user_id = '$user_id'");
 
-	if(count($adminAccess) > 0 || count($adminAccessUser) > 0)
-		return true;
+	if(count($DG) > 0 || count($adminAccessUser) > 0)
+		return 1;
+	else if(count($DA) > 0)
+		return 2;
+	else if(count($hovis) > 0)
+		return 3;
 	else
-		return false;
+		return 4; //No access
 }
 
 function checkAdminAccessForUser($user_id)

@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa grupp');
 
-if(checkAdminAccess())
+if(checkAdminAccess() == 1)
 	loadAll();
 else
 	{

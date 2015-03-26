@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['headwaiter_note_id']) && isset($_GET['comment_id']) && checkAdminAccess())
+if(isset($_GET['headwaiter_note_id']) && isset($_GET['comment_id']) && checkAdminAccess() == 1)
 {
 	$headwaiter_note_id = $_GET['headwaiter_note_id'];
 	$comment_id = $_GET['comment_id'];

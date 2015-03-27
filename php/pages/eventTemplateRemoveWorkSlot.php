@@ -12,7 +12,7 @@ if(isset($_GET['event_template_id']) && isset($_GET['work_slot_id']) && checkAdm
 
 	?>
 		<script>
-			window.location = "?page=manageEventTemplate&id=<?php echo $event_template_id; ?>";
+			window.location = "?page=manageEventTemplatePasses&id=<?php echo $event_template_id; ?>";
 		</script>
 	<?php
 }

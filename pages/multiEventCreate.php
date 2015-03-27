@@ -24,14 +24,8 @@
 				<option value="no">Ingen mall</option>
 				<?php loadTemplates(); ?>
 			</select>
-			
-			<label for="type">Evenemangstyp</label>
-			<select name="type" id="type">
-				<option id="typeno" value="no">Välj typ</option>
-				<?php loadTypes(); ?>
-			</select>
 
-			<label for="day">Dag i veckan</label>
+		<!-- 	<label for="day">Dag i veckan</label>
 			<select name="day" id="day">
 				<option id="monday" value="monday">Måndag</option>
 				<option id="tuesday" value="tuesday">Tisdag</option>
@@ -40,16 +34,16 @@
 				<option id="friday" value="friday">Fredag</option>
 				<option id="saturday" value="saturday">Lördag</option>
 				<option id="sunday" value="sunday">Söndag</option>
-			</select>
+			</select> -->
 
 			<div class="input-group date datetimepicker">
-				<label for="start">Från datum</label>
+				<label for="start">Startdatum</label>
 				<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
 		        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 			</div>
 				
 			<div class="input-group date datetimepicker">
-				<label for="end">Till datum</label>
+				<label for="end">Slutdatum</label>
 				<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>">
 				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 			</div>
@@ -59,7 +53,7 @@
 			<label for="info">Beskrivning</label>
 			<textarea rows="6" name="info" id="info" class="bottom-border"></textarea>
 			
-			<input type="submit" name="submit" value="Skapa evenemang">
+			<input type="submit" name="submit" value="Kör i vind!">
 		</div> <!-- .white-box -->
 	</div> <!-- .col-sm-6 -->	
 </div> <!-- .row -->		

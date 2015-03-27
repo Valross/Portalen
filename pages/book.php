@@ -21,14 +21,16 @@
 
 <div class="col-sm-4">
 	<div class="white-box">
-	<h3>Dina bokningsbara pass</h3>
-	<div class="list-group">
-	<?php echo loadAvailableEvents() ?>
-	</div>
-	<h3>Bokade pass</h3>
-	<div class="list-group">
-	<?php echo loadBookedEvents() ?>
-	</div>
+		<h4>Bokat</h4>	
+		<div class="list-group">
+			 <?php loadBookedEvents(); ?>
+		</div>
+	</div> <!-- .white-box -->
+	<div class="white-box">
+		<h4>Bokningsbart</h4>
+		<div class="list-group">
+			<?php loadAvailableEvents(); ?>
+		</div>
 	</div> <!-- .white-box -->
 </div> <!-- .col-sm-4 -->
 <div class="col-sm-8">

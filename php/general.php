@@ -177,31 +177,30 @@ if(count($periodDates) == 1)
 //Load booked events
 function loadBookedEvents()
 {
-	$bookedEvents = DBQuery::sql("SELECT id, name, start_time FROM event WHERE id IN
-									(SELECT event_id FROM work_slot WHERE id IN
-									(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
-									) 
-								ORDER BY start_time
-								");
+	$bookedEvents = DBQuery::sql("SELECT id, name, start_time FROM event 
+								WHERE id IN
+									(SELECT event_id FROM work_slot 
+									WHERE id IN
+										(SELECT work_slot_id FROM user_work 
+										WHERE user_id = '$_SESSION[user_id]' AND checked = '0')) 
+								ORDER BY start_time");
 	
-	$workTimes = DBQuery::sql	("SELECT start_time, end_time, points FROM work_slot WHERE id IN
-									(SELECT work_slot_id FROM user_work WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
-								ORDER BY start_time
-								");
-								
+	$workTimes = DBQuery::sql	("SELECT start_time, end_time, points, group_id, wage FROM work_slot 
+								WHERE id IN
+									(SELECT work_slot_id FROM user_work 
+									WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
+								ORDER BY start_time");
 							
 	for($i = 0; $i < count($bookedEvents); ++$i)
 	{
 		$eventId = $bookedEvents[$i]['id'];	
-		$availableSlots = DBQuery::sql	("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										");
-		$availableSlotsCount = count($availableSlots);
-		$availableSlotsText = 'lediga platser';
-		if($availableSlotsCount == 1)
-		{
-			$availableSlotsText = 'ledig plats';
-		}
+		$group_id = $workTimes[$i]['group_id'];
+		$availableSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
+											(SELECT work_slot_id FROM user_work)");
+
+		$group = DBQuery::sql("SELECT name FROM work_group 
+								WHERE id = '$group_id'");
+
 		$name = $bookedEvents[$i]['name'];
 		$eventDate = new DateTime($bookedEvents[$i]['start_time']);
 		$day = $eventDate->format('j');
@@ -211,13 +210,14 @@ function loadBookedEvents()
 		$end = new DateTime($workTimes[$i]['end_time']);
 		$end = $end->format(' H:i');
 		$points = $workTimes[$i]['points'];
+		$wage = $workTimes[$i]['wage'];
 		
-		?>
-			<a href=<?php echo '"?page=event&id='.$bookedEvents[$i]['id'].'"'; ?> class="list-group-item">
-			<span class="badge"><?php echo $points ?>p</span>
-			<strong><?php echo $day.'/'.$month.' '; ?></strong>
-			<?php echo ' '.$name ?></a>
-		<?php
+		echo '<a href="?page=event&id='.$bookedEvents[$i]['id'].'" class="list-group-item">';
+		echo '<span class="badge">'.$points.'p</span>';
+		if($wage > 0)
+			echo '<span class="badge">'.$wage.'kr/h</span>';
+		echo '<strong>'.$day.'/'.$month.' </strong>';
+		echo ' '.$name.' ('.$group[0]['name'].')</a>';
 	}
 	
 	if(count($bookedEvents) == 0)
@@ -234,23 +234,20 @@ function loadBookedEvents()
 function loadTodaysEvents()
 {
 	global $dateNoTime;
-	$upcomingEvents = DBQuery::sql("SELECT event.id, event.name AS event_name, event.start_time, event.end_time, event_type.name AS type_name FROM event 
-									INNER JOIN event_type ON event.event_type_id = event_type.id 
+	$todaysEvents = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event 
 									WHERE start_time > '$dateNoTime' ORDER BY start_time");
 
 	$nothingIsHappening = true;							
 	
-	for($i = 0; $i < count($upcomingEvents); ++$i)
+	for($i = 0; $i < count($todaysEvents); ++$i)
 	{
-		$eventId = $upcomingEvents[$i]['id'];
+		$eventId = $todaysEvents[$i]['id'];
 		$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");
 		$availableSlots = DBQuery::sql	("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
 											(SELECT work_slot_id FROM user_work)
 										");
 
-		
-
-		$eventDate = new DateTime($upcomingEvents[$i]['start_time']);
+		$eventDate = new DateTime($todaysEvents[$i]['start_time']);
 		if($dateNoTime == $eventDate->format('Y-m-d'))
 		{
 			$nothingIsHappening = false;	
@@ -262,19 +259,17 @@ function loadTodaysEvents()
 				$availableSlotsText = 'ledig plats';
 			}
 			
-			$name = $upcomingEvents[$i]['event_name'];
+			$name = $todaysEvents[$i]['name'];
 			
 			$day = $eventDate->format('j');
 			$month = $eventDate->format('n');
 			$start = $eventDate->format('H:i -');
-			$end = new DateTime($upcomingEvents[$i]['end_time']);
+			$end = new DateTime($todaysEvents[$i]['end_time']);
 			$end = $end->format(' H:i');
-			$type = $upcomingEvents[$i]['type_name'];
-			?>
-				<a href=<?php echo '"?page=event&id='.$upcomingEvents[$i]['id'].'"'; ?> class="list-group-item">
-				<strong class="list-group-item-time-floated-left"><?php echo $start. '' .$end.' ';?></strong>
-				<?php echo $name ?></a>
-			<?php
+
+			echo '<a href="?page=event&id='.$todaysEvents[$i]['id'].'" class="list-group-item">';
+			echo '<strong class="list-group-item-time-floated-left">'.$start.''.$end.' </strong>';
+			echo ' '.$name.'</a>';
 		}
 	}
 	if($nothingIsHappening)
@@ -291,12 +286,12 @@ function loadTodaysEvents()
 function loadAvailableEvents()
 {
 	global $dateNoTime;
-	$availableEvents = DBQuery::sql("SELECT event.id, event.name AS event_name, event.start_time, event.end_time, event_type.name AS type_name FROM event 
-									INNER JOIN event_type ON event.event_type_id = event_type.id 
-									WHERE start_time > '$dateNoTime' AND event.id IN
+	$availableEvents = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event
+									WHERE start_time > '$dateNoTime' AND id IN
 										(SELECT event_id FROM work_slot WHERE id NOT IN
 											(SELECT work_slot_id FROM user_work)
 										)
+									AND event_type_id != 5
 									ORDER BY start_time");
 								
 	
@@ -315,21 +310,18 @@ function loadAvailableEvents()
 			$availableSlotsText = 'ledig plats';
 		}
 		
-		$name = $availableEvents[$i]['event_name'];
+		$name = $availableEvents[$i]['name'];
 		$eventDate = new DateTime($availableEvents[$i]['start_time']);
 		$day = $eventDate->format('j');
 		$month = $eventDate->format('n');
 		$start = $eventDate->format('H:i -');
 		$end = new DateTime($availableEvents[$i]['end_time']);
 		$end = $end->format(' H:i');
-		$type = $availableEvents[$i]['type_name'];
 
-		?>
-			<a href=<?php echo '"?page=event&id='.$availableEvents[$i]['id'].'"'; ?> class="list-group-item">
-			<span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span>
-			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong>
-			<?php echo $name ?></a>
-		<?php
+		echo '<a href="?page=event&id='.$availableEvents[$i]['id'].'" class="list-group-item">';
+		echo '<span class="badge">'.$availableSlotsCount.' '.$availableSlotsText.'</span>';
+		echo '<strong class="list-group-item-date-floated-left">'.$day.'/'.$month.' </strong>';
+		echo ' '.$name.'</a>';
 	}
 
 	if(count($availableEvents) == 0)
@@ -345,13 +337,12 @@ function loadAvailableEvents()
 function loadAvailableMeetings()
 {
 	global $dateNoTime;
-	$availableMeetings = DBQuery::sql("SELECT event.id, event.name AS event_name, event.start_time, event.end_time, event_type.name AS type_name FROM event 
-									INNER JOIN event_type ON event.event_type_id = event_type.id 
-									WHERE start_time > '$dateNoTime' AND event.id IN
+	$availableMeetings = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event
+									WHERE start_time > '$dateNoTime' AND id IN
 										(SELECT event_id FROM work_slot WHERE id NOT IN
 											(SELECT work_slot_id FROM user_work)
 										)
-									AND event.event_type_id = 5
+									AND event_type_id = 5
 									ORDER BY start_time");
 								
 	
@@ -364,27 +355,19 @@ function loadAvailableMeetings()
 										");
 		$workSlotsCount = count($workSlots);
 		$availableSlotsCount = count($availableSlots);
-		$availableSlotsText = 'lediga platser';
-		if($availableSlotsCount == 1)
-		{
-			$availableSlotsText = 'ledig plats';
-		}
 		
-		$name = $availableMeetings[$i]['event_name'];
+		$name = $availableMeetings[$i]['name'];
 		$eventDate = new DateTime($availableMeetings[$i]['start_time']);
 		$day = $eventDate->format('j');
 		$month = $eventDate->format('n');
 		$start = $eventDate->format('H:i -');
 		$end = new DateTime($availableMeetings[$i]['end_time']);
 		$end = $end->format(' H:i');
-		$type = $availableMeetings[$i]['type_name'];
 
-		?>
-			<a href=<?php echo '"?page=event&id='.$availableMeetings[$i]['id'].'"'; ?> class="list-group-item">
-			<span class="badge"><?php echo $availableSlotsCount.' '.$availableSlotsText; ?></span>
-			<strong class="list-group-item-date-floated-left"><?php echo $day.'/'.$month.' '; ?></strong>
-			<?php echo $name ?></a>
-		<?php
+		echo '<a href="?page=event&id='.$availableMeetings[$i]['id'].'" class="list-group-item">';
+		echo '<span class="badge">Boka upp dig!</span>';
+		echo '<strong class="list-group-item-date-floated-left">'.$day.'/'.$month.' </strong>';
+		echo ' '.$name.'</a>';
 	}
 
 	if(count($availableMeetings) == 0)

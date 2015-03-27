@@ -9,26 +9,28 @@
 <div class="row">
 <div class="col-sm-5">
 	<div class="white-box">
-		
-			<h3>Bokade pass</h3>	
-			<div class="list-group">
-				 <?php loadBookedEvents(); ?>
-			</div>
-			
-			<h3>Idag på Trappan</h3>
-			<div class="list-group">	
-				<?php loadTodaysEvents(); ?>
-			</div>
-			
-			<h3>Bokningsbara pass</h3>
-			<div class="list-group">
-				<?php loadAvailableEvents(); ?>
-			</div>
-			
-			<h3>Möten</h3>
-			<div class="list-group">
-				<?php loadAvailableMeetings(); ?>
-			</div>
+		<h4>Idag</h4>
+		<div class="list-group">	
+			<?php loadTodaysEvents(); ?>
+		</div>
+	</div> <!-- .white-box -->
+	<div class="white-box">
+		<h4>Bokat</h4>	
+		<div class="list-group">
+			 <?php loadBookedEvents(); ?>
+		</div>
+	</div> <!-- .white-box -->
+	<div class="white-box">
+		<h4>Bokningsbart</h4>
+		<div class="list-group">
+			<?php loadAvailableEvents(); ?>
+		</div>
+	</div> <!-- .white-box -->
+	<div class="white-box">
+		<h4>Möten</h4>
+		<div class="list-group">
+			<?php loadAvailableMeetings(); ?>
+		</div>
 	</div> <!-- .white-box -->
 </div> <!-- col-sm-5 -->
 		

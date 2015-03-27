@@ -121,7 +121,7 @@ function loadEventName()
 	$event_id = $_GET['id'];
 	$user_id = $_SESSION['user_id'];
 
-	$event_name = DBQuery::sql("SELECT name FROM event
+	$event_name = DBQuery::sql("SELECT name, event_type_id FROM event
 							WHERE id = '$event_id'");
 
 	if(count($event_name) > 0)
@@ -138,7 +138,7 @@ function loadEventName()
 	$headwaiter_note = DBQuery::sql("SELECT event_id FROM headwaiter_note
 							WHERE event_id = '$event_id'");
 
-	if(checkAdminAccess() == 1)
+	if(checkAdminAccess() == 1 && $event_name[0]['event_type_id'] != 5)
 	{
 		echo ' - <a href="?page=checkPasses&id='.$event_id.'"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 	}

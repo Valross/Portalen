@@ -191,7 +191,7 @@ function loadBookedEvents()
 									WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
 								ORDER BY start_time");
 							
-	for($i = 0; $i < count($bookedEvents); ++$i)
+	for($i = 0; $i < count($bookedEvents) && $i < 15; ++$i)
 	{
 		$eventId = $bookedEvents[$i]['id'];	
 		$group_id = $workTimes[$i]['group_id'];
@@ -295,7 +295,7 @@ function loadAvailableEvents()
 									ORDER BY start_time");
 								
 	
-	for($i = 0; $i < count($availableEvents); ++$i)
+	for($i = 0; $i < count($availableEvents) && $i < 15; ++$i)
 	{
 		$eventId = $availableEvents[$i]['id'];
 		$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");
@@ -337,16 +337,21 @@ function loadAvailableEvents()
 function loadAvailableMeetings()
 {
 	global $dateNoTime;
+	$user_id = $_SESSION['user_id'];
 	$availableMeetings = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event
 									WHERE start_time > '$dateNoTime' AND id IN
 										(SELECT event_id FROM work_slot WHERE id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										)
+											(SELECT work_slot_id FROM user_work))
 									AND event_type_id = 5
+									AND id IN
+										(SELECT event_id FROM work_slot
+										WHERE group_id IN
+											(SELECT group_id FROM group_member
+											WHERE user_id = '$user_id'))
 									ORDER BY start_time");
 								
 	
-	for($i = 0; $i < count($availableMeetings); ++$i)
+	for($i = 0; $i < count($availableMeetings) && $i < 4; ++$i)
 	{
 		$eventId = $availableMeetings[$i]['id'];
 		$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");

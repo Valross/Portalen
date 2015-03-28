@@ -433,9 +433,9 @@ function loadMyGroups()
 			<a href=<?php echo '"?page=group&id='.$groups[$i]['id'].'"'; ?> class="list-group-item with-thumbnail">
 				<?php 
 				if($groups[$i]['icon'] != '')
-					echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>'; 
+					echo '<span class="fa fa-'.$groups[$i]['icon'].' fa-fw fa-lg list-group-thumbnail group-badge" style="background: #'.$groups[$i]['hex'].';"></span>'; 
 				else
-					echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+					echo '<span class="fa fa-circle fa-fw fa-lg list-group-thumbnail group-badge" style="background: #'.$groups[$i]['hex'].';"></span>'; 
 				?>
 				<?php echo $groups[$i]['name']; ?>
 				<span class="list-group-item-text pull-right"><?php echo 'sedan '.$group_members[0]['member_since']; ?></span>
@@ -474,9 +474,9 @@ function loadAllGroups()
 				
 				<?php 
 				if($groups[$i]['icon'] != '')
-					echo '<span class="'.$groups[$i]['icon'].' list-group-thumbnail group-badge webb"></span>'; 
+					echo '<span class="fa fa-'.$groups[$i]['icon'].' fa-fw fa-lg list-group-thumbnail group-badge" style="background: #'.$groups[$i]['hex'].';"></span>'; 
 				else
-					echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+					echo '<span class="fa fa-circle fa-fw list-group-thumbnail group-badge" style="background: #'.$groups[$i]['hex'].';"></span>'; 
 				?>
 				<?php echo $groups[$i]['name']; ?>
 				<span class="badge"><?php echo count($members); ?></span>

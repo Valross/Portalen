@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>">
+		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>" class="btn-page-header">
 		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
 		</a>
 	</div>

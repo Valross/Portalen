@@ -2,10 +2,12 @@
 	<div class="col-sm-8">
 		<div class="page-header">
 			<h1>
-			<span class="fa fa-users fa-fw fa-lg"></span> Lagsidor - 
-			<a href="?page=manageGroup">Hantera Lag</a>
+			<span class="fa fa-users fa-fw fa-lg"></span> Lagsidor
 			</h1>
 		</div>
+	</div>
+	<div class="col-sm-4 page-header-right text-right">
+		<a href="?page=manageGroup" class="btn btn-page-header">Hantera lag</a>
 	</div>
 </div> <!-- .row -->
 

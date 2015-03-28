@@ -77,13 +77,13 @@ function loadGroupName()
 {
 	$group_id = $_GET['id'];
 
-	$groupName = DBQuery::sql("SELECT name, icon FROM work_group 
+	$groupName = DBQuery::sql("SELECT name, icon, hex FROM work_group 
 							WHERE id = '$group_id'");
 	
 	if($groupName[0]['icon'] != '')
-		echo '<span class="'.$groupName[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
+		echo '<span class="fa fa-'.$groupName[0]['icon'].' fa-fw list-group-thumbnail group-badge" style="background: #'.$groupName[0]['hex'].';"></span>';
 	else
-		echo '<span class="fa fa-code fa-fw list-group-thumbnail group-badge webb"></span>'; 
+		echo '<span class="fa fa-circle fa-fw list-group-thumbnail group-badge" style="background: #'.$groupName[0]['hex'].';"></span>'; 
 	loadTitleForBrowser($groupName[0]['name']);
 	echo $groupName[0]['name'];
 }

@@ -7,16 +7,10 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Sökresultat');
 
-if(isset($_POST['submitSearch'])){ 
-	if(preg_match("/[A-Za-z]+/", $_POST['search_term'])){ 
-	   
-	   $searchTerm=DBQuery::safeString($_POST['search_term']); 
-
-	   // USERS
+	function searchUsers($searchTerm){
 	   $users = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
 	   			 WHERE name LIKE '%" . $searchTerm . "%' OR last_name LIKE '%" . $searchTerm  ."%'"); 
-	   echo "<p>Användare: </p>";
-	   
+
 	   for($i=0; $i < count($users); ++$i){ 
         	$firstName = $users[$i]['name']; 
         	$lastName = $users[$i]['last_name']; 
@@ -28,11 +22,11 @@ if(isset($_POST['submitSearch'])){
   			echo "<li>" . "<a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
   			echo "<li>" . "<a href=mailto:" . $userMail . ">" . $userMail . "</a></li>\n"; 
   			echo "</ul>"; 
-  		} 
+  		}
+  	}
 
-  		// EVENTS
+  	function searchEvents($searchTerm){
 		$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchTerm . "%'"); 
-		echo "<p>Evenemang: </p>";
 
 	   	for($i=0; $i < count($events); ++$i){ 
         	$eventName = $events[$i]['name'];
@@ -43,11 +37,13 @@ if(isset($_POST['submitSearch'])){
   			echo "<ul>\n"; 
   			echo "<li>" . "<a href=\"?page=event&id=$eventId\">" . $eventName . ", " . $date . "</a></li>\n"; 
   			echo "</ul>"; 
-  		} 
+  		}
 
-  		// TEAMS
+  	}
+
+
+  	function searchTeams($searchTerm){
   		$teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchTerm . "%'"); 
-		echo "<p>Lag: </p>";
 
 	   	for($i=0; $i < count($teams); ++$i){ 
         	$teamName = $teams[$i]['name'];
@@ -58,11 +54,6 @@ if(isset($_POST['submitSearch'])){
   			echo "<li>" . "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a></li>\n"; 
   			echo "</ul>"; 
   		} 
-	}   
-}
-
-else{ 
-	echo  "<p>Please enter a search query</p>"; 
-} 
+	}
 
 ?>

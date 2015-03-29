@@ -10,11 +10,11 @@ loadTitleForBrowser('Sökresultat');
 		// $events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'");
 		// $teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'");
 
-		$results = DBQuery::sql("SELECT name FROM user WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'
+		$results = DBQuery::sql("SELECT id, name, last_name FROM user WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'
 			UNION
-			SELECT name FROM event WHERE name LIKE '%" . $searchString . "%' 
+			SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%' 
 			UNION
-			SELECT name FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
+			SELECT id, name, Null as col3 FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
 
 		echo "DEBUG: results = " . count($results);
 

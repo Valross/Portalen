@@ -110,11 +110,17 @@ function loadGroupManageTools($group)
 	echo '<label for="groupName">Lagnamn</label>
 			<input type="text" name="groupName" id="groupName" value="'.$group_name[0]['name'].'">
 			<label for="facebookGroup">Facebookgrupp</label>
-			<input type="text" name="facebookGroup" id="facebookGroup" value="'.$group_name[0]['facebook_group'].'">
+			<input type="text" name="facebookGroup" id="facebookGroup" placeholder="https://www.facebook.com/groups/" value="'.$group_name[0]['facebook_group'].'">
 			<label for="icon">Ikon <span class="fa fa-cloud fa-fw fa-lg"></span></label>
-			<input type="text" name="icon" id="icon" placeholder="fa fa-cloud fa-fw fa-lg" value="'.$group_name[0]['icon'].'">
+			<input type="text" name="icon" id="icon" placeholder="cloud" value="'.$group_name[0]['icon'].'" class="bottom-border">
+			<p class="alert alert-info small" role="alert">
+			Värdet för fältet <strong>ikon</strong> används för att visa en specifik ikon från ikontypsnittet Font Awesome. En komplett lista över tillgängliga ikonnamn finns på <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">http://fortawesome.github.io/Font-Awesome/icons/</a>.
+			</p>
 			<label for="hex">#Hexkod</label>
-			<input type="text" name="hex" id="hex" placeholder="ffffff" value="'.$group_name[0]['hex'].'">
+			<input type="text" name="hex" id="hex" placeholder="ffffff" value="'.$group_name[0]['hex'].'" class="bottom-border">
+			<p class="alert alert-info small" role="alert">
+			Värdet för fältet <strong>#Hexkod</strong> kommer användas till bakgrundsfärgen i cirkeln till lagets ikon. Färger anges med hexadecimaler. Skriv 6 tecken och strunta i hashtecknet (#).
+			</p>
 			<label for="description">Beskrivning</label>
 			<textarea rows="6" cols="50" name="description" id="description" class="bottom-border">'.$group_name[0]['description'].'</textarea>
 			<input type="hidden" name="id" id="id" value="'.$group_name[0]['id'].'">';

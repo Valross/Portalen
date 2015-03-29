@@ -16,7 +16,7 @@ loadTitleForBrowser('Sökresultat');
 		if(isset($_GET['pageNumber']))
 			$currentPage = $_GET['pageNumber'];
 
-		$itemsPerPage = 3;
+		$itemsPerPage = 15;
 		$totalItems = count($results);
 		$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 		$startItem = $currentPage * $itemsPerPage;

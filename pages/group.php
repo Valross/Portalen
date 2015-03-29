@@ -1,20 +1,20 @@
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-6">
 		<div class="page-header">
-			<h1 class="header-img"><?php loadGroupName(); ?> - <a href="?page=groups">Alla lag</a></h1> 
+			<?php loadGroupName(); ?>
 		</div>
 	</div>
-	<div class="col-sm-4 page-header-right text-right">
+	<div class="col-sm-6 page-header-right text-right">
 	  <div class="dropdown children-float-right">
-		<button href="?page=manageGroup" class="btn btn-page-header dropdown-toggle" type="button" id="group-actions" data-toggle="dropdown">
-			Åtgärder
+		  <a href="?page=groups" class="btn btn-page-header header-img"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till alla lag</a>
+		  <a href="#" class="btn btn-page-header header-img">Ansök om medlemskap/Gå ur laget</a>
+		<button href="?page=manageGroup" class="btn btn-page-header header-img dropdown-toggle" type="button" id="group-actions" data-toggle="dropdown">
+			Gruppåtgärder
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="group-actions">
 		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Protokoll</a></li>
 		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Punkter</a></li>
-		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Gå ur laget</a></li>
-		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ansök om medlemskap</a></li>
 		  </ul>
 		</div> <!-- .dropdown -->
 	</div> <!-- .col-sm-4 -->

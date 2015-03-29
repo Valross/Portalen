@@ -81,11 +81,11 @@ function loadGroupName()
 							WHERE id = '$group_id'");
 	
 	if($groupName[0]['icon'] != '')
-		echo '<span class="fa fa-'.$groupName[0]['icon'].' fa-fw list-group-thumbnail group-badge" style="background: #'.$groupName[0]['hex'].';"></span>';
+		echo '<span class="fa fa-'.$groupName[0]['icon'].' fa-fw group-badge" style="background: #'.$groupName[0]['hex'].';"></span>';
 	else
-		echo '<span class="fa fa-circle fa-fw list-group-thumbnail group-badge" style="background: #'.$groupName[0]['hex'].';"></span>'; 
+		echo '<span class="fa fa-circle fa-fw group-badge" style="background: #'.$groupName[0]['hex'].';"></span>'; 
 	loadTitleForBrowser($groupName[0]['name']);
-	echo $groupName[0]['name'];
+	echo '<h1 class="header-img">'. $groupName[0]['name'] .'</h1>';
 }
 
 function loadProtocolLink()

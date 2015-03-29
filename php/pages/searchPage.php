@@ -4,19 +4,12 @@ loadTitleForBrowser('Sökresultat');
 
 	function loadAllResults($searchString){
 		
-		// Get results
-		// $users = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
-	 //   			 WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'");
-		// $events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'");
-		// $teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'");
-
-		$results = DBQuery::sql("SELECT id, name, last_name FROM user WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'
+		// TO DO: limit query to specific page to save performance
+		$results = DBQuery::sql("SELECT id, name, last_name, 'user' as source_table FROM user WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'
 			UNION
-			SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%' 
+			SELECT id, name, start_time, 'event' as source_table FROM event WHERE name LIKE '%" . $searchString . "%' 
 			UNION
-			SELECT id, name, Null as col3 FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
-
-		echo "DEBUG: results = " . count($results);
+			SELECT id, name, Null as col3, 'team' as source_table FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
 
 		$currentpage = 0;
 
@@ -28,38 +21,43 @@ loadTitleForBrowser('Sökresultat');
 		$lastPage = ceil(($totalItems / $itemsPerPage))-1;
 		$startItem = $currentPage * $itemsPerPage;
 
-		// echo "currentpage = " . $currentpage;
-		// echo ", startitem = " . $startItem;
-		// echo ", lastpage = " . $lastPage;
-
 		if($currentPage <= $lastPage) {
-			// echo "hej";
-			// echo "users = " . count($users);
-
 			for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($results); ++$i) {
-	     //    	$firstName = $results[$i]['name']; 
-	     //    	$lastName = $results[$i]['last_name']; 
-	     //    	$userId = $results[$i]['id']; 
-	     //    	$userMail = $results[$i]['mail']; 
+	  			$sourceTable = $results[$i]['source_table'];
+	  			// echo "source = " . $sourceTable;
 
-	  			// echo "<ul>\n"; 
-	  			// echo "<li>" . "<a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
-	  			// echo "<li>" . "<a href=mailto:" . $userMail . ">" . $userMail . "</a></li>\n"; 
-	  			// echo "</ul>"; 
+	  			if($sourceTable == 'user'){
+		  			$firstName = $results[$i]['name']; 
+		        	$lastName = $results[$i]['last_name']; 
+		        	$userId = $results[$i]['id'];
 
-	  			$name = $results[$i]['name'];
-	  			echo "<p>".$name."</p>";
+					echo "<ul>\n"; 
+		  			echo "<li><a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
+		  			echo "</ul>"; 	
+	  			}
+
+	  			else if ($sourceTable == 'event'){
+	  				$eventName = $results[$i]['name'];
+		        	$eventId = $results[$i]['id'];
+		        	$date = $results[$i]['start_time'];
+
+		        	echo "<ul>\n";
+		  			echo "<li><a href=\"?page=event&id=$eventId\">" . $eventName . ", " . $date . "</a></li>\n"; 
+		  			echo "</ul>";
+	  			}
+
+	  			else {  //team
+	  				$teamName = $results[$i]['name'];
+		        	$teamId =  $results[$i]['id'];
+
+		        	echo "<ul>\n";
+		  			echo "<li><a href=\"?page=group&id=$teamId\">" . $teamName . "</a></li>\n"; 
+		  			echo "</ul>";
+	  			}
+	  			
   			}
 
 				loadPageNumbers($currentPage, $lastPage, 'searchPage', '&query='.$searchString);
-				
-				// echo '<p>Användare: </p>';
-				// displayUsers($searchString, $users, $startItem, $itemsPerPage);
-
-				// echo '<p>Evenemang: </p>';
-				// displayEvents($searchString, $events, $startItem, $itemsPerPage);
-				// echo '<p>Lag: </p>';
-				// displayTeams($searchString, $teams, $startItem, $itemsPerPage);
 		
 		}
 			

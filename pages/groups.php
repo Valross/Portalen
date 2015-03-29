@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<a href="?page=manageGroup" class="btn btn-page-header">Hantera lag</a>
+		<a href="?page=manageGroup" class="btn btn-page-header"><i class="fa fa-wrench fa-fw"></i> Hantera lag</a>
 	</div>
 </div> <!-- .row -->
 

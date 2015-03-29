@@ -800,12 +800,19 @@ fieldset[disabled] {
 /* =State
 -------------------------------------------------------------- */
 	
-	.dropdown-menu.is-floated-parent {
-		top: 58px;
-	}
+	.dropdown-menu.is-floated-parent, 
 	.dropdown-notifications-menu.is-floated-parent {
 		top: 58px;
 	}
+	
+	.dropdown.children-float-right > ul {
+		float: right;
+		right: 0;
+		top: 36px;
+		left: auto;
+	}
+	
+
 	
 	/* Bootstrap calendar state */
 	

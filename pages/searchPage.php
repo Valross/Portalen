@@ -19,6 +19,20 @@ if(isset($_POST['submitSearch'])){
 	} 
 }
 
+else if(isset($_GET['query'])){ 
+	if(preg_match("/[A-Za-z]+/", $_GET['query'])){ 
+		$searchString = DBQuery::safeString($_GET['query']); 
+		
+		// echo "debug: query = " . $searchString;
+
+		loadAllResults($searchString);
+	}
+
+	else{ 
+		echo  "<p>Please enter a search query</p>"; 
+	} 
+}
+
 else
 	echo "form inte satt";
 

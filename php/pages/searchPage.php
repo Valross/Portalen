@@ -22,12 +22,13 @@ loadTitleForBrowser('Sökresultat');
 
 		// echo "currentpage = " . $currentpage;
 		// echo ", startitem = " . $startItem;
-		// echo "lastpage = " . $lastPage;
+		// echo ", lastpage = " . $lastPage;
 
 		if($currentPage <= $lastPage) {
 			// echo "hej";
 			echo "users = " . count($users);
-			for($i = $startItem; $i < $startItem + $itemsPerPage; ++$i) { //i varje funktion? 
+
+			for($i = $startItem; $i < $startItem + $itemsPerPage; ++$i) {
 	        	echo ", i = " . $i;
 	        	$firstName = $users[$i]['name']; 
 	        	$lastName = $users[$i]['last_name']; 
@@ -40,7 +41,7 @@ loadTitleForBrowser('Sökresultat');
 	  			echo "</ul>"; 
 	  		}
 
-				loadPageNumbers($currentPage, $lastPage, 'searchPage', '');
+				loadPageNumbers($currentPage, $lastPage, 'searchPage', '&query='.$searchString);
 				
 				// echo '<p>Användare: </p>';
 				// displayUsers($searchString, $users);

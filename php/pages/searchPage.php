@@ -24,81 +24,70 @@ loadTitleForBrowser('Sökresultat');
 		if($currentPage <= $lastPage) {
 			for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($results); ++$i) {
 	  			$sourceTable = $results[$i]['source_table'];
-	  			// echo "source = " . $sourceTable;
 
 	  			if($sourceTable == 'user'){
 		  			$firstName = $results[$i]['name']; 
 		        	$lastName = $results[$i]['last_name']; 
 		        	$userId = $results[$i]['id'];
 
-					echo "<ul>\n"; 
-		  			echo "<li><a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
-		  			echo "</ul>"; 	
+				 	displayUser($firstName, $lastName, $userId);	
 	  			}
 
 	  			else if ($sourceTable == 'event'){
 	  				$eventName = $results[$i]['name'];
 		        	$eventId = $results[$i]['id'];
-		        	$date = $results[$i]['start_time'];
+		        	// $date = $results[$i]['start_time']; funkar inte?
+		        	$date = DBQuery::sql("SELECT start_time FROM event WHERE id='$eventId'");
 
-		        	echo "<ul>\n";
-		  			echo "<li><a href=\"?page=event&id=$eventId\">" . $eventName . ", " . $date . "</a></li>\n"; 
-		  			echo "</ul>";
+		        	displayEvent($eventName, $eventId, $date[0]['start_time']);
 	  			}
 
 	  			else {  //team
 	  				$teamName = $results[$i]['name'];
 		        	$teamId =  $results[$i]['id'];
 
-		        	echo "<ul>\n";
-		  			echo "<li><a href=\"?page=group&id=$teamId\">" . $teamName . "</a></li>\n"; 
-		  			echo "</ul>";
-	  			}
-	  			
+		        	displayTeam($teamName, $teamId);
+	  			}  			
   			}
 
+  			echo '<div class="col-sm-7">
+					<div class="white-box">';
 				loadPageNumbers($currentPage, $lastPage, 'searchPage', '&query='.$searchString);
+			echo    '</div>
+				</div>'; 
 		
 		}
-			
-
 	}
 
-	function displayUsers($searchString, $users, $startItem, $itemsPerPage){
-		for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($users); ++$i) {
-	        	$firstName = $users[$i]['name']; 
-	        	$lastName = $users[$i]['last_name']; 
-	        	$userId = $users[$i]['id']; 
-	        	$userMail = $users[$i]['mail']; 
+	function displayUser($firstName, $lastName, $userId){		
+		?>
+		<div class="col-sm-7">
+			<div class="white-box">
+	   		<?php echo "<a href=\"?page=userProfile&id=$userId\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
+		 	</div>
+		</div>
+		<?php
 
-	  			echo "<ul>\n"; 
-	  			echo "<li>" . "<a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
-	  			echo "<li>" . "<a href=mailto:" . $userMail . ">" . $userMail . "</a></li>\n"; 
-	  			echo "</ul>"; 
-  		}
   	}
 
-  	function displayEvents($searchString, $events, $startItem, $itemsPerPage){
-	   	for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($events); ++$i) {
-        	$eventName = $events[$i]['name'];
-        	$eventId = $events[$i]['id'];
-        	$date = $events[$i]['start_time'];
-
-  			echo "<ul>\n"; 
-  			echo "<li>" . "<a href=\"?page=event&id=$eventId\">" . $eventName . ", " . $date . "</a></li>\n"; 
-  			echo "</ul>"; 
-  		}
+  	function displayEvent($eventName, $eventId, $date){
+	    ?>
+		<div class="col-sm-7">
+			<div class="white-box">
+	  			<?php echo "<a href=\"?page=event&id=$eventId\">" . $eventName . " (" . $date . ")" . "</a>\n"; ?> 
+			</div>
+ 		</div> 
+ 		<?php
   	}
 
-  	function displayTeams($searchString, $teams, $startItem, $itemsPerPage){
-	   	for($i=0; $i < count($teams); ++$i){ 
-        	$teamName = $teams[$i]['name'];
-        	$teamId =  $teams[$i]['id'];
-
-  			echo "<ul>\n"; 
-  			echo "<li>" . "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a></li>\n"; 
-  			echo "</ul>"; 
-  		} 
+  	function displayTeam($teamName, $teamId){
+        ?>
+        <div class="col-sm-7">
+			<div class="white-box">    	
+	  			<?php echo "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a>\n"; ?>
+			</div>
+ 		</div>
+ 		<?php
 	}
 
 ?>

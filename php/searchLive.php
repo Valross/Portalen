@@ -34,7 +34,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($users) > 0) {
 		$noResults = 0;
-		echo "<p>Användare</p>";
+		echo "Användare";
 		
 		for ($i=0; $i < count($users) and $i <= $maxResultsPerCategory; ++$i) { 
 			$userId = $users[$i]['id'];
@@ -64,7 +64,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($events) > 0) {
 		$noResults = 0;
-		echo "<p>Evenemang</p>";
+		echo "Evenemang";
 		
 		for ($i=0; $i < count($events) and $i <= $maxResultsPerCategory; ++$i) { 
 			$eventId = $events[$i]['id'];
@@ -119,7 +119,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($teams) > 0) {
 		$noResults = 0;
-		echo "<p>Lag</p>";
+		echo "Lag";
 		
 		for ($i=0; $i < count($teams) and $i <= $maxResultsPerCategory; ++$i) { 
 			$teamId =  $teams[$i]['id'];

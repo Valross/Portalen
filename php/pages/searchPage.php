@@ -7,37 +7,52 @@ loadTitleForBrowser('Sökresultat');
 		// Get results
 		$users = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
 	   			 WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'");
-		$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'");
-		$teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'");
+		// $events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'");
+		// $teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'");
 
-		// if(isset($_GET['pageNumber']))
-		// 	$currentPage = $_GET['pageNumber'];
-		// else
-		// 	$currentPage = 0;
+		$currentpage = 0;
 
-		// $itemsPerPage = 4;
-		// $totalItems = count($users) + count($events) + count($teams);
-		// $lastPage = ceil(($totalItems / $itemsPerPage))-1;
-		// $startItem = $currentPage * $itemsPerPage;
+		if(isset($_GET['pageNumber']))
+			$currentPage = $_GET['pageNumber'];
 
-				echo '<p>Användare: </p>';
-				displayUsers($searchString, $users);
+		$itemsPerPage = 3;
+		$totalItems = count($users);
+		$lastPage = ceil(($totalItems / $itemsPerPage))-1;
+		$startItem = $currentPage * $itemsPerPage;
 
-				echo '<p>Evenemang: </p>';
-				displayEvents($searchString, $events);
+		// echo "currentpage = " . $currentpage;
+		// echo ", startitem = " . $startItem;
+		// echo "lastpage = " . $lastPage;
 
-				echo '<p>Lag: </p>';
-				displayTeams($searchString, $teams);
+		if($currentPage <= $lastPage) {
+			// echo "hej";
+			echo "users = " . count($users);
+			for($i = $startItem; $i < $startItem + $itemsPerPage; ++$i) { //i varje funktion? 
+	        	echo ", i = " . $i;
+	        	$firstName = $users[$i]['name']; 
+	        	$lastName = $users[$i]['last_name']; 
+	        	$userId = $users[$i]['id']; 
+	        	$userMail = $users[$i]['mail']; 
 
+	  			echo "<ul>\n"; 
+	  			echo "<li>" . "<a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
+	  			echo "<li>" . "<a href=mailto:" . $userMail . ">" . $userMail . "</a></li>\n"; 
+	  			echo "</ul>"; 
+	  		}
 
-		// if($currentPage <= $lastPage) {
-		// 	for($i = $startItem; $i < $startItem + $itemsPerPage && $i < $count($...); ++$i) { //i varje funktion?
+				loadPageNumbers($currentPage, $lastPage, 'searchPage', '');
+				
+				// echo '<p>Användare: </p>';
+				// displayUsers($searchString, $users);
 
-		// 		funktioner
+				// echo '<p>Evenemang: </p>';
+				// displayEvents($searchString, $events);
+
+				// echo '<p>Lag: </p>';
+				// displayTeams($searchString, $teams);
 		
-		// 		loadPageNumbers($currentPage, $lastPage, 'searchPage', '');
-		// 	}
-		// }
+		}
+			
 
 	}
 

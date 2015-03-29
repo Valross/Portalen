@@ -7,16 +7,19 @@
 </div> <!-- .row -->
 
 <?php
-
 if(isset($_POST['submitSearch'])){ 
 	if(preg_match("/[A-Za-z]+/", $_POST['search_term'])){ 
-		$searchTerm = DBQuery::safeString($_POST['search_term']); 
-		loadAllResults($searchTerm);
+		$searchString = DBQuery::safeString($_POST['search_term']); 
+		
+		loadAllResults($searchString);
 	}
 
 	else{ 
 		echo  "<p>Please enter a search query</p>"; 
 	} 
 }
+
+else
+	echo "form inte satt";
 
 ?>

@@ -4,78 +4,90 @@ loadTitleForBrowser('Sökresultat');
 
 	function loadAllResults($searchString){
 		
-		// Get results
-		$users = DBQuery::sql("SELECT id, name, last_name, mail FROM user 
-	   			 WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'");
-		$events = DBQuery::sql("SELECT id, name, start_time FROM event WHERE name LIKE '%" . $searchString . "%'");
-		$teams = DBQuery::sql("SELECT id, name FROM work_group WHERE name LIKE '%" . $searchString . "%'");
+		// TO DO: limit query to specific page to save performance
+		$results = DBQuery::sql("SELECT id, name, last_name, 'user' as source_table FROM user WHERE name LIKE '%" . $searchString . "%' OR last_name LIKE '%" . $searchString  ."%'
+			UNION
+			SELECT id, name, start_time, 'event' as source_table FROM event WHERE name LIKE '%" . $searchString . "%' 
+			UNION
+			SELECT id, name, Null as col3, 'team' as source_table FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
 
-		// if(isset($_GET['pageNumber']))
-		// 	$currentPage = $_GET['pageNumber'];
-		// else
-		// 	$currentPage = 0;
+		$currentpage = 0;
 
-		// $itemsPerPage = 4;
-		// $totalItems = count($users) + count($events) + count($teams);
-		// $lastPage = ceil(($totalItems / $itemsPerPage))-1;
-		// $startItem = $currentPage * $itemsPerPage;
+		if(isset($_GET['pageNumber']))
+			$currentPage = $_GET['pageNumber'];
 
-				echo '<p>Användare: </p>';
-				displayUsers($searchString, $users);
+		$itemsPerPage = 3;
+		$totalItems = count($results);
+		$lastPage = ceil(($totalItems / $itemsPerPage))-1;
+		$startItem = $currentPage * $itemsPerPage;
 
-				echo '<p>Evenemang: </p>';
-				displayEvents($searchString, $events);
+		if($currentPage <= $lastPage) {
+			for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($results); ++$i) {
+	  			$sourceTable = $results[$i]['source_table'];
 
-				echo '<p>Lag: </p>';
-				displayTeams($searchString, $teams);
+	  			if($sourceTable == 'user'){
+		  			$firstName = $results[$i]['name']; 
+		        	$lastName = $results[$i]['last_name']; 
+		        	$userId = $results[$i]['id'];
 
+				 	displayUser($firstName, $lastName, $userId);	
+	  			}
 
-		// if($currentPage <= $lastPage) {
-		// 	for($i = $startItem; $i < $startItem + $itemsPerPage && $i < $count($...); ++$i) { //i varje funktion?
+	  			else if ($sourceTable == 'event'){
+	  				$eventName = $results[$i]['name'];
+		        	$eventId = $results[$i]['id'];
+		        	// $date = $results[$i]['start_time']; funkar inte?
+		        	$date = DBQuery::sql("SELECT start_time FROM event WHERE id='$eventId'");
 
-		// 		funktioner
+		        	displayEvent($eventName, $eventId, $date[0]['start_time']);
+	  			}
+
+	  			else {  //team
+	  				$teamName = $results[$i]['name'];
+		        	$teamId =  $results[$i]['id'];
+
+		        	displayTeam($teamName, $teamId);
+	  			}  			
+  			}
+
+  			echo '<div class="col-sm-7">
+					<div class="white-box">';
+				loadPageNumbers($currentPage, $lastPage, 'searchPage', '&query='.$searchString);
+			echo    '</div>
+				</div>'; 
 		
-		// 		loadPageNumbers($currentPage, $lastPage, 'searchPage', '');
-		// 	}
-		// }
-
+		}
 	}
 
-	function displayUsers($searchString, $users){
-		for($i=0; $i < count($users); ++$i){ 
-        	$firstName = $users[$i]['name']; 
-        	$lastName = $users[$i]['last_name']; 
-        	$userId = $users[$i]['id']; 
-        	$userMail = $users[$i]['mail']; 
+	function displayUser($firstName, $lastName, $userId){		
+		?>
+		<div class="col-sm-7">
+			<div class="white-box">
+	   		<?php echo "<a href=\"?page=userProfile&id=$userId\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
+		 	</div>
+		</div>
+		<?php
 
-  			echo "<ul>\n"; 
-  			echo "<li>" . "<a href=\"?page=userProfile&id=$userId\">" . $firstName . " " . $lastName . "</a></li>\n"; 
-  			echo "<li>" . "<a href=mailto:" . $userMail . ">" . $userMail . "</a></li>\n"; 
-  			echo "</ul>"; 
-  		}
   	}
 
-  	function displayEvents($searchString, $events){
-	   	for($i=0; $i < count($events); ++$i){ 
-        	$eventName = $events[$i]['name'];
-        	$eventId = $events[$i]['id'];
-        	$date = $events[$i]['start_time'];
-
-  			echo "<ul>\n"; 
-  			echo "<li>" . "<a href=\"?page=event&id=$eventId\">" . $eventName . ", " . $date . "</a></li>\n"; 
-  			echo "</ul>"; 
-  		}
+  	function displayEvent($eventName, $eventId, $date){
+	    ?>
+		<div class="col-sm-7">
+			<div class="white-box">
+	  			<?php echo "<a href=\"?page=event&id=$eventId\">" . $eventName . " (" . $date . ")" . "</a>\n"; ?> 
+			</div>
+ 		</div> 
+ 		<?php
   	}
 
-  	function displayTeams($searchString, $teams){
-	   	for($i=0; $i < count($teams); ++$i){ 
-        	$teamName = $teams[$i]['name'];
-        	$teamId =  $teams[$i]['id'];
-
-  			echo "<ul>\n"; 
-  			echo "<li>" . "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a></li>\n"; 
-  			echo "</ul>"; 
-  		} 
+  	function displayTeam($teamName, $teamId){
+        ?>
+        <div class="col-sm-7">
+			<div class="white-box">    	
+	  			<?php echo "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a>\n"; ?>
+			</div>
+ 		</div>
+ 		<?php
 	}
 
 ?>

@@ -63,7 +63,7 @@ loadTitleForBrowser('Sökresultat');
 		?>
 		<div class="col-sm-7">
 			<div class="white-box">
-	   		<?php echo "<a href=\"?page=userProfile&id=$userId\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
+	   			<?php echo "<a href=\"?page=userProfile&id=$userId\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
 		 	</div>
 		</div>
 		<?php

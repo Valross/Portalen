@@ -24,8 +24,16 @@ loadTitleForBrowser('Sökresultat');
 		if($currentPage <= $lastPage) {
 			for($i = $startItem; $i < $startItem + $itemsPerPage && $i < count($results); ++$i) {
 	  			$sourceTable = $results[$i]['source_table'];
+	  			$prevSourceTable = 0;
+	  			if ($i > 0)
+		  			$prevSourceTable = $results[$i-1]['source_table'];
 
 	  			if($sourceTable == 'user'){
+	  				if ($i == 0 ) {
+	  					//echo "<h2>Avändare</h2>";
+	  					displayTitle("Användare");
+	  				}
+
 		  			$firstName = $results[$i]['name']; 
 		        	$lastName = $results[$i]['last_name']; 
 		        	$userId = $results[$i]['id'];
@@ -33,7 +41,11 @@ loadTitleForBrowser('Sökresultat');
 				 	displayUser($firstName, $lastName, $userId);	
 	  			}
 
-	  			else if ($sourceTable == 'event'){
+	  			if ($sourceTable == 'event'){
+	  				if ($prevSourceTable !== 'event'){
+	  					displayTitle("Evenemang");
+	  				}
+
 	  				$eventName = $results[$i]['name'];
 		        	$eventId = $results[$i]['id'];
 		        	// $date = $results[$i]['start_time']; funkar inte?
@@ -42,7 +54,10 @@ loadTitleForBrowser('Sökresultat');
 		        	displayEvent($eventName, $eventId, $date[0]['start_time']);
 	  			}
 
-	  			else {  //team
+	  			if ($sourceTable == 'team') {
+	  				if ($prevSourceTable !== 'team') {
+	  					displayTitle("Lag");
+	  				}
 	  				$teamName = $results[$i]['name'];
 		        	$teamId =  $results[$i]['id'];
 
@@ -85,6 +100,16 @@ loadTitleForBrowser('Sökresultat');
         <div class="col-sm-7">
 			<div class="white-box">    	
 	  			<?php echo "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a>\n"; ?>
+			</div>
+ 		</div>
+ 		<?php
+	}
+
+	function displayTitle($title){
+        ?>
+        <div class="col-sm-7">
+			<div class="white-box">    	
+	  			<?php echo "<h3>$title</h3>"; ?>
 			</div>
  		</div>
  		<?php

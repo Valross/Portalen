@@ -11,7 +11,7 @@ loadTitleForBrowser('Sökresultat');
 			UNION
 			SELECT id, name, Null as col3, 'team' as source_table FROM work_group WHERE name LIKE '%" . $searchString . "%' ");
 
-		$currentpage = 0;
+		$currentPage = 0;
 
 		if(isset($_GET['pageNumber']))
 			$currentPage = $_GET['pageNumber'];

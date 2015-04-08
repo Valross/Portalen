@@ -12,8 +12,9 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
 	$date = $dates->format('Y-m-d');
 
-	// echo "DEBUG name = " . $name . ", lastName = " . $lastName . ", ssn = " . $ssn . ", mail = " . $mail;
-	// echo "ID = " . $appId;
+	// send confirmation mail
+	$msg = "Hej, $name \n Grattis osv boka upp dig och kbk #yolo";
+	mail($mail, "Jobba på trappaaan", $msg);
 
 	//add applicant to user
 	$tempPassword = "trappan";
@@ -39,9 +40,6 @@ if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && is
 
 	DBQuery::sql("INSERT INTO group_member (group_id, user_id, member_since)
 						VALUES ('25', '$user_id', '$date')"); //Lägg till i Värd - Nybyggare
-
-	//send confirmation email
-	//...
 
 	//remove applicant from applications
 	DBQuery::sql("DELETE FROM application WHERE id='$appId'");

@@ -30,7 +30,6 @@ loadTitleForBrowser('Sökresultat');
 
 	  			if($sourceTable == 'user'){
 	  				if ($i == 0 ) {
-	  					//echo "<h2>Avändare</h2>";
 	  					displayTitle("Användare");
 	  				}
 
@@ -58,6 +57,7 @@ loadTitleForBrowser('Sökresultat');
 	  				if ($prevSourceTable !== 'team') {
 	  					displayTitle("Lag");
 	  				}
+
 	  				$teamName = $results[$i]['name'];
 		        	$teamId =  $results[$i]['id'];
 

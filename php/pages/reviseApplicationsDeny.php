@@ -4,20 +4,18 @@ include_once('php/DBQuery.php');
 if(isset($_GET['id']) && checkAdminAccess() == 1){
 	$appId=$_GET['id'];
 
-	// echo "ID = " . $appId;
-
-
 	//remove applicant from applications
 	DBQuery::sql("DELETE FROM application WHERE id='$appId'");
 	DBQuery::sql("DELETE FROM application_group WHERE application_id='$appId'");
 
-	//send confirmation email
-	//...
+	// send confirmation mail
+	$msg = "Hej. \n Tyvärr finns det inte plats i lagen :pPppPpP bla bla";
+	mail($mail, "Sorry va", $msg);
 	
 	?>
 		<script>
 			window.location = "?page=reviseApplications";
-			alert("Nekad!")
+			//alert("Nekad!")
 		</script>
 	<?php
 }

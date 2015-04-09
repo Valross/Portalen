@@ -20,9 +20,9 @@
 		<label for="name">Period</label>
 		<input type="text" id="name" placeholder="månad år" name="name">
 		<label for="start_date">Startdatum</label>
-		<input type="text" id="start_date" placeholder="åååå-mm-yy" name="start_date">
+		<input type="text" id="start_date" placeholder="åååå-mm-dd" name="start_date">
 		<label for="end_date">Slutdatum</label>
-		<input type="text" id="end_date" placeholder="åååå-mm-yy" name="end_date" class="bottom-border">
+		<input type="text" id="end_date" placeholder="åååå-mm-dd" name="end_date" class="bottom-border">
 		
 		<input type="submit" name="submit" value="Skapa period">
 	</form>

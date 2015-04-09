@@ -20,72 +20,45 @@ function loadStats()
 
 	if(isset($_POST['submit']) && $_POST['start'] != '' && $_POST['end'] != '')
 	{
-		$users = DBQuery::sql("SELECT name, last_name, id FROM user
+		$users = DBQuery::sql("SELECT start_time, end_time, wage, user_id FROM work_slot 
+							INNER JOIN user_work ON user_work.work_slot_id = work_slot.id
 							WHERE id IN
-								(SELECT user_id FROM user_work
-								WHERE work_slot_id IN
-									(SELECT id FROM work_slot
-									WHERE wage > 0)
-								AND checked = 1)
-								ORDER BY id");
+								(SELECT work_slot_id FROM user_work WHERE checked = '1')
+							AND start_time > '$start' AND end_time < '$end' AND wage > 0
+							GROUP BY wage, user_id
+							ORDER BY user_id
+							");
 
 		$howMany = count($users);
 		for($j = 0; $j < $howMany; ++$j)
 		{
-			?>
-			<tr>
-				<td><?php echo $j+1;?></td>
-				<td><?php echo '<a href=?page=userProfile&id='.$users[$j]['id'].'>'.$users[$j]['name'].' '.$users[$j]['last_name'].'</td>'; ?>
-				<td><?php loadBankNumber($users[$j]['id'], $start, $end); ?></td>
-				<td><?php loadHoursOnPayroll($users[$j]['id'], $start, $end); ?></td>
-				<td>Nope</td>
-				<td><?php loadWorkSlotWage($users[$j]['id'], $start, $end); ?></td>
-			</tr>
-			<?php
+			echo '<tr>';
+				echo '<td>'.($j+1).'</td>';
+				echo '<td><a href=?page=userProfile&id='.$users[$j]['user_id'].'>'.loadNameFromUser($users[$j]['user_id']).'</td>';
+				echo '<td>'.loadBankNumber($users[$j]['user_id'], $start, $end).'</td>';
+				echo '<td>'.loadHoursOnPayroll($users[$j]['user_id'], $start, $end, $users[$j]['wage']).'</td>';
+				echo '<td>'.$users[$j]['wage'].'</td>';
+				echo '<td>'.loadWorkSlotWage($users[$j]['user_id'], $start, $end, $users[$j]['wage']).'</td>';
+			echo '</tr>';
 		}
 	}
 	else
 		echo 'Välj datum';
 }
 
-function loadUser($user_id, $start, $end)
-{
-	$workSlotHours = DBQuery::sql("SELECT start_time, end_time FROM work_slot 
-									WHERE id IN
-										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
-									AND start_time > '$start' AND end_time < '$end' AND wage > 0
-									");
-
-	$users = DBQuery::sql("SELECT name, last_name, id FROM user
-							WHERE id IN
-								(SELECT user_id FROM user_work
-								WHERE work_slot_id IN
-									(SELECT id FROM work_slot
-									WHERE wage > 0)
-								AND user_id = '$user_id')
-								ORDER BY id");
-
-	$totalHours = 0;
-	for($i = 0; $i < count($users); ++$i)
-	{
-		if(count($workSlotHours) > 0)
-			echo '<td><a href=?page=userProfile&id='.$users[$i]['id'].'>'.$users[$i]['name'].' '.$users[$i]['last_name'].'</td>';
-	}
-}
-
 function loadBankNumber($user_id, $start, $end)
 {
 	$bankNumber = DBQuery::sql("SELECT bank_account FROM user
 								WHERE id = $user_id");
-	echo $bankNumber[0]['bank_account'];
+	return $bankNumber[0]['bank_account'];
 }
 
-function loadHoursOnPayroll($user_id, $start, $end)
+function loadHoursOnPayroll($user_id, $start, $end, $wage)
 {
 	$workSlotHours = DBQuery::sql("SELECT start_time, end_time FROM work_slot 
 									WHERE id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
-									AND start_time > '$start' AND end_time < '$end' AND wage > 0
+									AND start_time > '$start' AND end_time < '$end' AND wage = '$wage'
 									");
 
 	$totalHours = 0;
@@ -96,15 +69,16 @@ function loadHoursOnPayroll($user_id, $start, $end)
 		$interval = $eventStart->diff($eventEnd);
 		$totalHours = $totalHours + $interval->format('%h') + ($interval->format('%i')/60);
 	}
-	echo $totalHours;
+	return $totalHours;
 }
 
-function loadWorkSlotWage($user_id, $start, $end)
+function loadWorkSlotWage($user_id, $start, $end, $wage)
 {
 	$workSlotHours = DBQuery::sql("SELECT start_time, end_time, wage FROM work_slot 
 									WHERE id IN
 										(SELECT work_slot_id FROM user_work WHERE user_id = '$user_id' AND checked = '1')
-									AND start_time > '$start' AND end_time < '$end' AND wage > 0
+									AND start_time > '$start' AND end_time < '$end' AND wage = '$wage'
+									GROUP BY wage
 									");
 
 	$totalHours = 0;
@@ -118,7 +92,7 @@ function loadWorkSlotWage($user_id, $start, $end)
 		$totalWage = $totalWage + $workSlotHours[$i]['wage']*$interval->format('%h') + $workSlotHours[$i]['wage']*($interval->format('%i')/60);
 	}
 
-	echo $totalWage.'kr';
+	return $totalWage.'kr';
 }
 
 ?>

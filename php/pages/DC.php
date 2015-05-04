@@ -5,11 +5,11 @@ function loadAllTools()
 {
 	if(checkAdminAccess() == 1)
 	{
-		echo '<a href="?page=wages" class="list-group-item">Löner</a>';
-		echo '<a href="?page=createGroup" class="list-group-item">Skapa grupp</a>';
-		echo '<a href="?page=manageGroup" class="list-group-item">Hantera grupp</a>';
-		echo '<a href="?page=manageGroupLeader" class="list-group-item">Hantera gruppledare</a>';
-		echo '<a href="?page=createAchievement" class="list-group-item">Skapa Achievement</a>';
+		echo '<a href="?page=wages" class="list-group-item"><span class="fa fa-money fa-fw fa-lg"></span>Löner</a>';
+		echo '<a href="?page=createGroup" class="list-group-item"><span class="fa fa-group fa-fw fa-lg"></span>Skapa grupp</a>';
+		echo '<a href="?page=manageGroup" class="list-group-item"><span class="fa fa-group fa-fw fa-lg"></span>Hantera grupp</a>';
+		echo '<a href="?page=manageGroupLeader" class="list-group-item"><span class="fa fa-trophy fa-fw fa-lg"></span>Hantera gruppledare</a>';
+		echo '<a href="?page=createAchievement" class="list-group-item"><span class="fa fa-trophy fa-fw fa-lg"></span>Skapa Achievement</a>';
 	}
 	else
 	{

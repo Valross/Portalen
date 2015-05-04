@@ -118,6 +118,9 @@ function loadCreateAchievementTools($achievement)
 			<input type="hidden" name="id" id="id" value="'.$achievement_name[0]['id'].'">';
 
 	echo '<input type="submit" name="submit" value="Spara">';
+
+	echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen (GÖR INTE DETTA)</a>';
 	
 	echo 			'</div>
 				</form>

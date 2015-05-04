@@ -5,7 +5,9 @@
 <div class="row">	
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-calendar-o fa-fw fa-lg"></span> Hantera perioder</h1>
+			<h1><span class="fa fa-calendar-o fa-fw fa-lg"></span> Skapa period - 
+			<a href="?page=managePeriod">Hantera perioder</a>
+			</h1>
 		</div>
 	</div>
 </div> <!-- .row -->

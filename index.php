@@ -65,7 +65,16 @@ include_once('php/pageManager.php');
 		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
 			              <li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>   
-			              <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li>
+			              <!-- <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li> -->
+
+	              		  <li class="panel dropdown">
+		  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+		  						<ul id="collapseThree" class="panel-collapse collapse">
+				              	<li><a href="?page=book"><span class="fa fa-book fa-fw fa-lg"></span>Kalenderbokning</a></li>
+	  							<li><a href="?page=bookold"><span class="fa fa-list fa-fw fa-lg"></span>Old Fashioned Way</a></li>
+  							</li>  
+  						  </ul>
+
 						  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 			              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
 			              <li><a href="?page=stats"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik</a></li>

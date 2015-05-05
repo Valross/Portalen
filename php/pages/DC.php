@@ -10,6 +10,7 @@ function loadAllTools()
 		echo '<a href="?page=manageGroup" class="list-group-item"><span class="fa fa-group fa-fw fa-lg"></span>Hantera grupp</a>';
 		echo '<a href="?page=manageGroupLeader" class="list-group-item"><span class="fa fa-trophy fa-fw fa-lg"></span>Hantera gruppledare</a>';
 		echo '<a href="?page=createAchievement" class="list-group-item"><span class="fa fa-trophy fa-fw fa-lg"></span>Skapa Achievement</a>';
+		echo '<a href="?page=manageAccess" class="list-group-item"><span class="fa fa-wheelchair fa-fw fa-lg"></span>Hantera Access</a>';
 	}
 	else
 	{

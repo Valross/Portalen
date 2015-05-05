@@ -20,18 +20,9 @@
 <div class="row">
 
 <div class="col-sm-4">
-	<div class="white-box">
-		<h4>Bokat</h4>	
-		<div class="list-group">
-			 <?php loadBookedEvents(); ?>
-		</div>
-	</div> <!-- .white-box -->
-	<div class="white-box">
-		<h4>Bokningsbart</h4>
-		<div class="list-group">
-			<?php loadAvailableEvents(); ?>
-		</div>
-	</div> <!-- .white-box -->
+	<?php loadBookedEvents(); ?>
+
+	<?php loadAvailableEvents(); ?>
 </div> <!-- .col-sm-4 -->
 <div class="col-sm-8">
 	<div class="white-box calendar-box">

@@ -190,7 +190,13 @@ function loadBookedEvents()
 									(SELECT work_slot_id FROM user_work 
 									WHERE user_id = '$_SESSION[user_id]' AND checked = '0')
 								ORDER BY start_time");
-							
+	
+	if(count($bookedEvents) > 0)
+	{
+		echo '<div class="white-box">
+				<h4>Bokat</h4>	
+					<div class="list-group">';
+	}
 	for($i = 0; $i < count($bookedEvents) && $i < 15; ++$i)
 	{
 		$eventId = $bookedEvents[$i]['id'];	
@@ -219,14 +225,10 @@ function loadBookedEvents()
 		echo '<strong>'.$day.'/'.$month.' </strong>';
 		echo ' '.$name.' ('.$group[0]['name'].')</a>';
 	}
-	
-	if(count($bookedEvents) == 0)
+	if(count($bookedEvents) > 0)
 	{
-		?>
-		
-		<p><i>Du har inte några bokade pass just nu.</i></p>
-		
-		<?php
+		echo '</div>
+		</div> <!-- .white-box -->';
 	}
 }
 //
@@ -235,10 +237,14 @@ function loadTodaysEvents()
 {
 	global $dateNoTime;
 	$todaysEvents = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event 
-									WHERE start_time > '$dateNoTime' ORDER BY start_time");
-
-	$nothingIsHappening = true;							
+									WHERE start_time > '$dateNoTime' ORDER BY start_time");					
 	
+	if(count($todaysEvents) > 0)
+	{
+		echo '<div class="white-box">
+				<h4>Idag</h4>
+					<div class="list-group">';
+	}
 	for($i = 0; $i < count($todaysEvents); ++$i)
 	{
 		$eventId = $todaysEvents[$i]['id'];
@@ -250,7 +256,6 @@ function loadTodaysEvents()
 		$eventDate = new DateTime($todaysEvents[$i]['start_time']);
 		if($dateNoTime == $eventDate->format('Y-m-d'))
 		{
-			$nothingIsHappening = false;	
 			$workSlotsCount = count($workSlots);
 			$availableSlotsCount = count($availableSlots);
 			$availableSlotsText = 'lediga platser';
@@ -272,13 +277,10 @@ function loadTodaysEvents()
 			echo ' '.$name.'</a>';
 		}
 	}
-	if($nothingIsHappening)
+	if(count($todaysEvents) > 0)
 	{
-		?>
-		
-		<p><i>Rätt lugnt på Trappan idag.</i></p>
-		
-		<?php
+		echo '</div>
+		</div> <!-- .white-box -->';
 	}
 }
 //
@@ -294,7 +296,12 @@ function loadAvailableEvents()
 									AND event_type_id != 5
 									ORDER BY start_time");
 								
-	
+	if(count($availableEvents) > 0)
+	{
+		echo '<div class="white-box">
+				<h4>Bokningsbart</h4>
+					<div class="list-group">';
+	}
 	for($i = 0; $i < count($availableEvents) && $i < 15; ++$i)
 	{
 		$eventId = $availableEvents[$i]['id'];
@@ -323,14 +330,10 @@ function loadAvailableEvents()
 		echo '<strong class="list-group-item-date-floated-left">'.$day.'/'.$month.' </strong>';
 		echo ' '.$name.'</a>';
 	}
-
-	if(count($availableEvents) == 0)
+	if(count($availableEvents) > 0)
 	{
-		?>
-		
-		<p><i>Det finns inte några lediga pass just nu.</i></p>
-		
-		<?php
+		echo '</div>
+		</div> <!-- .white-box -->';
 	}
 }
 //Load upcoming meetings
@@ -350,7 +353,12 @@ function loadAvailableMeetings()
 											WHERE user_id = '$user_id'))
 									ORDER BY start_time");
 								
-	
+	if(count($availableMeetings) > 0)
+	{
+		echo '<div class="white-box">
+				<h4>Möten</h4>
+					<div class="list-group">';
+	}
 	for($i = 0; $i < count($availableMeetings) && $i < 4; ++$i)
 	{
 		$eventId = $availableMeetings[$i]['id'];
@@ -374,14 +382,10 @@ function loadAvailableMeetings()
 		echo '<strong class="list-group-item-date-floated-left">'.$day.'/'.$month.' </strong>';
 		echo ' '.$name.'</a>';
 	}
-
-	if(count($availableMeetings) == 0)
+	if(count($availableMeetings) > 0)
 	{
-		?>
-		
-		<p><i>Det finns inte några möten för dig just nu.</i></p>
-		
-		<?php
+		echo '</div>
+		</div> <!-- .white-box -->';
 	}
 }
 

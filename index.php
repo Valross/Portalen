@@ -67,7 +67,7 @@ include_once('php/pageManager.php');
 			              <li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>   
 			              <!-- <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li> -->
 
-	              		  <li class="panel dropdown">
+	              		  <li class="dropdown">
 		  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 		  						<ul id="collapseThree" class="panel-collapse collapse">
 				              	<li><a href="?page=book"><span class="fa fa-book fa-fw fa-lg"></span>Kalenderbokning</a></li>

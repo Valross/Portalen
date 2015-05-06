@@ -502,11 +502,28 @@ function loadAllGroupsOption()
 
 function checkIfMemberOfGroup($user_id, $group_id)
 {
-	if($user_id < 0)
+	$group_member = DBQuery::sql("SELECT group_id, user_id FROM group_member
+									WHERE group_id = '$group_id'
+									AND user_id = '$user_id'");
+
+	$main_group_query = DBQuery::sql("SELECT main_group FROM work_group
+										WHERE id = '$group_id'");
+
+	if(count($main_group_query) > 0 && $main_group_query[0]['main_group'] != 'NULL')
 	{
-		return false;
+		$main_group = $main_group_query[0]['main_group'];
+		$group_member_of_main = DBQuery::sql("SELECT group_id, user_id FROM group_member
+									WHERE group_id = '$main_group'
+									AND user_id = '$user_id'");
+
+		if(count($group_member_of_main) > 0)
+			return true;
 	}
-	return true;
+
+	if(count($group_member) > 0)
+		return true;
+
+	return false;
 }
 
 function checkAdminAccess()

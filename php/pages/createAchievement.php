@@ -119,7 +119,7 @@ function loadCreateAchievementTools($achievement)
 
 	echo '<input type="submit" name="submit" value="Spara">';
 
-	echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'">
+	echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
 			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen (GÖR INTE DETTA)</a>';
 	
 	echo 			'</div>

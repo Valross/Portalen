@@ -206,7 +206,10 @@ function loadEventDescription()
 			echo '<textarea rows="4" name="info" id="info" class="bottom-border">'.$event_info[0]['info'].'</textarea>';
 			echo "</td></tr>";
 		}
-		echo '<tr><td><input type="submit" name="eventInfo" value="Spara"></td></tr>';
+		echo '<tr><td><input type="submit" name="eventInfo" value="Spara"></td>';
+		echo '<td><a href="?page=removeEvent&event_id='.$event_id.'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort eventet</a></td>';
+		echo '</tr>';
 		echo '</form>';
 	}
 	else

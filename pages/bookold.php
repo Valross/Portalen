@@ -13,20 +13,7 @@
 	<?php loadBookedEvents(); ?>
 
 	<?php loadAvailableEvents(); ?>
-</div> <!-- .col-sm-4 -->
-<!-- <div class="col-sm-8">
-	<div class="white-box">
-		<div class="calendar-top">
-			<h3>Bokning</h3>
-			<div class="pull-right form-inline">
-			<div class="btn-group">
-				<?php loadPageNavigators(); ?>
-			</div>
-			</div>
-		</div>
-
-	</div>
-</div> -->
+</div>
 
 <?php loadLayout(); ?>
 

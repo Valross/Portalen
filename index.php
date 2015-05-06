@@ -159,7 +159,7 @@ include_once('php/pageManager.php');
 					<div class="dropdown">
 						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
 							<i class="fa fa-globe"></i>
-						    <span class="badge on-top-of-element red-background"><?php loadAmountOfUnseenNotifications(); ?></span>
+						    <?php loadAmountOfUnseenNotifications(); ?>
 						</button>
 						
 						<ul class="dropdown-menu is-floated-parent" role="menu" aria-labelledby="userDropdown">

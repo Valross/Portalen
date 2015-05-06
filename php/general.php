@@ -291,8 +291,7 @@ function loadAvailableEvents()
 	$availableEvents = DBQuery::sql("SELECT id, name, start_time, end_time, name FROM event
 									WHERE start_time > '$dateNoTime' AND id IN
 										(SELECT event_id FROM work_slot WHERE id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										)
+											(SELECT work_slot_id FROM user_work))
 									AND event_type_id != 5
 									ORDER BY start_time");
 								
@@ -306,9 +305,14 @@ function loadAvailableEvents()
 	{
 		$eventId = $availableEvents[$i]['id'];
 		$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");
-		$availableSlots = DBQuery::sql	("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
-											(SELECT work_slot_id FROM user_work)
-										");
+
+		$availableSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
+											(SELECT work_slot_id FROM user_work)");
+
+		// if(checkIfMemberOfGroup($user_id, $group_id))
+		// {
+
+		// }
 		$workSlotsCount = count($workSlots);
 		$availableSlotsCount = count($availableSlots);
 		$availableSlotsText = 'lediga platser';
@@ -655,7 +659,12 @@ function loadAmountOfUnseenNotifications()
 	$notifications = DBQuery::sql("SELECT id FROM notification
 										WHERE user_id = '$user_id' AND seen IS NULL");
 
-	echo count($notifications);
+	if(count($notifications) > 0)
+	{
+		echo '<span class="badge on-top-of-element red-background">';
+		echo count($notifications);
+		echo '</span>';
+	}
 }
 
 function loadDropDownNotifications()

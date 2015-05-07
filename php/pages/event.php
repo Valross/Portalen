@@ -319,7 +319,7 @@ function loadWorkSlots()
 					echo '<input type="text" class="input-book" name="wage[]" id="wage[]" value="'.$slots[$j]['wage'].'"> kr/h ';
 					if(count($bookedSlot) > 0)
 					{
-						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'">'.loadAvatarFromUser($bookedSlot[0]['user_id'], 20). loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
+						echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="black-link">'.loadAvatarFromUser($bookedSlot[0]['user_id'], 20). loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 					}
 					else
 					{
@@ -364,22 +364,37 @@ function loadWorkSlots()
 
 					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
 
+					$alreadyHappend = DBQuery::sql("SELECT id, start_time, end_time FROM work_slot 
+															WHERE start_time > '".date('Y-m-d H:i:s',strtotime('-0 day'))."'
+															AND id = '$work_slot_id'");
+
 					if(count($localUserBookedThisEvent) == 0)
 					{
-						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0)
+						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
-						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && count($availableSlot) > 0 && $slots[$j]['group_id'] == $groups[$i]['sub_group'])
+						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && count($availableSlot) > 0 && $slots[$j]['group_id'] == $groups[$i]['sub_group'] && count($alreadyHappend) != 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
 						else
-							echo '</li>';
+							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Du kan inte boka upp dig på det här passet."> 
+									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
 					}
 					else
 					{
-						if(count($localUserBookedThisSlot) > 0)
-							echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
+						$bookingMoreThanFiveDays = DBQuery::sql("SELECT id, start_time, end_time FROM work_slot 
+															WHERE start_time > '".date('Y-m-d H:i:s',strtotime('-5 days'))."'
+															AND id = '$work_slot_id'");
+
+						if(count($localUserBookedThisSlot) > 0 && count($alreadyHappend) != 0)
+						{
+							if(count($bookingMoreThanFiveDays) > 0)
+								echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+									' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
+							else
+								echo '<a href="" class="list-group-item-text-book black-link" data-toggle="tooltip" data-placement="bottom" title="Du kan inte boka av dig 5 dagar innan passet. Kontakta lagansvarig."> 
+									<span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
+						}	
 						else
 							echo '</a></li>';
 					}
@@ -394,7 +409,7 @@ function loadWorkSlots()
 	}
 }
 
-function checkWhatGroup()
+function checkWhatGroup() //not used at the moment
 {
 	return true;
 }

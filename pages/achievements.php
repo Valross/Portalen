@@ -3,7 +3,7 @@
 		<div class="page-header">
 			<h1><span class="fa fa-trophy fa-fw fa-lg"></span> Achievements
 			<?php
-				if(checkAdminAccess() == 1)
+				if(checkAdminAccess() <= 1)
 				{
 					echo ' - <a href="?page=createAchievement">Hantera</a>';
 				}

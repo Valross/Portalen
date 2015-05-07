@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && isset($_GET['mail']) && isset($_GET['id']) && checkAdminAccess() == 1){
+if(isset($_GET['name']) && isset($_GET['lastName']) && isset($_GET['ssn']) && isset($_GET['mail']) && isset($_GET['id']) && checkAdminAccess() <= 1){
 	$name = $_GET['name'];
 	$lastName = $_GET['lastName'];
 	$ssn= $_GET['ssn'];

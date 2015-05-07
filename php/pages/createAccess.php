@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa Access');
 
-if(checkAdminAccess() == 1)
+if(checkAdminAccess() <= 1)
 	loadAll();
 else
 	{

@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa konto');
 
-if(isset($_POST['submit']) && checkAdminAccess() == 1)
+if(isset($_POST['submit']) && checkAdminAccess() <= 1)
 {
 	$userName = strip_tags($_POST['user_name']);
 	$password = strip_tags($_POST['password']);

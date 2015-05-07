@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('');
 
-if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot_id']) && checkAdminAccess() == 1)
+if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot_id']) && checkAdminAccess() <= 1)
 {
 	$event_id = $_GET['event_id'];
 	$user_id = $_GET['user_id'];

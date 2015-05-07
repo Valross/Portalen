@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Hantera lag');
 
-if(checkAdminAccess() == 1)
+if(checkAdminAccess() <= 1)
 	loadAll();
 else
 {
@@ -139,6 +139,13 @@ function loadGroupManageTools($group)
 
 
 	echo '<input type="submit" name="submit" value="Spara">';
+	
+	if(checkAdminAccess() == -1)
+		echo '<a href="?page=removeGroup&group_id='.$group_name[0]['id'].'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort laget</a>';
+	else
+		echo '<a href="" class="black-link" data-toggle="tooltip" data-placement="bottom" title="Endast webchefen kan ta bort lag"> 
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort laget</a>';
 	
 	echo 			'</div>
 				</form>

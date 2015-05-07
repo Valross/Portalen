@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa Achievement');
 
-if(checkAdminAccess() == 1)
+if(checkAdminAccess() <= 1)
 	loadAll();
 else
 	{
@@ -119,8 +119,14 @@ function loadCreateAchievementTools($achievement)
 
 	echo '<input type="submit" name="submit" value="Spara">';
 
-	echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
-			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen (GÖR INTE DETTA)</a>';
+
+	if(checkAdminAccess() == -1)
+		echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen</a>';
+	else
+		echo '<a href="" class="black-link" data-toggle="tooltip" data-placement="bottom" title="Endast webchefen kan ta bort achievements"> 
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen</a>';
+	
 	
 	echo 			'</div>
 				</form>

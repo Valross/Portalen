@@ -131,17 +131,17 @@ function loadEventName()
 	$headwaiter_note = DBQuery::sql("SELECT event_id FROM headwaiter_note
 							WHERE event_id = '$event_id'");
 
-	if(checkAdminAccess() == 1 && $event_name[0]['event_type_id'] != 5)
+	if(checkAdminAccess() <= 1 && $event_name[0]['event_type_id'] != 5)
 	{
 		echo ' - <a href="?page=checkPasses&id='.$event_id.'"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 	}
 
-	if(count($da_note) > 0 && checkAdminAccess() == 1)
+	if(count($da_note) > 0 && checkAdminAccess() <= 1)
 	{
 		echo ' - <a href="?page=DANote&id='.$da_note[0]['event_id'].'">DA-lapp</a>';
 	}
 
-	if(count($headwaiter_note) > 0 && checkAdminAccess() == 1)
+	if(count($headwaiter_note) > 0 && checkAdminAccess() <= 1)
 	{
 		echo ' - <a href="?page=HeadwaiterNote&id='.$headwaiter_note[0]['event_id'].'">Hovis-lapp</a>';
 	}
@@ -163,7 +163,7 @@ function loadEventPasses()
 	$start_d = $eventStart->format('Y-m-d');
 	$end_d = $eventEnd->format('Y-m-d');
 
-	if(checkAdminAccess() == 1)
+	if(checkAdminAccess() <= 1)
 	{
 		echo '<form action="" method="post">';
 		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)

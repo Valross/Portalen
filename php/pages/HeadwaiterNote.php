@@ -251,7 +251,7 @@ function loadComments()
 			echo '<span class="time">- '.$headwaiter_comments[$i]['date_written'].'</span><br />';
 			echo nl2br($headwaiter_comments[$i]['comment']);
 			echo '</p>';
-			if(checkAdminAccess() == 1 || count($myComment) > 0)
+			if(checkAdminAccess() <= 1 || count($myComment) > 0)
 					echo '<a href=?page=removeHeadwaiterNoteComment&headwaiter_note_id='.$headwaiter_note_event_id.'&comment_id='.$headwaiter_comments[$i]['id'].
 							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 			echo '</div>';

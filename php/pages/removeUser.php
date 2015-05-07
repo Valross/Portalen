@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['user_id']) && checkAdminAccess() == 1)
+if(isset($_GET['user_id']) && checkAdminAccess() <= 1)
 {
 	$user_id = $_GET['user_id'];
 

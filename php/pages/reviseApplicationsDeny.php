@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['id']) && checkAdminAccess() == 1){
+if(isset($_GET['id']) && checkAdminAccess() <= 1){
 	$appId=$_GET['id'];
 
 	//remove applicant from applications

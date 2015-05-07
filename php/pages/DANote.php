@@ -244,7 +244,7 @@ function loadComments()
 			echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
 			echo nl2br($DAComments[$i]['comment']);
 			echo '</p>';
-			if(checkAdminAccess() == 1 || count($myComment) > 0)
+			if(checkAdminAccess() <= 1 || count($myComment) > 0)
 					echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
 							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 			echo '</div>';

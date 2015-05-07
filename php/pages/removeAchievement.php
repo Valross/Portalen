@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['achievement_id']) && checkAdminAccess() == 1)
+if(isset($_GET['achievement_id']) && checkAdminAccess() == -1)
 {
 	$achievement_id = $_GET['achievement_id'];
 

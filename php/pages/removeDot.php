@@ -1,7 +1,7 @@
 <?php
 include_once('php/DBQuery.php');
 
-if(isset($_GET['dot_id']) && checkAdminAccess() == 1)
+if(isset($_GET['dot_id']) && checkAdminAccess() <= 1)
 {
 	$group_id = $_GET['group_id'];
 	$dot_id = $_GET['dot_id'];

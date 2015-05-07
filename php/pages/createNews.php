@@ -2,7 +2,7 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa nyhet');
 
-if(isset($_POST['submit']) && checkAdminAccess() == 1)
+if(isset($_POST['submit']) && checkAdminAccess() <= 1)
 {
 	$title = strip_tags($_POST['title']);
 	$message = strip_tags($_POST['message'], allowed_tags());

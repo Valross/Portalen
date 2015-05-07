@@ -555,6 +555,12 @@ function checkAdminAccess()
 						WHERE access_id = 1
 						AND user_id = '$user_id'");
 
+	$webmaster = DBQuery::sql("SELECT access_id FROM user_access
+						WHERE access_id = 5
+						AND user_id = '$user_id'");
+
+	if(count($webmaster) > 0)
+		return -1;
 	if(count($DG) > 0 || count($adminAccessUser) > 0)
 		return 1;
 	else if(count($DA) > 0)

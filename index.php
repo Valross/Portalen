@@ -103,7 +103,7 @@ include_once('php/pageManager.php');
 	  							<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-female fa-fw fa-lg"></span>Läs Hovis-lappar</a></li>
 	  							<?php 
 				  					}
-				  					if(checkAdminAccess() == 1)
+				  					if(checkAdminAccess() <= 1)
 						            {
 								?>
 	  							<li><a></a></li>

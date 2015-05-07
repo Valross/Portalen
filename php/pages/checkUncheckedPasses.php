@@ -7,7 +7,7 @@ $dates = new DateTime;
 $dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
 $date = $dates->format('Y-m-d H:i:s');
 
-if(isset($_POST['submit']) && checkAdminAccess() == 1)
+if(isset($_POST['submit']) && checkAdminAccess() <= 1)
 {
 	if(isset($_POST['slot'])){
 	    $slots = $_POST['slot'];

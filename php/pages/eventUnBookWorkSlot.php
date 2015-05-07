@@ -29,7 +29,7 @@ if(isset($_GET['event_id']) && isset($_GET['user_id']) && isset($_GET['work_slot
 				notify($group_leader[$i]['user_id'], 2, $info);
 		}
 	}
-	if(count($localUserBookedThisSlot) > 0 || checkAdminAccess() == 1)
+	if(count($localUserBookedThisSlot) > 0 || checkAdminAccess() <= 1)
 	{
 		DBQuery::sql("DELETE FROM user_work
         					WHERE '$work_slot_id' = work_slot_id");

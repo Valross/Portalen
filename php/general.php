@@ -551,8 +551,16 @@ function checkAdminAccess()
 							(SELECT group_id FROM group_member
 							WHERE user_id = '$user_id')");
 
-	$adminAccessUser = DBQuery::sql("SELECT access_id FROM user_access
+	$DGAccessUser = DBQuery::sql("SELECT access_id FROM user_access
 						WHERE access_id = 1
+						AND user_id = '$user_id'");
+
+	$DAAccessUser = DBQuery::sql("SELECT access_id FROM user_access
+						WHERE access_id = 2
+						AND user_id = '$user_id'");
+
+	$HovisAccessUser = DBQuery::sql("SELECT access_id FROM user_access
+						WHERE access_id = 3
 						AND user_id = '$user_id'");
 
 	$webmaster = DBQuery::sql("SELECT access_id FROM user_access
@@ -561,11 +569,11 @@ function checkAdminAccess()
 
 	if(count($webmaster) > 0)
 		return -1;
-	if(count($DG) > 0 || count($adminAccessUser) > 0)
+	if(count($DG) > 0 || count($DGAccessUser) > 0)
 		return 1;
-	else if(count($DA) > 0)
+	else if(count($DA) > 0 || count($DAAccessUser) > 0)
 		return 2;
-	else if(count($hovis) > 0)
+	else if(count($hovis) > 0 || count($HovisAccessUser) > 0)
 		return 3;
 	else
 		return 4; //No access

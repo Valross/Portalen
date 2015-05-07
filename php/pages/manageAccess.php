@@ -2,30 +2,30 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Hantera Access');
 
-if(checkAdminAccess() <= 1)
+if(checkAdminAccess() == -1)
 	loadAll();
 else
 {
 	?>
 	<script>
 		window.location = "?page=start";
-		alert("Sluta försöka hacka sidan!")
+		alert("Endast webchefen har tillgång till access!")
 	</script>
 	<?php
 }
 
 if(isset($_POST['submit']))
 {
-	$work_group_id = $_POST['id'];
-	$add_user_id = $_POST['add_group_leader'];
-	$remove_user_id = $_POST['remove_group_leader'];
+	$access_id = $_POST['id'];
+	$add_user_id = $_POST['add_access'];
+	$remove_user_id = $_POST['remove_access'];
 
-	DBQuery::sql("INSERT INTO work_group_leaders
-					(user_id, work_group_id)
-					VALUES ('$add_user_id', '$work_group_id')");
+	DBQuery::sql("INSERT INTO user_access
+					(user_id, access_id)
+					VALUES ('$add_user_id', '$access_id')");
 
-	DBQuery::sql("DELETE FROM work_group_leaders
-        					WHERE '$work_group_id' = work_group_id AND '$remove_user_id' = user_id");
+	DBQuery::sql("DELETE FROM user_access
+        					WHERE '$access_id' = access_id AND '$remove_user_id' = user_id");
 }
 
 function loadAll()
@@ -35,8 +35,7 @@ function loadAll()
 				<div class="page-header">
 					<h1>
 					<span class="fa fa-wheelchair fa-fw fa-lg"></span> Hantera Access - 
-					<a href="?page=createAccess">Skapa Access</a> - 
-					<a href="?page=manageGroup">Hantera Lag</a>
+					<a href="?page=createAccess">Skapa Access</a>
 					</h1>
 				</div>
 			</div>
@@ -46,81 +45,92 @@ function loadAll()
 				<form action="" method="post">
 					<div class="white-box">';
 
-	echo '<label for="group">Lag</label>
-			<select name="group" id="group" class="bottom-border">
-				<option id="typeno" value="typeno">Välj lag</option>';
+	echo '<label for="access">Access</label>
+			<select name="access" id="access" class="bottom-border">
+				<option id="typeno" value="typeno">Välj access</option>';
 	loadAllAccessAsOption();
 	echo '</select>';
 
-	echo '<input type="submit" name="chooseGroup" value="Välj">';
+	echo '<input type="submit" name="chooseAccess" value="Välj">';
 	
 	echo 			'</div>
 				</form>
 			</div>
 		</div>';
-	if(isset($_POST['chooseGroup']))
+	if(isset($_POST['chooseAccess']))
 	{
-		$group = $_POST['group'];
-		if($group != '')
-			loadGroupManageTools($group);
+		$access = $_POST['access'];
+		if($access != '')
+			loadAccessManageTools($access);
 	}
 }
 
-function loadAllGroupsAsOption()
+function loadAllAccessAsOption()
 {
-	$groups = DBQuery::sql("SELECT id, name FROM work_group ORDER BY name");
-	for($i = 0; $i < count($groups); ++$i)
+	$access = DBQuery::sql("SELECT id, name FROM access ORDER BY name");
+	for($i = 0; $i < count($access); ++$i)
 	{
-		echo '<option value="'.$groups[$i]['id'].'">'.$groups[$i]['name'].'</option>';
+		echo '<option value="'.$access[$i]['id'].'">'.$access[$i]['name'].'</option>';
 	}
 }
 
-function loadAllPeopleWithAdminAccess($group)
+function loadAllPeopleWithThisAccess($access)
+{
+	$user_access = DBQuery::sql("SELECT user_id FROM user_access
+						WHERE access_id = '$access'");
+
+	for($i = 0; $i < count($user_access); ++$i)
+	{
+		$user_id = $user_access[$i]['user_id'];
+		$user = DBQuery::sql("SELECT id, name, last_name FROM user 
+						WHERE id = '$user_id'");
+
+		echo '<option value="'.$user[0]['id'].'">'.$user[0]['name'].' '.$user[0]['last_name'].'</option>';
+	}
+}
+
+function loadAllPeopleWithoutThisAccess($access)
 {
 	$users = DBQuery::sql("SELECT id, name, last_name FROM user 
 						ORDER BY name");
 
-	$group_leader = DBQuery::sql("SELECT user_id FROM work_group_leaders
-						WHERE work_group_id = '$group'");
-
 	for($i = 0; $i < count($users); ++$i)
 	{
-		if(checkAdminAccessForUser($users[$i]['id']) == 1)
-		{
-			if(!in_array($users[$i]['id'], $group_leader))
-				echo '<option value="'.$users[$i]['id'].'">'.$users[$i]['name'].' '.$users[$i]['last_name'].'</option>';
-		}
+		if(!in_array($users[$i]['id'], $access))
+			echo '<option value="'.$users[$i]['id'].'">'.$users[$i]['name'].' '.$users[$i]['last_name'].'</option>';
 	}
 }
 
-function loadGroupManageTools($group)
+function loadAccessManageTools($access)
 {
-	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group, icon, hex, sub_group, main_group FROM work_group 
-						WHERE id = '$group'
-						ORDER BY name");
+	$access_name = DBQuery::sql("SELECT id, name FROM access 
+						WHERE id = '$access'
+						ORDER BY id");
 
 	echo '<div class="row">
 			<div class="col-sm-6">
 				<form action="" method="post">
 					<div class="white-box">';
 
-	echo '<input type="hidden" name="id" id="id" value="'.$group_name[0]['id'].'">';
+	echo '<input type="hidden" name="id" id="id" value="'.$access_name[0]['id'].'">';
 
-	echo '<h3>'.$group_name[0]['name'].'</h3>';
+	echo '<h3>'.$access_name[0]['name'].'</h3>';
 
-	echo '<label for="add_group_leader">Lägg till lagledare</label>
-			<select name="add_group_leader" id="add_group_leader" class="bottom-border">
-				<option id="typeno" value="NULL">Lägg till lagledare</option>';
-	loadAllPeopleWithAdminAccess($group);
+	echo '<label for="add_access">Lägg till access</label>
+			<select name="add_access" id="add_access" class="bottom-border">
+				<option id="typeno" value="NULL">Lägg till access</option>';
+	loadAllPeopleWithoutThisAccess($access);
 	echo '</select>';
 
-	echo '<label for="remove_group_leader">Ta bort lagledare</label>
-			<select name="remove_group_leader" id="remove_group_leader" class="bottom-border">
-				<option id="typeno" value="NULL">Ta bort lagledare</option>';
-	loadAllGroupLeaders($group);
+	echo '<label for="remove_access">Ta bort access</label>
+			<select name="remove_access" id="remove_access" class="bottom-border">
+				<option id="typeno" value="NULL">Ta bort access</option>';
+	loadAllPeopleWithThisAccess($access);
 	echo '</select>';
 
 	echo '<input type="submit" name="submit" value="Spara">';
+	echo '<a href="?page=removeAccess&access_id='.$access.'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort access ('.$access_name[0]['name'].')</a>';
 	
 	echo 			'</div>
 				</form>

@@ -2,15 +2,15 @@
 include_once('php/DBQuery.php');
 loadTitleForBrowser('Skapa Access');
 
-if(checkAdminAccess() <= 1)
+if(checkAdminAccess() == -1)
 	loadAll();
 else
-	{
-		?>
-		<script>
-			window.location = "?page=start";
-			alert("Sluta försöka hacka sidan!")
-		</script>
+{
+	?>
+	<script>
+		window.location = "?page=start";
+		alert("Endast webchefen har tillgång till access!")
+	</script>
 	<?php
 }
 
@@ -36,6 +36,16 @@ if(isset($_POST['submitGive']))
 					VALUES ('$access_id', '$group_id')");
 }
 
+if(isset($_POST['submitGiveUser']))
+{
+	$access_id = strip_tags($_POST['access_id']);
+	$user_id = strip_tags($_POST['user_id']);
+
+	DBQuery::sql("INSERT INTO user_access 
+					(access_id, user_id)
+					VALUES ('$access_id', '$user_id')");
+}
+
 function loadAll()
 {
 	echo '<div class="row">
@@ -43,8 +53,7 @@ function loadAll()
 				<div class="page-header">
 					<h1>
 					<span class="fa fa-wheelchair fa-fw fa-lg"></span> Skapa Access - 
-					<a href="?page=manageAccess">Hantera Access</a> - 
-					<a href="?page=manageGroupLeader">Hantera Lagledare</a>
+					<a href="?page=manageAccess">Hantera Access</a>
 					</h1>
 				</div>
 			</div>
@@ -53,6 +62,8 @@ function loadAll()
 	loadCreateAccessGroupTools();
 
 	loadCreateAccessForGroupTools();
+
+	loadCreateAccessForUserTools();
 }
 
 function loadCreateAccessGroupTools()
@@ -82,6 +93,15 @@ function loadAllGroupsAsOption()
 	}
 }
 
+function loadAllUsersAsOption()
+{
+	$users = DBQuery::sql("SELECT id, name, last_name FROM user ORDER BY name");
+	for($i = 0; $i < count($users); ++$i)
+	{
+		echo '<option value="'.$users[$i]['id'].'">'.$users[$i]['name'].' '.$users[$i]['last_name'].'</option>';
+	}
+}
+
 function loadAllAccessAsOption()
 {
 	$access = DBQuery::sql("SELECT id, name FROM access ORDER BY name");
@@ -101,7 +121,7 @@ function loadCreateAccessForGroupTools()
 				<form action="" method="post">
 					<div class="white-box">';
 
-	echo '<h3>'.$group_name[0]['name'].'</h3>';
+	echo '<h3>Lagaccess</h3>';
 
 	echo '<label for="group_id">Lag</label>
 			<select name="group_id" id="group_id" class="bottom-border">
@@ -116,6 +136,38 @@ function loadCreateAccessForGroupTools()
 	echo '</select>';
 
 	echo '<input type="submit" name="submitGive" value="Ge Access">';
+	
+	echo 			'</div>
+				</form>
+			</div>
+		</div>';
+}
+
+function loadCreateAccessForUserTools()
+{
+	$group_name = DBQuery::sql("SELECT id, name, description, facebook_group, icon, hex, sub_group, main_group FROM work_group 
+						ORDER BY name");
+
+	echo '<div class="row">
+			<div class="col-sm-6">
+				<form action="" method="post">
+					<div class="white-box">';
+
+	echo '<h3>Användaraccess</h3>';
+
+	echo '<label for="user_id">Lag</label>
+			<select name="user_id" id="user_id" class="bottom-border">
+				<option id="typeno" value="NULL">Välj användare</option>';
+	loadAllUsersAsOption();
+	echo '</select>';
+
+	echo '<label for="access_id">Access</label>
+			<select name="access_id" id="access_id" class="bottom-border">
+				<option id="typeno" value="NULL">Välj Access</option>';
+	loadAllAccessAsOption();
+	echo '</select>';
+
+	echo '<input type="submit" name="submitGiveUser" value="Ge Access">';
 	
 	echo 			'</div>
 				</form>

@@ -61,7 +61,7 @@ function loadLayout()
 
 	$dates = new DateTime;
 	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
-	setlocale(LC_TIME, 'swedish');
+	setlocale(LC_TIME, 'sv');
 
 	$date1 = date("l, M jS, Y", strtotime($this_year."W".sprintf("%02u", $this_week)."1")); // First day of week
 	$date_int = strtotime($date1);

@@ -38,12 +38,21 @@
 <div class="row">
 <?php loadArrangingPartyries(); ?>
 <?php loadWorkingPartyries(); ?>
-
+</div> <!-- .row -->
+<div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>Meddelande</h3>
 			<p>
 			<?php loadDAMessage(); ?>
+			</p>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="white-box">
+			<h3>Fixlista</h3>
+			<p>
+			<?php loadDAFixlist(); ?>
 			</p>
 		</div>
 	</div>

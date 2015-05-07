@@ -11,12 +11,13 @@ if(isset($_POST['submit']) && checkAdminAccess() <= 2)
 	$cash = strip_tags($_POST['cash']);
 	$nOfPeople = strip_tags($_POST['nOfPeople']);
 	$salesSpenta = strip_tags($_POST['salesSpenta']);
+	$fixlist = strip_tags($_POST['fixlist'], allowed_tags());
 	$message = strip_tags($_POST['message'], allowed_tags());
 
-	if($event != 'typeno' && $salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
+	if($event != 'typeno' && $salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $fixlist != '' && $message != '')
 	{
-		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_total, sales_entry, sales_bar, cash, n_of_people, sales_spenta, message)
-						VALUES ('$_SESSION[user_id]', '$event', '$salesTotal', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$message')");
+		DBQuery::sql("INSERT INTO da_note (user_id, event_id, sales_total, sales_entry, sales_bar, cash, n_of_people, sales_spenta, fixlist, message)
+						VALUES ('$_SESSION[user_id]', '$event', '$salesTotal', '$salesEntry', '$salesBar', '$cash', '$nOfPeople', '$salesSpenta', '$fixlist', '$message')");
 
 		$DA_note = DBQuery::sql("SELECT id FROM da_note 
 						ORDER BY date_written DESC");

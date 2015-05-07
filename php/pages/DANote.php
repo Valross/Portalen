@@ -72,6 +72,16 @@ function loadDAStats()
 	echo '</tr>';
 }
 
+function loadDAFixlist()
+{
+	$event_id = $_GET['id'];
+
+	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.fixlist FROM da_note 
+							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
+
+	echo $DANotes[0]['fixlist'];
+}
+
 function loadDAMessage()
 {
 	$event_id = $_GET['id'];
@@ -159,7 +169,7 @@ function loadArrangingPartyries()
 
 	if(count($arrangingPartyries) > 0)
 	{
-		echo '<div class="col-sm-3">
+		echo '<div class="col-sm-6">
 						<div class="white-box">';
 		if(count($arrangingPartyries) > 1)
 			echo '<h4>Arrangerande festerier</h4>';
@@ -188,7 +198,7 @@ function loadWorkingPartyries()
 
 	if(count($workingPartyries) > 0)
 	{
-		echo '<div class="col-sm-3">
+		echo '<div class="col-sm-6">
 						<div class="white-box">';
 		if(count($workingPartyries) > 1)
 			echo '<h4>Arbetande festerier</h4>';

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2015 at 12:54 PM
+-- Generation Time: May 07, 2015 at 03:03 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `access`
@@ -205,33 +205,35 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   `cash` int(11) NOT NULL,
   `n_of_people` int(11) NOT NULL,
   `sales_spenta` int(11) NOT NULL,
+  `fixlist` varchar(4000) NOT NULL,
   `message` varchar(4000) NOT NULL,
-  `date_written` date NOT NULL,
+  `date_written` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `da_note`
 --
 
-INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `message`, `date_written`) VALUES
-(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 'fest', '0000-00-00'),
-(27, 2, 36, 0, 1, 2, 23, 2342, 242, '42', '2015-02-19'),
-(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-22'),
-(29, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(30, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(31, 2, 51, 1, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(32, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(33, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(34, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(35, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(36, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(37, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(38, 2, 51, 12, 2, 3, 4, 56, 67, '77', '2015-03-22'),
-(39, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22'),
-(40, 2, 51, 12, 2, 3, 4, 56, 67, '7726436', '2015-03-22');
+INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `fixlist`, `message`, `date_written`) VALUES
+(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, '', 'fest', '0000-00-00 00:00:00'),
+(27, 2, 36, 0, 1, 2, 23, 2342, 242, '', '42', '2015-02-18 23:00:00'),
+(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, '', 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-21 23:00:00'),
+(29, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(30, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(31, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(32, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(33, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(34, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(35, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(36, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(37, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(38, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
+(39, 2, 51, 12, 2, 3, 4, 56, 67, '', '7726436', '2015-03-21 23:00:00'),
+(40, 2, 51, 12, 2, 3, 4, 56, 67, '', '7726436', '2015-03-21 23:00:00'),
+(41, 2, 53, 1, 3, 5, 7, 9, 11, 'Svarta slut', 'Ja', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -248,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `da_note_comments` (
   PRIMARY KEY (`id`),
   KEY `event_id` (`da_note_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `da_note_comments`
@@ -259,7 +261,8 @@ INSERT INTO `da_note_comments` (`id`, `da_note_id`, `comment`, `date_written`, `
 (2, 1, 'wrr', '2015-02-18 23:00:00', 2),
 (4, 27, 'top lel\r\n', '2015-02-18 23:00:00', 2),
 (5, 27, 'CRAZY men ändå <i>rätt</i> najs...', '2015-03-16 23:00:00', 2),
-(9, 28, 'lol', '2015-03-22 16:52:51', 2);
+(9, 28, 'lol', '2015-03-22 16:52:51', 2),
+(10, 41, 'lol', '2015-05-07 13:03:16', 2);
 
 -- --------------------------------------------------------
 
@@ -325,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   KEY `period_id` (`period_id`),
   KEY `event_type_id` (`event_type_id`),
   KEY `name_3` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
 -- Dumping data for table `event`
@@ -357,7 +360,10 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 (52, 'Test wage #2', 'mhm', '2015-02-25 22:00:00', '2015-02-26 03:00:00', 2, 2),
 (53, 'Testpub', 'Tesssssssssssssst', '2015-03-12 00:00:00', '2015-03-13 00:00:00', 3, 1),
 (54, 'Passtest#2', 'Ja!', '2015-03-18 13:37:00', '2016-03-18 13:37:00', 3, 1),
-(55, 'Bleep', 'beaw', '2015-05-05 18:00:00', '2015-05-05 23:00:00', 5, 1);
+(55, 'Bleep', 'beaw', '2015-05-05 18:00:00', '2015-05-05 23:00:00', 5, 1),
+(59, 'NIGHT CLUB 2.0', 'wr', '2015-05-06 22:00:00', '2015-05-07 03:00:00', 5, 2),
+(60, 'NIGHT CLUB 3.0', 'YEAH', '2015-05-17 22:00:00', '2015-05-18 03:00:00', 5, 2),
+(61, 'NIGHT CLUB 2.5', 'YEAH', '2015-05-11 22:00:00', '2015-05-12 03:00:00', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -538,7 +544,6 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 INSERT INTO `group_member` (`group_id`, `user_id`, `member_since`) VALUES
 (1, 1, '0000-00-00 00:00:00'),
 (1, 2, '2015-03-03 23:00:00'),
-(1, 8, '2015-03-21 23:00:00'),
 (2, 1, '0000-00-00 00:00:00'),
 (2, 2, '2015-02-04 23:00:00'),
 (4, 1, '0000-00-00 00:00:00'),
@@ -552,6 +557,7 @@ INSERT INTO `group_member` (`group_id`, `user_id`, `member_since`) VALUES
 (16, 9, '2015-03-16 23:00:00'),
 (17, 9, '2015-03-16 23:00:00'),
 (25, 9, '2015-03-16 23:00:00'),
+(26, 8, '2015-05-06 11:30:06'),
 (28, 2, '2015-03-16 23:00:00');
 
 -- --------------------------------------------------------
@@ -683,7 +689,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `notification`
@@ -772,7 +778,9 @@ INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`
 (82, 1, 6, '22', NULL, '2015-03-23 14:34:17'),
 (83, 1, 6, '23', NULL, '2015-03-23 14:34:17'),
 (84, 1, 6, '24', NULL, '2015-03-23 14:34:17'),
-(85, 2, 6, '25', 1, '2015-03-23 14:34:17');
+(85, 2, 6, '25', 1, '2015-03-23 14:34:17'),
+(86, 1, 3, '34', NULL, '2015-05-07 12:59:15'),
+(87, 1, 11, '10', NULL, '2015-05-07 13:03:16');
 
 -- --------------------------------------------------------
 
@@ -852,7 +860,8 @@ CREATE TABLE IF NOT EXISTS `partyries_arrange` (
 
 INSERT INTO `partyries_arrange` (`event_id`, `partyries_id`) VALUES
 (36, 1),
-(36, 11);
+(36, 11),
+(53, 5);
 
 -- --------------------------------------------------------
 
@@ -874,7 +883,8 @@ CREATE TABLE IF NOT EXISTS `partyries_work` (
 INSERT INTO `partyries_work` (`event_id`, `partyries_id`) VALUES
 (36, 1),
 (36, 9),
-(36, 10);
+(36, 10),
+(53, 6);
 
 -- --------------------------------------------------------
 
@@ -966,11 +976,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-26 23:00:00', 0, 35, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '199311111122', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '1236548792', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-05-06 10:50:27', 21, 90, NULL, 'KATTER'),
+(2, 'test', 'ankan@mail.com', '199311111122', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '1236548792', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-05-07 11:00:48', 22, 90, NULL, 'KATTER'),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-03-16 23:00:00', 1, 15, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
-(8, 'Test2', 'test', '1999999999', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-03-25 14:38:34', 9, 45, NULL, NULL),
+(8, 'Test2', 'test', '199201151234', '9163b11327d5001b62d94c2ba978a262', 'Tess', 'Två', '0701234567', NULL, '', NULL, NULL, NULL, 'Tess8.gif', '2015-03-15 21:23:41', '2015-05-07 11:34:25', 11, 45, NULL, NULL),
 (9, '123', '123', '1245241241', 'trappan', '1', '2', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-17 19:00:26', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (11, 'Test3', 'test', '9000000000', '2bac9f5e083e2843e8893f11abef6618', 'Tess', 'Tre', '', NULL, '', NULL, NULL, NULL, NULL, '2015-03-18 18:20:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL);
 
@@ -986,6 +996,14 @@ CREATE TABLE IF NOT EXISTS `user_access` (
   PRIMARY KEY (`access_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_access`
+--
+
+INSERT INTO `user_access` (`access_id`, `user_id`) VALUES
+(5, 2),
+(2, 8);
 
 -- --------------------------------------------------------
 
@@ -1038,7 +1056,8 @@ INSERT INTO `user_work` (`work_slot_id`, `user_id`, `checked`) VALUES
 (142, 8, 1),
 (144, 6, 1),
 (145, 3, 1),
-(146, 1, 1);
+(146, 1, 1),
+(158, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -1132,7 +1151,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=160 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -1234,7 +1253,18 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (145, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (146, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
 (147, 13, 54, 0, 0, '2015-03-18 13:37:00', '2016-03-18 13:37:00'),
-(148, 7, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00');
+(148, 7, 50, 0, 0, '2015-02-19 17:15:00', '2015-03-25 19:00:00'),
+(149, 13, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(150, 13, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(151, 6, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(152, 6, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(153, 10, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(154, 26, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00'),
+(155, 10, 60, 0, 0, '2015-05-17 22:00:00', '2015-05-18 03:00:00'),
+(156, 26, 60, 0, 0, '2015-05-17 22:00:00', '2015-05-18 03:00:00'),
+(157, 10, 61, 0, 0, '2015-05-11 22:00:00', '2015-05-12 03:00:00'),
+(158, 26, 61, 0, 0, '2015-05-11 22:00:00', '2015-05-12 03:00:00'),
+(159, 26, 55, 0, 0, '2015-05-05 18:00:00', '2015-05-05 23:00:00');
 
 --
 -- Constraints for dumped tables

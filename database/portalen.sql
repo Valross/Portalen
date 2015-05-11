@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2015 at 03:03 PM
+-- Generation Time: May 11, 2015 at 06:12 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -205,35 +205,37 @@ CREATE TABLE IF NOT EXISTS `da_note` (
   `cash` int(11) NOT NULL,
   `n_of_people` int(11) NOT NULL,
   `sales_spenta` int(11) NOT NULL,
+  `sales_shots` int(11) NOT NULL,
   `fixlist` varchar(4000) NOT NULL,
   `message` varchar(4000) NOT NULL,
-  `date_written` timestamp NOT NULL,
+  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `da_note`
 --
 
-INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `fixlist`, `message`, `date_written`) VALUES
-(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, '', 'fest', '0000-00-00 00:00:00'),
-(27, 2, 36, 0, 1, 2, 23, 2342, 242, '', '42', '2015-02-18 23:00:00'),
-(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, '', 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-21 23:00:00'),
-(29, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(30, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(31, 2, 51, 1, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(32, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(33, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(34, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(35, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(36, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(37, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(38, 2, 51, 12, 2, 3, 4, 56, 67, '', '77', '2015-03-21 23:00:00'),
-(39, 2, 51, 12, 2, 3, 4, 56, 67, '', '7726436', '2015-03-21 23:00:00'),
-(40, 2, 51, 12, 2, 3, 4, 56, 67, '', '7726436', '2015-03-21 23:00:00'),
-(41, 2, 53, 1, 3, 5, 7, 9, 11, 'Svarta slut', 'Ja', '0000-00-00 00:00:00');
+INSERT INTO `da_note` (`id`, `user_id`, `event_id`, `sales_total`, `sales_entry`, `sales_bar`, `cash`, `n_of_people`, `sales_spenta`, `sales_shots`, `fixlist`, `message`, `date_written`) VALUES
+(1, 1, 35, 0, 9001, 80085, 1337, 69, 420, 0, '', 'fest', '0000-00-00 00:00:00'),
+(27, 2, 36, 0, 1, 2, 23, 2342, 242, 0, '', '42', '2015-02-18 23:00:00'),
+(28, 2, 50, 1337, 1323, 1, 1337, 1, 1, 0, '', 'Neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2015-03-21 23:00:00'),
+(29, 2, 51, 1, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(30, 2, 51, 1, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(31, 2, 51, 1, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(32, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(33, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(34, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(35, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(36, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(37, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(38, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '77', '2015-03-21 23:00:00'),
+(39, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '7726436', '2015-03-21 23:00:00'),
+(40, 2, 51, 12, 2, 3, 4, 56, 67, 0, '', '7726436', '2015-03-21 23:00:00'),
+(41, 2, 53, 1, 3, 5, 7, 9, 11, 0, 'Svarta slut', 'Ja', '0000-00-00 00:00:00'),
+(42, 2, 53, 1, 2, 23, 34, 5, 6, 0, '6', '6', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -374,7 +376,7 @@ INSERT INTO `event` (`id`, `name`, `info`, `start_time`, `end_time`, `period_id`
 CREATE TABLE IF NOT EXISTS `event_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment` varchar(500) NOT NULL,
-  `date_written` datetime NOT NULL,
+  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -387,12 +389,12 @@ CREATE TABLE IF NOT EXISTS `event_comments` (
 --
 
 INSERT INTO `event_comments` (`id`, `comment`, `date_written`, `user_id`, `event_id`) VALUES
-(1, '*måste fixa lite', '2015-02-26 00:00:00', 2, 50),
-(2, '*lol', '2015-02-26 00:00:00', 2, 37),
-(4, 'lol', '2015-03-17 00:00:00', 2, 50),
-(6, '*undrar om <i>italics</i> fungerar', '2015-03-17 00:00:00', 2, 50),
-(7, '*notify', '2015-03-22 17:34:08', 2, 50),
-(8, '*notilicious', '2015-03-22 17:40:36', 2, 50);
+(1, '*måste fixa lite', '2015-02-25 23:00:00', 2, 50),
+(2, '*lol', '2015-02-25 23:00:00', 2, 37),
+(4, 'lol', '2015-03-16 23:00:00', 2, 50),
+(6, '*undrar om <i>italics</i> fungerar', '2015-03-16 23:00:00', 2, 50),
+(7, '*notify', '2015-03-22 16:34:08', 2, 50),
+(8, '*notilicious', '2015-03-22 16:40:36', 2, 50);
 
 -- --------------------------------------------------------
 
@@ -616,7 +618,7 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `headwaiter_note_id` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `date_written` datetime NOT NULL,
+  `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `headwaiter_note_id` (`headwaiter_note_id`,`user_id`),
@@ -628,9 +630,9 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
 --
 
 INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `user_id`) VALUES
-(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 17:55:55', 2),
-(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 12:41:54', 2),
-(5, 5, 'lol', '2015-03-22 17:56:01', 2);
+(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 16:55:55', 2),
+(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 11:41:54', 2),
+(5, 5, 'lol', '2015-03-22 16:56:01', 2);
 
 -- --------------------------------------------------------
 
@@ -689,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
 
 --
 -- Dumping data for table `notification`
@@ -780,7 +782,8 @@ INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`
 (84, 1, 6, '24', NULL, '2015-03-23 14:34:17'),
 (85, 2, 6, '25', 1, '2015-03-23 14:34:17'),
 (86, 1, 3, '34', NULL, '2015-05-07 12:59:15'),
-(87, 1, 11, '10', NULL, '2015-05-07 13:03:16');
+(87, 1, 11, '10', NULL, '2015-05-07 13:03:16'),
+(88, 1, 3, '34', NULL, '2015-05-11 16:00:14');
 
 -- --------------------------------------------------------
 
@@ -861,6 +864,7 @@ CREATE TABLE IF NOT EXISTS `partyries_arrange` (
 INSERT INTO `partyries_arrange` (`event_id`, `partyries_id`) VALUES
 (36, 1),
 (36, 11),
+(53, 2),
 (53, 5);
 
 -- --------------------------------------------------------

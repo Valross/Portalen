@@ -24,6 +24,7 @@
 					  	<th>Cash (kr)</th>
 					  	<th>Inklick</th>
 					  	<th>Gränga</th>
+					  	<th>4cl shots</th>
 			        </tr>
 			    </thead>
 				<tbody>

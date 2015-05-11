@@ -59,7 +59,7 @@ function loadDAStats()
 	$event_id = $_GET['id'];
 
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.sales_total, da_note.sales_entry, da_note.sales_bar, da_note.cash, 
-									da_note.n_of_people, da_note.sales_spenta, da_note.message, event.name FROM da_note 
+									da_note.n_of_people, da_note.sales_spenta, da_note.sales_shots, da_note.message, event.name FROM da_note 
 							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
 
 	echo '<tr>';
@@ -69,6 +69,7 @@ function loadDAStats()
 		echo '<td>'.$DANotes[0]['cash'].'</td>';
 		echo '<td>'.$DANotes[0]['n_of_people'].'</td>';
 		echo '<td>'.$DANotes[0]['sales_spenta'].'</td>';
+		echo '<td>'.$DANotes[0]['sales_shots'].'</td>';
 	echo '</tr>';
 }
 

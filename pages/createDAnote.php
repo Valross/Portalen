@@ -39,6 +39,8 @@
 			<input type="text" placeholder="69" name="nOfPeople" id="nOfPeople">
 			<label for="salesSpenta">Antal sålda Spenta</label>
 			<input type="text" placeholder="420" name="salesSpenta" id="salesSpenta">
+			<label for="salesShots">Antal sålda 4cl shots</label>
+			<input type="text" placeholder="911" name="salesShots" id="salesShots">
 			<label for="fixlist">Fixlista</label>
 			<textarea rows="6" cols="50" placeholder="Svarta sopsäckar är slut @Piia @Janne" name="fixlist" id="fixlist" class="bottom-border"></textarea>
 			<label for="message">Händelser</label>

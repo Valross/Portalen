@@ -162,8 +162,10 @@ include_once('php/pageManager.php');
 						    <?php loadAmountOfUnseenNotifications(); ?>
 						</button>
 						
-						<ul class="dropdown-menu is-floated-parent" role="menu" aria-labelledby="userDropdown">
+						<ul class="dropdown-menu is-floated-parent dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
+							<div class="list-group">
 						    <?php loadDropDownNotifications(); ?>
+							</div>
 					  	</ul>
 					</div> <!-- .dropdown -->					
 					</div>

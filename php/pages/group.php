@@ -138,7 +138,7 @@ function loadLeaveGroupButton()
 	if(count($memberOfGroup) > 0)
 	{
 		echo '<form action="" method="post">';
-		echo '<input type="submit" name="leave" value="Gå ur laget">';
+		echo '<button class="btn btn-page-header header-img" name="leave">Gå ur laget</button>';
 		echo '</form>';
 	}
 }
@@ -236,11 +236,11 @@ function loadApplyForGroupButton()
 		if(count($alreadyApplied) == 0)
 		{
 			echo '<form action="" method="post">';
-			echo '<tr><td><input type="submit" name="apply" value="Sök detta laget"></td></tr>';
+			echo '<button class="btn btn-page-header header-img" name="apply">Ansök om medlemskap</button>';
 			echo '</form>';
 		}
 		else
-			echo '<tr><td>Du söker det här laget</td></tr>';
+			echo '<button class="btn btn-page-header header-img" disabled="disabled"><i class="fa fa-check fa-fw"></i> Ansökt om medlemskap</button>';
 		
 	}
 }

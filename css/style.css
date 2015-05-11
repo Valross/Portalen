@@ -399,6 +399,9 @@ fieldset[disabled] {
 	.btn-page-header.header-img {
 		margin: 14px 0 54px 0;
 	}
+	.page-header-right form {
+		display: inline-block;
+	}
 	
 	/* Dropdowns: modified Bootstrap style */
 	
@@ -423,7 +426,7 @@ fieldset[disabled] {
 	}
 	.dropdown-notifications-menu {
 	  min-width: 250px;
-	  max-width: 350px;
+	  max-width: 400px;
 	  padding: 5px 0;
 	  margin: 2px 0 0;
 	  background-color: #ffffff;

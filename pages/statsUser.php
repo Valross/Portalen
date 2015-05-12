@@ -15,9 +15,6 @@
 			  	
 		</div>
 	</div>
-</div>
-
-<div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
 			<h3>

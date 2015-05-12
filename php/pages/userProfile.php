@@ -212,8 +212,8 @@ function loadEdit()
 	$user_id = $_GET['id'];
 	if(checkAdminAccess() <= 1)
 	{
-		echo ' - <a href="?page=editOtherProfile&id='.$user_id.'">
-			<span class="fa fa-pencil-square-o fa-fw fa-lg"></span>Redigera</a>';
+		echo '<a href="?page=editOtherProfile&id='.$user_id.'" class="btn btn-page-header header-img">
+			<i class="fa fa-pencil-square-o fa-fw fa-lg"></i> Redigera profil</a>';
 	}
 }
 

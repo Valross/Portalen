@@ -5,11 +5,10 @@
 		</div>
 	</div>
 	<div class="col-sm-6 page-header-right text-right">
-	  <div class="children-float-right">
 		  <a href="?page=groups" class="btn btn-page-header header-img"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till alla lag</a>
 		  <?php loadLeaveGroupButton(); ?>
 		  <?php loadApplyForGroupButton(); ?>
-	</div> <!-- .col-sm-4 -->
+	</div> <!-- .col-sm-6 -->
 </div> <!-- .row -->
 
 <div class="row">

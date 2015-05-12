@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-7">
 		<div class="page-header">
 		<h1>
 		<span class="fa fa-cog fa-fw fa-lg"></span>
@@ -7,8 +7,8 @@
 		</h1>
 		</div>
 	</div>
-	<div class="col-sm-4 page-header-right text-right">
-		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>" class="btn-page-header">
+	<div class="col-sm-5 page-header-right text-right">
+		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>" class="btn btn-page-header">
 		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
 		</a>
 	</div>

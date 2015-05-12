@@ -4,10 +4,12 @@
 		<img src="<?php echo loadUserAvatar(); ?>" width="100" height="100" class="page-header-img img-circle">
 			<h1 class="header-img">
 			<?php loadUserName(); ?>
-			<?php loadEdit(); ?>
 			</h1>
 		</div>
 	</div>
+	<div class="col-sm-4 page-header-right text-right">
+		  <?php loadEdit(); ?>
+	</div> <!-- .col-sm-4 -->
 </div> <!-- .row -->
 
 <div class="row">

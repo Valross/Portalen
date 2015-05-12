@@ -808,13 +808,6 @@ fieldset[disabled] {
 		top: 58px;
 	}
 	
-	.dropdown.children-float-right > ul {
-		float: right;
-		right: 0;
-		top: 52px;
-		left: auto;
-	}
-	
 
 	
 	/* Bootstrap calendar state */

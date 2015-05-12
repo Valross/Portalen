@@ -9,30 +9,10 @@
 
 <form action="" method="post">
 <div class="row">
-<div class="col-sm-6">
-	<div class="white-box">
-		<h3>Datum</h3>
-
-		<div class="input-group date datetimepicker">
-			<label for="start">Starttid</label>
-			<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
-	        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-		</div>
-			
-		<div class="input-group date datetimepicker">
-			<label for="end">Sluttid</label>
-			<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>">
-			<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-		</div>
 		
-		<input type="submit" name="submit" value="Sök">
-	</div>
-</div> <!-- .white-box -->
-</div> <!-- .col-sm-6 -->			
-
-<div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-8">
 		<div class="white-box">
+			<h3>Arbetade pass</h3>
 			<table class="table table-hover">
 		      	<thead>
 			        <tr>
@@ -49,7 +29,27 @@
 
 			  	</tbody>
 				</table>
-			</div>
 		</div>
 	</div>
+	
+	<div class="col-sm-4">
+		<div class="white-box">
+			<h3>Sök på datum</h3>
+
+			<div class="input-group date datetimepicker">
+				<label for="start">Starttid</label>
+				<input id="start" type="text" name="start" value="<?php echo $dateNoTime; ?>">
+		        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+			
+			<div class="input-group date datetimepicker">
+				<label for="end">Sluttid</label>
+				<input id="end" type="text" name="end" value="<?php echo $dateNoTime; ?>" class="bottom-border">
+				<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+			</div>
+		
+			<input type="submit" name="submit" value="Sök">
+	</div> <!-- .white-box -->
+	</div> <!-- .col-sm-4 -->
+	
 </div>

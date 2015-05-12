@@ -8,7 +8,6 @@ if(!isset($_SESSION['user_id']))
 
 include_once('php/general.php');
 include_once('php/pageManager.php');
-include_once('php/getLoggedInUsers.php');
 
 refreshLatestActivity();	//general.php
 
@@ -287,7 +286,7 @@ refreshLatestActivity();	//general.php
 			<div class="push"></div>
 		  </div> <!-- end #content -->
 
-		  <div id="logged-in-users-container">
+		  <div id="logged-in-users-container">	<!-- style.css -->
 
 		  </div>
 		

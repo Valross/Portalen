@@ -634,6 +634,14 @@ fieldset[disabled] {
 	    -ms-user-select: none;
 	    user-select: none;
 	}
+
+	#logged-in-users-container {
+		position: absolute;
+		right: 20px;
+		top: 300px;
+		heigth: 100px;
+		width: 100px;
+	}
 	
 	/* Page headers */
 	

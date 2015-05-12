@@ -696,16 +696,22 @@ fieldset[disabled] {
 	
 	/* List groups */	
 	
-	.white-box .list-group-item {
+	.white-box .list-group-item,
+	.dropdown-notifications-menu .list-group-item {
   	  border-right: 0;
   	  border-left: 0;
 	  border-color: #e3e9eb;
 	}
-	.white-box .list-group-item:first-child {
+	.white-box .list-group-item:first-child,
+	.dropdown-notifications-menu .list-group-item:first-child {
 	  border-top-right-radius: 0px;
 	  border-top-left-radius: 0px;
 	}
-	.white-box .list-group-item:last-child {
+	.dropdown-notifications-menu .list-group-item:first-child {
+		border-top: 0;
+	}
+	.white-box .list-group-item:last-child,
+	.dropdown-notifications-menu .list-group-item:last-child {
 	  margin-bottom: -20px;
 	  border-bottom: 0;
 	  border-bottom-right-radius: 0px;

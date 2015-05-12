@@ -49,8 +49,9 @@ DBQuery::sql("UPDATE user
 	    });
 
 	    function refreshLoggedInUsers(){
-	        $('#logged-in-users-container').load('getLoggedInUsers.php', function(){
+	        $('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
 	           setTimeout(refreshLoggedInUsers, 10000);
+	           console.log("hej");
 	        });
 	    }
 	</script>

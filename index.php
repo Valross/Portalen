@@ -202,8 +202,21 @@ refreshLatestActivity();	//general.php
 						</button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
-							<div class="list-group">
-						    	<?php loadDropDownNotifications(); ?>
+							<div class="list-group" id="notifications-menu">
+						    	<!-- /?php loadDropDownNotifications(); ? -->
+
+						    	<script type="text/javascript">
+							    $(document).ready(function(){
+							      loadNotifications();
+							    });
+
+							    function loadNotifications(){
+							        $('#notifications-menu').load('php/loadDropDownNotifications.php', function(){
+							           setTimeout(loadNotifications, 10000);
+							        });
+							    }
+								</script>
+
 							</div>
 					  	</ul>
 					</div> <!-- .dropdown -->					

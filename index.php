@@ -10,14 +10,7 @@ include_once('php/general.php');
 include_once('php/pageManager.php');
 include_once('php/getLoggedInUsers.php');
 
-// $_SESSION['last_activity'] = date("Y-m-d h:i:s", $d);
-// $_SESSION['last_activity'] = date("Y-m-d h:i:s");
-
-// update user latest activity
-$lastAct = date("Y-m-d H:i:s");
-DBQuery::sql("UPDATE user 
-			  SET latest_activity = '$lastAct'
-			  WHERE id='$_SESSION[user_id]'");
+refreshLatestActivity();	//general.php
 
 ?>
 <!DOCTYPE html>

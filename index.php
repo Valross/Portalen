@@ -43,7 +43,6 @@ refreshLatestActivity();	//general.php
 	    function refreshLoggedInUsers(){
 	        $('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
 	           setTimeout(refreshLoggedInUsers, 10000);
-	           console.log("hej");
 	        });
 	    }
 	</script>
@@ -184,13 +183,27 @@ refreshLatestActivity();	//general.php
 
 					<div class="dropdown">
 						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
-							<i class="fa fa-globe"></i>
-						    <?php loadAmountOfUnseenNotifications(); ?>
+							<i class="fa fa-globe" id="notifications-globe"></i>
+							<!-- ?php loadAmountOfUnseenNotifications(); ? -->
+							<!-- <div id="amount-unseen-notifications-container"></div> -->
+
+							<script type="text/javascript">
+						    $(document).ready(function(){
+						      loadUnseenNotificationsCircle();
+						    });
+
+						    function loadUnseenNotificationsCircle(){
+						        $('#notifications-globe').load('php/loadAmountOfUnseenNotifications.php', function(){
+						           setTimeout(loadUnseenNotificationsCircle, 10000);
+						        });
+						    }
+							</script>
+
 						</button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
 							<div class="list-group">
-						    <?php loadDropDownNotifications(); ?>
+						    	<?php loadDropDownNotifications(); ?>
 							</div>
 					  	</ul>
 					</div> <!-- .dropdown -->					

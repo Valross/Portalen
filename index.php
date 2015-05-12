@@ -77,7 +77,15 @@ include_once('php/pageManager.php');
 
 						  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
 			              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
-			              <li><a href="?page=stats"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik</a></li>
+			              <li class="dropdown">
+							  <a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFour"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+  		  						<ul id="collapseFour" class="panel-collapse collapse">
+  				              	<li><a href="?page=statsUser"><span class="fa fa-book fa-fw fa-lg"></span>Din statistik</a></li>
+  	  							<li><a href="?page=statsList"><span class="fa fa-list fa-fw fa-lg"></span>Statistiklista</a></li>
+						  </li>
+						  </ul>
+						  
+						  
 			              <li><a href="?page=achievements"><span class="fa fa-trophy fa-fw fa-lg"></span>Achievements</a></li>
 	  		               
 		            <?php 

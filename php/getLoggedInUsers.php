@@ -1,5 +1,7 @@
 <?php
 
+include_once('DBQuery.php');
+
 // get logged in users
 $users = DBQuery::sql("SELECT id, name, latest_session 
 					   FROM user 

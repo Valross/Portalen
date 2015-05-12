@@ -301,25 +301,33 @@ function loadAvailableEvents()
 				<h4>Bokningsbart</h4>
 					<div class="list-group">';
 	}
-	for($i = 0; $i < count($availableEvents) && $i < 15; ++$i)
+	for($i = 0; $i < count($availableEvents) && $i < 10; ++$i)
 	{
-		$eventId = $availableEvents[$i]['id'];
-		$workSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId'");
+		$total_available_slots = 0;
+		$event_id = $availableEvents[$i]['id'];
 
-		$availableSlots = DBQuery::sql("SELECT id FROM work_slot WHERE event_id = '$eventId' AND id NOT IN
-											(SELECT work_slot_id FROM user_work)");
+		$groups = DBQuery::sql("SELECT id, name, main_group, sub_group, icon, hex FROM work_group 
+							WHERE id IN 
+								(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
+							ORDER BY name");
 
-		// if(checkIfMemberOfGroup($user_id, $group_id))
-		// {
-
-		// }
-		$workSlotsCount = count($workSlots);
-		$availableSlotsCount = count($availableSlots);
-		$availableSlotsText = 'lediga platser';
-		if($availableSlotsCount == 1)
+		for($k = 0; $k < count($groups); $k++)
 		{
-			$availableSlotsText = 'ledig plats';
+			$group_id = $groups[$k]['id'];
+			$available_slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
+				WHERE event_id = '$event_id' AND group_id = '$group_id'
+				AND id NOT IN
+					(SELECT work_slot_id FROM user_work)");
+
+			if(checkIfMemberOfGroup($_SESSION['user_id'], $group_id))
+				$total_available_slots = $total_available_slots + count($available_slots);
 		}
+		
+		$availableSlotsCount = $total_available_slots;
+		$availableSlotsText = 'lediga platser';
+
+		if($availableSlotsCount == 1)
+			$availableSlotsText = 'ledig plats';
 		
 		$name = $availableEvents[$i]['name'];
 		$eventDate = new DateTime($availableEvents[$i]['start_time']);

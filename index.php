@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if(!isset($_SESSION['user_id']))
 {
 	header('Location: login.php');
@@ -7,6 +8,17 @@ if(!isset($_SESSION['user_id']))
 
 include_once('php/general.php');
 include_once('php/pageManager.php');
+include_once('php/getLoggedInUsers.php');
+
+// $_SESSION['last_activity'] = date("Y-m-d h:i:s", $d);
+// $_SESSION['last_activity'] = date("Y-m-d h:i:s");
+
+// update user latest activity
+$lastAct = date("Y-m-d H:i:s");
+DBQuery::sql("UPDATE user 
+			  SET latest_activity = '$lastAct'
+			  WHERE id='$_SESSION[user_id]'");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +42,19 @@ include_once('php/pageManager.php');
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+	    $(document).ready(function(){
+	      refreshLoggedInUsers();
+	    });
+
+	    function refreshLoggedInUsers(){
+	        $('#logged-in-users-container').load('getLoggedInUsers.php', function(){
+	           setTimeout(refreshLoggedInUsers, 10000);
+	        });
+	    }
+	</script>
+
   </head>
   <body>
 	  
@@ -257,6 +282,10 @@ include_once('php/pageManager.php');
 			  </div>
 			<div class="push"></div>
 		  </div> <!-- end #content -->
+
+		  <div id="logged-in-users-container">
+
+		  </div>
 		
 		  <div id="footer">
 			  <div class="container-fluid">

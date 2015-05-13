@@ -104,9 +104,9 @@ function loadLayout()
 				echo $event_time_start->format(' H:i');
 				echo $event_time_end->format('-H:i');
 
-				for($k = 0; $k < count($groups); $k++)
+				for($l = 0; $l < count($groups); $l++)
 				{
-					$group_id = $groups[$k]['id'];
+					$group_id = $groups[$l]['id'];
 					$total_slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
 						WHERE event_id = '$event_id' AND group_id = '$group_id'");
 
@@ -117,9 +117,9 @@ function loadLayout()
 
 					if(checkIfMemberOfGroup($_SESSION['user_id'], $group_id))
 					{
-						echo '<p class="">';
-						echo $groups[$k]['name'].' ('.count($booked_slots).'/'.count($total_slots).')';
-						echo '</p>';
+						echo '<li class="">';
+						echo $groups[$l]['name'].' ('.count($booked_slots).'/'.count($total_slots).')';
+						echo '</li>';
 					}
 				}
 			}

@@ -372,12 +372,15 @@ function loadWorkSlots()
 					{
 						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && count($availableSlot) > 0 && $slots[$j]['group_id'] == $groups[$i]['sub_group'] && count($alreadyHappend) != 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Nybyggare)</a></li>';
+						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && !checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
+							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Det här passet är endast för ordinarie."> 
+									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
 						else
-							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Du kan inte boka upp dig på det här passet."> 
+							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Du är inte med i det här laget."> 
 									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
 					}
 					else

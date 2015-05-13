@@ -1,5 +1,13 @@
 <?php
 include_once('php/DBQuery.php');
+
+if(isset($_GET['notified']))
+{
+	$notification_id = $_GET['notified'];
+	DBQuery::sql("UPDATE notification
+		 	SET seen = 1
+		 	WHERE id = '$notification_id'");
+}
 	
 //Score progress bar calculation
 $dates = new DateTime;
@@ -62,7 +70,7 @@ if($bookedPointsPercent > 100 - $workedPointsPercent)
 //Allowed tags
 function allowed_tags()
 {
-	return '<i>\n';
+	return '<i>\n<a>';
 }
 
 function refreshLatestActivity()

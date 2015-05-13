@@ -26,7 +26,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 								WHERE id = '$info'");
 		if(count($achievement) > 0)
 		{
-			echo '<a href="?page=achievement&id='.$info.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=achievement&id='.$info.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -64,7 +64,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$info_user_id'");
 			
-			echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=event&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -99,7 +99,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=DANote&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -132,7 +132,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=HeadwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=HeadwaiterNote&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -156,7 +156,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		$group = DBQuery::sql("SELECT name, icon FROM work_group
 								WHERE id = '$group_id'");
 
-		echo '<a href="?page=group&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+		echo '<a href="?page=group&id='.$info.'&group_id='.$group_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 		if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -186,7 +186,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 			
-			echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=browseDots&id='.$info.'&group_id='.$group_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -222,7 +222,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=protocol&id='.$info.'&group_id='.$group_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -257,7 +257,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=event&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=event&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -300,7 +300,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 										WHERE id = '$user_id'");
 
-			echo '<a href="?page=group&id='.$group_id.'" class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=group&id='.$group_id.'&notified='.$notification_id.'" class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -339,7 +339,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=DANote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=DANote&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -377,7 +377,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			$user = DBQuery::sql("SELECT id, name, last_name FROM user
 									WHERE id = '$user_id'");
 
-			echo '<a href="?page=headwaiterNote&id='.$event_id.'"class="list-group-item with-thumbnail black-link';
+			echo '<a href="?page=headwaiterNote&id='.$event_id.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';

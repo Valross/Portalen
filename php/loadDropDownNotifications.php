@@ -26,7 +26,10 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 								WHERE id = '$info'");
 		if(count($achievement) > 0)
 		{
-			echo '<a href="?page=achievement&id='.$info.'&notified='.$notification_id.'"class="list-group-item with-thumbnail black-link';
+			
+			// EJ KLAR WOOP
+			
+			echo '<a href="?page=achievement&id='.$info.'&notified='.$notification_id.'" class="list-group-item with-thumbnail black-link';
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
@@ -42,7 +45,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Avbokning')
@@ -68,7 +71,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har avbokat sig från sitt ';
 			echo $group[0]['name'].'-pass';
 
@@ -81,7 +84,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'DA-lapp')
@@ -103,7 +106,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har skrivit en ';
 			echo '<span class="fa fa-key fa-fw fa-lg"></span>';
 			echo 'DA-lapp.';
@@ -114,7 +117,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Hovis-lapp')
@@ -136,7 +139,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har skrivit en ';
 			echo '<span class="fa fa-female fa-fw fa-lg"></span>';
 			echo 'Hovis-lapp.';
@@ -147,7 +150,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Uppgradering')
@@ -190,7 +193,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har skrivit en punkt i ';
 
 			if($group[0]['icon'] != '')
@@ -203,7 +206,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Protokoll')
@@ -226,7 +229,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har skrivit ett protokoll i ';
 
 			if($group[0]['icon'] != '')
@@ -239,7 +242,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Kommentar - Event')
@@ -261,7 +264,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har kommenterat i evenemanget ';
 
 			echo $event[0]['name'];
@@ -271,7 +274,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Ansökan - Portalen')
@@ -280,7 +283,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-		echo loadAvatarFromUser(-1, 25).$info;
+		echo loadAvatarFromUserAsNotification(-1, 32).$info;
 		echo ' har gjort en ansökan till portalen.';
 
 		echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
@@ -304,20 +307,16 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
-			echo ' har sökt till ditt lag ';
-
-			if($group[0]['icon'] != '')
-				echo '<span class="'.$group[0]['icon'].' list-group-thumbnail group-badge webb"></span>';
-
-			echo $group[0]['name'];
-			echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo '</strong> har sökt till ditt lag ';
+			echo '<strong>'.$group[0]['name'].'</strong>.';
+			echo '</br><i class="time">'.$notifications[$i]['date'].'</i></span>';
 			echo '</a>';
 		}
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Kommentar - DA-lapp')
@@ -343,7 +342,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har kommenterat i ';
 			echo '<span class="fa fa-key fa-fw fa-lg"></span>';
 			echo 'DA-lappen ';
@@ -355,7 +354,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	else if($notification_type[0]['type'] == 'Kommentar - Hovis-lapp')
@@ -381,7 +380,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 25).$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).$user[0]['name'].' '.$user[0]['last_name'];
 			echo ' har kommenterat i ';
 			echo '<span class="fa fa-female fa-fw fa-lg"></span>';
 			echo 'Hovis-lappen ';
@@ -393,7 +392,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		else
 		{
 			echo '<a class="list-group-item with-thumbnail black-link">
-				<i>Det verkar som att det här inlägget är borttaget.</i></a>';
+				<i>Händelsen kunde inte hittas.</i></a>';
 		}
 	}
 	// DBQuery::sql("UPDATE notification
@@ -403,14 +402,14 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 echo '<li role="presentation"><a role="menuitem" href="?page=browseUserNotifications&user_id='.$_SESSION['user_id'].'"><span class="fa fa-globe fa-fw"></span> Alla händelser</a></li>';
 
 //general.php
-function loadAvatarFromUser($user_id, $size)
+function loadAvatarFromUserAsNotification($user_id, $size)
 {
 	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
 	if(count($results) == 0)
 	{
-		return '<img src="img/avatars/no_face_small.png" width="'.$size.'" height="'.$size.'" class="img-circle">';
+		return '<img src="img/avatars/no_face_small.png" width="'.$size.'" height="'.$size.'" class="img-circle list-group-thumbnail">';
 	}
-	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="'.$size.'" height="'.$size.'" class="img-circle">';
+	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="'.$size.'" height="'.$size.'" class="img-circle list-group-thumbnail">';
 }
 
 ?>

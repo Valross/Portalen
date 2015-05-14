@@ -183,7 +183,7 @@ refreshLatestActivity();	//general.php
 
 					<div class="dropdown">
 						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
-							<i class="fa fa-globe" id="notifications-globe"></i>
+							<i class="fa fa-bell-o" id="notifications-globe"></i>
 							<!-- ?php loadAmountOfUnseenNotifications(); ? -->
 							<!-- <div id="amount-unseen-notifications-container"></div> -->
 

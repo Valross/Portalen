@@ -2,15 +2,17 @@
 	<div class="col-sm-8">
 		<div class="page-header">
 			<h1><span class="fa fa-trophy fa-fw fa-lg"></span> Achievements
-			<?php
-				if(checkAdminAccess() <= 1)
-				{
-					echo ' - <a href="?page=createAchievement">Hantera</a>';
-				}
-			?>
 			</h1>
 		</div>
 	</div>
+	<?php
+		if(checkAdminAccess() <= 1)
+		{
+	echo'<div class="col-sm-4 page-header-right text-right">
+		<a href="?page=createAchievement" class="btn btn-page-header"><i class="fa fa-wrench fa-fw"></i> Hantera achievements</a>
+	</div>';
+	}
+?>
 </div> <!-- .row -->
 
 <div class="row">

@@ -201,7 +201,7 @@ refreshLatestActivity();	//general.php
 
 						</button>
 						
-						<ul class="dropdown-menu is-floated-parent dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
+						<ul class="dropdown-menu is-floated-parent dropdown-menu-right dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
 							<div class="list-group" id="notifications-menu">
 						    	<!-- /?php loadDropDownNotifications(); ? -->
 

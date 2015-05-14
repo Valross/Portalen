@@ -421,7 +421,7 @@ function loadTitleForBrowser($title)
 {
 	echo '<title>';
 	if($title != '')
-		echo $title;
+		echo $title . ' - Trappans personalportal';
 	else
 		echo 'Trappans personalportal';
 	echo '</title>';

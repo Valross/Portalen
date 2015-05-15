@@ -3,12 +3,19 @@
 	{
 ?>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="page-header">
-			<h1><span class="fa fa-check-square-o fa-fw fa-lg"></span> Gamla pass
-			 - <a href="?page=checkPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka pass</a>
-			 - <a href="?page=checkUncheckedPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Ocheckade pass</a>
+			<h1>Gamla pass
 			</h1>
+		</div>
+	</div>
+	<div class="col-sm-6 page-header-right">
+		<div class="pull-right form-inline">
+				<div class="btn-group">
+					<a href="?page=checkPasses" class="btn btn-page-header"><i class="fa fa-check-square-o fa-fw fa-lg"></i> Checka pass</a>
+					<a href="?page=checkUncheckedPasses" class="btn btn-page-header"><i class="fa fa-square-o fa-fw fa-lg"></i> Ocheckade pass</a>
+					<a href="?page=checkPassesAllEvents" class="btn btn-page-header active">Gamla pass</a>
+				</div>
 		</div>
 	</div>
 </div> <!-- .row -->

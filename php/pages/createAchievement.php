@@ -53,11 +53,14 @@ if(isset($_POST['add']))
 function loadAll()
 {
 	echo '<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<div class="page-header">
-					<h1><span class="fa fa-trophy fa-fw fa-lg"></span>Hantera <a href="?page=achievements">Achievements</a></h1>
+					<h1><span class="fa fa-trophy fa-fw fa-lg"></span>Hantera achievements</h1>
 				</div>
 			</div>
+			<div class="col-sm-6 page-header-right text-right">
+				  <a href="?page=achievements" class="btn btn-page-header"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till all achievements</a>
+			</div> <!-- .col-sm-6 -->
 		</div> <!-- .row -->';
 
 	echo '<div class="row">

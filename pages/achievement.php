@@ -1,9 +1,15 @@
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-7">
 		<div class="page-header">
-			<h1><span class="fa fa-trophy fa-fw"></span><a href="?page=achievements">Achievements</a></h1>
+			<h1>
+				<span class="fa fa-trophy fa-fw fa-lg"></span>
+				Achievements
+			</h1>
 		</div>
 	</div>
+	<div class="col-sm-5 page-header-right text-right">
+		  <a href="?page=achievements" class="btn btn-page-header"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till alla achievements</a>
+	</div> <!-- .col-sm-5 -->
 </div> <!-- .row -->
 
 <div class="row">

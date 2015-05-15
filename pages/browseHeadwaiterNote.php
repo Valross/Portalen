@@ -3,12 +3,14 @@
 	{
 ?>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="page-header">
-			<h1><span class="fa fa-female fa-fw fa-lg"></span> Hovis-lappar - 
-			<a href="?page=browseDANote"><span class="fa fa-key fa-fw fa-lg"></span>DA-lappar</a></h1>
+			<h1><span class="fa fa-female fa-fw fa-lg"></span> Hovis-lappar
 		</div>
 	</div>
+	<div class="col-sm-6 page-header-right text-right">
+		  <a href="?page=browseDANote" class="btn btn-page-header"><i class="fa fa-female fa-fw"></i> DA-lappar</a>
+	</div> <!-- .col-sm-6 -->
 </div>
 
 <div class="row">

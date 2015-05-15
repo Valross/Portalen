@@ -31,13 +31,18 @@ if(isset($_POST['submit']))
 function loadAll()
 {
 	echo '<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<div class="page-header">
-					<h1>
-					Hantera Lagledare - 
-					<a href="?page=createGroup">Skapa Lag</a> - 
-					<a href="?page=manageGroup">Hantera Lag</a>
-					</h1>
+					<h1>Hantera Lagledare</h1>
+				</div>
+			</div>
+			<div class="col-sm-6 page-header-right">
+				<div class="pull-right form-inline">
+						<div class="btn-group">
+							<a href="?page=manageGroup" class="btn btn-page-header">Hantera lag</a>
+							<a href="?page=manageGroupLeader" class="btn btn-page-header active">Hantera lagledare</a>
+							<a href="?page=createGroup" class="btn btn-page-header">Skapa lag</a>
+						</div>
 				</div>
 			</div>
 		</div> <!-- .row -->';

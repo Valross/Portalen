@@ -33,13 +33,13 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
+			echo '<i class="fa fa-fw fa-diamond fa-lg list-group-thumbnail group-badge"></i>';
+			// echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>';
 			
-			echo 'Du låste upp ';
-			echo '<i class="'.$achievement[0]['icon'].'"></i>';
-			echo '<span class="badge on-top-of-element">'.$achievement[0]['points'].'</span>';
-			echo $achievement[0]['name'].'.';
+			echo '<span class="message">Du låste upp <strong>';
+			echo $achievement[0]['name'].'</strong>.';
 
-			echo '</br><span class="time">'.$notifications[$i]['date'].'</span>';
+			echo '</br><i class="time">'.$notifications[$i]['date'].'</i></span>';
 			echo '</a>';
 		}
 		else

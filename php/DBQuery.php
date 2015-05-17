@@ -1,6 +1,6 @@
 <?php
 
-include_once('DBConnect.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBConnect.php');
 
 class DBQuery
 {			

@@ -1,5 +1,5 @@
 <?php
-include_once('DBQuery.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 
 // Define Output HTML Formating

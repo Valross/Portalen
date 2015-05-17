@@ -1,6 +1,6 @@
 <?php
 
-include_once('DBQuery.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 // get logged in users
 $users = DBQuery::sql("SELECT id, name, latest_session 

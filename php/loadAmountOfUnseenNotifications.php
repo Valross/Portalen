@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('DBQuery.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 $user_id = $_SESSION['user_id'];
 $notifications = DBQuery::sql("SELECT id FROM notification

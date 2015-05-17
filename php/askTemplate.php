@@ -1,6 +1,6 @@
 <?php
 
-include_once('DBQuery.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 $date = new DateTime;
 $date->setTimezone(new DateTimeZone('Europe/Stockholm'));

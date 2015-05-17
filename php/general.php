@@ -1,5 +1,5 @@
 <?php
-include_once('php/DBQuery.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 if(isset($_GET['notified']))
 {

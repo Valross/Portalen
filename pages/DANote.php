@@ -3,13 +3,16 @@
 	{
 ?>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-6">
 		<div class="page-header">
 			<h1><?php loadEventName(); ?></h1>
 			<h4>
 			<img src="<?php echo loadDAAvatar(); ?>" width="32" height="32" class="img-circle"> <?php loadDAName(); ?></h4>
 		</div>
 	</div>
+	<div class="col-sm-6 page-header-right text-right">
+		  <a href="?page=browseDANote" class="btn btn-page-header"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till alla DA-lappar</a>
+	</div> <!-- .col-sm-6 -->
 </div>
 
 <div class="row">

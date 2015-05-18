@@ -51,7 +51,6 @@ function loadEventName()
 	$eventStart = new DateTime($eventName[0]['start_time']);
 	$start = $eventStart->format('D Y-m-d');
 	echo $eventName[0]['name'].'</a> - '.$start;
-	echo ' - <a href=?page=browseHeadwaiterNote><span class="fa fa-female fa-fw fa-lg"></span>Hovis-lappar</a>';
 }
 
 function loadHeadwaiterStats()

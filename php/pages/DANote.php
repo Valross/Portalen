@@ -51,7 +51,6 @@ function loadEventName()
 	$eventStart = new DateTime($eventName[0]['start_time']);
 	$start = $eventStart->format('D Y-m-d');
 	echo $eventName[0]['name'].'</a> - '.$start;
-	echo ' - <a href=?page=browseDANote><span class="fa fa-key fa-fw fa-lg"></span>DA-lappar</a>';
 }
 
 function loadDAStats()

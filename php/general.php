@@ -448,6 +448,15 @@ function loadAvatarFromUser($user_id, $size)
 	}
 	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="'.$size.'" height="'.$size.'" class="img-circle">';
 }
+function loadAvatarFromUserAsNotification($user_id, $size)
+{
+	$results = DBQuery::sql("SELECT avatar FROM user WHERE id = '$user_id' AND avatar IS NOT NULL");
+	if(count($results) == 0)
+	{
+		return '<img src="img/avatars/no_face_small.png" width="'.$size.'" height="'.$size.'" class="img-circle list-group-thumbnail">';
+	}
+	return '<img src="img/avatars/'.$results[0]['avatar'].'" width="'.$size.'" height="'.$size.'" class="img-circle list-group-thumbnail">';
+}
 
 function loadMyGroups()
 {

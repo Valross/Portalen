@@ -71,7 +71,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har avbokat sig från sitt ';
 			echo $group[0]['name'].'-pass';
 
@@ -106,7 +106,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'].'</strong>';
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'].'</strong>';
 			echo ' har skrivit en ';
 			echo '<span class="fa fa-key fa-fw fa-lg"></span>';
 			echo '<strong>DA-lapp</strong>.';
@@ -139,7 +139,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'].'</strong>';
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'].'</strong>';
 			echo ' har skrivit en ';
 			echo '<span class="fa fa-female fa-fw fa-lg"></span>';
 			echo '<strong>Hovis-lapp</strong>.';
@@ -193,7 +193,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har skrivit en punkt i <strong>';
 			echo $group[0]['name'];
 			echo '</strong>.</br><i class="time">'.$notifications[$i]['date'].'</i></span>';
@@ -225,7 +225,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har skrivit ett protokoll i <strong>';
 			echo $group[0]['name'];
 			echo '</strong></br><i class="time">'.$notifications[$i]['date'].'</i></span>';
@@ -256,7 +256,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har kommenterat i evenemanget <strong>';
 			echo $event[0]['name'];
 			echo '</strong></br><i class="time">'.$notifications[$i]['date'].'</i></span>';
@@ -274,7 +274,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 		if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-		echo loadAvatarFromUser(-1, 32).'<span class="message"><strong>'.$info;
+		echo loadAvatarFromUserAsNotification(-1, 32).'<span class="message"><strong>'.$info;
 		echo '</strong> har gjort en ansökan till portalen.';
 
 		echo '</br><i class="time">'.$notifications[$i]['date'].'</i></span>';
@@ -298,7 +298,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har sökt till ditt lag ';
 			echo '<strong>'.$group[0]['name'].'</strong>.';
 			echo '</br><i class="time">'.$notifications[$i]['date'].'</i></span>';
@@ -333,7 +333,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har kommenterat i ';
 			echo '<span class="fa fa-key fa-fw fa-lg"></span>';
 			echo '<strong>DA-lappen</strong> ';
@@ -371,7 +371,7 @@ for($i = 0; $i < count($notifications) && $i < 6; ++$i)
 			if(count($unseen_notification) > 0)
 				echo ' new-notification';
 			echo '">';
-			echo loadAvatarFromUser($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
+			echo loadAvatarFromUserAsNotification($user[0]['id'], 32).'<span class="message"><strong>'.$user[0]['name'].' '.$user[0]['last_name'];
 			echo '</strong> har kommenterat i ';
 			echo '<span class="fa fa-female fa-fw fa-lg"></span>';
 			echo '<strong>Hovis-lappen</strong> ';

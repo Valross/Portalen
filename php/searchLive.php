@@ -4,19 +4,25 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
 
 // Define Output HTML Formating
 $defaultHtml  = '';
-$defaultHtml .= '<li class="result">';
-$defaultHtml .= '<a target="_blank" href="urlString" class="black-link">';
-$defaultHtml .= '<p>nameString</p>';
+$defaultHtml .= '<a href="urlString" class="list-group-item with-thumbnail">';
+$defaultHtml .= '<img src="img/avatars/portalen_bild.jpg" class="img-circle list-group-thumbnail" width="32" height="32">';
+$defaultHtml .= 'nameString';
 $defaultHtml .= '</a>';
-$defaultHtml .= '</li>';
+$defaultHtml .= '';
 
 $eventHtml  = '';
-$eventHtml .= '<li class="result">';
-$eventHtml .= '<a target="_blank" href="urlString" class="black-link">';
-$eventHtml .= '<p>nameString - ';
-$eventHtml .= '<span class="time">dateString</span></p>';
+$eventHtml .= '<a href="urlString" class="list-group-item">';
+$eventHtml .= 'nameString';
+$eventHtml .= '<span class="list-group-item-text pull-right">dateString</span>';
 $eventHtml .= '</a>';
-$eventHtml .= '</li>';
+$eventHtml .= '';
+
+$groupHtml  = '';
+$groupHtml .= '<a href="urlString" class="list-group-item with-thumbnail">';
+$groupHtml .= '<span class="fa fa-users fa-fw fa-lg list-group-thumbnail group-badge" style="background: #f79839;"></span>';
+$groupHtml .= 'nameString';
+$groupHtml .= '</a>';
+$groupHtml .= '';
 
 
 // Get Search
@@ -34,7 +40,9 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($users) > 0) {
 		$noResults = 0;
-		echo "Användare";
+		echo '<div class="col-sm-4">
+			<h3>Användare</h3>
+				<div class="list-group">';
 		
 		for ($i=0; $i < count($users) and $i <= $maxResultsPerCategory; ++$i) { 
 			$userId = $users[$i]['id'];
@@ -54,6 +62,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 			}
 
 			echo($output);
+			echo "</div></div>";
 	 	} 	
 	}
 
@@ -64,7 +73,9 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($events) > 0) {
 		$noResults = 0;
-		echo "Evenemang";
+		echo '<div class="col-sm-4">
+			<h3>Evenemang</h3>
+				<div class="list-group">';
 		
 		for ($i=0; $i < count($events) and $i <= $maxResultsPerCategory; ++$i) { 
 			$eventId = $events[$i]['id'];
@@ -87,11 +98,16 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 			}
 			echo($output);
 	 	}
+		echo '</div></div>';
 	}
 
 	// If slots remain, search events past current time
  	if(count($pastEvents) > 0 && (count($events) < $maxResultsPerCategory || count($events == 0))) {
 		$noResults = 0;
+		echo '<div class="col-sm-4">
+			<h3>Evenemang</h3>
+				<div class="list-group">';
+		
  		for ($j=0; $j < count($pastEvents) and $j <= $maxResultsPerCategory - count($events); ++$j) { 
  			$eventId = $pastEvents[$j]['id'];
 			$eventDate = $pastEvents[$j]['start_time'];
@@ -110,8 +126,11 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 				$output = str_replace('nameString', "...", $defaultHtml);
 				$output = str_replace('urlString', "", $output);
 			}
+
 			echo($output);
+			
  		}
+		echo '</div></div>';
  	} 	
 
 	// Search teams
@@ -119,7 +138,9 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 
 	if(count($teams) > 0) {
 		$noResults = 0;
-		echo "Lag";
+		echo '<div class="col-sm-4">
+			<h3>Lag</h3>
+			<div class="list-group">';
 		
 		for ($i=0; $i < count($teams) and $i <= $maxResultsPerCategory; ++$i) { 
 			$teamId =  $teams[$i]['id'];
@@ -128,7 +149,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 				, $teams[$i]['name']);
 
 			if(!($i == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $defaultHtml);
+				$output = str_replace('nameString', $display_name, $groupHtml);
 				$output = str_replace('urlString', "?page=group&id=$teamId", $output);
 			}
 
@@ -139,6 +160,7 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 			}
 			echo($output);
 	 	} 	
+		echo '</div></div>';
 	}
 
 	// No-results-found output

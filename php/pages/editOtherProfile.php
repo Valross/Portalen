@@ -12,6 +12,12 @@ if(count($result) == 1)
 else
 	$profileMail = "";
 
+$result = DBQuery::sql("SELECT bank_account FROM user WHERE id = '$_SESSION[user_id]' AND bank_account IS NOT NULL");
+if(count($result) == 1)
+	$profileBankAccount = $result[0]["bank_account"];
+else
+	$profileBankAccount = "";
+
 $result = DBQuery::sql("SELECT address FROM user WHERE id = '$user_id' AND address IS NOT NULL");
 if(count($result) == 1)
 	$profileAddress = $result[0]["address"];
@@ -64,6 +70,7 @@ else
 if(isset($_POST['changeInfo'])) {
 	$phoneNumber = strip_tags(DBQuery::safeString($_POST['phone_number']));
 	$ssn = strip_tags(DBQuery::safeString($_POST['ssn']));
+	$bankAccount = strip_tags(DBQuery::safeString($_POST['bank_account']));
 	$mail = strip_tags(DBQuery::safeString($_POST['mail']));
 	$address = strip_tags(DBQuery::safeString($_POST['address']));
 	$major = strip_tags(DBQuery::safeString($_POST['major']));
@@ -84,6 +91,13 @@ if(isset($_POST['changeInfo'])) {
 			$queryString = $queryString . ", ssn='$ssn'";
 		else
 			$queryString = $queryString . "ssn='$ssn'";
+	}
+
+	if ($bankAccount != '') {
+		if ($queryString != '')
+			$queryString = $queryString . ", bank_account='$bankAccount'";
+		else
+			$queryString = $queryString . "bank_account='$bankAccount'";
 	}
 
 	if ($mail != '') {

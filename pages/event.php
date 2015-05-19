@@ -7,28 +7,7 @@
 		</div>
 	</div>
 	<div class="col-sm-4 page-header-right text-right">
-		<?php
-		$da_note = DBQuery::sql("SELECT event_id FROM da_note
-								WHERE event_id = '$event_id'");
-
-		$headwaiter_note = DBQuery::sql("SELECT event_id FROM headwaiter_note
-								WHERE event_id = '$event_id'");
-
-		if(checkAdminAccess() <= 1 && $event_name[0]['event_type_id'] != 5)
-		{
-			echo ' - <a href="?page=checkPasses&id='.$event_id.'" class="btn btn-page-header"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
-		}
-
-		if(count($da_note) > 0 && checkAdminAccess() <= 1)
-		{
-			echo ' - <a href="?page=DANote&id='.$da_note[0]['event_id'].'" class="btn btn-page-header">DA-lapp</a>';
-		}
-
-		if(count($headwaiter_note) > 0 && checkAdminAccess() <= 1)
-		{
-			echo ' - <a href="?page=HeadwaiterNote&id='.$headwaiter_note[0]['event_id'].'" class="btn btn-page-header">Hovis-lapp</a>';
-		}
-		?>
+		<?php loadButtons() ?> 
 	</div>
 </div> <!-- .row -->
 

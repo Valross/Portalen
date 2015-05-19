@@ -35,6 +35,7 @@
 
 	<div class="col-sm-9">
 		<div class="white-box">
+			<h3>Sökträffar</h3>
 			<table class="table table-hover">
 		      	<thead>
 			        <tr>

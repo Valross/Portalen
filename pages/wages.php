@@ -2,11 +2,20 @@
 	if(checkAdminAccess() <= 1)
 	{
 ?>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="page-header">
+			<h1><span class="fa fa-money fa-fw fa-lg"></span> Löner</h3>
+		</div>
+	</div>
+</div>
+
 <form action="" method="post">
 <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-3">
 	<div class="white-box">
-		<h3>Datum</h3>
+		<h3>Välj tidsperiod</h3>
 
 		<div class="input-group date datetimepicker">
 			<label for="start">Starttid</label>
@@ -21,12 +30,10 @@
 		</div>
 		
 		<input type="submit" name="submit" value="Sök">
-	</div>
 </div> <!-- .white-box -->
-</div> <!-- .col-sm-6 -->			
+</div> <!-- .col-sm-3 -->			
 
-<div class="row">
-	<div class="col-sm-12">
+	<div class="col-sm-9">
 		<div class="white-box">
 			<table class="table table-hover">
 		      	<thead>

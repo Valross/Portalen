@@ -19,7 +19,7 @@
 		<label for="password">Lösenord</label>
 		<input type="password" name="password" id="password">
 		<label for="ssn">Personnummer</label>
-		<input type="text" placeholder="ååmmddxxxx" name="ssn" id="ssn" maxlength="10">
+		<input type="text" name="ssn" id="ssn" placeholder="ååååmmddxxxx" maxlength="12" pattern=".{12,12}" required title="12 siffror" />
 		<label for="mail">Mailadress</label>
 		<input type="text" name="mail" id="mail">
 		<label for="name">Förnamn</label>

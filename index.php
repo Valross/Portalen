@@ -33,30 +33,34 @@ include_once('php/pageManager.php');
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Update latest_session for current user -->
+    <!-- Update latest_session (logged in state) for current user -->
     <script>
-      $(document).ready(function(){
-        var call = function(){
-          $.ajax({
-            method:'post',
-            url:'php/refreshLatestActivity.php',
-          });
-        }
-        setInterval(call, 10000);	//call every 10 sec
-      });
+	$(document).ready(function(){
+		var call = function(){
+			$.ajax({
+				method:'post',
+				url:'php/refreshLatestActivity.php',
+				// success: function(){
+				// 	console.log("logged in state refreshed");
+				// }
+			});
+		}
+		setInterval(call, 30000);	//call every 30 sec
+	});
     </script>
 
     <!-- Refresh list of logged in users -->
     <script type="text/javascript">
-	    $(document).ready(function(){
-	      refreshLoggedInUsers();
-	    });
+	$(document).ready(function(){
+		refreshLoggedInUsers();
+	});
 
-	    function refreshLoggedInUsers(){
-	        $('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
-	           setTimeout(refreshLoggedInUsers, 120000);	//120 sec
-	        });
-	    }
+	function refreshLoggedInUsers(){
+		$('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
+			setTimeout(refreshLoggedInUsers, 30000);	//run every 30 sec
+			// console.log("logged in users loaded");
+		});
+	}
 	</script>
 
   </head>
@@ -196,12 +200,10 @@ include_once('php/pageManager.php');
 					<div class="dropdown">
 						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
 							<i class="fa fa-bell-o" id="notifications-globe"></i>
-							<!-- ?php loadAmountOfUnseenNotifications(); ? -->
-							<!-- <div id="amount-unseen-notifications-container"></div> -->
-
+							
 							<script type="text/javascript">
 						    $(document).ready(function(){
-						      loadUnseenNotificationsCircle();
+						      	loadUnseenNotificationsCircle();
 						    });
 
 						    function loadUnseenNotificationsCircle(){
@@ -210,7 +212,6 @@ include_once('php/pageManager.php');
 						        });
 						    }
 							</script>
-
 						</button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-menu-right dropdown-notifications-menu" role="menu" aria-labelledby="userDropdown">
@@ -219,7 +220,7 @@ include_once('php/pageManager.php');
 
 						    	<script type="text/javascript">
 							    $(document).ready(function(){
-							      loadNotifications();
+							      	loadNotifications();
 							    });
 
 							    function loadNotifications(){
@@ -233,7 +234,24 @@ include_once('php/pageManager.php');
 					  	</ul>
 					</div> <!-- .dropdown -->				
 					<div class="dropdown">
-						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-laptop"><span class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">4</span></i></button>
+						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true">
+							<i class="fa fa-laptop">
+								<span id="logged-in-users-counter" class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">
+									<script>
+									$(document).ready(function(){
+								      	loadUserCount();
+								    });
+
+								    function loadUserCount(){
+								        $('#logged-in-users-counter').load('php/getAmountLoggedInUsers.php', function(){
+								           setTimeout(loadUserCount, 30000);	//run every 30 sec
+								           // console.log("amount logged in users retrieved");
+								        });
+								    }
+									</script>
+								</span>
+							</i>
+						</button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-menu-right dropdown-online-menu" role="menu" aria-labelledby="onlineDropdown">
 								<li role="presentation" class="dropdown-header">Inloggade användare</li>

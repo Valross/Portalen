@@ -73,15 +73,6 @@ function allowed_tags()
 	return '<i>\n<a>';
 }
 
-function refreshLatestActivity()
-{
-	$latestSession = date("Y-m-d H:i:s");
-
-	DBQuery::sql("UPDATE user 
-				  SET latest_session = '$latestSession'
-			  	  WHERE id='$_SESSION[user_id]'");
-}
-
 //Load upcoming events
 function loadUpcomingEvents()
 {

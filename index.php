@@ -9,8 +9,6 @@ if(!isset($_SESSION['user_id']))
 include_once('php/general.php');
 include_once('php/pageManager.php');
 
-refreshLatestActivity();	//general.php
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,6 +33,20 @@ refreshLatestActivity();	//general.php
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Update latest_session for current user -->
+    <script>
+      $(document).ready(function(){
+        var call = function(){
+          $.ajax({
+            method:'post',
+            url:'php/refreshLatestActivity.php',
+          });
+        }
+        setInterval(call, 10000);	//call every 10 sec
+      });
+    </script>
+
+    <!-- Refresh list of logged in users -->
     <script type="text/javascript">
 	    $(document).ready(function(){
 	      refreshLoggedInUsers();

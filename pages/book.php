@@ -2,7 +2,7 @@
 <div class="row">	
 	<div class="col-sm-6">
 		<div class="page-header">
-			<h1><span class="fa fa-book fa-fw fa-lg"></span> Boka pass</h1>
+			<h1><span class="fa fa-calendar fa-fw fa-lg"></span> Boka pass</h1>
 		</div>
 	</div>
 	<div class="col-sm-6 page-header-right">

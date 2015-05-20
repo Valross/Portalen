@@ -85,9 +85,9 @@ refreshLatestActivity();	//general.php
 			              <!-- <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li> -->
 
 	              		  <li class="dropdown">
-		  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+		  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-calendar fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 		  						<ul id="collapseThree" class="panel-collapse collapse">
-				              	<li><a href="?page=book"><span class="fa fa-book fa-fw fa-lg"></span>Kalenderbokning</a></li>
+				              	<li><a href="?page=book"><span class="fa fa-calendar fa-fw fa-lg"></span>Kalenderbokning</a></li>
 	  							<li><a href="?page=bookold"><span class="fa fa-list fa-fw fa-lg"></span>Old Fashioned Way</a></li>
   							</li>  
   						  </ul>
@@ -221,7 +221,7 @@ refreshLatestActivity();	//general.php
 					  	</ul>
 					</div> <!-- .dropdown -->				
 					<div class="dropdown">
-						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-smile-o"><span class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">4</span></i></button>
+						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-laptop"><span class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">4</span></i></button>
 						
 						<ul class="dropdown-menu is-floated-parent dropdown-menu-right dropdown-online-menu" role="menu" aria-labelledby="onlineDropdown">
 								<li role="presentation" class="dropdown-header">Inloggade användare</li>

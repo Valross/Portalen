@@ -6,12 +6,16 @@
 	</div>
 </div> <!-- .row -->
 
+<div class="row">
 <?php
 if(isset($_POST['submitSearch'])){ 
 	if(preg_match("/[A-Za-z]+/", $_POST['search_term'])){ 
 		$searchString = DBQuery::safeString($_POST['search_term']); 
-		
+		echo '<div class="col-sm-6">
+					<div class="white-box">';
 		loadAllResults($searchString);
+		echo '</div>
+				</div>';
 	}
 
 	else{ 
@@ -22,9 +26,11 @@ if(isset($_POST['submitSearch'])){
 else if(isset($_GET['query'])){ 
 	if(preg_match("/[A-Za-z]+/", $_GET['query'])){ 
 		$searchString = DBQuery::safeString($_GET['query']); 
-		
+		echo '<div class="col-sm-7">
+					<div class="white-box">';
 		loadAllResults($searchString);
-		
+		echo '</div>
+				</div>';
 	}
 
 	else{ 
@@ -36,3 +42,4 @@ else
 	echo "form inte satt";
 
 ?>
+</div>

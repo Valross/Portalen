@@ -65,53 +65,35 @@ loadTitleForBrowser('Sökresultat');
 	  			}  			
   			}
 
-  			echo '<div class="col-sm-7">
-					<div class="white-box">';
 				loadPageNumbers($currentPage, $lastPage, 'searchPage', '&query='.$searchString);
-			echo    '</div>
-				</div>'; 
 		
 		}
 	}
 
 	function displayUser($firstName, $lastName, $userId){		
 		?>
-		<div class="col-sm-7">
-			<div class="white-box">
-	   			<?php echo "<a href=\"?page=userProfile&id=$userId\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
-		 	</div>
-		</div>
+		
+	   			<?php echo "<a href=\"?page=userProfile&id=$userId\" class=\"list-group-item with-thumbnail\">". loadAvatarFromUser($userId, 32) . $firstName . " " . $lastName . "</a>\n"; ?>
+		 	
 		<?php
 
   	}
 
   	function displayEvent($eventName, $eventId, $date){
 	    ?>
-		<div class="col-sm-7">
-			<div class="white-box">
-	  			<?php echo "<a href=\"?page=event&id=$eventId\">" . $eventName . " (" . $date . ")" . "</a>\n"; ?> 
-			</div>
- 		</div> 
+	  			<?php echo "<a href=\"?page=event&id=$eventId\" class=\"list-group-item with-thumbnail\">" . $eventName . "<span class=\"list-group-item-text pull-right\">" . $date . "</span>" . "</a>\n"; ?> 
  		<?php
   	}
 
   	function displayTeam($teamName, $teamId){
         ?>
-        <div class="col-sm-7">
-			<div class="white-box">    	
-	  			<?php echo "<a href=\"?page=group&id=$teamId\">" . $teamName . "</a>\n"; ?>
-			</div>
- 		</div>
+	  			<?php echo "<a href=\"?page=group&id=$teamId\" class=\"list-group-item with-thumbnail\">" . $teamName . "</a>\n"; ?>
  		<?php
 	}
 
 	function displayTitle($title){
-        ?>
-        <div class="col-sm-7">
-			<div class="white-box">    	
+        ?>   	
 	  			<?php echo "<h3>$title</h3>"; ?>
-			</div>
- 		</div>
  		<?php
 	}
 

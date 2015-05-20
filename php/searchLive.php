@@ -1,11 +1,11 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/DBQuery.php');
+session_start();
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Portalen/php/general.php');
 
 
 // Define Output HTML Formating
 $defaultHtml  = '';
 $defaultHtml .= '<a href="urlString" class="list-group-item with-thumbnail">';
-$defaultHtml .= '<img src="img/avatars/portalen_bild.jpg" class="img-circle list-group-thumbnail" width="32" height="32">';
 $defaultHtml .= 'nameString';
 $defaultHtml .= '</a>';
 $defaultHtml .= '';
@@ -45,13 +45,14 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 				<div class="list-group">';
 		
 		for ($i=0; $i < count($users) and $i <= $maxResultsPerCategory; ++$i) { 
-			$userId = $users[$i]['id'];
-
-			$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
-				, $users[$i]['name'] . " " . $users[$i]['last_name']);
-
 			if(!($i == $maxResultsPerCategory)){
-				$output = str_replace('nameString', $display_name, $defaultHtml);
+				$userId = $users[$i]['id'];
+				$avatar = loadAvatarFromUser($userId, 32);
+
+				$display_name = preg_replace("/".$searchString."/i", "<b class='highlight'>".$searchString."</b>"
+				, $users[$i]['name'] . " " . $users[$i]['last_name']);
+				
+				$output = str_replace('nameString', $avatar . " " . $display_name, $defaultHtml);
 				$output = str_replace('urlString', "?page=userProfile&id=$userId", $output);
 			}
 

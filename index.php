@@ -54,7 +54,7 @@ include_once('php/pageManager.php');
 
 	    function refreshLoggedInUsers(){
 	        $('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
-	           setTimeout(refreshLoggedInUsers, 10000);
+	           setTimeout(refreshLoggedInUsers, 120000);	//120 sec
 	        });
 	    }
 	</script>

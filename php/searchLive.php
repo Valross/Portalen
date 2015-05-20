@@ -63,8 +63,8 @@ if (strlen($searchString) > 1 && $searchString !== ' ') {
 			}
 
 			echo($output);
-			echo "</div></div>";
 	 	} 	
+		echo "</div></div>";
 	}
 
 	// Search events ahead of current time

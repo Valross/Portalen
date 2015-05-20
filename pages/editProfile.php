@@ -76,4 +76,27 @@
 	</form>
 	</div> <!-- .white-box -->
 </div>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Tryck på mig
+</button>
 </div> <!-- .row -->
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Hejhå</h4>
+      </div>
+      <div class="modal-body">
+       <p>Bootstrap har en inbyggd "Modal". All kod för den här modalen ligger längst ner i editProfile.php.<br><br> Det är även möjligt att få upp en modal direkt när man laddar sidan. Står i dokumentationen hur det fungerar. Scrolla upp till Overview -> Events: 
+		   <a href="http://getbootstrap.com/javascript/#modals" target="_blank">http://getbootstrap.com/javascript/#modals</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

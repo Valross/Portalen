@@ -157,7 +157,7 @@ refreshLatestActivity();	//general.php
 		  	<div id="topbar">
 				<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-6" id="search">
+					<div class="col-sm-7" id="search">
 						<form  method="post" action="?page=searchPage"  id="searchform"> 
 							<button type="submit" name="submitSearch"><span class="fa fa-search"></span></button>
 							
@@ -165,7 +165,7 @@ refreshLatestActivity();	//general.php
 							<input type="search" name="search_term" id="search-live" placeholder="Sök på portalen..." autocomplete="off">
 						</form>
 					</div>
-					<div class="col-sm-6 text-right">
+					<div class="col-sm-5 text-right">
 					<div class="dropdown">
 						<button class="user-dropdown-btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-expanded="true">
 							<img src="<?php echo loadAvatar(); ?>" class="img-circle" width="32" height="32">
@@ -219,7 +219,17 @@ refreshLatestActivity();	//general.php
 
 							</div>
 					  	</ul>
-					</div> <!-- .dropdown -->					
+					</div> <!-- .dropdown -->				
+					<div class="dropdown">
+						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-smile-o"><span class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">4</span></i></button>
+						
+						<ul class="dropdown-menu is-floated-parent dropdown-menu-right dropdown-online-menu" role="menu" aria-labelledby="onlineDropdown">
+								<li role="presentation" class="dropdown-header">Inloggade användare</li>
+								<div class="list-group" id="logged-in-users-container">	
+
+		 					   </div>
+					  	</ul>
+					</div> <!-- .dropdown -->	
 					</div>
 				</div> <!-- .row -->
 				</div>
@@ -241,10 +251,6 @@ refreshLatestActivity();	//general.php
 			  </div>
 			<div class="push"></div>
 		  </div> <!-- end #content -->
-
-		  <div id="logged-in-users-container">	<!-- style.css -->
-
-		  </div>
 		
 		  <div id="footer">
 			  <div class="container-fluid">

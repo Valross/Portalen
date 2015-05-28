@@ -5,15 +5,15 @@ function loadPageNavigators($navigate_date)
 {
 	date_sub($navigate_date, date_interval_create_from_date_string('2 weeks'));
 
-	echo '<a href="?page=bookold&y='.$navigate_date->format('Y').'&w='.$navigate_date->format('W').'">';
+	echo '<a href="?page=bookold&y='.$navigate_date->format('Y').'&w='.$navigate_date->format('W').'" class="btn btn-default">';
 	echo '<i class="fa fa-angle-left fa-lg fa-margin-right"></i> Föregående veckor';
 	echo '</a>';
 
 	echo '   ';
 	date_add($navigate_date, date_interval_create_from_date_string('4 weeks'));
 
-	echo '<a href="?page=bookold&y='.$navigate_date->format('Y').'&w='.$navigate_date->format('W').'">';
-	echo 'Nästa veckor <i class="fa fa-angle-right fa-lg fa-margin-right"></i>';
+	echo '<a href="?page=bookold&y='.$navigate_date->format('Y').'&w='.$navigate_date->format('W').'" class="btn btn-default">';
+	echo 'Nästkommande veckor <i class="fa fa-angle-right fa-lg fa-margin-left"></i>';
 	echo '</a>';
 }
 
@@ -41,11 +41,7 @@ function loadLayout()
 				<div class="calendar-top">
 				<h3>Bokning</h3>
 				<div class="pull-right form-inline">
-				<div class="btn-group">
-					<!-- <form action="?page=bookold&y=2015&w=15">
-					    <button class="btn btn-default" data-calendar-nav="prev"><i class="fa fa-angle-left fa-lg fa-margin-right"></i> Föregående veckor</button>
-					</form>
-					<button class="btn btn-default" data-calendar-nav="next">Nästa veckor <i class="fa fa-angle-right fa-lg fa-margin-left"></i></button> -->';
+				<div class="btn-group">';
 	loadPageNavigators($navigate_date);
 	echo '		</div>
 				</div>
@@ -72,7 +68,7 @@ function loadLayout()
 		echo 'Vecka ';
 		echo $date->format('W');
 		echo '</h4>';
-		
+		echo '<div class="list-group">';
 		for($i = 0; $i < 7; $i++)
 		{
 			$date_d = $date->format('d');
@@ -84,8 +80,9 @@ function loadLayout()
 							WHERE start_time > '".$this_date." 00:00:00' AND start_time < '".$this_date." 23:59:59'
 							ORDER BY start_time");
 
-			echo '<p>';
+			echo '<div class="list-group-item"><strong>';
 			echo strftime('%A %d:e %B', mktime(0, 0, 0, $date_m, $date_d, $date_Y));
+			echo '</strong>';
 			for($j = 0; $j < count($events_this_day); $j++)
 			{
 				$event_id = $events_this_day[$j]['id'];
@@ -103,7 +100,7 @@ function loadLayout()
 				$event_time_end = DateTime::createFromFormat('Y-m-d H:i:s', $events_this_day[$j]['end_time']);
 				echo $event_time_start->format(' H:i');
 				echo $event_time_end->format('-H:i');
-
+				echo '<ul>';
 				for($l = 0; $l < count($groups); $l++)
 				{
 					$group_id = $groups[$l]['id'];
@@ -117,16 +114,17 @@ function loadLayout()
 
 					if(checkIfMemberOfGroup($_SESSION['user_id'], $group_id))
 					{
-						echo '<li class="">';
+						echo '<li class="small">';
 						echo $groups[$l]['name'].' ('.count($booked_slots).'/'.count($total_slots).')';
 						echo '</li>';
 					}
 				}
+				echo '</ul>';
 			}
 			date_add($date, date_interval_create_from_date_string('1 days'));
-			echo '</p>';
+			echo '</div>';
 		}
-		echo '</div>
+		echo '</div></div>
 			</div>';
 	}
 }

@@ -236,7 +236,7 @@ include_once('php/pageManager.php');
 					<div class="dropdown">
 						<button class="notifications-dropdown-btn dropdown-toggle" type="button" id="onlineDropdown" data-toggle="dropdown" aria-expanded="true">
 							<i class="fa fa-laptop">
-								<span id="logged-in-users-counter" class="badge on-top-of-element" style="margin: 0 0 0 -4px; background: transparent; color: #444; font-weight: bold;">
+								<span id="logged-in-users-counter" class="badge on-top-of-element" style="margin: 0 0 0 -9px; background: transparent; color: #444; font-weight: bold;">
 									<script>
 									$(document).ready(function(){
 								      	loadUserCount();

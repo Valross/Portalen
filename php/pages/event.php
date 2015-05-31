@@ -129,6 +129,11 @@ function loadButtons()
 	$event_name = DBQuery::sql("SELECT name, event_type_id FROM event
 							WHERE id = '$event_id'");
 
+	if(checkAdminAccess() <= 1 && !isset($_GET['edit']))
+		echo '<a href="?page=event&id='.$event_id.'&edit" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Redigeringsläge</a>';
+	else if(checkAdminAccess() <= 1  && isset($_GET['edit']))
+		echo '<a href="?page=event&id='.$event_id.'" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Snyggläge</a>';
+
 	if(checkAdminAccess() <= 1 && $event_name[0]['event_type_id'] != 5)
 		echo '<a href="?page=checkPasses&id='.$event_id.'" class="btn btn-page-header"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 
@@ -174,7 +179,7 @@ function loadEventDescription()
 	$start_d = $eventStart->format('Y-m-d');
 	$end_d = $eventEnd->format('Y-m-d');
 
-	if(checkAdminAccess() <= 1)
+	if(checkAdminAccess() <= 1 && isset($_GET['edit']))
 	{
 		echo '<form action="" method="post">';
 		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
@@ -267,7 +272,7 @@ function loadWorkSlots()
 							(SELECT group_id FROM work_slot WHERE event_id = '$event_id')
 							ORDER BY name");
 
-	if(checkAdminAccess() <= 1)
+	if(checkAdminAccess() <= 1 && isset($_GET['edit']))
 	{
 		echo '<form action="" method="post">';
 	}
@@ -309,7 +314,7 @@ function loadWorkSlots()
 							WHERE event_id = '$event_id')
 						AND work_slot_id = '$work_slot_id'");
 
-				if(checkAdminAccess() <= 1)
+				if(checkAdminAccess() <= 1 && isset($_GET['edit']))
 				{
 					if($slots[$j]['group_id'] == $groups[$i]['sub_group'])
 						echo '<li class="list-group-item">'.$number.'! ';
@@ -382,6 +387,8 @@ function loadWorkSlots()
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && !checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
 							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Det här passet är endast för ordinarie."> 
 									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
+						else if(count($availableSlot) == 0)
+							echo '';
 						else
 							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Du är inte med i det här laget."> 
 									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
@@ -408,7 +415,7 @@ function loadWorkSlots()
 			}
 		}
 	}
-	if(checkAdminAccess() <= 1 && count($groups) > 0)
+	if(checkAdminAccess() <= 1 && count($groups) > 0 && isset($_GET['edit']))
 	{
 		echo '<input type="submit" name="submit" value="Spara">';
 		echo '</form>';

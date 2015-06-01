@@ -316,8 +316,8 @@ function loadWorkSlots()
 
 				if(checkAdminAccess() <= 1 && isset($_GET['edit']))
 				{
-					if($slots[$j]['group_id'] == $groups[$i]['sub_group'])
-						echo '<li class="list-group-item">'.$number.'! ';
+					if($slots[$j]['group_id'] == $groups[$i]['sub_group']) //if it's a newbuilder-pass
+						echo '<li class="list-group-item">'.$number.'. ';
 					else
 						echo '<li class="list-group-item">'.$number.'. ';
 					echo '<input type="text" class="input-book-long" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
@@ -331,6 +331,8 @@ function loadWorkSlots()
 					}
 					else
 					{
+						if($slots[$j]['group_id'] == $groups[$i]['sub_group']) //if it's a newbuilder-pass
+							echo '(Nybyggare)';
 						echo '<a href=?page=eventRemoveWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 							' class="list-group-item-text-book-remove"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 					}
@@ -367,10 +369,10 @@ function loadWorkSlots()
 					else
 						echo '<li class="list-group-item">'.$number.'. '.$start_h.$end_h;
 
+					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
+
 					if(checkAdminAccess() <= 1 || count($localUserBookedThisSlot) > 0)
 						echo " (".$slots[$j]['wage'].' kr/h)'; 
-
-					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
 
 					$alreadyHappend = DBQuery::sql("SELECT id, start_time, end_time FROM work_slot 
 															WHERE start_time > '".date('Y-m-d H:i:s',strtotime('-0 day'))."'
@@ -378,7 +380,10 @@ function loadWorkSlots()
 
 					if(count($localUserBookedThisEvent) == 0)
 					{
-						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
+						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0 && $groups[$i]['sub_group'] == 0)
+							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
+						else if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0 && $slots[$j]['group_id'] != $groups[$i]['sub_group'])
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && count($availableSlot) > 0 && $slots[$j]['group_id'] == $groups[$i]['sub_group'] && count($alreadyHappend) != 0)
@@ -395,13 +400,16 @@ function loadWorkSlots()
 					}
 					else
 					{
-						$bookingMoreThanFiveDays = DBQuery::sql("SELECT id, start_time, end_time FROM work_slot 
-															WHERE start_time > '".date('Y-m-d H:i:s',strtotime('-5 days'))."'
-															AND id = '$work_slot_id'");
+						$start_time_event = DBQuery::sql("SELECT id, start_time FROM work_slot 
+															WHERE id = '$work_slot_id'");
+
+						$five_days = new DateTime($start_time_event[0]['start_time']);
+						date_sub($five_days, date_interval_create_from_date_string('5 days'));
+						$today = new DateTime;
 
 						if(count($localUserBookedThisSlot) > 0 && count($alreadyHappend) != 0)
 						{
-							if(count($bookingMoreThanFiveDays) > 0)
+							if($five_days > $today)
 								echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
 									' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
 							else
@@ -450,8 +458,18 @@ function loadCommentAvatar($comment_id)
 
 function loadComments()
 {
-	if(checkWhatGroup())
+	if(checkWhatGroup() && !isset($_GET['edit']))
 	{
+		echo '<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h1><span class="fa fa-comments fa-fw fa-lg"></span> Kommentarer</h1>
+					</div>
+				</div>
+			</div> <!-- .row -->
+
+			<div class="row">';
+
 		$event_id = $_GET['id'];
 
 		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written, user_id FROM event_comments 
@@ -489,7 +507,24 @@ function loadComments()
 			echo '			</div>
 						</div>';
 		}
+		loadWriteComments();
+		echo '</div> <!-- .row -->';
 	}
+}
+
+function loadWriteComments()
+{
+	echo '<form action="" method="post">
+		<div class="col-sm-5">
+			<div class="white-box">
+				<h3>Skriv kommentar</h3>
+				<label for="comment">Kommentar</label>
+				<textarea rows="6" cols="50" placeholder="Fan rätt schysst event asså!!" name="comment" id="comment" class="bottom-border"></textarea>
+
+				<input type="submit" name="submitComment" value="Skicka kommentar">
+			</div> <!-- .white-box -->
+		</div>
+		</form>';
 }
 
 ?>

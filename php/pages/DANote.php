@@ -221,7 +221,8 @@ function loadWorkSlots()
 	if(isset($_GET['id']))
 	{
 		echo '<div class="col-sm-12">
-					<div class="white-box">';
+					<div class="white-box">
+						<div class="list-group">';
 		$event_id = $_GET['id'];
 		$user_id = $_SESSION['user_id'];
 		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
@@ -271,16 +272,19 @@ function loadWorkSlots()
 						{
 							echo '<li class="list-group-item">';
 							echo $start.$end;
-							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> '.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
+							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> 
+								'.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
 							echo " (".$slots[$j]['points'].' poäng)';
 							echo " (".$slots[$j]['wage'].' kr/h)';
+							echo '</li>';
 						}
 					}
 				}
 			}
 		}
-		echo '</div> <!-- .white-box -->
-			</div>';
+		echo '</div>
+			</div> <!-- .white-box -->
+		</div>';
 	}
 }
 

@@ -54,28 +54,4 @@
 	</div> <!-- .col-sm-6 -->
 </div> <!-- .row -->
 
-<div class="row">
-	<div class="col-sm-12">
-		<div class="page-header">
-			<h1><span class="fa fa-comments fa-fw fa-lg"></span> Kommentarer</h1>
-		</div>
-	</div>
-</div> <!-- .row -->
-
-<div class="row">
-
 <?php loadComments() ?>
-
-<form action="" method="post">
-	<div class="col-sm-5">
-		<div class="white-box">
-			<h3>Skriv kommentar</h3>
-			<label for="comment">Kommentar</label>
-			<textarea rows="6" cols="50" placeholder="*Portalen är fan rätt schysst asså!!" name="comment" id="comment" class="bottom-border"></textarea>
-
-			<input type="submit" name="submitComment" value="Skicka kommentar">
-		</div> <!-- .white-box -->
-	</div>
-</form>
-
-</div> <!-- .row -->

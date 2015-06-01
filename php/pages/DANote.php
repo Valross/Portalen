@@ -220,7 +220,7 @@ function loadWorkSlots()
 {
 	if(isset($_GET['id']))
 	{
-		echo '<div class="col-sm-12">
+		echo '<div class="col-sm-6">
 					<div class="white-box">
 						<div class="list-group">';
 		$event_id = $_GET['id'];

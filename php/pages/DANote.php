@@ -216,6 +216,73 @@ function loadWorkingPartyries()
 	}
 }
 
+function loadWorkSlots()
+{
+	if(isset($_GET['id']))
+	{
+		echo '<div class="col-sm-12">
+					<div class="white-box">';
+		$event_id = $_GET['id'];
+		$user_id = $_SESSION['user_id'];
+		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
+							WHERE event_id = '$event_id'");
+
+		$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+							WHERE work_slot_id IN
+								(SELECT id FROM work_slot 
+								WHERE event_id = '$event_id')
+							AND user_id = '$user_id'");
+
+		$groups = DBQuery::sql("SELECT id, name FROM work_group 
+								WHERE id IN 
+									(SELECT group_id FROM work_slot 
+									WHERE event_id = '$event_id'
+									AND id IN
+										(SELECT work_slot_id FROM user_work))");
+
+
+		if(count($groups) > 0)
+		{
+			echo '<h3>Passen</h3>';
+
+			for($i = 0; $i < count($groups); ++$i)
+			{
+				echo '<p><strong>'.$groups[$i]['name'].'</strong></p>';
+				for($j = 0; $j < count($slots); ++$j)
+				{
+					$work_slot_id = $slots[$j]['id'];
+					$availableSlot = DBQuery::sql("SELECT id FROM work_slot 
+												WHERE id NOT IN
+													(SELECT work_slot_id FROM user_work)
+												AND id = '$work_slot_id'");
+					$slotStart = new DateTime($slots[$j]['start_time']);
+					$slotEnd = new DateTime($slots[$j]['end_time']);
+					$start = $slotStart->format('H:i -');
+					$end = $slotEnd->format(' H:i');
+					if($slots[$j]['group_id'] == $groups[$i]['id'])
+					{
+						$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+								WHERE work_slot_id IN
+									(SELECT id FROM work_slot 
+									WHERE event_id = '$event_id')
+								AND work_slot_id = '$work_slot_id'");
+
+						if(count($bookedSlot) > 0)
+						{
+							echo '<li class="list-group-item">';
+							echo $start.$end;
+							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> '.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
+							echo " (".$slots[$j]['points'].' poäng)';
+							echo " (".$slots[$j]['wage'].' kr/h)';
+						}
+					}
+				}
+			}
+		}
+		echo '</div> <!-- .white-box -->
+			</div>';
+	}
+}
 
 function loadComments()
 {

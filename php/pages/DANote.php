@@ -161,58 +161,54 @@ function loadCommentAvatar($comment_id)
 function loadArrangingPartyries()
 {
 	$event_id = $_GET['id'];
-	
-	$arrangingPartyries = DBQuery::sql("SELECT id, name FROM partyries
-							WHERE id IN
-							(SELECT partyries_id FROM partyries_arrange
-							WHERE event_id = '$event_id')");
+	$arrangingPartyries = DBQuery::sql("SELECT event_id, partyries_id, comment FROM partyries_arrange
+							WHERE event_id = '$event_id'");	
 
 	if(count($arrangingPartyries) > 0)
 	{
-		echo '<div class="col-sm-6">
-						<div class="white-box">';
-		if(count($arrangingPartyries) > 1)
-			echo '<h4>Arrangerande festerier</h4>';
-		else
-			echo '<h4>Arrangerande festeri</h4>';
-
+		echo '<div class="col-sm-6">';
 		for($i = 0; $i < count($arrangingPartyries); ++$i)
 		{
+			$partyrie_id = $arrangingPartyries[$i]['partyries_id'];
+			$partyrie = DBQuery::sql("SELECT id, name FROM partyries
+								WHERE id = '$partyrie_id'");
+			echo '<div class="white-box">';
+			echo '<h4>';
+			echo $partyrie[0]['name'];
+			echo '</h4>';
 			echo '<p>';
-			echo $arrangingPartyries[$i]['name'];
+			echo $arrangingPartyries[$i]['comment'];
 			echo '</p>';
+			echo '</div>';
 		}
-		echo '			</div>
-					</div>';
+		echo '</div>';
 	}
 }
 
 function loadWorkingPartyries()
 {
 	$event_id = $_GET['id'];
-	
-	$workingPartyries = DBQuery::sql("SELECT id, name FROM partyries
-							WHERE id IN
-							(SELECT partyries_id FROM partyries_work
-							WHERE event_id = '$event_id')");
+	$workingPartyries = DBQuery::sql("SELECT event_id, partyries_id, comment FROM partyries_work
+							WHERE event_id = '$event_id'");	
 
 	if(count($workingPartyries) > 0)
 	{
-		echo '<div class="col-sm-6">
-						<div class="white-box">';
-		if(count($workingPartyries) > 1)
-			echo '<h4>Arbetande festerier</h4>';
-		else
-			echo '<h4>Arbetande festeri</h4>';
-
+		echo '<div class="col-sm-6">';
 		for($i = 0; $i < count($workingPartyries); ++$i)
 		{
+			$partyrie_id = $workingPartyries[$i]['partyries_id'];
+			$partyrie = DBQuery::sql("SELECT id, name FROM partyries
+								WHERE id = '$partyrie_id'");
+			echo '<div class="white-box">';
+			echo '<h4>';
+			echo $partyrie[0]['name'];
+			echo '</h4>';
 			echo '<p>';
-			echo $workingPartyries[$i]['name'];
+			echo $workingPartyries[$i]['comment'];
 			echo '</p>';
+			echo '</div>';
 		}
-		echo '			</div>
-					</div>';
+		echo '</div>';
 	}
 }
 

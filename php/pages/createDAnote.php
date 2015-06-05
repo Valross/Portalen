@@ -44,8 +44,8 @@ if(isset($_POST['submit']) && checkAdminAccess() <= 2)
         for($i = 0; $i < $partyriesArrangingCounter; ++$i)
         {
         	$partyriesArranging_id = $partyriesArranging[$i];
-			DBQuery::sql("INSERT INTO partyries_arrange (event_id, partyries_id)
-							VALUES ('$event', '$partyriesArranging_id')");
+			DBQuery::sql("INSERT INTO partyries_arrange (event_id, partyries_id, comment)
+							VALUES ('$event', '$partyriesArranging_id', '')");
         }
 	}
 	if(isset($_POST['partyriesWorking']))
@@ -56,11 +56,19 @@ if(isset($_POST['submit']) && checkAdminAccess() <= 2)
         for($i = 0; $i < $partyriesWorkingCounter; ++$i)
         {
         	$partyriesWorking_id = $partyriesWorking[$i];
-			DBQuery::sql("INSERT INTO partyries_work (event_id, partyries_id)
-							VALUES ('$event', '$partyriesWorking_id')");
+			DBQuery::sql("INSERT INTO partyries_work (event_id, partyries_id, comment)
+							VALUES ('$event', '$partyriesWorking_id', '')");
         }
 	}
-	if($event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
+	if((isset($_POST['partyriesWorking']) || isset($_POST['partyriesArranging'])) && $event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
+	{
+		?>
+		<script>
+			window.location = "?page=createDANote_rate&id=<?php echo $event; ?>";
+		</script>
+		<?php
+	}
+	else if($event != 'typeno' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
 	{
 		?>
 		<script>

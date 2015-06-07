@@ -129,13 +129,18 @@ function loadButtons()
 	$event_name = DBQuery::sql("SELECT name, event_type_id FROM event
 							WHERE id = '$event_id'");
 
+	if(checkAdminAccess() <= 1)
+		echo '<a href="?page=removeEvent&event_id='.$event_id.'" class="btn btn-page-header"
+				onclick="return confirm(\'Är du säker på att du vill ta bort eventet? Det går inte att ångra sig.\')">
+				<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a></td>';
 	if(checkAdminAccess() <= 1 && !isset($_GET['edit']))
 		echo '<a href="?page=event&id='.$event_id.'&edit" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Redigeringsläge</a>';
 	else if(checkAdminAccess() <= 1  && isset($_GET['edit']))
 		echo '<a href="?page=event&id='.$event_id.'" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Snyggläge</a>';
 
 	if(checkAdminAccess() <= 1 && $event_name[0]['event_type_id'] != 5)
-		echo '<a href="?page=checkPasses&id='.$event_id.'" class="btn btn-page-header"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
+		echo '<a href="?page=checkPasses&id='.$event_id.'" class="btn btn-page-header">
+				<span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka Pass</a>';
 
 	if(count($da_note) > 0 && checkAdminAccess() <= 1)
 		echo '<a href="?page=DANote&id='.$da_note[0]['event_id'].'" class="btn btn-page-header">DA-lapp</a>';
@@ -215,8 +220,6 @@ function loadEventDescription()
 			echo "</td></tr>";
 		}
 		echo '<tr><td><input type="submit" name="eventInfo" value="Spara"></td>';
-		echo '<td><a href="?page=removeEvent&event_id='.$event_id.'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
-			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort eventet</a></td>';
 		echo '</tr>';
 		echo '</form>';
 	}
@@ -371,9 +374,6 @@ function loadWorkSlots()
 
 					echo '<span class="badge">'.$slots[$j]['points'].'p</span>';
 
-					if(checkAdminAccess() <= 1 || count($localUserBookedThisSlot) > 0)
-						echo " (".$slots[$j]['wage'].' kr/h)'; 
-
 					$alreadyHappend = DBQuery::sql("SELECT id, start_time, end_time FROM work_slot 
 															WHERE start_time > '".date('Y-m-d H:i:s',strtotime('-0 day'))."'
 															AND id = '$work_slot_id'");
@@ -382,21 +382,21 @@ function loadWorkSlots()
 					{
 						if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0 && $groups[$i]['sub_group'] == 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a>';
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0 && $slots[$j]['group_id'] != $groups[$i]['sub_group'])
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a>';
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && count($availableSlot) > 0 && $slots[$j]['group_id'] == $groups[$i]['sub_group'] && count($alreadyHappend) != 0)
 							echo '<a href=?page=eventBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Nybyggare)</a></li>';
+							' class="work-slot-user"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Nybyggare)</a>';
 						else if(checkIfMemberOfGroup($user_id, $groups[$i]['sub_group']) && !checkIfMemberOfGroup($user_id, $groups[$i]['id']) && count($availableSlot) > 0 && count($alreadyHappend) != 0)
 							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Det här passet är endast för ordinarie."> 
-									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a></li>';
+									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass (Ordinarie)</a>';
 						else if(count($availableSlot) == 0)
 							echo '';
 						else
 							echo '<a href="" class="work-slot-user black-link" data-toggle="tooltip" data-placement="bottom" title="Du är inte med i det här laget."> 
-									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a></li>';
+									<span class="fa fa-user-plus fa-fw fa-lg"></span>Ledigt pass</a>';
 					}
 					else
 					{
@@ -411,14 +411,18 @@ function loadWorkSlots()
 						{
 							if($five_days > $today)
 								echo '<a href=?page=eventUnBookWorkSlot&event_id='.$event_id.'&user_id='.$user_id.'&work_slot_id='.$slots[$j]['id'].
-									' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
+									' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
 							else
 								echo '<a href="" class="list-group-item-text-book black-link" data-toggle="tooltip" data-placement="bottom" title="Du kan inte boka av dig 5 dagar innan passet. Kontakta lagansvarig."> 
-									<span class="fa fa-remove fa-fw fa-lg"></span></a></li>';
+									<span class="fa fa-remove fa-fw fa-lg"></span></a>';
 						}	
 						else
-							echo '</a></li>';
+							echo '</a>';
 					}
+					if(checkAdminAccess() <= 1 || count($localUserBookedThisSlot) > 0)
+						// echo " (".$slots[$j]['wage'].' kr/h)';
+						echo '<span class="badge">'.$slots[$j]['wage'].' kr/h</span>';
+					echo '</li>';
 				}
 			}
 		}

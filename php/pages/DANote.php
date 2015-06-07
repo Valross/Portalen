@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST['submit']))
+if(isset($_POST['submitComment']))
 {
 	$comment = strip_tags($_POST['comment'], allowed_tags());
 	$da_note_event_id = $_GET['id'];
@@ -38,6 +38,43 @@ if(isset($_POST['submit']))
 	}
 }
 
+if(isset($_POST['submit']) && checkAdminAccess() <= 2)
+{
+	$event_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+	$da_note = DBQuery::sql("SELECT id FROM da_note
+								WHERE event_id = '$event_id'");
+
+	$da_note_id = $da_note[0]['id'];
+	$salesTotal = strip_tags($_POST['salesTotal']);
+	$salesEntry = strip_tags($_POST['salesEntry']);
+	$salesBar = strip_tags($_POST['salesBar']);
+	$cash = strip_tags($_POST['cash']);
+	$nOfPeople = strip_tags($_POST['nOfPeople']);
+	$salesSpenta = strip_tags($_POST['salesSpenta']);
+	$salesShots = strip_tags($_POST['salesShots']);
+	$fixlist = strip_tags($_POST['fixlist'], allowed_tags());
+	$message = strip_tags($_POST['message'], allowed_tags());
+
+	if($salesTotal != '' && $salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $salesShots != '' && $fixlist != '' && $message != '')
+	{
+		DBQuery::sql("UPDATE da_note
+			SET sales_total = '$salesTotal', sales_entry = '$salesEntry',
+				sales_bar = '$salesBar', cash = '$cash', n_of_people = '$nOfPeople',
+				sales_spenta = '$salesSpenta', sales_shots = '$salesShots',
+				fixlist = '$fixlist', message = '$message'
+			WHERE id = '$da_note_id'");
+	}	
+	if($salesEntry != '' && $salesBar != '' && $cash != '' && $nOfPeople != '' && $salesSpenta != '' && $message != '')
+	{
+		?>
+		<script>
+			window.location = "?page=DANote&id=<?php echo $event_id; ?>";
+		</script>
+		<?php
+	}	
+}
+
 function loadEventName()
 {
 	$event_id = $_GET['id'];
@@ -53,6 +90,31 @@ function loadEventName()
 	echo $eventName[0]['name'].'</a> - '.$start;
 }
 
+function loadButtons()
+{
+	$event_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	$da_note = DBQuery::sql("SELECT id FROM da_note
+								WHERE event_id = '$event_id'");
+
+	$da_note_id = $da_note[0]['id'];
+
+	$my_note = DBQuery::sql("SELECT id, name, start_time FROM event 
+							WHERE event_type_id != 5 AND id IN
+								(SELECT event_id FROM work_slot
+								WHERE group_id = 7 AND id IN
+									(SELECT work_slot_id FROM user_work
+									WHERE user_id = '$user_id'))"); 
+
+	if(count($my_note) > 0 || checkAdminAccess() < 1)
+		echo '<a href="?page=removeDANote&event_id='.$event_id.'&da_note_id='.$da_note_id.'" class="btn btn-page-header"
+			onclick="return confirm(\'Är du säker på att du vill ta bort lappen? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a></td>';
+	if(count($my_note) > 0 && !isset($_GET['edit']))
+		echo '<a href="?page=DANote&id='.$event_id.'&edit" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Redigera</a>';
+}
+
 function loadDAStats()
 {
 	$event_id = $_GET['id'];
@@ -61,15 +123,30 @@ function loadDAStats()
 									da_note.n_of_people, da_note.sales_spenta, da_note.sales_shots, da_note.message, event.name FROM da_note 
 							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo '<tr>';
-		echo '<td>'.$DANotes[0]['sales_total'].'</td>';
-		echo '<td>'.$DANotes[0]['sales_entry'].'</td>';
-		echo '<td>'.$DANotes[0]['sales_bar'].'</td>';
-		echo '<td>'.$DANotes[0]['cash'].'</td>';
-		echo '<td>'.$DANotes[0]['n_of_people'].'</td>';
-		echo '<td>'.$DANotes[0]['sales_spenta'].'</td>';
-		echo '<td>'.$DANotes[0]['sales_shots'].'</td>';
-	echo '</tr>';
+	if(!isset($_GET['edit']))
+	{
+		echo '<tr>';
+			echo '<td>'.$DANotes[0]['sales_total'].'</td>';
+			echo '<td>'.$DANotes[0]['sales_entry'].'</td>';
+			echo '<td>'.$DANotes[0]['sales_bar'].'</td>';
+			echo '<td>'.$DANotes[0]['cash'].'</td>';
+			echo '<td>'.$DANotes[0]['n_of_people'].'</td>';
+			echo '<td>'.$DANotes[0]['sales_spenta'].'</td>';
+			echo '<td>'.$DANotes[0]['sales_shots'].'</td>';
+		echo '</tr>';
+	}
+	else
+	{
+		echo '<tr>';
+			echo '<td><input type="text" name="salesTotal" id="salesTotal" value="'.$DANotes[0]['sales_total'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="salesEntry" id="salesEntry" value="'.$DANotes[0]['sales_entry'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="salesBar" id="salesBar" value="'.$DANotes[0]['sales_bar'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="cash" id="cash" value="'.$DANotes[0]['cash'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="nOfPeople" id="nOfPeople" value="'.$DANotes[0]['n_of_people'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="salesSpenta" id="salesSpenta" value="'.$DANotes[0]['sales_spenta'].'" form="da_note_form"></td>';
+			echo '<td><input type="text" name="salesShots" id="salesShots" value="'.$DANotes[0]['sales_shots'].'" form="da_note_form"></td>';
+		echo '</tr>';
+	}
 }
 
 function loadDAFixlist()
@@ -79,7 +156,10 @@ function loadDAFixlist()
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.fixlist FROM da_note 
 							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $DANotes[0]['fixlist'];
+	if(!isset($_GET['edit']))
+		echo $DANotes[0]['fixlist'];
+	else
+		echo '<textarea rows="8" cols="50" name="fixlist" id="fixlist" class="bottom-border">'.$DANotes[0]['fixlist'].'</textarea>';
 }
 
 function loadDAMessage()
@@ -89,7 +169,13 @@ function loadDAMessage()
 	$DANotes = DBQuery::sql("SELECT da_note.event_id, da_note.message FROM da_note 
 							INNER JOIN event ON da_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $DANotes[0]['message'];
+	if(!isset($_GET['edit']))
+		echo $DANotes[0]['message'];
+	else
+	{
+		echo '<textarea rows="12" cols="50" name="message" id="message" class="bottom-border">'.$DANotes[0]['message'].'</textarea>';
+		echo '<input type="submit" name="submit" value="Uppdatera">';
+	}
 }
 
 function loadDAName()
@@ -164,7 +250,7 @@ function loadArrangingPartyries()
 	$arrangingPartyries = DBQuery::sql("SELECT event_id, partyries_id, comment FROM partyries_arrange
 							WHERE event_id = '$event_id'");	
 
-	if(count($arrangingPartyries) > 0)
+	if(count($arrangingPartyries) > 0 && !isset($_GET['edit']))
 	{
 		echo '<div class="col-sm-6">';
 		for($i = 0; $i < count($arrangingPartyries); ++$i)
@@ -191,7 +277,7 @@ function loadWorkingPartyries()
 	$workingPartyries = DBQuery::sql("SELECT event_id, partyries_id, comment FROM partyries_work
 							WHERE event_id = '$event_id'");	
 
-	if(count($workingPartyries) > 0)
+	if(count($workingPartyries) > 0 && !isset($_GET['edit']))
 	{
 		echo '<div class="col-sm-6">';
 		for($i = 0; $i < count($workingPartyries); ++$i)
@@ -214,7 +300,7 @@ function loadWorkingPartyries()
 
 function loadWorkSlots()
 {
-	if(isset($_GET['id']))
+	if(isset($_GET['id']) && !isset($_GET['edit']))
 	{
 		echo '<div class="col-sm-6">
 					<div class="white-box">
@@ -286,48 +372,73 @@ function loadWorkSlots()
 
 function loadComments()
 {
-	$da_note_event_id = $_GET['id'];
-	$da_note = DBQuery::sql("SELECT id FROM da_note
-							WHERE event_id = '$da_note_event_id'");
-
-	$da_note_id = $da_note[0]['id'];
-
-	$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written, user_id FROM da_note_comments 
-							WHERE da_note_id = '$da_note_id'");
-
-	if(count($DAComments) > 0)
+	if(!isset($_GET['edit']))
 	{
-		echo '<div class="col-sm-7">
-						<div class="white-box">';
-		echo '<h3>Kommentarer ('.count($DAComments).')</h3>';
-	
+		echo '<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h1><span class="fa fa-comments fa-fw fa-lg"></span> Kommentarer</h1>
+					</div>
+				</div>
+			</div> <!-- .row -->';
 
-		for($i = 0; $i < count($DAComments); ++$i)
+		echo '<div class="row">';
+		echo '<form action="" method="post">
+				<div class="col-sm-5">
+					<div class="white-box">
+						<h3>Skriv kommentar</h3>
+						<label for="comment">Kommentar</label>
+						<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
+
+						<input type="submit" name="submitComment" value="Skicka kommentar">
+					</div> <!-- .white-box -->
+				</div>
+			</form>';
+
+		$da_note_event_id = $_GET['id'];
+		$da_note = DBQuery::sql("SELECT id FROM da_note
+								WHERE event_id = '$da_note_event_id'");
+
+		$da_note_id = $da_note[0]['id'];
+
+		$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written, user_id FROM da_note_comments 
+								WHERE da_note_id = '$da_note_id'");
+
+		if(count($DAComments) > 0)
 		{
-			$user_id = $DAComments[$i]['user_id'];
-			$comment_id = $DAComments[$i]['id'];
-			$my_user_id = $_SESSION['user_id'];
+			echo '<div class="col-sm-7">
+							<div class="white-box">';
+			echo '<h3>Kommentarer ('.count($DAComments).')</h3>';
+		
 
-			$myComment = DBQuery::sql("SELECT id FROM da_note_comments 
-							WHERE id = '$comment_id'
-							AND user_id = '$my_user_id'");
+			for($i = 0; $i < count($DAComments); ++$i)
+			{
+				$user_id = $DAComments[$i]['user_id'];
+				$comment_id = $DAComments[$i]['id'];
+				$my_user_id = $_SESSION['user_id'];
 
-			$commenter = DBQuery::sql("SELECT name, last_name FROM user 
-							WHERE id = '$user_id' AND id IN
-							(SELECT user_id FROM da_note_comments WHERE id = '$comment_id')");
-			echo '<div class="comment">';
-			echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="64" height="64" class="img-circle">';
-			echo '<p><a href="?page=userProfile&id='.$DAComments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
-			echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
-			echo nl2br($DAComments[$i]['comment']);
-			echo '</p>';
-			if(checkAdminAccess() <= 1 || count($myComment) > 0)
-					echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
-							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
-			echo '</div>';
+				$myComment = DBQuery::sql("SELECT id FROM da_note_comments 
+								WHERE id = '$comment_id'
+								AND user_id = '$my_user_id'");
+
+				$commenter = DBQuery::sql("SELECT name, last_name FROM user 
+								WHERE id = '$user_id' AND id IN
+								(SELECT user_id FROM da_note_comments WHERE id = '$comment_id')");
+				echo '<div class="comment">';
+				echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="64" height="64" class="img-circle">';
+				echo '<p><a href="?page=userProfile&id='.$DAComments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
+				echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
+				echo nl2br($DAComments[$i]['comment']);
+				echo '</p>';
+				if(checkAdminAccess() <= 1 || count($myComment) > 0)
+						echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
+								' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+				echo '</div>';
+			}
+			echo '			</div> <!-- .white-box -->
+						</div> <!-- .col-sm-7 -->';
 		}
-		echo '			</div> <!-- .white-box -->
-					</div> <!-- .col-sm-7 -->';
+		echo '</div> <!-- .row -->';
 	}
 }
 

@@ -383,17 +383,6 @@ function loadComments()
 			</div> <!-- .row -->';
 
 		echo '<div class="row">';
-		echo '<form action="" method="post">
-				<div class="col-sm-5">
-					<div class="white-box">
-						<h3>Skriv kommentar</h3>
-						<label for="comment">Kommentar</label>
-						<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
-
-						<input type="submit" name="submitComment" value="Skicka kommentar">
-					</div> <!-- .white-box -->
-				</div>
-			</form>';
 
 		$da_note_event_id = $_GET['id'];
 		$da_note = DBQuery::sql("SELECT id FROM da_note
@@ -438,6 +427,17 @@ function loadComments()
 			echo '			</div> <!-- .white-box -->
 						</div> <!-- .col-sm-7 -->';
 		}
+		echo '<form action="" method="post">
+				<div class="col-sm-5">
+					<div class="white-box">
+						<h3>Skriv kommentar</h3>
+						<label for="comment">Kommentar</label>
+						<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
+
+						<input type="submit" name="submitComment" value="Skicka kommentar">
+					</div> <!-- .white-box -->
+				</div>
+			</form>';
 		echo '</div> <!-- .row -->';
 	}
 }

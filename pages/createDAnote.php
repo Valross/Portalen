@@ -44,7 +44,7 @@
 			<label for="fixlist">Fixlista</label>
 			<textarea rows="6" cols="50" placeholder="Svarta sopsäckar är slut @Piia @Janne" name="fixlist" id="fixlist"></textarea>
 			<label for="message">Händelser</label>
-			<textarea rows="6" cols="50" placeholder="Festeristerna jobbade på bra" name="message" id="message" class="bottom-border"></textarea>
+			<textarea rows="16" cols="50" placeholder="Festeristerna jobbade på bra" name="message" id="message" class="bottom-border"></textarea>
 
 			<input type="submit" name="submit" value="Skapa DA-lapp">
 		</div> <!-- .white-box -->

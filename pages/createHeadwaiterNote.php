@@ -40,8 +40,10 @@
 			<textarea rows="3" cols="50" placeholder="Det viktiga är att man försöker" name="organizers_staff" id="organizers_staff"></textarea>
 			<label for="swine">Svinn</label>
 			<textarea rows="3" cols="50" placeholder="2cl Sourz Raspberry - dålig bartender" name="swine" id="swine"></textarea>
+			<label for="fixlist">Fixlist</label>
+			<textarea rows="6" cols="50" placeholder="Tändarvätskan är typ slut. @Hovisansvarig" name="fixlist" id="fixlist" class="bottom-border"></textarea>
 			<label for="message">Händelser</label>
-			<textarea rows="6" cols="50" placeholder="Det var en lugn sittning, inte GaSSKAT 2014" name="message" id="message" class="bottom-border"></textarea>
+			<textarea rows="12" cols="50" placeholder="Det var en lugn sittning, inte GaSSKAT 2014" name="message" id="message" class="bottom-border"></textarea>
 
 			<input type="submit" name="submit" value="Skapa Hovis-lapp">
 		</div> <!-- .white-box -->

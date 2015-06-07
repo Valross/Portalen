@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST['submit']))
+if(isset($_POST['submitComment']))
 {
 	$comment = strip_tags($_POST['comment'], allowed_tags());
 	$headwaiter_note_event_id = $_GET['id'];
@@ -38,6 +38,46 @@ if(isset($_POST['submit']))
 	}
 }
 
+if(isset($_POST['submit']) && checkAdminAccess() <= 3)
+{
+	$event_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+	$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
+								WHERE event_id = '$event_id'");
+
+	$headwaiter_note_id = $headwaiter_note[0]['id'];
+	$nOfSitting = strip_tags($_POST['n_of_sitting'], allowed_tags());
+	$food = strip_tags($_POST['food'], allowed_tags());
+	$invoiceDrinks = strip_tags($_POST['invoice_drinks'], allowed_tags());
+	$nOfWaitingOrganizers = strip_tags($_POST['n_of_waiting_organizers'], allowed_tags());
+	$nOfWaitingStair = strip_tags($_POST['n_of_waiting_stair'], allowed_tags());
+	$toast = strip_tags($_POST['toast'], allowed_tags());
+	$organizers = strip_tags($_POST['organizers'], allowed_tags());
+	$stairStaff = strip_tags($_POST['stair_staff'], allowed_tags());
+	$organizersStaff = strip_tags($_POST['organizers_staff'], allowed_tags());
+	$swine = strip_tags($_POST['swine'], allowed_tags());
+	$fixlist = strip_tags($_POST['fixlist'], allowed_tags());
+	$message = strip_tags($_POST['message'], allowed_tags());
+
+	if($nOfSitting != '' && $food != '' && $invoiceDrinks != '' && $nOfWaitingOrganizers != '' 
+		&& $nOfWaitingStair != '' && $toast != '' && $organizers != '' && $stairStaff != '' && $organizersStaff != '' && $swine != '' && $fixlist != '' && $message != '')
+	{
+		DBQuery::sql("UPDATE headwaiter_note
+			SET n_of_sitting = '$nOfSitting', food = '$food',
+				invoice_drinks = '$invoiceDrinks', n_of_waiting_organizers = '$nOfWaitingOrganizers', n_of_waiting_stair = '$nOfWaitingStair',
+				toast = '$toast', organizers = '$organizers',
+				stair_staff = '$stairStaff', organizers_staff = '$organizersStaff',
+				swine = '$swine', fixlist = '$fixlist', message = '$message'
+			WHERE id = '$headwaiter_note_id'");
+
+		?>
+			<script>
+				window.location = "?page=HeadwaiterNote&id=<?php echo $event_id; ?>";
+			</script>
+		<?php
+	}
+}
+
 function loadEventName()
 {
 	$event_id = $_GET['id'];
@@ -53,6 +93,32 @@ function loadEventName()
 	echo $eventName[0]['name'].'</a> - '.$start;
 }
 
+function loadButtons()
+{
+	$event_id = $_GET['id'];
+	$user_id = $_SESSION['user_id'];
+
+	$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
+								WHERE event_id = '$event_id'");
+
+	$headwaiter_note_id = $headwaiter_note[0]['id'];
+
+	$my_note = DBQuery::sql("SELECT id, name, start_time FROM event 
+							WHERE event_type_id != 5 AND id IN
+								(SELECT event_id FROM work_slot
+								WHERE group_id = 12 AND id IN
+									(SELECT work_slot_id FROM user_work
+									WHERE user_id = '$user_id'))"); 
+
+	if(count($my_note) > 0 || checkAdminAccess() < 1)
+		echo '<a href="?page=removeHeadwaiterNote&event_id='.$event_id.'&headwaiter_note_id='.$headwaiter_note_id.'" class="btn btn-page-header"
+			onclick="return confirm(\'Är du säker på att du vill ta bort lappen? Det går inte att ångra sig.\')">
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a></td>';
+	if((count($my_note) > 0 || checkAdminAccess() < 1) && !isset($_GET['edit']))
+		echo '<a href="?page=HeadwaiterNote&id='.$event_id.'&edit" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Redigera</a>';
+}
+
+
 function loadHeadwaiterStats()
 {
 	$event_id = $_GET['id'];
@@ -62,9 +128,18 @@ function loadHeadwaiterStats()
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
 	echo '<tr>';
+	if(!isset($_GET['edit']))
+	{
 		echo '<td>'.$HeadwaiterNotes[0]['n_of_sitting'].'</td>';
 		echo '<td>'.$HeadwaiterNotes[0]['n_of_waiting_organizers'].'</td>';
 		echo '<td>'.$HeadwaiterNotes[0]['n_of_waiting_stair'].'</td>';
+	}
+	else
+	{
+		echo '<td><input type="text" name="n_of_sitting" id="n_of_sitting" value="'.$HeadwaiterNotes[0]['n_of_sitting'].'" form="headwaiter_note_form"></td>';
+		echo '<td><input type="text" name="n_of_waiting_organizers" id="n_of_waiting_organizers" value="'.$HeadwaiterNotes[0]['n_of_waiting_organizers'].'" form="headwaiter_note_form"></td>';
+		echo '<td><input type="text" name="n_of_waiting_stair" id="n_of_waiting_stair" value="'.$HeadwaiterNotes[0]['n_of_waiting_stair'].'" form="headwaiter_note_form"></td>';
+	}
 	echo '</tr>';
 }
 
@@ -75,7 +150,10 @@ function loadFood()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.food FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['food'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['food'];
+	else
+		echo '<textarea rows="5" cols="50" name="food" id="food" class="bottom-border">'.$HeadwaiterNotes[0]['food'].'</textarea>';
 }
 
 function loadInvoiceDrinks()
@@ -85,7 +163,10 @@ function loadInvoiceDrinks()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.invoice_drinks FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['invoice_drinks'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['invoice_drinks'];
+	else
+		echo '<textarea rows="5" cols="50" name="invoice_drinks" id="invoice_drinks" class="bottom-border">'.$HeadwaiterNotes[0]['invoice_drinks'].'</textarea>';
 }
 
 function loadToast()
@@ -95,7 +176,10 @@ function loadToast()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.toast FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['toast'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['toast'];
+	else
+		echo '<textarea rows="4" cols="50" name="toast" id="toast" class="bottom-border">'.$HeadwaiterNotes[0]['toast'].'</textarea>';
 }
 
 function loadOrganizers()
@@ -105,7 +189,10 @@ function loadOrganizers()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.organizers FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['organizers'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['organizers'];
+	else
+		echo '<textarea rows="4" cols="50" name="organizers" id="organizers" class="bottom-border">'.$HeadwaiterNotes[0]['organizers'].'</textarea>';
 }
 
 function loadStairStaff()
@@ -115,7 +202,10 @@ function loadStairStaff()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.stair_staff FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['stair_staff'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['stair_staff'];
+	else
+		echo '<textarea rows="4" cols="50" name="stair_staff" id="stair_staff" class="bottom-border">'.$HeadwaiterNotes[0]['stair_staff'].'</textarea>';
 }
 
 function loadOrganizersStaff()
@@ -125,7 +215,10 @@ function loadOrganizersStaff()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.organizers_staff FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['organizers_staff'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['organizers_staff'];
+	else
+		echo '<textarea rows="4" cols="50" name="organizers_staff" id="organizers_staff" class="bottom-border">'.$HeadwaiterNotes[0]['organizers_staff'].'</textarea>';
 }
 
 function loadSwine()
@@ -135,7 +228,23 @@ function loadSwine()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.swine FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['swine'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['swine'];
+	else
+		echo '<textarea rows="5" cols="50" name="swine" id="swine" class="bottom-border">'.$HeadwaiterNotes[0]['swine'].'</textarea>';
+}
+
+function loadFixlist()
+{
+	$event_id = $_GET['id'];
+
+	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.fixlist FROM headwaiter_note 
+							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
+
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['fixlist'];
+	else
+		echo '<textarea rows="6" cols="50" name="fixlist" id="fixlist" class="bottom-border">'.$HeadwaiterNotes[0]['fixlist'].'</textarea>';
 }
 
 function loadMessage()
@@ -145,7 +254,13 @@ function loadMessage()
 	$HeadwaiterNotes = DBQuery::sql("SELECT headwaiter_note.event_id, headwaiter_note.message FROM headwaiter_note 
 							INNER JOIN event ON headwaiter_note.event_id = event.id WHERE event.id = '$event_id'");
 
-	echo $HeadwaiterNotes[0]['message'];
+	if(!isset($_GET['edit']))
+		echo $HeadwaiterNotes[0]['message'];
+	else
+	{
+		echo '<textarea rows="12" cols="50" name="message" id="message" class="bottom-border">'.$HeadwaiterNotes[0]['message'].'</textarea>';
+		echo '<input type="submit" name="submit" value="Uppdatera">';
+	}
 }
 
 function loadHeadwaiterName()
@@ -215,48 +330,74 @@ function loadCommentAvatar($comment_id)
 
 function loadComments()
 {
-	$headwaiter_note_event_id = $_GET['id'];
-	$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
-							WHERE event_id = '$headwaiter_note_event_id'");
-
-	$headwaiter_note_id = $headwaiter_note[0]['id'];
-
-	$headwaiter_comments = DBQuery::sql("SELECT id, headwaiter_note_id, comment, date_written, user_id FROM headwaiter_note_comments 
-							WHERE headwaiter_note_id = '$headwaiter_note_id'");
-
-	if(count($headwaiter_comments) > 0)
+	if(!isset($_GET['edit']))
 	{
-		echo '<div class="col-sm-7">
-						<div class="white-box">';
-		echo '<h3>Kommentarer ('.count($headwaiter_comments).')</h3>';
-	
+		echo '<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h1><span class="fa fa-comments fa-fw fa-lg"></span> Kommentarer</h1>
+					</div>
+				</div>
+			</div> <!-- .row -->';
 
-		for($i = 0; $i < count($headwaiter_comments); ++$i)
+		echo '<div class="row">';
+		
+		$headwaiter_note_event_id = $_GET['id'];
+		$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note
+								WHERE event_id = '$headwaiter_note_event_id'");
+
+		$headwaiter_note_id = $headwaiter_note[0]['id'];
+
+		$headwaiter_comments = DBQuery::sql("SELECT id, headwaiter_note_id, comment, date_written, user_id FROM headwaiter_note_comments 
+								WHERE headwaiter_note_id = '$headwaiter_note_id'");
+
+		if(count($headwaiter_comments) > 0)
 		{
-			$user_id = $headwaiter_comments[$i]['user_id'];
-			$comment_id = $headwaiter_comments[$i]['id'];
-			$my_user_id = $_SESSION['user_id'];
+			echo '<div class="col-sm-7">
+							<div class="white-box">';
+			echo '<h3>Kommentarer ('.count($headwaiter_comments).')</h3>';
+		
 
-			$myComment = DBQuery::sql("SELECT id FROM headwaiter_note_comments 
-							WHERE id = '$comment_id'
-							AND user_id = '$my_user_id'");
+			for($i = 0; $i < count($headwaiter_comments); ++$i)
+			{
+				$user_id = $headwaiter_comments[$i]['user_id'];
+				$comment_id = $headwaiter_comments[$i]['id'];
+				$my_user_id = $_SESSION['user_id'];
 
-			$commenter = DBQuery::sql("SELECT name, last_name FROM user 
-							WHERE id = '$user_id' AND id IN
-							(SELECT user_id FROM headwaiter_note_comments WHERE id = '$comment_id')");
-			echo '<div class="comment">';
-			echo '<img src="'.loadCommentAvatar($headwaiter_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
-			echo '<p><a href="?page=userProfile&id='.$headwaiter_comments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
-			echo '<span class="time">- '.$headwaiter_comments[$i]['date_written'].'</span><br />';
-			echo nl2br($headwaiter_comments[$i]['comment']);
-			echo '</p>';
-			if(checkAdminAccess() <= 1 || count($myComment) > 0)
-					echo '<a href=?page=removeHeadwaiterNoteComment&headwaiter_note_id='.$headwaiter_note_event_id.'&comment_id='.$headwaiter_comments[$i]['id'].
-							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
-			echo '</div>';
+				$myComment = DBQuery::sql("SELECT id FROM headwaiter_note_comments 
+								WHERE id = '$comment_id'
+								AND user_id = '$my_user_id'");
+
+				$commenter = DBQuery::sql("SELECT name, last_name FROM user 
+								WHERE id = '$user_id' AND id IN
+								(SELECT user_id FROM headwaiter_note_comments WHERE id = '$comment_id')");
+				echo '<div class="comment">';
+				echo '<img src="'.loadCommentAvatar($headwaiter_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
+				echo '<p><a href="?page=userProfile&id='.$headwaiter_comments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
+				echo '<span class="time">- '.$headwaiter_comments[$i]['date_written'].'</span><br />';
+				echo nl2br($headwaiter_comments[$i]['comment']);
+				echo '</p>';
+				if(checkAdminAccess() <= 1 || count($myComment) > 0)
+						echo '<a href=?page=removeHeadwaiterNoteComment&headwaiter_note_id='.$headwaiter_note_event_id.'&comment_id='.$headwaiter_comments[$i]['id'].
+								' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+				echo '</div>';
+			}
+			echo '			</div> <!-- .white-box -->
+						</div> <!-- .col-sm-7 -->';
 		}
-		echo '			</div> <!-- .white-box -->
-					</div> <!-- .col-sm-7 -->';
+		echo '<form action="" method="post">
+				<div class="col-sm-5">
+					<div class="white-box">
+						<h3>Skriv kommentar</h3>
+						<label for="comment">Kommentar</label>
+						<textarea rows="6" cols="50" placeholder="Fan glöm inte att kolla om det redan finns öppnade vinflaskor!" 
+							name="comment" id="comment" class="bottom-border"></textarea>
+
+						<input type="submit" name="submitComment" value="Skicka kommentar">
+					</div> <!-- .white-box -->
+				</div>
+			</form>';
+	echo '</div> <!-- .row -->';
 	}
 }
 

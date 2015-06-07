@@ -15,16 +15,17 @@ if(isset($_POST['submit']))
 	$stairStaff = strip_tags($_POST['stair_staff'], allowed_tags());
 	$organizersStaff = strip_tags($_POST['organizers_staff'], allowed_tags());
 	$swine = strip_tags($_POST['swine'], allowed_tags());
+	$fixlist = strip_tags($_POST['fixlist'], allowed_tags());
 	$message = strip_tags($_POST['message'], allowed_tags());
 
 	
 	if($event != 'typeno' && $nOfSitting != '' && $food != '' && $invoiceDrinks != '' && $nOfWaitingOrganizers != '' 
-		&& $nOfWaitingStair != '' && $toast != '' && $organizers != '' && $stairStaff != '' && $organizersStaff != '' && $swine != '' && $message != '')
+		&& $nOfWaitingStair != '' && $toast != '' && $organizers != '' && $stairStaff != '' && $organizersStaff != '' && $swine != '' && $fixlist != '' && $message != '')
 	{
 		DBQuery::sql("INSERT INTO headwaiter_note (id, user_id, event_id, n_of_sitting, food, invoice_drinks, 
-			n_of_waiting_organizers, n_of_waiting_stair, toast, organizers, stair_staff, organizers_staff, swine, message)
+			n_of_waiting_organizers, n_of_waiting_stair, toast, organizers, stair_staff, organizers_staff, swine, fixlist, message)
 						VALUES ('', '$_SESSION[user_id]', '$event', '$nOfSitting', '$food', '$invoiceDrinks', '$nOfWaitingOrganizers', '$nOfWaitingStair', 
-							'$toast', '$organizers', '$stairStaff', '$organizersStaff', '$swine', '$message')");
+							'$toast', '$organizers', '$stairStaff', '$organizersStaff', '$swine', '$fixlist', '$message')");
 
 		$headwaiter_note = DBQuery::sql("SELECT id FROM headwaiter_note 
 						ORDER BY date_written DESC");

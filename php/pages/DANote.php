@@ -111,7 +111,7 @@ function loadButtons()
 		echo '<a href="?page=removeDANote&event_id='.$event_id.'&da_note_id='.$da_note_id.'" class="btn btn-page-header"
 			onclick="return confirm(\'Är du säker på att du vill ta bort lappen? Det går inte att ångra sig.\')">
 			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a></td>';
-	if(count($my_note) > 0 && !isset($_GET['edit']))
+	if((count($my_note) > 0 || checkAdminAccess() < 1) && !isset($_GET['edit']))
 		echo '<a href="?page=DANote&id='.$event_id.'&edit" class="btn btn-page-header"><span class="fa fa-wrench fa-fw fa-lg"></span>Redigera</a>';
 }
 

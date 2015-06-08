@@ -28,23 +28,25 @@
 					<?php loadWorkingPartyries(); ?>
 			</div>
 			<label for="salesTotal">Försäljning totalt</label>
-			<input type="text" placeholder="89086" name="salesTotal" id="salesTotal">
+			<input type="number" placeholder="89086" name="salesTotal" id="salesTotal" min="0" max="700000">
 			<label for="salesEntry">Försäljning entré</label>
-			<input type="text" placeholder="9001" name="salesEntry" id="salesEntry">
+			<input type="number" placeholder="9001" name="salesEntry" id="salesEntry" min="0" max="200000">
 			<label for="salesBar">Försäljning bar</label>
-			<input type="text" placeholder="80085" name="salesBar" id="salesBar">
+			<input type="number" placeholder="80085" name="salesBar" id="salesBar" min="0" max="500000">
 			<label for="cash">Varav cash</label>
-			<input type="text" placeholder="1337" name="cash" id="cash">
+			<input type="number" placeholder="1337" name="cash" id="cash" min="0" max="200000">
 			<label for="nOfPeople">Inklick</label>
-			<input type="text" placeholder="69" name="nOfPeople" id="nOfPeople">
+			<input type="number" placeholder="69" name="nOfPeople" id="nOfPeople" min="0" max="2000">
 			<label for="salesSpenta">Antal sålda Spenta</label>
-			<input type="text" placeholder="420" name="salesSpenta" id="salesSpenta">
+			<input type="number" placeholder="420" name="salesSpenta" id="salesSpenta" min="0" max="2000">
 			<label for="salesShots">Antal sålda 4cl shots</label>
-			<input type="text" placeholder="911" name="salesShots" id="salesShots">
+			<input type="number" placeholder="911" name="salesShots" id="salesShots" min="0" max="1500">
 			<label for="fixlist">Fixlista</label>
-			<textarea rows="6" cols="50" placeholder="Svarta sopsäckar är slut @Piia @Janne" name="fixlist" id="fixlist"></textarea>
+			<textarea rows="6" cols="50" placeholder="Svarta sopsäckar är slut @Piia @Janne" maxlength="4000"
+				name="fixlist" id="fixlist"></textarea>
 			<label for="message">Händelser</label>
-			<textarea rows="16" cols="50" placeholder="Festeristerna jobbade på bra" name="message" id="message" class="bottom-border"></textarea>
+			<textarea rows="16" cols="50" placeholder="Festeristerna jobbade på bra" maxlength="6000"
+				name="message" id="message" class="bottom-border"></textarea>
 
 			<input type="submit" name="submit" value="Skapa DA-lapp">
 		</div> <!-- .white-box -->

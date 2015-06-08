@@ -476,7 +476,7 @@ function loadComments()
 						<h3>Skriv kommentar</h3>
 						<label for="comment">Kommentar</label>
 						<textarea rows="6" cols="50" placeholder="Fan glöm inte att kolla om det redan finns öppnade vinflaskor!" 
-							name="comment" id="comment" class="bottom-border"></textarea>
+							name="comment" id="comment" class="bottom-border" maxlength="1000"></textarea>
 
 						<input type="submit" name="submitComment" value="Skicka kommentar">
 					</div> <!-- .white-box -->

@@ -59,9 +59,10 @@ function loadArrangingPartyries()
 								WHERE id = '$partyrie_id'");
 		echo '<div class="white-box">';
 		echo '<label for="A'.$partyrie[0]['name'].'">Arrangerande - '.$partyrie[0]['name'].'</label>
-			<textarea rows="6" cols="50" placeholder="lol" name="partyriesArrangingComment[]" id="A'.$partyrie[0]['name'].'"></textarea>';
+			<textarea rows="6" cols="50" placeholder="lol" name="partyriesArrangingComment[]" maxlength="4000"
+			id="A'.$partyrie[0]['name'].'"></textarea>';
 		echo '</div>';
-	}
+	}	
 }
 
 function loadWorkingPartyries()
@@ -77,7 +78,8 @@ function loadWorkingPartyries()
 								WHERE id = '$partyrie_id'");
 		echo '<div class="white-box">';
 		echo '<label for="'.$partyrie[0]['name'].'">Arbetande - '.$partyrie[0]['name'].'</label>
-			<textarea rows="6" cols="50" placeholder="lol" name="partyriesWorkingComment[]" id="'.$partyrie[0]['name'].'"></textarea>';
+			<textarea rows="6" cols="50" placeholder="lol" name="partyriesWorkingComment[]" maxlength="4000"
+			id="'.$partyrie[0]['name'].'"></textarea>';
 		echo '</div>';
 	}
 }

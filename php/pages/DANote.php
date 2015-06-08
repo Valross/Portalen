@@ -138,13 +138,20 @@ function loadDAStats()
 	else
 	{
 		echo '<tr>';
-			echo '<td><input type="text" name="salesTotal" id="salesTotal" value="'.$DANotes[0]['sales_total'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="salesEntry" id="salesEntry" value="'.$DANotes[0]['sales_entry'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="salesBar" id="salesBar" value="'.$DANotes[0]['sales_bar'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="cash" id="cash" value="'.$DANotes[0]['cash'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="nOfPeople" id="nOfPeople" value="'.$DANotes[0]['n_of_people'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="salesSpenta" id="salesSpenta" value="'.$DANotes[0]['sales_spenta'].'" form="da_note_form"></td>';
-			echo '<td><input type="text" name="salesShots" id="salesShots" value="'.$DANotes[0]['sales_shots'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="salesTotal" id="salesTotal" min="0" max="700000"
+				value="'.$DANotes[0]['sales_total'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="salesEntry" id="salesEntry" min="0" max="200000"
+				value="'.$DANotes[0]['sales_entry'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="salesBar" id="salesBar" min="0" max="500000"
+				value="'.$DANotes[0]['sales_bar'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="cash" id="cash" min="0" max="200000"
+				value="'.$DANotes[0]['cash'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="nOfPeople" id="nOfPeople" min="0" max="2000"
+				value="'.$DANotes[0]['n_of_people'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="salesSpenta" id="salesSpenta" min="0" max="2000"
+				value="'.$DANotes[0]['sales_spenta'].'" form="da_note_form"></td>';
+			echo '<td><input type="number" name="salesShots" id="salesShots" min="0" max="1500"
+				value="'.$DANotes[0]['sales_shots'].'" form="da_note_form"></td>';
 		echo '</tr>';
 	}
 }
@@ -159,7 +166,8 @@ function loadDAFixlist()
 	if(!isset($_GET['edit']))
 		echo $DANotes[0]['fixlist'];
 	else
-		echo '<textarea rows="8" cols="50" name="fixlist" id="fixlist" class="bottom-border">'.$DANotes[0]['fixlist'].'</textarea>';
+		echo '<textarea rows="8" cols="50" name="fixlist" id="fixlist" maxlength="4000"
+			class="bottom-border">'.$DANotes[0]['fixlist'].'</textarea>';
 }
 
 function loadDAMessage()
@@ -173,7 +181,8 @@ function loadDAMessage()
 		echo $DANotes[0]['message'];
 	else
 	{
-		echo '<textarea rows="12" cols="50" name="message" id="message" class="bottom-border">'.$DANotes[0]['message'].'</textarea>';
+		echo '<textarea rows="12" cols="50" name="message" id="message" maxlength="6000"
+			class="bottom-border">'.$DANotes[0]['message'].'</textarea>';
 		echo '<input type="submit" name="submit" value="Uppdatera">';
 	}
 }
@@ -432,7 +441,8 @@ function loadComments()
 					<div class="white-box">
 						<h3>Skriv kommentar</h3>
 						<label for="comment">Kommentar</label>
-						<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" name="comment" id="comment" class="bottom-border"></textarea>
+						<textarea rows="6" cols="50" placeholder="Fan panten är ju inte alls snygg!" maxlength="1000"
+							name="comment" id="comment" class="bottom-border"></textarea>
 
 						<input type="submit" name="submitComment" value="Skicka kommentar">
 					</div> <!-- .white-box -->

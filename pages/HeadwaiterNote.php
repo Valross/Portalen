@@ -100,6 +100,10 @@
 </div>
 </form>
 
+<div class="row">
+	<?php loadWorkSlots(); ?>
+</div> <!-- .row -->
+
 <?php loadComments(); ?>
 
 <?php

@@ -136,9 +136,12 @@ function loadHeadwaiterStats()
 	}
 	else
 	{
-		echo '<td><input type="text" name="n_of_sitting" id="n_of_sitting" value="'.$HeadwaiterNotes[0]['n_of_sitting'].'" form="headwaiter_note_form"></td>';
-		echo '<td><input type="text" name="n_of_waiting_organizers" id="n_of_waiting_organizers" value="'.$HeadwaiterNotes[0]['n_of_waiting_organizers'].'" form="headwaiter_note_form"></td>';
-		echo '<td><input type="text" name="n_of_waiting_stair" id="n_of_waiting_stair" value="'.$HeadwaiterNotes[0]['n_of_waiting_stair'].'" form="headwaiter_note_form"></td>';
+		echo '<td><input type="number" name="n_of_sitting" id="n_of_sitting" min="0" max="500"
+			value="'.$HeadwaiterNotes[0]['n_of_sitting'].'" form="headwaiter_note_form"></td>';
+		echo '<td><input type="number" name="n_of_waiting_organizers" id="n_of_waiting_organizers" min="0" max="20"
+			value="'.$HeadwaiterNotes[0]['n_of_waiting_organizers'].'" form="headwaiter_note_form"></td>';
+		echo '<td><input type="number" name="n_of_waiting_stair" id="n_of_waiting_stair" min="0" max="15"
+			value="'.$HeadwaiterNotes[0]['n_of_waiting_stair'].'" form="headwaiter_note_form"></td>';
 	}
 	echo '</tr>';
 }
@@ -153,7 +156,8 @@ function loadFood()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['food'];
 	else
-		echo '<textarea rows="5" cols="50" name="food" id="food" class="bottom-border">'.$HeadwaiterNotes[0]['food'].'</textarea>';
+		echo '<textarea rows="5" cols="50" name="food" id="food" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['food'].'</textarea>';
 }
 
 function loadInvoiceDrinks()
@@ -166,7 +170,8 @@ function loadInvoiceDrinks()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['invoice_drinks'];
 	else
-		echo '<textarea rows="5" cols="50" name="invoice_drinks" id="invoice_drinks" class="bottom-border">'.$HeadwaiterNotes[0]['invoice_drinks'].'</textarea>';
+		echo '<textarea rows="5" cols="50" name="invoice_drinks" id="invoice_drinks" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['invoice_drinks'].'</textarea>';
 }
 
 function loadToast()
@@ -179,7 +184,8 @@ function loadToast()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['toast'];
 	else
-		echo '<textarea rows="4" cols="50" name="toast" id="toast" class="bottom-border">'.$HeadwaiterNotes[0]['toast'].'</textarea>';
+		echo '<textarea rows="4" cols="50" name="toast" id="toast" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['toast'].'</textarea>';
 }
 
 function loadOrganizers()
@@ -192,7 +198,8 @@ function loadOrganizers()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['organizers'];
 	else
-		echo '<textarea rows="4" cols="50" name="organizers" id="organizers" class="bottom-border">'.$HeadwaiterNotes[0]['organizers'].'</textarea>';
+		echo '<textarea rows="4" cols="50" name="organizers" id="organizers" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['organizers'].'</textarea>';
 }
 
 function loadStairStaff()
@@ -205,7 +212,8 @@ function loadStairStaff()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['stair_staff'];
 	else
-		echo '<textarea rows="4" cols="50" name="stair_staff" id="stair_staff" class="bottom-border">'.$HeadwaiterNotes[0]['stair_staff'].'</textarea>';
+		echo '<textarea rows="4" cols="50" name="stair_staff" id="stair_staff" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['stair_staff'].'</textarea>';
 }
 
 function loadOrganizersStaff()
@@ -218,7 +226,8 @@ function loadOrganizersStaff()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['organizers_staff'];
 	else
-		echo '<textarea rows="4" cols="50" name="organizers_staff" id="organizers_staff" class="bottom-border">'.$HeadwaiterNotes[0]['organizers_staff'].'</textarea>';
+		echo '<textarea rows="4" cols="50" name="organizers_staff" id="organizers_staff" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['organizers_staff'].'</textarea>';
 }
 
 function loadSwine()
@@ -231,7 +240,8 @@ function loadSwine()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['swine'];
 	else
-		echo '<textarea rows="5" cols="50" name="swine" id="swine" class="bottom-border">'.$HeadwaiterNotes[0]['swine'].'</textarea>';
+		echo '<textarea rows="5" cols="50" name="swine" id="swine" maxlength="400"
+			class="bottom-border">'.$HeadwaiterNotes[0]['swine'].'</textarea>';
 }
 
 function loadFixlist()
@@ -244,7 +254,8 @@ function loadFixlist()
 	if(!isset($_GET['edit']))
 		echo $HeadwaiterNotes[0]['fixlist'];
 	else
-		echo '<textarea rows="6" cols="50" name="fixlist" id="fixlist" class="bottom-border">'.$HeadwaiterNotes[0]['fixlist'].'</textarea>';
+		echo '<textarea rows="6" cols="50" name="fixlist" id="fixlist" maxlength="4000"
+			class="bottom-border">'.$HeadwaiterNotes[0]['fixlist'].'</textarea>';
 }
 
 function loadMessage()
@@ -258,8 +269,82 @@ function loadMessage()
 		echo $HeadwaiterNotes[0]['message'];
 	else
 	{
-		echo '<textarea rows="12" cols="50" name="message" id="message" class="bottom-border">'.$HeadwaiterNotes[0]['message'].'</textarea>';
+		echo '<textarea rows="12" cols="50" name="message" id="message" maxlength="6000"
+			class="bottom-border">'.$HeadwaiterNotes[0]['message'].'</textarea>';
 		echo '<input type="submit" name="submit" value="Uppdatera">';
+	}
+}
+
+function loadWorkSlots()
+{
+	if(isset($_GET['id']) && !isset($_GET['edit']))
+	{
+		echo '<div class="col-sm-6">
+					<div class="white-box">
+						<div class="list-group">';
+		$event_id = $_GET['id'];
+		$user_id = $_SESSION['user_id'];
+		$slots = DBQuery::sql("SELECT id, points, event_id, start_time, end_time, group_id, wage FROM work_slot 
+							WHERE event_id = '$event_id'");
+
+		$bookedSlots = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+							WHERE work_slot_id IN
+								(SELECT id FROM work_slot 
+								WHERE event_id = '$event_id')
+							AND user_id = '$user_id'");
+
+		$groups = DBQuery::sql("SELECT id, name FROM work_group 
+								WHERE id IN 
+									(SELECT group_id FROM work_slot 
+									WHERE event_id = '$event_id'
+									AND id IN
+										(SELECT work_slot_id FROM user_work))");
+
+
+		if(count($groups) > 0)
+		{
+			echo '<h3>Passen</h3>';
+
+			for($i = 0; $i < count($groups); ++$i)
+			{
+				echo '<p><strong>'.$groups[$i]['name'].'</strong></p>';
+				for($j = 0; $j < count($slots); ++$j)
+				{
+					$work_slot_id = $slots[$j]['id'];
+					$availableSlot = DBQuery::sql("SELECT id FROM work_slot 
+												WHERE id NOT IN
+													(SELECT work_slot_id FROM user_work)
+												AND id = '$work_slot_id'");
+
+					$slotStart = new DateTime($slots[$j]['start_time']);
+					$slotEnd = new DateTime($slots[$j]['end_time']);
+					$start = $slotStart->format('H:i -');
+					$end = $slotEnd->format(' H:i');
+					if($slots[$j]['group_id'] == $groups[$i]['id'])
+					{
+						$bookedSlot = DBQuery::sql("SELECT work_slot_id, user_id FROM user_work 
+								WHERE work_slot_id IN
+									(SELECT id FROM work_slot 
+									WHERE event_id = '$event_id')
+								AND work_slot_id = '$work_slot_id'");
+
+						if(count($bookedSlot) > 0)
+						{
+							echo '<li class="list-group-item">';
+							echo $start.$end;
+							echo '<a href="?page=userProfile&id='.$bookedSlot[0]['user_id'].'" class="work-slot-user black-link"> 
+								'.loadAvatarFromUser($bookedSlot[0]['user_id'], 20).loadNameFromUser($bookedSlot[0]['user_id']).'</a>';
+							echo " (".$slots[$j]['points'].' poäng)';
+							echo " (".$slots[$j]['wage'].' kr/h)';
+							echo '</li>';
+						}
+					}
+				}
+			}
+		}
+		echo '</div>
+			</div> <!-- .white-box -->
+		</div>';
 	}
 }
 

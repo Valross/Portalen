@@ -21,14 +21,17 @@ if(isset($_POST['submit']))
 	$points = strip_tags($_POST['points']);
 	$description = strip_tags($_POST['description'], allowed_tags());
 	$icon = strip_tags($_POST['icon']);
+	$unobtainable = strip_tags($_POST['unobtainable']);
+
 	if($icon == '')
 		$icon = 'fa fa-cloud fa-fw fa-lg';
 
 	if($name != '')
 	{
-		DBQuery::sql("UPDATE achievement
+	  	DBQuery::sql("UPDATE achievement
 				  SET name = '$name', points = '$points', 
-				  description = '$description', icon = '$icon'
+				  description = '$description', icon = '$icon',
+				  unobtainable = '$unobtainable'
 				  WHERE id = '$id'");
 		?>
 		<script>
@@ -41,8 +44,8 @@ if(isset($_POST['submit']))
 if(isset($_POST['add']))
 {
 	DBQuery::sql("INSERT INTO achievement 
-					(name, points, description, icon)
-					VALUES ('Obestämd', '5', '', '')");
+					(name, points, description, icon, unobtainable)
+					VALUES ('Obestämd', '5', '', '', '0')");
 	?>
 	<script>
 		window.location = "?page=createAchievement";
@@ -103,7 +106,7 @@ function loadAllAchievementsAsOption()
 
 function loadCreateAchievementTools($achievement)
 {
-	$achievement_name = DBQuery::sql("SELECT id, name, description, icon, points FROM achievement 
+	$achievement_name = DBQuery::sql("SELECT id, name, description, icon, points, unobtainable FROM achievement 
 						WHERE id = '$achievement'");
 	echo '<div class="row">
 			<div class="col-sm-6">
@@ -113,9 +116,12 @@ function loadCreateAchievementTools($achievement)
 	echo '<label for="name">Achievementnamn</label>
 			<input type="text" name="name" id="name" value="'.$achievement_name[0]['name'].'">
 			<label for="points">Poäng <span class="fa fa-diamond fa-fw fa-lg"></span></label>
-			<input type="text" name="points" id="points" value="'.$achievement_name[0]['points'].'">
+			<input type="number" name="points" id="points" min="0" max="50" value="'.$achievement_name[0]['points'].'">
 			<label for="icon">Ikon <span class="'.$achievement_name[0]['icon'].'"></span></label>
 			<input type="text" name="icon" id="icon" placeholder="fa fa-cloud fa-fw fa-lg" value="'.$achievement_name[0]['icon'].'">
+			<label for="unobtainable">Anskaffbarhet (1 = går ej att få längre)</label>
+			<input type="number" name="unobtainable" id="unobtainable" placeholder="0" maxlength="1" min="0" max="1" required title="1 siffra"
+				value="'.$achievement_name[0]['unobtainable'].'">
 			<label for="description">Beskrivning</label>
 			<textarea rows="2" cols="50" name="description" id="description" class="bottom-border">'.$achievement_name[0]['description'].'</textarea>
 			<input type="hidden" name="id" id="id" value="'.$achievement_name[0]['id'].'">';
@@ -125,10 +131,10 @@ function loadCreateAchievementTools($achievement)
 
 	if(checkAdminAccess() == -1)
 		echo '<a href="?page=removeAchievement&achievement_id='.$achievement_name[0]['id'].'" onclick="return confirm(\'Är du säker? Det går inte att ångra sig.\')">
-			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen</a>';
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a>';
 	else
 		echo '<a href="" class="black-link" data-toggle="tooltip" data-placement="bottom" title="Endast webchefen kan ta bort achievements"> 
-			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort achievementen</a>';
+			<span class="fa fa-remove fa-fw fa-lg"></span>Ta bort</a>';
 	
 	
 	echo 			'</div>

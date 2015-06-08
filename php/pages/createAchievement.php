@@ -62,7 +62,7 @@ function loadAll()
 				</div>
 			</div>
 			<div class="col-sm-6 page-header-right text-right">
-				  <a href="?page=achievements" class="btn btn-page-header"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till all achievements</a>
+				  <a href="?page=achievements" class="btn btn-page-header"><i class="fa fa-arrow-circle-left fa-fw"></i> Tillbaka till alla achievements</a>
 			</div> <!-- .col-sm-6 -->
 		</div> <!-- .row -->';
 

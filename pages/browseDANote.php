@@ -8,9 +8,15 @@
 			<h1><span class="fa fa-key fa-fw fa-lg"></span> DA-lappar</h1>
 		</div>
 	</div>
-	<div class="col-sm-6 page-header-right text-right">
-		  <a href="?page=browseHeadwaiterNote" class="btn btn-page-header"><i class="fa fa-female fa-fw"></i> Hovis-lappar</a>
-	</div> <!-- .col-sm-6 -->
+	<div class="col-sm-6 page-header-right">
+		<a href="?page=createDANote" class="btn btn-page-header"><i class="fa fa-pencil fa-fw"></i> Skriv DA-lapp</a>
+		<div class="pull-right form-inline">
+				<div class="btn-group">
+					<a href="?page=browseDANote" class="btn btn-page-header active"><i class="fa fa-key fa-fw"></i> DA-lappar</a>
+  					<a href="?page=browseHeadwaiterNote" class="btn btn-page-header"><i class="fa fa-female fa-fw"></i> Hovis-lappar</a>
+				</div>
+		</div>
+	</div>
 </div>
 
 <div class="row">

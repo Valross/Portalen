@@ -97,29 +97,48 @@ include_once('php/pageManager.php');
 
 		          <div class="navbar-collapse collapse">
 		            <ul class="main-nav">
-			              <li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>   
-			              <!-- <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li> -->
+						<li class="active"><a href="?page=start"><span class="fa fa-home fa-fw fa-lg"></span>Hem</a></li>   
+						<!-- <li><a href="?page=book" onclick="location.reload()"><span class="fa fa-book fa-fw fa-lg"></span>Boka pass</a></li> -->
 
-	              		  <li class="dropdown">
-		  					<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-calendar fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
-		  						<ul id="collapseThree" class="panel-collapse collapse">
-				              	<li><a href="?page=book"><span class="fa fa-calendar fa-fw fa-lg"></span>Kalenderbokning</a></li>
-	  							<li><a href="?page=bookold"><span class="fa fa-list fa-fw fa-lg"></span>Old Fashioned Way</a></li>
-  							</li>  
-  						  </ul>
+						<li class="dropdown">
+						<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseThree"><span class="fa fa-calendar fa-fw fa-lg"></span>Boka pass<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+							<ul id="collapseThree" class="panel-collapse collapse">
+							<li><a href="?page=book"><span class="fa fa-calendar fa-fw fa-lg"></span>Kalenderbokning</a></li>
+							<li><a href="?page=bookold"><span class="fa fa-list fa-fw fa-lg"></span>Old Fashioned Way</a></li>
+						</li>  
+						</ul>
 
-						  <li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
-			              <li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
-			              <li class="dropdown">
-							  <a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFour"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik<span class="chevron_toggleable fa fa-chevron-down"></span></a>
-  		  						<ul id="collapseFour" class="panel-collapse collapse">
-  				              	<li><a href="?page=statsUser"><span class="fa fa-book fa-fw fa-lg"></span>Din statistik</a></li>
-  	  							<li><a href="?page=statsList"><span class="fa fa-list fa-fw fa-lg"></span>Statistiklista</a></li>
-						  </li>
-						  </ul>
-						  
-						  
-			              <li><a href="?page=achievements"><span class="fa fa-trophy fa-fw fa-lg"></span>Achievements</a></li>
+						<li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
+						<?php 
+							if(checkAdminAccess() <= 1)
+							{
+						?>
+							<li class="dropdown">
+							<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFive"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+								<ul id="collapseFive" class="panel-collapse collapse">
+								  	<li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+									<li><a href="?page=createNews"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv nyhet</a></li>
+							</li>
+							</ul>
+						<?php 
+		  					}
+		  					else
+		  					{
+						?>
+							<li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+						<?php 
+		  					}
+						?>
+						<li class="dropdown">
+						<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFour"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik<span class="chevron_toggleable fa fa-chevron-down"></span></a>
+							<ul id="collapseFour" class="panel-collapse collapse">
+						  		<li><a href="?page=statsUser"><span class="fa fa-book fa-fw fa-lg"></span>Din statistik</a></li>
+								<li><a href="?page=statsList"><span class="fa fa-list fa-fw fa-lg"></span>Statistiklista</a></li>
+						</li>
+						</ul>
+
+
+						<li><a href="?page=achievements"><span class="fa fa-trophy fa-fw fa-lg"></span>Achievements</a></li>
 	  		               
 		            <?php 
 			            if(checkAdminAccess() <= 3)
@@ -133,30 +152,27 @@ include_once('php/pageManager.php');
 						            {
 					            ?>
 		  							<li><a href="?page=checkPasses"><span class="fa fa-check-square-o fa-fw fa-lg"></span>Checka av pass</a></li>
-		  							<li><a href="?page=createDANote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv DA-lapp</a></li>
-		  							<li><a href="?page=browseDANote"><span class="fa fa-key fa-fw fa-lg"></span>Läs DA-lappar</a></li>
+		  							<li><a href="?page=browseDANote"><span class="fa fa-key fa-fw fa-lg"></span>DA-lappar</a></li>
 	  							<?php 
 				  					}
 				  					if(checkAdminAccess() <= 3)
 						            {
 								?>
-	  							<li><a href="?page=createHeadWaiterNote"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv Hovis-lapp</a></li>
-	  							<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-female fa-fw fa-lg"></span>Läs Hovis-lappar</a></li>
+	  								<li><a href="?page=browseHeadWaiterNote"><span class="fa fa-female fa-fw fa-lg"></span>Hovis-lappar</a></li>
 	  							<?php 
 				  					}
 				  					if(checkAdminAccess() <= 1)
 						            {
 								?>
-	  							<li><a></a></li>
+		  							<li><a></a></li>
 
-	  							<li><a href="?page=createEvent"><span class="fa fa-calendar fa-fw fa-lg"></span>Skapa evenemang</a></li>
-	  							<li><a href="?page=createNews"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Skriv nyhet</a></li>
-	  							<li><a href="?page=reviseApplications"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ansökningar</a></li>
-	  							<li><a href="?page=staffList"><span class="fa fa-list fa-fw fa-lg"></span>Personallista</a></li>
-	  							<li><a href="?page=createAccount"><span class="fa fa-user-plus fa-fw fa-lg"></span>Skapa nytt konto</a></li>
-	  							<li><a href="?page=manageEventTemplate"><span class="fa fa-table fa-fw fa-lg"></span>Eventmallar</a></li>
-	  							<li><a href="?page=period"><span class="fa fa-calendar-o fa-fw fa-lg"></span>Perioder</a></li>
-	  							<li><a href="?page=DC"><span class="fa fa-gavel fa-fw fa-lg"></span>DC-Verktyg</a></li>
+		  							<li><a href="?page=createEvent"><span class="fa fa-calendar fa-fw fa-lg"></span>Skapa evenemang</a></li>
+		  							<li><a href="?page=reviseApplications"><span class="fa fa-user-plus fa-fw fa-lg"></span>Ansökningar</a></li>
+		  							<li><a href="?page=staffList"><span class="fa fa-list fa-fw fa-lg"></span>Personallista</a></li>
+		  							<li><a href="?page=createAccount"><span class="fa fa-user-plus fa-fw fa-lg"></span>Skapa nytt konto</a></li>
+		  							<li><a href="?page=manageEventTemplate"><span class="fa fa-table fa-fw fa-lg"></span>Eventmallar</a></li>
+		  							<li><a href="?page=period"><span class="fa fa-calendar-o fa-fw fa-lg"></span>Perioder</a></li>
+		  							<li><a href="?page=DC"><span class="fa fa-gavel fa-fw fa-lg"></span>DC-Verktyg</a></li>
 	  							<?php 
 				  					}
 								?>

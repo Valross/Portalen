@@ -4,9 +4,7 @@ include_once('php/DBQuery.php');
 function loadButtons()
 {
 	if(checkAdminAccess() <= 1)
-		echo '<div class="col-sm-4 page-header-right text-right">
-				<a href="?page=createEvent" class="btn btn-page-header"><i class="fa fa-calendar fa-fw"></i> Skapa event</a>
-			</div> <!-- .col-sm-4 -->';
+		echo '<a href="?page=createEvent" class="btn btn-page-header"><i class="fa fa-calendar fa-fw"></i> Skapa event</a>';
 }
 
 function loadPageNavigators($navigate_date)

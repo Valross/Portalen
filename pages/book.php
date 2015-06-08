@@ -7,12 +7,13 @@
 	</div>
 	<div class="col-sm-6 page-header-right">
 		<div class="pull-right form-inline">
-				<div class="btn-group">
-					<button class="btn btn-page-header" data-calendar-view="year">År</button>
-					<button class="btn btn-page-header active" data-calendar-view="month">Månad</button>
-					<button class="btn btn-page-header" data-calendar-view="week">Vecka</button>
-					<button class="btn btn-page-header" data-calendar-view="day">Dag</button>
-				</div>
+			<?php loadButtons(); ?>
+			<div class="btn-group">
+				<button class="btn btn-page-header" data-calendar-view="year">År</button>
+				<button class="btn btn-page-header active" data-calendar-view="month">Månad</button>
+				<button class="btn btn-page-header" data-calendar-view="week">Vecka</button>
+				<button class="btn btn-page-header" data-calendar-view="day">Dag</button>
+			</div>
 		</div>
 	</div>
 </div> <!-- .row -->

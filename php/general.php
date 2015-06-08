@@ -1120,11 +1120,7 @@ function notify($user_id, $notification_type, $info)
 }
 
 function unlockAchievementForUser($user_id, $achievement_id)
-{
-	$dates = new DateTime;
-	$dates->setTimezone(new DateTimeZone('Europe/Stockholm'));
-	$date = $dates->format('Y-m-d H:i:s');
-	
+{	
 	$achievement = DBQuery::sql("SELECT id, points FROM achievement WHERE id = '$achievement_id'");
 
 	$achievement_unlocked = DBQuery::sql("SELECT achievement_id FROM achievement_unlocked 
@@ -1136,8 +1132,8 @@ function unlockAchievementForUser($user_id, $achievement_id)
 	
 	if(count($achievement_unlocked) == 0)
 	{
-		DBQuery::sql("INSERT INTO achievement_unlocked (user_id, achievement_id, date_unlocked)
-							VALUES ('$user_id', '$achievement_id', '$date')");
+		DBQuery::sql("INSERT INTO achievement_unlocked (user_id, achievement_id)
+							VALUES ('$user_id', '$achievement_id')");
 
 		DBQuery::sql("UPDATE user
 				  SET achievement_points = '$total_points', 

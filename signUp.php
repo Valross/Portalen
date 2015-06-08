@@ -144,13 +144,13 @@
 		<form action="" method="post">
 			<div class="two-column">
 		 	<label for="firstName">Förnamn</label>
-				<input type="text" name="firstName" id="firstName" placeholder="James" maxlength="15" />
+				<input type="text" name="firstName" id="firstName" placeholder="James" pattern="[A-Za-z]{1,15}" maxlength="15" />
 		 	<label for="lastName">Efternamn</label>
-				<input type="text" name="lastName" id="lastName" placeholder="Bond" maxlength="15" />
+				<input type="text" name="lastName" id="lastName" placeholder="Bond" pattern="[A-Za-z]{1,25}" maxlength="25" />
 			<label for="mail">Mailadress (LIU-mail)</label>
-				<input type="text" name="mail" id="mail" placeholder="Jambo007@student.liu.se" maxlength="30" />
+				<input type="text" name="mail" id="mail" placeholder="Jambo007@student.liu.se" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="30" />
 			<label for="ssn">Personnummer</label>
-				<input type="text" name="ssn" id="ssn" placeholder="ååååmmddxxxx" maxlength="12" pattern=".{12,12}" required title="12 siffror" />
+				<input type="text" name="ssn" id="ssn" placeholder="ååååmmddxxxx" maxlength="12" pattern="[0-9]{12,12}$" required title="12 siffror" />
 			</div>
 			<div class="two-column-padding">
 			<h2>Vilka lag vill du söka?</h2>

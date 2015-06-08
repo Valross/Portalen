@@ -72,9 +72,11 @@ function loadActivePeople()
 				$work_counter++;
 		}
 	}
-
-	return 'Du har arbetat med '.round(($work_counter/count($activeUsers))*100).'% 
-		('.$work_counter.'/'.count($activeUsers).') av alla aktiva (pass senaste 8 veckorna)';
+	if(count($activeUsers) != 0)
+		return 'Du har arbetat med '.round(($work_counter/count($activeUsers))*100).'% 
+			('.$work_counter.'/'.count($activeUsers).') av alla aktiva (pass senaste 8 veckorna)';
+	else
+		return 'Det finns inga aktiva användare!';
 }
 
 function loadAllPeople()

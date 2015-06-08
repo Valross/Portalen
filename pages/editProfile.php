@@ -26,7 +26,7 @@
 		<label for="last_name">Efternamn (Går inte att ändra)</label>
 		<input type="text" value="<?php echo $profileLastName; ?>" name="last_name" id="last_name" readonly>
 	  	<label for="ssn">Personnummer (Går inte att ändra)</label>
-	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååååmmddxxxx" name="ssn" id="ssn" maxlength="12" pattern=".{12,12}" required title="12 siffror" readonly>
+	  	<input type="text" value="<?php echo $profileSsn; ?>" placeholder="ååååmmddxxxx" name="ssn" id="ssn" maxlength="12" pattern="[0-9]{12,12}$" required title="12 siffror" readonly>
 	  	<label for="phone_number">Mobilnummer</label>
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="10" pattern=".{10,10}" required title="10 siffror">
 		<label for="bank_account">Kontonummer</label>

@@ -15,8 +15,8 @@
 			          	<th>Namn</th>
 			          	<th>Bokade poäng</th>
 			          	<th>Arbetade poäng</th>
-					  	<th>Antal pass</th>
-					  	<th>Antal möten</th>
+					  	<th>Pass</th>
+					  	<th>Medelpoäng/pass</th>
 			        </tr>
 			    </thead>
 				<tbody>

@@ -705,11 +705,22 @@ function notify($user_id, $notification_type, $info)
 function mailToUser($recipient, $subject, $msg)
 {
 	mail($recipient, $subject, $msg);
+	echo("mailing to " . $recipient . ", mail with subject " . $subject);
 }
 
-function mailToGroup($recipient, $subject, $msg)
+function mailToGroup($group, $subject, $msg) 
 {
-	mail($recipient, $subject, $msg);
+	$recipients = DBQuery::sql("SELECT mail FROM user WHERE id IN 
+													(SELECT user_id FROM group_member 
+														WHERE group_id = '$group' )");
+	$howMany = count($recipients);
+	for($i = 0; $i < $howMany; ++$i)
+	{
+		// echo $recipients[$i]['mail'];
+		mail($recipients[$i]['mail'], $subject, $msg);
+		echo("mailing to " . $recipients[$i]['mail'] . ", subject: " . $subject . "  ");
+	}
+
 }
 
 function unlockAchievementForUser($user_id, $achievement_id)

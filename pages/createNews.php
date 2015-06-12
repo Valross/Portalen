@@ -25,7 +25,8 @@
 		<label for="title">Titel</label>
 		<input type="text" placeholder="Nyhetsbrev Maj" name="title" id="title" required>
 		<label for="message">Meddelande</label>
-		<textarea rows="7" cols="50" value="" name="message" id="message" maxlength="1500" class="bottom-border" required></textarea>
+		<textarea rows="7" cols="50" value="" name="message" id="message" maxlength="1500"></textarea>
+		<?php loadGroupSelectable() ?>
 		<input type="submit" name="submit" value="Skicka nyhet">
 	</form>
 	</div> <!-- .white-box -->

@@ -109,26 +109,8 @@ include_once('php/pageManager.php');
 						</ul>
 
 						<li><a href="?page=groups"><span class="fa fa-users fa-fw fa-lg"></span>Lagsidor</a></li>
-						<?php 
-							if(checkAdminAccess() <= 1)
-							{
-						?>
-							<li class="dropdown">
-							<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFive"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter<span class="chevron_toggleable fa fa-chevron-down"></span></a>
-								<ul id="collapseFive" class="panel-collapse collapse">
-								  	<li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
-									<li><a href="?page=createNews"><span class="fa fa-pencil fa-fw fa-lg"></span>Skriv nyhet</a></li>
-							</li>
-							</ul>
-						<?php 
-		  					}
-		  					else
-		  					{
-						?>
-							<li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
-						<?php 
-		  					}
-						?>
+						<li><a href="?page=news"><span class="fa fa-newspaper-o fa-fw fa-lg"></span>Nyheter</a></li>
+						
 						<li class="dropdown">
 						<a data-toggle="collapse" data-parent="#menu-bar2" href="#collapseFour"><span class="fa fa-pie-chart fa-fw fa-lg"></span>Statistik<span class="chevron_toggleable fa fa-chevron-down"></span></a>
 							<ul id="collapseFour" class="panel-collapse collapse">

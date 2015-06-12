@@ -9,8 +9,8 @@
 		</div>
 	</div>
 	<div class="col-sm-6 page-header-right">
-		<a href="?page=createDANote" class="btn btn-page-header"><i class="fa fa-pencil fa-fw"></i> Skriv DA-lapp</a>
 		<div class="pull-right form-inline">
+			<a href="?page=createDANote" class="btn btn-page-header"><i class="fa fa-pencil fa-fw"></i> Skriv DA-lapp</a>
 				<div class="btn-group">
 					<a href="?page=browseDANote" class="btn btn-page-header active"><i class="fa fa-key fa-fw"></i> DA-lappar</a>
   					<a href="?page=browseHeadwaiterNote" class="btn btn-page-header"><i class="fa fa-female fa-fw"></i> Hovis-lappar</a>

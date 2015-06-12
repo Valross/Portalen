@@ -41,60 +41,38 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="white-box">
-		<h4>Maten</h4>
-			<p>
-
-			<?php loadFood(); ?>
+			<h3>Meddelande</h3>
+		<h5>Maten</h5>
+			<p><?php loadFood(); ?></p>
 			
-			</p>
-		<h4>Drinkfakturering</h4>
-			<p>
-
-			<?php loadInvoiceDrinks(); ?>
+		<h5>Drinkfakturering</h5>
+			<p><?php loadInvoiceDrinks(); ?></p>
 			
-			</p>
-		<h4>Toast</h4>
-			<p>
-
-			<?php loadToast(); ?>
+		<h5>Toast</h5>
+			<p><?php loadToast(); ?></p>
 			
-			</p>
-		<h4>Arrangörerna</h4>
-			<p>
-
-			<?php loadOrganizers(); ?>
+		<h5>Arrangörerna</h5>
+			<p><?php loadOrganizers(); ?></p>
 			
-			</p>
-		<h4>Trappans Personal</h4>
-			<p>
-
-			<?php loadStairStaff(); ?>
+		<h5>Trappans Personal</h5>
+			<p><?php loadStairStaff(); ?></p>
 			
-			</p>
-		<h4>Arrangörernas Personal</h4>
-			<p>
-
-			<?php loadOrganizersStaff(); ?>
+		<h5>Arrangörernas Personal</h5>
+			<p><?php loadOrganizersStaff(); ?></p>
 			
-			</p>
-		<h4>Svinn</h4>
-			<p>
-
-			<?php loadSwine(); ?>
+		<h5>Svinn</h5>
+			<p><?php loadSwine(); ?></p>
 			
-			</p>
-		<h4>Fixlist</h4>
-			<p>
-
-			<?php loadFixlist(); ?>
-			
-			</p>
-		<h4>Meddelande</h4>
-			<p>
-
-			<?php loadMessage(); ?>
-			
-			</p>
+		<h5>Övrigt</h5>
+			<p><?php loadMessage(); ?></p>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="white-box">
+			<h3>Fixlista</h3>
+				<p>
+				<?php loadFixlist(); ?>
+				</p>
 		</div>
 	</div>
 </div>

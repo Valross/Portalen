@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2015 at 01:56 PM
+-- Generation Time: Jun 12, 2015 at 01:00 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `achievement` (
   `points` int(11) NOT NULL DEFAULT '5',
   `unobtainable` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `achievement`
@@ -101,8 +101,7 @@ INSERT INTO `achievement` (`id`, `name`, `description`, `icon`, `points`, `unobt
 (34, 'Hovis#3', 'Jobba hovis 15 gånger', 'fa fa-female fa-fw fa-lg', 15, 0),
 (35, 'Hovis#4', 'Jobba hovis 25 gånger', 'fa fa-female fa-fw fa-lg', 25, 0),
 (36, 'BITCH I AM FABULOUS', 'Ladda upp en profilbild', 'fa fa-cloud fa-fw fa-lg', 5, 0),
-(37, 'Founding father', 'Var med och skapade portalen.', 'fa fa-skyatlas fa-fw fa-lg', 25, 1),
-(38, 'Obestämd', '', '', 5, 0);
+(37, 'Founding father', 'Var med och skapade portalen.', 'fa fa-skyatlas fa-fw fa-lg', 25, 1);
 
 -- --------------------------------------------------------
 
@@ -250,6 +249,7 @@ CREATE TABLE IF NOT EXISTS `da_note_comments` (
   `da_note_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_edit` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `event_id` (`da_note_id`),
@@ -260,14 +260,14 @@ CREATE TABLE IF NOT EXISTS `da_note_comments` (
 -- Dumping data for table `da_note_comments`
 --
 
-INSERT INTO `da_note_comments` (`id`, `da_note_id`, `comment`, `date_written`, `user_id`) VALUES
-(1, 1, 'bleep', '2015-02-18 23:00:00', 2),
-(2, 1, 'wrr', '2015-02-18 23:00:00', 2),
-(4, 27, 'top lel\r\n', '2015-02-18 23:00:00', 2),
-(5, 27, 'CRAZY men ändå <i>rätt</i> najs...', '2015-03-16 23:00:00', 2),
-(9, 28, 'lol', '2015-03-22 16:52:51', 2),
-(11, 41, 'damn', '2015-06-07 13:57:07', 2),
-(12, 29, 'lol', '2015-06-07 15:01:09', 2);
+INSERT INTO `da_note_comments` (`id`, `da_note_id`, `comment`, `date_written`, `last_edit`, `user_id`) VALUES
+(1, 1, 'bleep', '2015-02-18 23:00:00', NULL, 2),
+(2, 1, 'wrr', '2015-02-18 23:00:00', NULL, 2),
+(4, 27, 'top lel\r\n', '2015-02-18 23:00:00', NULL, 2),
+(5, 27, 'CRAZY men ändå <i>rätt</i> najs...', '2015-03-16 23:00:00', NULL, 2),
+(9, 28, 'lol', '2015-03-22 16:52:51', NULL, 2),
+(11, 41, 'damn lol', '2015-06-07 13:57:07', '2015-06-12 10:48:58', 2),
+(12, 29, 'lol', '2015-06-07 15:01:09', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -384,26 +384,28 @@ CREATE TABLE IF NOT EXISTS `event_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment` varchar(500) NOT NULL,
   `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_edit` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `event_comments`
 --
 
-INSERT INTO `event_comments` (`id`, `comment`, `date_written`, `user_id`, `event_id`) VALUES
-(1, '*måste fixa lite', '2015-02-25 23:00:00', 2, 50),
-(2, '*lol', '2015-02-25 23:00:00', 2, 37),
-(4, 'lol', '2015-03-16 23:00:00', 2, 50),
-(6, '*undrar om <i>italics</i> fungerar', '2015-03-16 23:00:00', 2, 50),
-(7, '*notify', '2015-03-22 16:34:08', 2, 50),
-(8, '*notilicious', '2015-03-22 16:40:36', 2, 50),
-(9, 'lol\r\n', '2015-06-01 15:27:59', 2, 64),
-(10, 'lol', '2015-06-07 15:00:57', 2, 5);
+INSERT INTO `event_comments` (`id`, `comment`, `date_written`, `last_edit`, `user_id`, `event_id`) VALUES
+(1, '*måste fixa lite', '2015-02-25 23:00:00', NULL, 2, 50),
+(2, '*lol', '2015-02-25 23:00:00', NULL, 2, 37),
+(4, 'lol', '2015-03-16 23:00:00', NULL, 2, 50),
+(6, '*undrar om <i>italics</i> fungerar', '2015-03-16 23:00:00', NULL, 2, 50),
+(7, '*notify', '2015-03-22 16:34:08', NULL, 2, 50),
+(8, '*notilicious', '2015-03-22 16:40:36', NULL, 2, 50),
+(9, 'lol\r\n', '2015-06-01 15:27:59', NULL, 2, 64),
+(10, 'lol', '2015-06-07 15:00:57', NULL, 2, 5),
+(11, 'bleep blop blap', '2015-06-12 10:58:59', '2015-06-12 10:59:23', 2, 65);
 
 -- --------------------------------------------------------
 
@@ -601,7 +603,7 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `headwaiter_note`
@@ -632,20 +634,22 @@ CREATE TABLE IF NOT EXISTS `headwaiter_note_comments` (
   `headwaiter_note_id` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
   `date_written` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_edit` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `headwaiter_note_id` (`headwaiter_note_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `headwaiter_note_comments`
 --
 
-INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `user_id`) VALUES
-(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 16:55:55', 2),
-(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 11:41:54', 2),
-(5, 5, 'lol', '2015-03-22 16:56:01', 2);
+INSERT INTO `headwaiter_note_comments` (`id`, `headwaiter_note_id`, `comment`, `date_written`, `last_edit`, `user_id`) VALUES
+(1, 6, '"Hälsa från mig!" - Astrid', '2015-03-19 16:55:55', NULL, 2),
+(4, 6, 'Testar \r\n\r\nline \r\n\r\nbreaks', '2015-03-20 11:41:54', NULL, 2),
+(5, 5, 'lol', '2015-03-22 16:56:01', NULL, 2),
+(6, 9, 'olwf gijeagi', '2015-06-12 10:52:20', '2015-06-12 10:56:20', 2);
 
 -- --------------------------------------------------------
 
@@ -657,37 +661,39 @@ CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `message` varchar(3000) NOT NULL,
-  `date` datetime NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_edit` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `title`, `message`, `date`, `user_id`) VALUES
-(1, 'Hej', 'Då', '2015-02-12 14:53:09', 2),
-(2, 'Nya pass och personalfest!', 'Hej!  Nu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan!  Glöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen.  Ha det bra!', '2015-02-27 11:20:14', 2),
-(3, 'Nyhetsbrev', 'Hej! \nNu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan! \n\nGlöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen. \n\nHa det bra!', '2015-02-27 11:40:17', 2),
-(4, 'Portalen snart färdig!', 'Det ryktas om att portalen snart är färdig och redo för användning. \n\n\nSpännande tycker webblaget. \n\n\nJapp.', '2015-03-17 20:07:58', 2),
-(5, '1', '2', '2015-03-23 14:26:03', 2),
-(6, '3', '4', '2015-03-23 14:26:16', 2),
-(7, '5', '6', '2015-03-23 14:26:25', 2),
-(8, '7', '8', '2015-03-23 14:26:32', 2),
-(9, '1', '2', '2015-03-23 14:54:57', 2),
-(10, '1', '2', '2015-03-23 14:54:59', 2),
-(11, '1', '2', '2015-03-23 14:55:01', 2),
-(12, '1', '2', '2015-03-23 14:55:03', 2),
-(13, '1', '2', '2015-03-23 14:55:05', 2),
-(14, '1', '2', '2015-03-23 14:55:07', 2),
-(15, '1', '2', '2015-03-23 14:55:09', 2),
-(16, '1', '2', '2015-03-23 14:55:11', 2),
-(17, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:00', 2),
-(18, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:37', 2),
-(19, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:52', 2),
-(20, 'Nya portalen', 'Fan rätt fräscht asså.', '2015-03-25 17:09:04', 2);
+INSERT INTO `news` (`id`, `title`, `message`, `date`, `last_edit`, `user_id`) VALUES
+(1, 'Hej', 'Då', '2015-02-12 14:53:09', '2015-06-12 10:05:47', 2),
+(2, 'Nya pass och personalfest!', 'Hej!  Nu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan!  Glöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen.  Ha det bra!', '2015-02-27 11:20:14', '2015-06-12 10:05:47', 2),
+(3, 'Nyhetsbrev', 'Hej! \nNu har det kommit upp nya pass för mars månad! så nu är det bara att börja boka upp sig. Glöm inte att boka upp er till personalfesten den 8:e mars. För att gå ska du ha jobbat 8 poäng i dec/jan och 8 poäng i februari eller motsvarande för poängbefriat lag. Du får även gå om du är nybyggare och aldrig har gått på en personalfest innan! \n\nGlöm inte att skriva in eventuella allergier eller specialkost om ni har på portalen. \n\nHa det bra!', '2015-02-27 11:40:17', '2015-06-12 10:05:47', 2),
+(4, 'Portalen snart färdig!', 'Det ryktas om att portalen snart är färdig och redo för användning. \n\n\nSpännande tycker webblaget. \n\n\nJapp.', '2015-03-17 20:07:58', '2015-06-12 10:05:47', 2),
+(5, '1', '2', '2015-03-23 14:26:03', '2015-06-12 10:05:47', 2),
+(6, '3', '4', '2015-03-23 14:26:16', '2015-06-12 10:05:47', 2),
+(7, '5', '6', '2015-03-23 14:26:25', '2015-06-12 10:05:47', 2),
+(8, '7', '8', '2015-03-23 14:26:32', '2015-06-12 10:05:47', 2),
+(9, '1', '2', '2015-03-23 14:54:57', '2015-06-12 10:05:47', 2),
+(10, '1', '2', '2015-03-23 14:54:59', '2015-06-12 10:05:47', 2),
+(11, '1', '2', '2015-03-23 14:55:01', '2015-06-12 10:05:47', 2),
+(12, '1', '2', '2015-03-23 14:55:03', '2015-06-12 10:05:47', 2),
+(13, '1', '2', '2015-03-23 14:55:05', '2015-06-12 10:05:47', 2),
+(14, '1', '2', '2015-03-23 14:55:07', '2015-06-12 10:05:47', 2),
+(15, '1', '2', '2015-03-23 14:55:09', '2015-06-12 10:05:47', 2),
+(16, '1', '2', '2015-03-23 14:55:11', '2015-06-12 10:05:47', 2),
+(17, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:00', '2015-06-12 10:05:47', 2),
+(18, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:37', '2015-06-12 10:05:47', 2),
+(19, 'News!', 'New stuff on the horizon!', '2015-03-23 15:57:52', '2015-06-12 10:05:47', 2),
+(20, 'Nya portalen, coolt!', 'Fan rätt fräscht asså. Fan rätt schysst asså!', '2015-03-25 17:09:04', '2015-06-12 10:22:07', 2),
+(21, 'Nu kan man redigera nyheter!', 'Det är rätt trevligt faktiskt.', '2015-06-12 12:26:34', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -704,7 +710,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`notification_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=106 ;
 
 --
 -- Dumping data for table `notification`
@@ -812,7 +818,8 @@ INSERT INTO `notification` (`id`, `user_id`, `notification_type`, `info`, `seen`
 (101, 1, 11, '11', NULL, '2015-06-07 13:57:07'),
 (102, 1, 11, '12', NULL, '2015-06-07 15:01:09'),
 (103, 1, 12, '6', NULL, '2015-06-07 15:03:05'),
-(104, 1, 4, '18', NULL, '2015-06-08 10:15:50');
+(104, 1, 4, '18', NULL, '2015-06-08 10:15:50'),
+(105, 1, 12, '6', NULL, '2015-06-12 10:52:20');
 
 -- --------------------------------------------------------
 
@@ -1013,7 +1020,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `user_name`, `mail`, `ssn`, `password`, `name`, `last_name`, `phone_number`, `description`, `major`, `address`, `zip`, `city`, `avatar`, `date_created`, `latest_session`, `number_of_sessions`, `achievement_points`, `bank_account`, `special_food`) VALUES
 (1, 'Valross', 'valross@mail.com', '111111-123', '9b8c524273eaeab794fdd09a36f26e81', 'Hampus', 'Axelsson', '123456789', 'Jag är så cool!', 'MT', 'DK', '60333', 'Norrpan', 'portalen_bild.jpg', '2014-01-31 23:00:00', '2015-02-26 23:00:00', 0, 35, '1337-000000000', 'Ja'),
-(2, 'test', 'ankan@mail.com', '199311111122', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '1236548792', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-06-08 11:56:25', 29, 90, '14353', 'KATTER'),
+(2, 'test', 'jambo007@student.liu.se', '199311111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Herpy', 'Derpy', '1236548792', 'WOPP och <i>så</i>', 'MT', 'Ankeborgsvägen 2', NULL, NULL, 'dancing-banana.gif', '0000-00-00 00:00:00', '2015-06-12 11:00:24', 31, 90, '14353', 'KATTER'),
 (3, 'test2', '1111@mail.com', '1111111111', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Testarn', 'Testsson', '', NULL, '', NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', '2015-05-12 14:13:35', 2, 15, NULL, NULL),
 (5, 'Trappan', '2222@mail.com', '2222222222', 'cb15ee3da60f51d1f8cb94652b1539f3', 'Harry', 'Gluten', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 14:00:19', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
 (6, 'Bajs', 'hej@mail.com', 'ssssssssss', '711284ca87ba99f7c8198840f5dc607c', 'Bajs', 'o kiss', '', NULL, '', NULL, NULL, NULL, NULL, '2014-02-19 15:24:25', '0000-00-00 00:00:00', 0, 0, NULL, NULL),
@@ -1190,7 +1197,7 @@ CREATE TABLE IF NOT EXISTS `work_slot` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=175 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
 
 --
 -- Dumping data for table `work_slot`
@@ -1318,7 +1325,8 @@ INSERT INTO `work_slot` (`id`, `group_id`, `event_id`, `points`, `wage`, `start_
 (171, 26, 64, 0, 0, '2015-06-08 22:00:00', '2015-06-09 03:00:00'),
 (172, 15, 64, 0, 0, '2015-06-08 22:00:00', '2015-06-09 03:00:00'),
 (173, 12, 35, 0, 0, '2015-02-14 00:00:00', '2015-02-15 00:00:00'),
-(174, 12, 65, 0, 0, '2015-06-08 18:00:00', '2015-06-08 19:00:00');
+(174, 12, 65, 0, 0, '2015-06-08 18:00:00', '2015-06-08 19:00:00'),
+(175, 13, 65, 0, 0, '2015-06-08 18:00:00', '2015-06-08 19:00:00');
 
 --
 -- Constraints for dumped tables

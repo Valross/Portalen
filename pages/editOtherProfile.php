@@ -12,12 +12,19 @@
 		</h1>
 		</div>
 	</div>
+<?php
+	if(checkAdminAccess() < 1)
+	{
+?>
 	<div class="col-sm-4 page-header-right text-right">
 		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>" class="btn btn-page-header" 
 			onclick="return confirm('Är du säker? Det går inte att ångra sig.')">
 		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
 		</a>
 	</div>
+<?php
+	}
+?>
 </div> <!-- .row -->
 
 <div class="row">

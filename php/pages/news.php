@@ -26,7 +26,7 @@ function loadAll()
 						echo '<div class="news-info"><span>';
 						echo loadUserAvatar($news[$i]['id']);
 						echo loadUserName($news[$i]['id']);
-						echo '</span> <span class="time">- '.loadDate($news[$i]['id']).'</span>'.loadRemove($news[$i]['id']).'</div>';
+						echo '</span> <span class="time">- '.loadDate($news[$i]['id']).loadLastEdit($news[$i]['id']).'</span>'.loadRemoveAndEdit($news[$i]['id']).'</div>';
 						echo '<p>'.loadMessage($news[$i]['id']).'</p>';
 			echo    '</div>
 				 </div>';
@@ -46,11 +46,17 @@ function loadTitle($news_id)
 	return $news[0]['title'];
 }
 
-function loadRemove($news_id)
+function loadRemoveAndEdit($news_id)
 {
 	if(checkAdminAccess() <= 1)
 		echo '<a href=?page=removeNews&news_id='.$news_id.
 				' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+	$news = DBQuery::sql("SELECT id, title, message, user_id FROM news 
+						WHERE id = '$news_id'");
+
+	if($news[0]['user_id'] == $_SESSION['user_id'] || checkAdminAccess() < 1)
+		echo '<a href=?page=editNews&news_id='.$news_id.
+				' class="list-group-item-text-book"><span class="fa fa-pencil fa-fw fa-lg"></span></a>';
 }
 
 function loadMessage($news_id)
@@ -101,6 +107,15 @@ function loadDate($news_id)
 	$news = DBQuery::sql("SELECT date FROM news
 							WHERE id = '$news_id'");
 	return $news[0]['date'];
+}
+
+function loadLastEdit($news_id)
+{
+	$news = DBQuery::sql("SELECT last_edit FROM news
+							WHERE id = '$news_id'");
+	if($news[0]['last_edit'] == 0)
+		return '';
+	return ' ('.$news[0]['last_edit'].')';
 }
 
 ?>

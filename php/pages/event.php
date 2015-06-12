@@ -476,7 +476,7 @@ function loadComments()
 
 		$event_id = $_GET['id'];
 
-		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written, user_id FROM event_comments 
+		$event_comments = DBQuery::sql("SELECT id, event_id, comment, date_written, user_id, last_edit FROM event_comments 
 								WHERE event_id = '$event_id'");
 
 		if(count($event_comments) > 0)
@@ -501,11 +501,19 @@ function loadComments()
 				echo '<div class="comment">';
 				echo '<img src="'.loadCommentAvatar($event_comments[$i]['id']).'" width="64" height="64" class="img-circle">';
 				echo '<p><a href="?page=userProfile&id='.$user_id.'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
-				echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
+
+				if($event_comments[$i]['last_edit'] == 0)
+					echo '<span class="time">- ' .$event_comments[$i]['date_written'].'</span><br />';
+				else
+					echo '<span class="time">- '.$event_comments[$i]['date_written'].' ('.$event_comments[$i]['last_edit'].')</span><br />';
+
 				echo $event_comments[$i]['comment'].'</p>';
-				if(checkAdminAccess() <= 1 || count($myComment) > 0)
+				if(checkAdminAccess() < 1 || count($myComment) > 0)
 					echo '<a href=?page=removeEventComment&event_id='.$event_id.'&comment_id='.$event_comments[$i]['id'].
-							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+						' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+				if(checkAdminAccess() < 1 || count($myComment) > 0)
+					echo '<a href=?page=editComment&event_id='.$event_id.'&comment_id='.$event_comments[$i]['id'].'&comment_type=event'.
+							' class="list-group-item-text-book"><span class="fa fa-pencil fa-fw fa-lg"></span></a>';
 				echo '</div>';
 			}
 			echo '			</div>

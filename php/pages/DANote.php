@@ -399,7 +399,7 @@ function loadComments()
 
 		$da_note_id = $da_note[0]['id'];
 
-		$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written, user_id FROM da_note_comments 
+		$DAComments = DBQuery::sql("SELECT id, da_note_id, comment, date_written, user_id, last_edit FROM da_note_comments 
 								WHERE da_note_id = '$da_note_id'");
 
 		if(count($DAComments) > 0)
@@ -425,12 +425,20 @@ function loadComments()
 				echo '<div class="comment">';
 				echo '<img src="'.loadCommentAvatar($DAComments[$i]['id']).'" width="64" height="64" class="img-circle">';
 				echo '<p><a href="?page=userProfile&id='.$DAComments[$i]['id'].'">'.$commenter[0]['name'].' '.$commenter[0]['last_name'].'</a> ';
-				echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
+
+				if($DAComments[$i]['last_edit'] == 0)
+					echo '<span class="time">- '.$DAComments[$i]['date_written'].'</span><br />';
+				else
+					echo '<span class="time">- '.$DAComments[$i]['date_written'].' ('.$DAComments[$i]['last_edit'].')</span><br />';
+
 				echo nl2br($DAComments[$i]['comment']);
 				echo '</p>';
-				if(checkAdminAccess() <= 1 || count($myComment) > 0)
-						echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
-								' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+				if(checkAdminAccess() < 1 || count($myComment) > 0)
+					echo '<a href=?page=removeDANoteComment&da_note_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].
+							' class="list-group-item-text-book"><span class="fa fa-remove fa-fw fa-lg"></span></a>';
+				if(checkAdminAccess() < 1 || count($myComment) > 0)
+					echo '<a href=?page=editComment&event_id='.$da_note_event_id.'&comment_id='.$DAComments[$i]['id'].'&comment_type=da_note'.
+							' class="list-group-item-text-book"><span class="fa fa-pencil fa-fw fa-lg"></span></a>';
 				echo '</div>';
 			}
 			echo '			</div> <!-- .white-box -->

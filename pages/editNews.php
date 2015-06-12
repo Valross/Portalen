@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="page-header">
-			<h1><span class="fa fa-newspaper-o fa-fw fa-lg"></span> Skriv nyhet</h1>
+			<h1><span class="fa fa-newspaper-o fa-fw fa-lg"></span> Uppdatera nyhet</h1>
 		</div>
 	</div>
 </div> <!-- .row -->
@@ -14,11 +14,7 @@
 <div class="col-sm-6">
 	<div class="white-box">
 	<form action="" method="post">
-		<label for="title">Titel</label>
-		<input type="text" placeholder="Nyhetsbrev Maj" name="title" id="title" required>
-		<label for="message">Meddelande</label>
-		<textarea rows="7" cols="50" value="" name="message" id="message" maxlength="1500" class="bottom-border" required></textarea>
-		<input type="submit" name="submit" value="Skicka nyhet">
+		<?php loadFormContent() ?>
 	</form>
 	</div> <!-- .white-box -->
 </div>

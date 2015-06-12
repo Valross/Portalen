@@ -19,7 +19,7 @@
 	<div class="col-sm-4 page-header-right text-right">
 		<a href="?page=removeUser&user_id=<?php echo $user_id; ?>" class="btn btn-page-header" 
 			onclick="return confirm('Är du säker? Det går inte att ångra sig.')">
-		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Avsluta medlemskap
+		<i class="fa fa-user-times fa-lg fa-margin-right"></i> Ta bort användaren
 		</a>
 	</div>
 <?php
@@ -46,11 +46,13 @@
 		<input type="text" value="<?php echo $profileBankAccount; ?>" name="bank_account" id="bank_account">
 		<label for="mail">Mailadress</label>
 		<input type="text" value="<?php echo $profileMail; ?>" placeholder="jambo007@student.liu.se" name="mail" id="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-		<label for="mail">Adress</label>
+		<label for="adress">Adress</label>
 		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address">
-		<label for="mail">Utbildning</label>
+		<label for="zip">Postkod</label>
+		<input type="text" value="<?php echo $profileZip; ?>" name="zip" id="zip" required>
+		<label for="major">Utbildning</label>
 		<input type="text" value="<?php echo $profileMajor; ?>" placeholder="MT" name="major" id="major">
-		<label for="mail">Specialkost</label>
+		<label for="special_food">Specialkost</label>
 		<input type="text" value="<?php echo $profileSpecialFood; ?>" placeholder="Tomat, katt" name="special_food" id="special_food">
 		
 		<label for="description">Presentation</label>

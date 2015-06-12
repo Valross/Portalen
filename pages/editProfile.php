@@ -30,14 +30,16 @@
 	  	<label for="phone_number">Mobilnummer</label>
 	  	<input type="text" value="<?php echo $profileNumber; ?>" name="phone_number" id="phone_number" maxlength="10" pattern=".{10,10}" required title="10 siffror">
 		<label for="bank_account">Kontonummer</label>
-		<input type="text" value="<?php echo $profileBankAccount; ?>" name="bank_account" id="bank_account">
+		<input type="text" value="<?php echo $profileBankAccount; ?>" name="bank_account" id="bank_account" required>
 		<label for="mail">Mailadress</label>
-		<input type="text" value="<?php echo $profileMail; ?>" name="mail" id="mail">
-		<label for="mail">Adress</label>
-		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address">
-		<label for="mail">Utbildning</label>
-		<input type="text" value="<?php echo $profileMajor; ?>" name="major" id="major">
-		<label for="mail">Specialkost</label>
+		<input type="text" value="<?php echo $profileMail; ?>" name="mail" id="mail" required>
+		<label for="adress">Adress</label>
+		<input type="text" value="<?php echo $profileAddress; ?>" name="address" id="address" required>
+		<label for="zip">Postkod</label>
+		<input type="text" value="<?php echo $profileZip; ?>" name="zip" id="zip" required>
+		<label for="major">Utbildning</label>
+		<input type="text" value="<?php echo $profileMajor; ?>" name="major" id="major" required>
+		<label for="special_food">Specialkost</label>
 		<input type="text" value="<?php echo $profileSpecialFood; ?>" name="special_food" id="special_food">
 		
 		<label for="description">Presentation</label>

@@ -24,6 +24,12 @@ if(count($result) == 1)
 else
 	$profileAddress = "";
 
+$result = DBQuery::sql("SELECT zip FROM user WHERE id = '$_SESSION[user_id]' AND zip IS NOT NULL");
+if(count($result) == 1)
+	$profileZip = $result[0]["zip"];
+else
+	$profileZip = "";
+
 $result = DBQuery::sql("SELECT major FROM user WHERE id = '$user_id' AND major IS NOT NULL");
 if(count($result) == 1)
 	$profileMajor = $result[0]["major"];
@@ -73,6 +79,7 @@ if(isset($_POST['changeInfo'])) {
 	$bankAccount = strip_tags(DBQuery::safeString($_POST['bank_account']));
 	$mail = strip_tags(DBQuery::safeString($_POST['mail']));
 	$address = strip_tags(DBQuery::safeString($_POST['address']));
+	$zip = strip_tags(DBQuery::safeString($_POST['zip']));
 	$major = strip_tags(DBQuery::safeString($_POST['major']));
 	$specialFood = strip_tags(DBQuery::safeString($_POST['special_food']));
 	$name = strip_tags(DBQuery::safeString($_POST['name']));
@@ -112,6 +119,13 @@ if(isset($_POST['changeInfo'])) {
 			$queryString = $queryString . ", address='$address'";
 		else
 			$queryString = $queryString . "address='$address'";
+	}
+
+	if ($zip != '') {
+		if ($queryString != '')
+			$queryString = $queryString . ", zip='$zip'";
+		else
+			$queryString = $queryString . "zip='$zip'";
 	}
 
 	if ($major != '') {

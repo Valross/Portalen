@@ -189,38 +189,38 @@ function loadEventDescription()
 		echo '<form action="" method="post">';
 		if(count($event_info) > 0 && $event_info[0]['event_type_id'] == 5)
 		{
-			echo "<tr><td><strong>Börjar</strong></td><td>";
-			echo '<input type="text" class="input-book-long" name="start_d" id="start_d" value="'.$start_d.'">';
-			echo '<input type="text" class="input-book" name="start_h" id="start_h" value="'.$start_h.'"> ';
-			echo "</td></tr>";
+			
+			echo '<label for="start_d">Börjar (dag)</label>';
+			echo '<input type="text" value="'.$start_d.' name="start_d" id="start_d" >';
+			echo '<label for="start_h">Börjar (tid)</label>';
+			echo '<input type="text" value="'.$start_h.' name="start_h" id="start_h">';
 
-			echo "<tr><td><strong>Slutar</strong></td><td>";
-			echo '<input type="text" class="input-book-long" name="end_d" id="end_d" value="'.$end_d.'">';
-			echo '<input type="text" class="input-book" name="end_h" id="end_h" value="'.$end_h.'"> ';
-			echo "</td></tr>";
+			echo '<label for="end_d">Slutar (dag)</label>';
+			echo '<input type="text" name="end_d" id="end_d" value="'.$end_d.'">';
+			echo '<label for="end_h">Slutar (tid)</label>';
+			echo '<input type="text" name="end_h" id="end_h" value="'.$end_h.'"> ';
 
-			echo "<tr><td><strong>Information</strong></td><td>";
+			echo '<label for="info">Information</label>';
 			echo '<textarea rows="4" name="info" id="info" class="bottom-border">'.$event_info[0]['info'].'</textarea>';
-			echo "</td></tr>";
+
 		}
 		else
 		{
-			echo "<tr><td><strong>Öppnar</strong></td><td>";
-			echo '<input type="text" class="input-book-long" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
-			echo '<input type="text" class="input-book" name="start_h[]" id="start_h[]" value="'.$start_h.'"> ';
-			echo "</td></tr>";
+			echo '<label for="start_d[]">Öppnar (dag)</label>';
+			echo '<input type="text" name="start_d[]" id="start_d[]" value="'.$start_d.'">';
+			echo '<label for="start_h[]">Öppnar (tid)</label>';
+			echo '<input type="text" name="start_h[]" id="start_h[]" value="'.$start_h.'"> ';
 
-			echo "<tr><td><strong>Stänger</strong></td><td>";
-			echo '<input type="text" class="input-book-long" name="end_d[]" id="end_d[]" value="'.$end_d.'">';
-			echo '<input type="text" class="input-book" name="end_h[]" id="end_h[]" value="'.$end_h.'"> ';
-			echo "</td></tr>";
+			echo '<label for="end_d[]">Stänger (dag)</label>';
+			echo '<input type="text" name="end_d[]" id="end_d[]" value="'.$end_d.'">';
+			echo '<label for="end_h[]">Stänger (tid)</label>';
+			echo '<input type="text" name="end_h[]" id="end_h[]" value="'.$end_h.'"> ';
 
-			echo "<tr><td><strong>Information</strong></td><td>";
+			echo '<label for="info">Information</label>';
 			echo '<textarea rows="4" name="info" id="info" class="bottom-border">'.$event_info[0]['info'].'</textarea>';
-			echo "</td></tr>";
+
 		}
-		echo '<tr><td><input type="submit" name="eventInfo" value="Spara"></td>';
-		echo '</tr>';
+		echo '<input type="submit" name="eventInfo" value="Spara">';
 		echo '</form>';
 	}
 	else

@@ -49,12 +49,19 @@ if(isset($_POST['submitGiveUser']))
 function loadAll()
 {
 	echo '<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<div class="page-header">
 					<h1>
-					<span class="fa fa-wheelchair fa-fw fa-lg"></span> Skapa Access - 
-					<a href="?page=manageAccess">Hantera Access</a>
+					<span class="fa fa-wheelchair fa-fw fa-lg"></span> Skapa Access
 					</h1>
+				</div>
+			</div>
+			<div class="col-sm-6 page-header-right">
+				<div class="pull-right form-inline">
+					<div class="btn-group">
+						<a href="?page=createAccess" class="btn btn-page-header active">Skapa Access</a>
+						<a href="?page=manageAccess" class="btn btn-page-header">Hantera Access</a>
+					</div>
 				</div>
 			</div>
 		</div> <!-- .row -->';

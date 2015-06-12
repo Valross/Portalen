@@ -481,8 +481,7 @@ function loadComments()
 
 		if(count($event_comments) > 0)
 		{
-			echo '
-						<div class="col-sm-7">
+			echo '<div class="col-sm-7">
 							<div class="white-box">';
 			echo '<h3>Kommentarer ('.count($event_comments).')</h3>';
 

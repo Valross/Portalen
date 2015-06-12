@@ -40,12 +40,12 @@ include_once('php/pageManager.php');
 			$.ajax({
 				method:'post',
 				url:'php/refreshLatestActivity.php',
-				// success: function(){
-				// 	console.log("logged in state refreshed");
-				// }
+				success: function(){
+					// console.log("logged in state refreshed");
+				}
 			});
 		}
-		setInterval(call, 30000);	//call every 30 sec
+		setInterval(call, 10000);	//call every 30 sec
 	});
     </script>
 
@@ -57,8 +57,8 @@ include_once('php/pageManager.php');
 
 	function refreshLoggedInUsers(){
 		$('#logged-in-users-container').load('php/getLoggedInUsers.php', function(){
-			setTimeout(refreshLoggedInUsers, 30000);	//run every 30 sec
-			// console.log("logged in users loaded");
+			setTimeout(refreshLoggedInUsers, 10000);	//run every 30 sec
+			// console.log("logged in users refreshed ");
 		});
 	}
 	</script>
@@ -242,7 +242,7 @@ include_once('php/pageManager.php');
 
 								    function loadUserCount(){
 								        $('#logged-in-users-counter').load('php/getAmountLoggedInUsers.php', function(){
-								           setTimeout(loadUserCount, 30000);	//run every 30 sec
+								           setTimeout(loadUserCount, 10000);	//run every 30 sec
 								           // console.log("amount logged in users retrieved");
 								        });
 								    }
